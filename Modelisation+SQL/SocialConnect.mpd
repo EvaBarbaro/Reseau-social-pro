@@ -14,7 +14,7 @@ UTILISATEUR: idUtilisateur, nomUtilisateur, motDePasse, role, #idEntreprise->ENT
 
 
 :
-AMIS: #idCompte->COMPTE->idCompte, _#idCompte.1->COMPTE->idCompte
+AMIS: #idCompte->COMPTE->idCompte, _#idCompte.ami->COMPTE->idCompte
 :
 COMPTE: idCompte, nom, prenom, photo, poste, grade, departement, date embauche, #idUtilisateur->UTILISATEUR->idUtilisateur
 :::
