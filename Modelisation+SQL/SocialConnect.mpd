@@ -1,0 +1,22 @@
+%%mocodo
+:::
+PUBLICATION: idPublication, description, image, like, #idCompte->COMPTE->idCompte
+:
+ENTREPRISE: idEntreprise, designation, logo, description, url
+:::
+
+
+:
+COMMENTAIRE: idCommentaire, description, like, #idPublication->PUBLICATION->idPublication
+:::::
+UTILISATEUR: idUtilisateur, nomUtilisateur, motDePasse, role, #idEntreprise->ENTREPRISE->idEntreprise
+:
+
+
+:
+AMIS: #idCompte->COMPTE->idCompte, _#idCompte.1->COMPTE->idCompte
+:
+COMPTE: idCompte, nom, prenom, photo, poste, grade, departement, date embauche, #idUtilisateur->UTILISATEUR->idUtilisateur
+:::
+IMAGE: idImage, titre, image, #idCompte->COMPTE->idCompte
+:
