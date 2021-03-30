@@ -48,6 +48,24 @@
 | IdCompte | Identifiant du compte | Char | Clé étrangère |
 | IdCompte_ami | Identifiant du pilote | Char | Clé étrangère |
 
+## LIKE_PUBLICATION
+
+| Nom | Description | Type | Commentaire |
+| :--------------- |:---------------:|:---------------:| -----:|
+| IdPublication | Identifiant de la publication | Char | Clé primaire |
+| IdCompte | Identifiant du compte | Char | Clé primaire |
+| IdPublication | Identifiant de la publication | Char | Clé étrangère |
+| IdCompte | Identifiant du compte | Char | Clé étrangère |
+
+## LIKE_COMMENTAIRE
+
+| Nom | Description | Type | Commentaire |
+| :--------------- |:---------------:|:---------------:| -----:|
+| IdCommentaire | Identifiant du commentaire | Char | Clé primaire |
+| IdCompte | Identifiant du compte | Char | Clé primaire |
+| IdCommentaire | Identifiant du commentaire | Char | Clé étrangère |
+| IdCompte | Identifiant du compte | Char | Clé étrangère |
+
 ## COMPTE
 
 | Nom | Description | Type | Commentaire |
