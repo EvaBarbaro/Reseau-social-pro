@@ -10,6 +10,14 @@
 <body>
 <div id='mld'>
 <div>
+  <span class='relation'>COMMENTAIRE</span> (
+    <span class='primary'>idCommentaire</span>,
+    <span class='normal'>description</span>,
+    <span class='normal'>like</span>,
+    <span class='foreign'>idPublication</span>
+  )
+</div>
+<div>
   <span class='relation'>PUBLICATION</span> (
     <span class='primary'>idPublication</span>,
     <span class='normal'>description</span>,
@@ -19,20 +27,17 @@
   )
 </div>
 <div>
-  <span class='relation'>ENTREPRISE</span> (
-    <span class='primary'>idEntreprise</span>,
-    <span class='normal'>designation</span>,
-    <span class='normal'>logo</span>,
-    <span class='normal'>description</span>,
-    <span class='normal'>url</span>
+  <span class='relation'>IMAGE</span> (
+    <span class='primary'>idImage</span>,
+    <span class='normal'>titre</span>,
+    <span class='normal'>image</span>,
+    <span class='foreign'>idCompte</span>
   )
 </div>
 <div>
-  <span class='relation'>COMMENTAIRE</span> (
-    <span class='primary'>idCommentaire</span>,
-    <span class='normal'>description</span>,
-    <span class='normal'>like</span>,
-    <span class='foreign'>idPublication</span>
+  <span class='relation'>LIKE_COMMENTAIRE</span> (
+    <span class='foreign primary'>idCompte</span>,
+    <span class='foreign primary'>idCommentaire</span>
   )
 </div>
 <div>
@@ -41,13 +46,14 @@
     <span class='normal'>nomUtilisateur</span>,
     <span class='normal'>motDePasse</span>,
     <span class='normal'>role</span>,
+    <span class='normal'>statut</span>,
     <span class='foreign'>idEntreprise</span>
   )
 </div>
 <div>
-  <span class='relation'>AMIS</span> (
+  <span class='relation'>LIKE_PUBLICATION</span> (
     <span class='foreign primary'>idCompte</span>,
-    <span class='foreign primary'>idCompte.ami</span>
+    <span class='foreign primary'>idPublication</span>
   )
 </div>
 <div>
@@ -64,11 +70,19 @@
   )
 </div>
 <div>
-  <span class='relation'>IMAGE</span> (
-    <span class='primary'>idImage</span>,
-    <span class='normal'>titre</span>,
-    <span class='normal'>image</span>,
-    <span class='foreign'>idCompte</span>
+  <span class='relation'>ENTREPRISE</span> (
+    <span class='primary'>idEntreprise</span>,
+    <span class='normal'>designation</span>,
+    <span class='normal'>logo</span>,
+    <span class='normal'>description</span>,
+    <span class='normal'>url</span>,
+    <span class='normal'>statut</span>
+  )
+</div>
+<div>
+  <span class='relation'>AMIS</span> (
+    <span class='foreign primary'>idCompte</span>,
+    <span class='foreign primary'>idCompte.ami</span>
   )
 </div>
 </div>

@@ -1,22 +1,24 @@
 %%mocodo
-:::
-PUBLICATION: idPublication, description, image, like, #idCompte->COMPTE->idCompte
-:
-ENTREPRISE: idEntreprise, designation, logo, description, url
-:::
-
-
 :
 COMMENTAIRE: idCommentaire, description, like, #idPublication->PUBLICATION->idPublication
-:::::
-UTILISATEUR: idUtilisateur, nomUtilisateur, motDePasse, role, #idEntreprise->ENTREPRISE->idEntreprise
+:
+PUBLICATION: idPublication, description, image, like, #idCompte->COMPTE->idCompte
+:
+LIKE_PUBLICATION: #idCompte->COMPTE->idCompte, _#idPublication->PUBLICATION->idPublication
 :
 
+:
+LIKE_COMMENTAIRE: #idCompte->COMPTE->idCompte, _#idCommentaire->COMMENTAIRE->idCommentaire
+:
+COMPTE: idCompte, nom, prenom, photo, poste, grade, departement, date embauche, #idUtilisateur->UTILISATEUR->idUtilisateur
+:
+UTILISATEUR: idUtilisateur, nomUtilisateur, motDePasse, role, statut, #idEntreprise->ENTREPRISE->idEntreprise
+:
 
+:
+IMAGE: idImage, titre, image, #idCompte->COMPTE->idCompte
 :
 AMIS: #idCompte->COMPTE->idCompte, _#idCompte.ami->COMPTE->idCompte
 :
-COMPTE: idCompte, nom, prenom, photo, poste, grade, departement, date embauche, #idUtilisateur->UTILISATEUR->idUtilisateur
-:::
-IMAGE: idImage, titre, image, #idCompte->COMPTE->idCompte
+ENTREPRISE: idEntreprise, designation, logo, description, url, statut
 :
