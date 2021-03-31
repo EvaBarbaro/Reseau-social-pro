@@ -6,6 +6,8 @@ class ErrorController extends CoreController
     {
         http_response_code(404);
 
-        $this->show('404');
+        $this->show('404', [
+            'title' => 'Erreur 404'
+        ]);
     }
 }

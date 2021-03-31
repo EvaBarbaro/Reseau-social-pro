@@ -6,6 +6,8 @@ class MainController extends CoreController
     {
         $dbData = new DBData();
 
-        $this->show('home');
+        $this->show('home', [
+            'title' => 'Social Connect'
+        ]);
     }
 }

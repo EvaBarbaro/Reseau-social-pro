@@ -9,7 +9,7 @@ class CoreController
         $this->router = $router;
     }
 
-    protected function show($viewName)
+    protected function show($viewName, $viewVars = [])
     {
         $router = $this->router;
 
