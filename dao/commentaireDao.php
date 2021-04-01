@@ -1,6 +1,6 @@
 <?php 
 
-class commentaireDao implements dao {
+class commentaireDao implements commentaire {
 
 
 
@@ -8,7 +8,7 @@ class commentaireDao implements dao {
 /**
  * Get a single commentaire
  */ 
-public function get(int $id){
+public function get(commentaire $commentaire){
 
 }
 
@@ -18,7 +18,7 @@ public function get(int $id){
 /**
 * Get all commentaire
 */ 
-public function getAll(){
+public function getAll(commentaire $commentaire){
 
 }
 
@@ -28,7 +28,7 @@ public function getAll(){
 /**
 * Update one commentaire
 */ 
-public function update(){
+public function update(commentaire $commentaire){
 
 }
 
@@ -38,7 +38,7 @@ public function update(){
 /**
 * Create one commentaire
 */ 
-public function create(){
+public function create(commentaire $commentaire){
 
 }
     
@@ -48,7 +48,7 @@ public function create(){
 /**
 * Delete one commentaire
 */ 
-public function delete(){
+public function delete(commentaire $commentaire){
 
 }
 }
