@@ -1,0 +1,17 @@
+COMMENTAIRE: idCommentaire, description, like
+EST EN LIEN AVEC, 0N PUBLICATION, 11 COMMENTAIRE
+PUBLICATION: idPublication, description, image, like, statut
+EST LIE A, 11 PUBLICATION, 0N COMPTE
+IMAGE: idImage, titre, image
+
+LIKE_COMMENTAIRE, 0N COMPTE, 0N COMMENTAIRE
+UTILISATEUR: idUtilisateur, nomUtilisateur, motDePasse, mail, role, statut
+LIKE_PUBLICATION, 0N COMPTE, 0N PUBLICATION
+COMPTE: idCompte, nom, prenom, photo, poste, grade, departement, date embauche
+EST A, 11 IMAGE, 0N COMPTE
+
+ENTREPRISE: idEntreprise, designation, logo, description, url, statut
+APPARTIENT A, 1N ENTREPRISE, 11 UTILISATEUR
+SE REFERE A, 11 COMPTE, 11 UTILISATEUR
+AMIS, 0N COMPTE, 0N COMPTE
+:
