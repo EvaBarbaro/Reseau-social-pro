@@ -14,6 +14,7 @@ CREATE TABLE `PUBLICATION` (
   `description` VARCHAR(100),
   `image` VARCHAR(42),
   `like` INTEGER NOT NULL,
+  `statut` VARCHAR(42),
   `idcompte` VARCHAR(42),
   PRIMARY KEY (`idpublication`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -35,9 +36,10 @@ CREATE TABLE `LIKE_COMMENTAIRE` (
 CREATE TABLE `UTILISATEUR` (
   `idutilisateur` VARCHAR(42),
   `nomutilisateur` VARCHAR(42),
-  `motdepasse` VARCHAR(42),
+  `motdepasse` VARCHAR(100),
+  `mail` VARCHAR(42),
   `role` VARCHAR(42),
-  `statut` VARCHAR(42),
+  `statut` BOOLEAN,
   `identreprise` VARCHAR(42),
   PRIMARY KEY (`idutilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -67,7 +69,7 @@ CREATE TABLE `ENTREPRISE` (
   `logo` VARCHAR(42),
   `description` VARCHAR(42),
   `url` VARCHAR(42),
-  `statut` VARCHAR(42),
+  `statut` BOOLEAN,
   PRIMARY KEY (`identreprise`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -8,6 +8,7 @@
 | Description | Description de la publication | Char |   |
 | Image | Chemin de l'image | Char |   |
 | Like | Nombre de like | Int |   |
+| Statut | Statut de la publication (public ou privée) | Char |   |
 | IdCompte | Identifiant du compte | Char | Clé étrangère |
 
 ## ENTREPRISE
@@ -19,6 +20,7 @@
 | Logo | Chemin du logo | Char | |
 | Description | Description de l'entrerpise | Char | |
 | Url | Url du réseau lié à l'entrerprise | Char | |
+| Statut | Actif ou Désactif | Bool | |
 
 ## COMMENTAIRE
 
@@ -36,7 +38,9 @@
 | IdUtilisateur | Identifiant de l'utilisateur | Char | Clé primaire |
 | NomUtilisateur | Nom de l'utilisateur | Char |   |
 | MotDePasse | Mot de passe utilisateur | Char |   |
+| Mail | Email de l'utilisateur | Char |   |
 | Role | Role de l'utilisateur | Char |   |
+| Statut | Actif ou Désactif | Bool |   |
 | IdEntreprise | Identifiant de l'entreprise | Char | Clé étrangère |
 
 ## AMIS
