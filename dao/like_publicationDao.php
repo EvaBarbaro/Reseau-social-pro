@@ -1,5 +1,5 @@
 <?php 
 
-class like_publicationDao implements dao {
+class like_publicationDao implements like {
 
 }
