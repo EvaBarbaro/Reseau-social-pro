@@ -1,6 +1,16 @@
 <?php 
 
+include_once __DIR__.'/../interface/dao.php';
+include_once __DIR__.'/../utils/DBData.php';
+
 class imageDao implements dao {
+
+    private $conn;
+
+    public function __construct($db){
+        $this->conn = $db;
+    }
+
     create(%titre,$image,$idcompte){
         $sql = "INSERT INTO image(titre,image,idcompte) 
 			VALUES ('$titre', '$image', '$idcompte');
@@ -11,11 +21,24 @@ class imageDao implements dao {
 			$result = $con->query($sql);
             return $result;
     }
-    images getAll(){
+    public function getAll(){
         $sql 	= "SELECT * FROM image";
-        $result = $con->query($sql); 
-        return $result;
+        $result = $this->conn->query($sql); 
+        $images = $result->fetchAll();
+        return $images;
     }
+
+    
+
+
+
+
+
+
+
+
+
+
     update($idimage,$titre,$image,$idcompte){
         $sql = "UPDATE image SET titre='$titre', image = '$image' , idcompte='$idcompte' WHERE id='$idimage';
         $con->query($sql);
