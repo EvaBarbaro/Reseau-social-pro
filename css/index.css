@@ -4,21 +4,47 @@ body {
     width: 100%;
 }
 
-#logo {
-    width: 25%;
-    height: 25%;
+#logoImg {
+    margin-left: 5em;
     object-fit: contain;
     border: none;
+    background-color: transparent;
+}
+
+#logo {
+    padding-right: 10em;
+    padding-bottom: 82vh;
+    background: rgb(185,43,39);
+    background: linear-gradient(90deg, rgba(185,43,39,1) 21%, rgba(21,101,192,1) 100%);
 }
 
 #login {
     width: 100%;
+    margin-left: 5em;
+    margin-right: 1em;
+}
+
+#register {
+    width: 100%;
+    margin-left: 5em;
+    margin-right: 1em;
 }
 
 footer {
     position: absolute;
     bottom: 0;
     width: 98%;
-    padding-top: 2em;
+    padding-top: 1.5em;
     height: 2.5rem; 
+}
+
+.btn {
+    background: rgb(185,43,39);
+    background: linear-gradient(90deg, rgba(185,43,39,1) 21%, rgba(21,101,192,1) 100%);
+    color: #FFF;
+}
+
+.btn:hover {
+    opacity: 85%;
+    color: antiquewhite;
 }

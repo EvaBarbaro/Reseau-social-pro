@@ -1,7 +1,7 @@
 <?php
 
 interface dao {
-    function get();
+    function get($id);
     function getAll();
     function update();
     function create();

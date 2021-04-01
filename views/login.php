@@ -1,9 +1,17 @@
+<?php
+
+var_dump($viewVars['entrepriseList']);
+
+?>
+
 <div class="d-flex">
-    <img src="http://localhost:8080/apache/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logo" class="img-thumbnail mt-4">
+    <div id="logo">
+        <img src="http://localhost:8080/apache/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logoImg" class="img-thumbnail mt-4">
+    </div>
 
         <div id="login">
-            <h1 class="mt-4 mb-4" style="width:200px">Connexion</h1>
-                <form method="POST" class="col-6">
+            <h1 class="mt-4 mb-4 mx-auto" style="width:200px">Connexion</h1>
+                <form method="POST" class="col">
                     <div class="form-group row">
                         <label for="inputUsername" class="col-sm-4 col-form-label">Nom d'utilisateur</label>
                         <div class="col-sm-8">
@@ -16,8 +24,8 @@
                         <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-                    <p class="mt-2 mx-auto" style="width:350px">Si vous n'êtes pas encore inscrit <a class="text-info" href="./inscription">Inscrivez-vous</a> !</p>
+                    <button type="submit" class="btn btn-lg btn-block">Confirmer</button>
+                    <p class="mt-2 mx-auto" style="width:420px">Si vous n'avez pas de compte <a href="./inscription">Créer votre réseau</a> !</p>
                 </form>
             </div>
         </div>

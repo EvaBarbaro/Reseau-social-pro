@@ -14,7 +14,6 @@ $router->setBasePath($_SERVER['BASE_URI']);
 
 $router->map('GET', '/', 'MainController#login', 'login');
 $router->map('GET', '/inscription', 'MainController#register', 'register');
-$router->map('Post', '/inscription-verif', 'MainController#registerCheck', 'registerCheck');
 
 $match = $router->match();
 
