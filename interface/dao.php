@@ -1,9 +1,9 @@
 <?php
 
 interface dao {
-    function get();
-    function getAll();
-    function update();
-    function create();
-    function delete();
+    public function get(int $id);
+    public function getAll();
+    public function update(int $id,array $object);
+    public function create();
+    public function delete(int $id);
 }
