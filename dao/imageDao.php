@@ -11,10 +11,16 @@ class imageDao implements dao {
         $this->conn = $db;
     }
 
-    create(image $image){
+    public function create(image $image){
         $sql = "INSERT INTO image(titre,image,idcompte) 
-			VALUES ('$titre', '$image', '$idcompte');
-        $con->query($sql); 
+			VALUES (:titre, :image, :idcompte)";
+        $q=$this->conn->prepare($sql); 
+
+        $q->bindValue(':titre',$image->getTitre(), PDO::PARAM_STR);
+        $q->bindValue(':image',$image->getImage(), PDO::PARAM_STR);
+        $q->bindValue(':idcompte',$image->getIdcompte(), PDO::PARAM_STR);
+        
+        $q->execute();
     }
     public function get($id){
         $id = (string) $id;
