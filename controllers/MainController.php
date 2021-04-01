@@ -2,12 +2,21 @@
 
 class MainController extends CoreController
 {
-    public function home()
+    public function login()
     {
         $dbData = new DBData();
 
-        $this->show('home', [
-            'title' => 'Social Connect'
+        $this->show('login', [
+            'title' => 'Social Connect - Connexion'
+        ]);
+    }
+
+    public function register()
+    {
+        $dbData = new DBData();
+
+        $this->show('register', [
+            'title' => 'Social Connect - Inscription'
         ]);
     }
 }
