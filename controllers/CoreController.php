@@ -11,9 +11,6 @@ class CoreController
 
     protected function show($viewName, $viewVars = [])
     {
-        $router = $this->router;
-
-        $dbData = new DBData;
 
         include __DIR__ . '/../views/header.php';
         include __DIR__ . '/../views/' . $viewName . '.php';

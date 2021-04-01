@@ -1,31 +1,41 @@
-    <div class="container">
-        <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
-        <div class="row justify-content-md-center">
+<div class="d-flex">
+    <div id="logo">
+        <img src="http://localhost:8080/apache/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logoImg" class="img-thumbnail mt-4">
+    </div>
 
-            <form method="POST" class="col-6">
+        <div id="register">
+        <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
+
+            <form method="POST" class="col">
                 <input type="hidden" name="user_id" value="<?= uniqid() ?>">
                 <div class="form-group row">
-                    <label for="inputName" class="col-sm-4 col-form-label">Nom(s)</label>
+                    <label for="designation" class="col-sm-4 col-form-label">Nom de votre entreprise</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Nom(s)" required>
+                    <input type="text" class="form-control" name="designation" id="designation" placeholder="Nom de votre entreprise" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputFirstname" class="col-sm-4 col-form-label">Prénom(s)</label>
+                    <label for="logo" class="col-sm-4 col-form-label">Logo</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="firstname" id="inputFirstname" placeholder="Prénom(s)" required>
+                    <input type="text" class="form-control" name="logo" id="logoInput" placeholder="Logo">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-4 col-form-label">Nom d'utilisateur</label>
+                    <label for="description" class="col-sm-4 col-form-label">Description</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="username" id="inputUsername" placeholder="Nom d'utilisateur" required>
+                    <input type="text" class="form-control" name="description" id="description" placeholder="Description">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputMail" class="col-sm-4 col-form-label">Email</label>
+                    <label for="mail" class="col-sm-4 col-form-label">Email</label>
                     <div class="col-sm-8">
-                    <input type="email" class="form-control" name="mail" id="inputMail" placeholder="Email" required>
+                    <input type="email" class="form-control" name="mail" id="mail" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nomutilisateur" class="col-sm-4 col-form-label">Nom d'utilisateur</label>
+                    <div class="col-sm-8">
+                    <input type="email" class="form-control" name="nomutilisateur" id="nomutilisateur" placeholder="Nom d'utilisateur" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -35,9 +45,9 @@
                     <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-                <p class="mt-2 mx-auto" style="width:350px">Si vous êtes déjà inscrit <a class="text-info" href="./">Connectez-vous</a> !</p>
+                <button type="submit" class="btn btn-lg btn-block">Confirmer</button>
+                <p class="mt-2 mx-auto" style="width:350px">Si vous avez déjà un réseau <a class="text-info" href="./">Connectez-vous</a> !</p>
             </form>
         </div>
-    </div>
+</div>
 </body>

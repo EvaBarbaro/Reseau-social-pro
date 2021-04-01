@@ -4,7 +4,7 @@ class DBData {
 	/** @var PDO */
 	private $dbh;
 
-    public function __construct() {
+    public function getConnection() {
         $configData = parse_ini_file(__DIR__.'/../config.conf');
 
         try {
@@ -23,5 +23,7 @@ class DBData {
             echo '</pre>';
             exit;
         }
+        
+    return $this->dbh;
     }
 }
