@@ -1,6 +1,6 @@
 <?php 
 
-include_once __DIR__.'/../interface/dao.php';
+include_once __DIR__.'/../interface/entrepriseInterface.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/entreprise.php';
 
