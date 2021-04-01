@@ -15,7 +15,7 @@ class DBData {
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING)
             );
         }
-        catch(\Exception $exception) {
+        catch(Exception $exception) {
             echo 'Erreur de connexion...<br>';
             echo $exception->getMessage().'<br>';
             echo '<pre>';
