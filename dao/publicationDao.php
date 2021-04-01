@@ -1,14 +1,18 @@
 <?php 
 
-class publicationDao implements dao {
+class publicationDao implements publication {
 
+    private $conn;
 
+    public function __construct($db){
+        $this->conn = $db;
+    }
 
 
 /**
  * Get a single publication
  */ 
-    public function get(int $id){
+    public function get(publication $publication){
      
     }
 
@@ -18,8 +22,14 @@ class publicationDao implements dao {
 /**
  * Get all publication
  */ 
-    public function getAll(){
+    public function getAll(publication $publication){
+        $sql = "SELECT * FROM publication";
 
+        $pdoStatement = $this->conn->query($sql);
+
+        $publication = $pdoStatement->fetchAll();
+
+        return $publication;
     }
     
 
@@ -28,7 +38,7 @@ class publicationDao implements dao {
 /**
  * Update one publication
  */ 
-    public function update(array $object){
+    public function update(publication $publication){
 
     }
     
@@ -38,7 +48,7 @@ class publicationDao implements dao {
 /**
  * Create one publication
  */ 
-    public function create(){
+    public function create(publication $publication){
 
     }
         
@@ -48,7 +58,7 @@ class publicationDao implements dao {
 /**
  * Delete one publication
  */ 
-    public function delete(int $id){
+    public function delete(publication $publication){
 
     }
 }

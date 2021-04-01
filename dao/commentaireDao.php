@@ -28,7 +28,7 @@ public function getAll(){
 /**
 * Update one commentaire
 */ 
-public function update(array $object){
+public function update(){
 
 }
 
@@ -48,7 +48,7 @@ public function create(){
 /**
 * Delete one commentaire
 */ 
-public function delete(int $id){
+public function delete(){
 
 }
 }
