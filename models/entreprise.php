@@ -1,6 +1,6 @@
 <?php 
 
-class entrerprise {
+class entreprise {
     public $idEntreprise;
     public $designation;
     public $logo;
