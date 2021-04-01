@@ -11,15 +11,16 @@ class imageDao implements dao {
         $this->conn = $db;
     }
 
-    create(%titre,$image,$idcompte){
+    create(image $image){
         $sql = "INSERT INTO image(titre,image,idcompte) 
 			VALUES ('$titre', '$image', '$idcompte');
         $con->query($sql); 
     }
-    image get($id){
-    $sql = "SELECT * FROM image WHERE idimage={$id}";
-			$result = $con->query($sql);
-            return $result;
+    public function get($id){
+        $id = (string) $id;
+        $sql = "SELECT * FROM image WHERE idimage=".$id;
+			$result = $conn->query($sql);
+            return new image($result);
     }
     public function getAll(){
         $sql 	= "SELECT * FROM image";
