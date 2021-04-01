@@ -9,7 +9,7 @@ class publicationDao implements dao {
  * Get a single publication
  */ 
     public function get(int $id){
-
+     
     }
 
 
