@@ -6,6 +6,7 @@ include __DIR__ . '/utils/DBData.php';
 
 include __DIR__ . '/controllers/CoreController.php';
 include __DIR__ . '/controllers/MainController.php';
+include __DIR__ . '/controllers/CompanyController.php';
 include __DIR__ . '/controllers/ErrorController.php';
 
 $router = new AltoRouter();
@@ -14,6 +15,8 @@ $router->setBasePath($_SERVER['BASE_URI']);
 
 $router->map('GET', '/', 'MainController#login', 'login');
 $router->map('GET', '/inscription', 'MainController#register', 'register');
+$router->map('GET', '/superAdmin', 'CompanyController#allEntreprise', 'superAdmin');
+$router->map('GET', '/superAdmin/[i:id]', 'CompanyController#entreprise', 'superAdminSingle');
 
 $match = $router->match();
 

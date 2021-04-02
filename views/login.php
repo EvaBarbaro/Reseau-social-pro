@@ -1,9 +1,3 @@
-<?php
-
-var_dump($viewVars['entrepriseList']);
-
-?>
-
 <div class="d-flex">
     <div id="logo">
         <img src="http://localhost:8080/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logoImg" class="img-thumbnail mt-4">
