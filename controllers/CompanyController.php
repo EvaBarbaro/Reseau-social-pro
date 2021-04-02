@@ -30,7 +30,6 @@ class CompanyController extends CoreController
 
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Back Office',
-            'enrepriseId' => $entrepriseId,
             'entreprise' => $entreprise
         ]);
     }
@@ -52,5 +51,18 @@ class CompanyController extends CoreController
         $entrepriseDao->create();
 
         header('Location: http://localhost/apache/Reseau-social-pro/inscription');
+    }
+
+    public function delete($parameters)
+    {
+        $entrepriseId = $parameters['id'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $entrepriseDao = new entrepriseDao($db);
+        $entrepriseDao->delete($entrepriseId);
+
+        header('Location: http://localhost/apache/Reseau-social-pro/superAdmin');
     }
 }

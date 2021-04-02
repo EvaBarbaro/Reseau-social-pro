@@ -69,6 +69,6 @@ class entrepriseDao implements interfaceDao {
     }
 
     public function delete($id) {
-        $this->conn->execute("DELETE FROM personnages WHERE id = $id");
+        $this->conn->exec("DELETE FROM entreprise WHERE identreprise = $id");
     }
 }
