@@ -1,33 +1,32 @@
 <?php 
 
-include_once __DIR__.'/../interface/dao.php';
+include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
+include_once __DIR__.'/../models/image.php';
 
-class imageDao implements dao {
+class imageDao implements interfaceDao {
 
     private $conn;
 
     public function __construct($db){
         $this->conn = $db;
     }
-
-    public function create(image $image){
-        $sql = "INSERT INTO image(titre,image,idcompte) 
-			VALUES (:titre, :image, :idcompte)";
-        $q=$this->conn->prepare($sql); 
-
-        $q->bindValue(':titre',$image->getTitre(), PDO::PARAM_STR);
-        $q->bindValue(':image',$image->getImage(), PDO::PARAM_STR);
-        $q->bindValue(':idcompte',$image->getIdcompte(), PDO::PARAM_STR);
-        
-        $q->execute();
-    }
+ 
     public function get($id){
         $id = (string) $id;
         $sql = "SELECT * FROM image WHERE idimage=".$id;
-			$result = $conn->query($sql);
+			$result = $this->conn->query($sql);
             return new image($result);
     }
+
+ /*   public function get($id) {
+        $sql = "SELECT * FROM `entreprise` WHERE `identreprise` = $id";
+        $pdoStatement = $this->conn->query($sql);
+        $entreprise = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+        return $entreprise;
+    }
+*/
+
     public function getAll(){
         $sql 	= "SELECT * FROM image";
         $result = $this->conn->query($sql); 
@@ -35,27 +34,32 @@ class imageDao implements dao {
         return $images;
     }
 
-    
 
-
-
-
-
-
-
-
-
-
-    update($idimage,$titre,$image,$idcompte){
-        $sql = "UPDATE image SET titre='$titre', image = '$image' , idcompte='$idcompte' WHERE id='$idimage';
-        $con->query($sql);
+    public function update($image){
+        $sql = $this->conn->prepare("UPDATE image SET titre = :titre, image = :image, idcompte = :idcompte");
+        $sql->bindValue(':titre',$image->getTitre(), PDO::PARAM_STR);
+        $sql->bindValue(':image',$image->getImage(), PDO::PARAM_STR);
+        $sql->bindValue(':idcompte',$image->getIdcompte(), PDO::PARAM_STR);      
+        $sql->execute();
     }
-    delete($id){
-        $sql = "DELETE FROM image WHERE idimage='$id';
-        $con->query($sql);
-
+    public function create($image){
+        $sql = "INSERT INTO image(titre,image,idcompte) VALUES (:titre, :image, :idcompte)";
+        $q=$this->conn->prepare($sql); 
+        $q->bindValue(':titre',$image->getTitre(), PDO::PARAM_STR);
+        $q->bindValue(':image',$image->getImage(), PDO::PARAM_STR);
+        $q->bindValue(':idcompte',$image->getIdcompte(), PDO::PARAM_STR);     
+        $q->execute();
     }
 
+    public function delete($id){
+        $sql = "DELETE FROM image WHERE idimage=".$id;
+        $this->conn->execute($sql);
+    }
+    /*
+    public function delete($id) {
+        $this->conn->execute("DELETE FROM personnages WHERE id = $id");
+    }
+    */
 
 }
 /* <?php
