@@ -5,36 +5,24 @@ include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/image.php';
 
 class imageDao implements interfaceDao {
-
     private $conn;
-
-    public function __construct($db){
-        $this->conn = $db;
-    }
- 
+    public function __construct($db){   $this->conn = $db;  }
+    
     public function get($id){
         $id = (string) $id;
         $sql = "SELECT * FROM image WHERE idimage=".$id;
 			$result = $this->conn->query($sql);
             return new image($result);
     }
-
- /*   public function get($id) {
-        $sql = "SELECT * FROM `entreprise` WHERE `identreprise` = $id";
-        $pdoStatement = $this->conn->query($sql);
-        $entreprise = $pdoStatement->fetch(PDO::FETCH_ASSOC);
-        return $entreprise;
-    }
-*/
-
     public function getAll(){
         $sql 	= "SELECT * FROM image";
         $result = $this->conn->query($sql); 
         $images = $result->fetchAll();
+    //  $pdoStatement = $this->conn->query($sql);
+    //  $entreprise = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+    //  return $entreprise;
         return $images;
     }
-
-
     public function update($image){
         $sql = $this->conn->prepare("UPDATE image SET titre = :titre, image = :image, idcompte = :idcompte");
         $sql->bindValue(':titre',$image->getTitre(), PDO::PARAM_STR);
@@ -50,7 +38,6 @@ class imageDao implements interfaceDao {
         $q->bindValue(':idcompte',$image->getIdcompte(), PDO::PARAM_STR);     
         $q->execute();
     }
-
     public function delete($id){
         $sql = "DELETE FROM image WHERE idimage=".$id;
         $this->conn->execute($sql);
@@ -62,13 +49,3 @@ class imageDao implements interfaceDao {
     */
 
 }
-/* <?php
-interface dao {
-    function get();
-    function getAll();
-    function update();
-    function create();
-    function delete();
-}
-
-*/
