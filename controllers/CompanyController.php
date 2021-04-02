@@ -5,7 +5,7 @@ include_once __DIR__.'/../utils/DBData.php';
 
 class CompanyController extends CoreController
 {
-    public function allEntreprise()
+    public function getAll()
     {
         $DBData = new DBData();
         $db = $DBData->getConnection();
@@ -18,7 +18,7 @@ class CompanyController extends CoreController
         ]);
     }
 
-    public function entreprise($parameters)
+    public function get($parameters)
     {
         $entrepriseId = $parameters['id'];
 
@@ -33,5 +33,24 @@ class CompanyController extends CoreController
             'enrepriseId' => $entrepriseId,
             'entreprise' => $entreprise
         ]);
+    }
+
+    public function register()
+    {
+        $this->show('register', [
+            'title' => 'Social Connect - Inscription'
+        ]);
+    }
+
+    public function create()
+    {
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $entrepriseDao = new entrepriseDao($db);
+
+        $entrepriseDao->create();
+
+        header('Location: http://localhost/apache/Reseau-social-pro/inscription');
     }
 }

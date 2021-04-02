@@ -8,11 +8,4 @@ class MainController extends CoreController
             'title' => 'Social Connect - Connexion'
         ]);
     }
-
-    public function register()
-    {
-        $this->show('register', [
-            'title' => 'Social Connect - Inscription'
-        ]);
-    }
 }

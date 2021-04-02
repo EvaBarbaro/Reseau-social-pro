@@ -38,7 +38,7 @@ footer {
     height: 2.5rem; 
 }
 
-.btn {
+/* .btn {
     background: rgb(185,43,39);
     background: linear-gradient(90deg, rgba(185,43,39,1) 21%, rgba(21,101,192,1) 100%);
     color: #FFF;
@@ -47,4 +47,4 @@ footer {
 .btn:hover {
     opacity: 85%;
     color: antiquewhite;
-}
+} */

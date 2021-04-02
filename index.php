@@ -14,9 +14,11 @@ $router = new AltoRouter();
 $router->setBasePath($_SERVER['BASE_URI']);
 
 $router->map('GET', '/', 'MainController#login', 'login');
-$router->map('GET', '/inscription', 'MainController#register', 'register');
-$router->map('GET', '/superAdmin', 'CompanyController#allEntreprise', 'superAdmin');
-$router->map('GET', '/superAdmin/[i:id]', 'CompanyController#entreprise', 'superAdminSingle');
+
+$router->map('GET', '/inscription', 'CompanyController#register', 'register');
+$router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
+$router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'superAdminSingle');
+$router->map('POST', '/monReseau/create', 'CompanyController#create', 'superAdminCreate');
 
 $match = $router->match();
 
