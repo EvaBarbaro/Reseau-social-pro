@@ -2,9 +2,9 @@
 
 
 interface interfaceDao {
-    public function get($id);
-    public function getAll();
-    public function update($obj);
-    public function create($obj);
-    public function delete($id);
+    function get($id);
+    function getAll();
+    function update(object $model);
+    function create(object $model);
+    function delete($id);
 }

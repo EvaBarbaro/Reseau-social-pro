@@ -1,10 +1,10 @@
 <?php 
 
-include_once __DIR__.'/../interface/entrepriseInterface.php';
+include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/entreprise.php';
 
-class entrepriseDao implements entrepriseInterface {
+class entrepriseDao implements interfaceDao {
     private $conn;
 
     public function __construct($db){
