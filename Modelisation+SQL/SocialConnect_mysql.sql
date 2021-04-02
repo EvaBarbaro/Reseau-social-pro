@@ -12,7 +12,7 @@ CREATE TABLE `COMMENTAIRE` (
 CREATE TABLE `PUBLICATION` (
   `idpublication` INTEGER NOT NULL,
   `description` VARCHAR(100),
-  `image` VARCHAR(42),
+  `imageurl` VARCHAR(42),
   `like` INTEGER NOT NULL,
   `statut` VARCHAR(42),
   `idcompte` INTEGER NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE `PUBLICATION` (
 CREATE TABLE `IMAGE` (
   `idimage` INTEGER NOT NULL,
   `titre` VARCHAR(42),
-  `image` VARCHAR(42),
+  `imageurl` VARCHAR(42),
   `idcompte` INTEGER NOT NULL,
   PRIMARY KEY (`idimage`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

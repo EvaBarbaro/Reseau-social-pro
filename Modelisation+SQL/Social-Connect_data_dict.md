@@ -6,7 +6,7 @@
 | :--------------- |:---------------:|:---------------:| -----:|
 | IdPublication | Identifiant de la publication | Int | Clé primaire |
 | Description | Description de la publication | Char |   |
-| Image | Chemin de l'image | Char |   |
+| ImageUrl | Chemin de l'image | Char |   |
 | Like | Nombre de like | Int |   |
 | Statut | Statut de la publication (public ou privée) | Char |   |
 | IdCompte | Identifiant du compte | int | Clé étrangère |
@@ -90,5 +90,5 @@
 | :--------------- |:---------------:|:---------------:| -----:|
 | IdImage | Identifiant de l'image | Int | Clé primaire |
 | Titre | Titre de l'image | Char |  |
-| Image | Chemin de l'image | Char |  |
+| ImageURL | Chemin de l'image | Char |  |
 | IdCompte | Identifiant du compte lié | Int | Clé étrangère |
