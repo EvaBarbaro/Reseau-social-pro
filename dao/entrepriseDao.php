@@ -31,7 +31,7 @@ class entrepriseDao implements interfaceDao {
         return $entreprise;
     }
 
-    public function update(entreprise $entreprise) {
+    public function update($entreprise) {
         $sql = $this->conn->prepare("UPDATE entreprise SET identreprise = :identreprise, designation = :designation, logo = :logo, description = :description, url = :url, statut = :statut");
 
         $sql->bindValue(':identreprise', $entreprise->getIdEntreprise(), PDO::PARAM_INT);
@@ -44,7 +44,7 @@ class entrepriseDao implements interfaceDao {
         $sql->execute();
     }
 
-    public function create(entreprise $entreprise) {
+    public function create($entreprise) {
         $sql = $this->conn->prepare("INSERT INTO entreprise(identreprise, designation, logo, description, url, statut) VALUES(:identreprise, :designation, :logo, :description, :url, statut)");
 
         $sql->bindValue(':identreprise', $entreprise->getIdEntreprise(), PDO::PARAM_INT);
