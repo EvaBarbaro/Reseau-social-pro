@@ -18,7 +18,7 @@
                         <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-block">Confirmer</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
                     <p class="mt-2 mx-auto" style="width:420px">Si vous n'avez pas de compte <a href="./inscription">Créer votre réseau</a> !</p>
                 </form>
             </div>

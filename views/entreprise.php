@@ -11,11 +11,13 @@
 
         for ($index=0; $index < $length; $index++) { 
             $entreprise = $viewVars['entrepriseList'][$index];
-        
+
+            echo "<form action='http://localhost/apache/Reseau-social-pro/monReseau/delete' method='POST'>";
             echo "<input type='hidden' value='". $entreprise['identreprise']."' name='identreprise' />";
             echo "<tr>";
             echo "<td>".$entreprise['designation'] . "</td>";
-            echo "<td><a href='./monReseau/delete/".$entreprise['identreprise']."' class='btn btn-danger'>Supprimer</a>"; 
+            echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
+            echo "</form>";
             echo "<td><a href='./monReseau/".$entreprise['identreprise']."' class='btn btn-info'>Modifier</a></td>";
             echo "</tr>";
         }

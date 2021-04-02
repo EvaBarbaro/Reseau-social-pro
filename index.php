@@ -19,7 +19,8 @@ $router->map('GET', '/inscription', 'CompanyController#register', 'register');
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'reseauSingle');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
-$router->map('GET', '/monReseau/delete/[i:id]', 'CompanyController#delete', 'superAdminDelete');
+$router->map('POST', '/monReseau/delete', 'CompanyController#delete', 'superAdminDelete');
+$router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpdate');
 
 $match = $router->match();
 

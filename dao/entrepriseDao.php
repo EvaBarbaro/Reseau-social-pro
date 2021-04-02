@@ -36,6 +36,13 @@ class entrepriseDao implements interfaceDao {
 
         $entreprise = new entreprise();
 
+        $entreprise->setIdEntreprise($_POST['identreprise']);
+        $entreprise->setDesignation($_POST['designation']);
+        $entreprise->setLogo($_POST['logo']);
+        $entreprise->setDescription($_POST['description']);
+        $entreprise->setUrl($_POST['url']);
+        $entreprise->setStatut($_POST['statut']);
+
         $sql->bindValue(':identreprise', $entreprise->getIdEntreprise(), PDO::PARAM_INT);
         $sql->bindValue(':designation', $entreprise->getDesignation());
         $sql->bindValue(':logo', $entreprise->getLogo());

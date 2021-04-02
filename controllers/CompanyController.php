@@ -53,9 +53,22 @@ class CompanyController extends CoreController
         header('Location: http://localhost/apache/Reseau-social-pro/inscription');
     }
 
-    public function delete($parameters)
+    public function update()
     {
-        $entrepriseId = $parameters['id'];
+        $entrepriseId = $_POST['identreprise'];
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $entrepriseDao = new entrepriseDao($db);
+
+        $entrepriseDao->update();
+
+        header('Location: http://localhost/apache/Reseau-social-pro/monReseau/'.$entrepriseId);
+    }
+
+    public function delete()
+    {
+        $entrepriseId = $_POST['identreprise'];
 
         $DBData = new DBData();
         $db = $DBData->getConnection();

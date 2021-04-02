@@ -11,7 +11,7 @@ $uniqueID = hexdec(uniqid());
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
 
-            <form action="http://localhost/apache/Reseau-social-pro/superAdmin/create" method="POST" class="col">
+            <form action="http://localhost/apache/Reseau-social-pro/monReseau/create" method="POST" class="col">
                 <input type="hidden" name="identreprise" value="<?= $uniqueID ?>">
                 <div class="form-group row">
                     <label for="designation" class="col-sm-4 col-form-label">Nom de votre entreprise</label>
@@ -32,7 +32,7 @@ $uniqueID = hexdec(uniqid());
                     </div>
                 </div>
                 <input type="hidden" name="url" value="<?= "http://localhost" . $_SERVER['BASE_URI'] . "/monReseau/" . $uniqueID ?>">
-                <button type="submit" class="btn btn-lg btn-block">Confirmer</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
                 <p class="mt-2 mx-auto" style="width:350px">Si vous avez déjà un réseau <a class="text-info" href="./">Connectez-vous</a> !</p>
             </form>
         </div>
