@@ -29,7 +29,7 @@ class CompanyController extends CoreController
         $entreprise = $entrepriseDao->get($entrepriseId);
 
         $this->show('singleEntreprise', [
-            'title' => 'Social Connect - Back Office',
+            'title' => 'Social Connect - Mon Réseau',
             'entreprise' => $entreprise
         ]);
     }
