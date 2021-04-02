@@ -32,7 +32,7 @@ class entrepriseDao implements interfaceDao {
     }
 
     public function update() {
-        $sql = $this->conn->prepare("UPDATE entreprise SET identreprise = :identreprise, designation = :designation, logo = :logo, description = :description, url = :url, statut = :statut");
+        $sql = $this->conn->prepare("UPDATE entreprise SET designation = :designation, logo = :logo, description = :description, url = :url, statut = :statut WHERE identreprise = :identreprise");
 
         $entreprise = new entreprise();
 

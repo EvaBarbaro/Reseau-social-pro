@@ -29,7 +29,6 @@
                 <input type="hidden" name="url" value="<?= $viewVars['entreprise']['url'] ?>">
                 <input type="hidden" name="statut" value="<?= $viewVars['entreprise']['statut'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-                <p class="mt-2 mx-auto" style="width:350px">Si vous avez déjà un réseau <a class="text-info" href="./">Connectez-vous</a> !</p>
             </form>
         </div>
 </div>
