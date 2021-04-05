@@ -17,12 +17,12 @@ class compteDao implements interfaceDao {
             grade , departement , date_embauche   
             FROM compte JOIN utilisateur
             ON compte.idutilisateur = utilisateur.idutilisateur
-            WHERE compte.idutilisateur=$id";
-        $pdoStatement = $this->conn->query($sql);
+            WHERE compte.idutilisateur=:id";
+        //$pdoStatement = $this->conn->query($sql);
 
-        /*$pdoStatement = $this->conn->prepare($sql);
-        $sql->bindValue(':id', $id, PDO::PARAM_INT);
-        $sql->execute();*/
+        $pdoStatement = $this->conn->prepare($sql);
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdoStatement->execute();
         $compte = $pdoStatement->fetch(PDO::FETCH_ASSOC);
         return $compte;
     }

@@ -21,8 +21,8 @@ public function get($id){
     $sql = "SELECT * FROM commentaire WHERE idcommentaire = :id";
 
     $pdoStatement = $this->conn->prepare($sql);
-    $sql->bindValue(':id', $id, PDO::PARAM_INT);
-    $sql->execute();
+    $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+    $pdoStatement->execute();
     $commentaire = $pdoStatement->fetch(PDO::FETCH_ASSOC);
 
     return $commentaire;
@@ -52,12 +52,12 @@ public function getAll(){
  * Get all publication commentaire
  */ 
 public function getAllPostsComents($id){
-    $sql = "SELECT * FROM commentaire WHERE idpublication = $id";
+    $sql = "SELECT * FROM commentaire WHERE idpublication = :id";
 
-    /*$pdoStatement = $this->conn->prepare($sql);
-    $sql->bindValue(':id', $id, PDO::PARAM_INT);
-    $sql->execute();*/
-    $pdoStatement = $this->conn->query($sql);
+    $pdoStatement = $this->conn->prepare($sql);
+    $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+    $pdoStatement->execute();
+    //$pdoStatement = $this->conn->query($sql);
     $commentaire = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
     $compteDao = new compteDao($this->conn);
     if($commentaire){

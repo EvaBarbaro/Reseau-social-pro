@@ -9,6 +9,7 @@ include_once __DIR__.'/compteDao.php';
 class publicationDao implements interfaceDao {
 
     private $conn;
+    private $idUtilisateur=1;
 
     public function __construct($db){
         $this->conn = $db;
@@ -22,8 +23,8 @@ class publicationDao implements interfaceDao {
         $sql = "SELECT * FROM publication WHERE idpublication = :id";
 
         $pdoStatement = $this->conn->prepare($sql);
-        $sql->bindValue(':id', $id, PDO::PARAM_INT);
-        $sql->execute();
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdoStatement->execute();
         $publication = $pdoStatement->fetch(PDO::FETCH_ASSOC);
 
         return $publication;
@@ -36,15 +37,19 @@ class publicationDao implements interfaceDao {
  * Get all publication
  */ 
     public function getAll(){
-        $sql = "SELECT * FROM publication";
+        $sql = "SELECT * FROM publication p WHERE (statut='public') OR 
+        (statut='amis' AND idcompte = 
+        (SELECT amis.idcompte FROM amis WHERE 
+        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte))";
 
-        $pdoStatement = $this->conn->query($sql);
-
+        $pdoStatement = $this->conn->prepare($sql);
+        $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
+        $pdoStatement->execute();
         $publication = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
         $compteDao = new compteDao($this->conn);
         $commentaireDao = new commentaireDao($this->conn);
         foreach($publication as $pub){
-            $compte =  $compteDao->get((int)$pub['idcompte']);
+            $compte =  $compteDao->get($pub['idcompte']);
             $compteInfo = array(
             "idcompte"=>$compte['idcompte'],
             "nomutilisateur"=>$compte['nomutilisateur'],
@@ -52,7 +57,7 @@ class publicationDao implements interfaceDao {
             );
             $publication["comptePublication"] = $compteInfo;
 
-            $commentaires =  $commentaireDao->getAllPostsComents((int)$pub['idcompte']);
+            $commentaires =  $commentaireDao->getAllPostsComents($pub['idcompte']);
             $publication["commentaires"] = $commentaires;
          }
         return $publication;
@@ -86,5 +91,13 @@ class publicationDao implements interfaceDao {
  */ 
     public function delete($id){
 
+    }
+
+    /**
+     * Get the value of idUtilisateur
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
     }
 }
