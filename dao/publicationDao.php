@@ -3,6 +3,8 @@
 include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/publication.php';
+include_once __DIR__.'/commentaireDao.php';
+include_once __DIR__.'/compteDao.php';
 
 class publicationDao implements interfaceDao {
 
@@ -39,7 +41,20 @@ class publicationDao implements interfaceDao {
         $pdoStatement = $this->conn->query($sql);
 
         $publication = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+        $compteDao = new compteDao($this->conn);
+        $commentaireDao = new commentaireDao($this->conn);
+        foreach($publication as $pub){
+            $compte =  $compteDao->get((int)$pub['idcompte']);
+            $compteInfo = array(
+            "idcompte"=>$compte['idcompte'],
+            "nomutilisateur"=>$compte['nomutilisateur'],
+            "photo"=>$compte['photo']
+            );
+            $publication["comptePublication"] = $compteInfo;
 
+            $commentaires =  $commentaireDao->getAllPostsComents((int)$pub['idcompte']);
+            $publication["commentaires"] = $commentaires;
+         }
         return $publication;
     }
     

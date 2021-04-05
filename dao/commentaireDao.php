@@ -3,9 +3,14 @@
 include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/commentaire.php';
+include_once __DIR__.'/compteDao.php';
 
 class commentaireDao implements interfaceDao {
+    private $conn;
 
+    public function __construct($db){
+        $this->conn = $db;
+    }
 
 
 
@@ -47,13 +52,28 @@ public function getAll(){
  * Get all publication commentaire
  */ 
 public function getAllPostsComents($id){
-    $sql = "SELECT * FROM commentaire WHERE idpublication = :id";
+    $sql = "SELECT * FROM commentaire WHERE idpublication = $id";
 
-    $pdoStatement = $this->conn->prepare($sql);
+    /*$pdoStatement = $this->conn->prepare($sql);
     $sql->bindValue(':id', $id, PDO::PARAM_INT);
-    $sql->execute();
-    $commentaire = $pdoStatement->fetch(PDO::FETCH_ASSOC);
-
+    $sql->execute();*/
+    $pdoStatement = $this->conn->query($sql);
+    $commentaire = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+    $compteDao = new compteDao($this->conn);
+    if($commentaire){
+    $comptes = array(); 
+    foreach($commentaire as $com){
+       $compte =  $compteDao->get($com['idcompte']);
+       $compteInfo = array(
+       "idcompte"=>$compte['idcompte'],
+       "nomutilisateur"=>$compte['nomutilisateur'],
+       "photo"=>$compte['photo']
+       );
+       array_push($comptes,$compteInfo);
+       
+    }
+    $commentaire["compteCommentaires"]=$comptes;
+}
     return $commentaire;
 
 }
