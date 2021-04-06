@@ -49,7 +49,16 @@ class CompanyController extends CoreController
 
         $entrepriseDao = new entrepriseDao($db);
 
-        $entrepriseDao->create();
+        $entreprise = new entreprise();
+
+        $entreprise->setIdEntreprise($_POST['identreprise']);
+        $entreprise->setDesignation($_POST['designation']);
+        $entreprise->setLogo($_POST['logo']);
+        $entreprise->setDescription($_POST['description']);
+        $entreprise->setUrl($_POST['url']);
+        $entreprise->setStatut($_POST['statut']);
+
+        $entrepriseDao->create($entreprise);
 
         header('Location: '.pathUrl());
     }
@@ -62,7 +71,16 @@ class CompanyController extends CoreController
 
         $entrepriseDao = new entrepriseDao($db);
 
-        $entrepriseDao->update();
+        $entreprise = new entreprise();
+
+        $entreprise->setIdEntreprise($_POST['identreprise']);
+        $entreprise->setDesignation($_POST['designation']);
+        $entreprise->setLogo($_POST['logo']);
+        $entreprise->setDescription($_POST['description']);
+        $entreprise->setUrl($_POST['url']);
+        $entreprise->setStatut(true);
+
+        $entrepriseDao->update($entreprise);
 
         header('Location: '.pathUrl().'monReseau/'.$entrepriseId);
     }

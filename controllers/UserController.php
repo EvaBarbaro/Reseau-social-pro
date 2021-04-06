@@ -13,8 +13,8 @@ class UserController extends CoreController
 
         $utilisateurDao = new utilisateurDao($db);
         $utilisateurList = $utilisateurDao->getAll();
-        $this->show('utilisateur', [
-            'title' => 'Social Connect - Réseau Back Office',
+        $this->show('utilisateurs', [
+            'title' => 'Social Connect - Réseau Back Office - Utilisateurs',
             'utilisateurList' => $utilisateurList
         ]);
     }
@@ -54,7 +54,17 @@ class UserController extends CoreController
 
         $utilisateurDao = new utilisateurDao($db);
 
-        $utilisateurDao->create();
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
+        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
+        $utilisateur->setMotDePasse($_POST['motdepasse']);
+        $utilisateur->setMail($_POST['mail']);
+        $utilisateur->setRole($_POST['role']);
+        $utilisateur->setStatut($_POST['statut']);
+        $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+        $utilisateurDao->create($utilisateur);
 
         header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/inscription');
     }
@@ -67,7 +77,17 @@ class UserController extends CoreController
 
         $utilisateurDao = new utilisateurDao($db);
 
-        $utilisateurDao->update();
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setIdutilisateur($_POST['idutilisateur']);
+        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
+        $utilisateur->setMotDePasse($_POST['motdepasse']);
+        $utilisateur->setMail($_POST['mail']);
+        $utilisateur->setRole($_POST['role']);
+        $utilisateur->setStatut($_POST['statut']);
+        $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+        $utilisateurDao->update($utilisateur);
 
         header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
     }

@@ -31,19 +31,8 @@ class compteDao implements interfaceDao {
         return $compte;
     }
 
-    public function update() {
+    public function update($compte) {
         $sql = $this->conn->prepare("UPDATE compte SET nom = :nom, prenom = :prenom, photo = :photo, poste = :poste, grade = :grade, departement = :departement, date_embauche = :date_embauche WHERE idcompte = :idcompte");
-
-        $compte = new compte();
-
-        $compte->setIdCompte($_POST['idcompte']);
-        $compte->setNom($_POST['nom']);
-        $compte->setPrenom($_POST['prenom']);
-        $compte->setPhoto($_POST['photo']);
-        $compte->setPoste($_POST['poste']);
-        $compte->setGrade($_POST['grade']);
-        $compte->setDepartement($_POST['departement']);
-        $compte->setDateEmbauche($_POST['date_embauche']);
 
         $sql->bindValue(':idcompte', $compte->getIdCompte(), PDO::PARAM_INT);
         $sql->bindValue(':nom', $compte->getNom());
@@ -57,19 +46,8 @@ class compteDao implements interfaceDao {
         $sql->execute();
     }
 
-    public function create() {
+    public function create($compte) {
         $sql = $this->conn->prepare("INSERT INTO compte(idcompte, nom, prenom, photo, poste, grade, departement, date_embauche) VALUES(:idcompte, :nom, :prenom, :photo, :poste, :grade, :departement, :date_embauche)");
-
-        $compte = new compte();
-
-        $compte->setIdCompte($_POST['idcompte']);
-        $compte->setNom($_POST['nom']);
-        $compte->setPrenom($_POST['prenom']);
-        $compte->setPhoto($_POST['photo']);
-        $compte->setPoste($_POST['poste']);
-        $compte->setGrade($_POST['grade']);
-        $compte->setDepartement($_POST['departement']);
-        $compte->setDateEmbauche($_POST['date_embauche']);
 
         $sql->bindValue(':idCompte', $compte->getIdCompte(), PDO::PARAM_INT);
         $sql->bindValue(':nom', $compte->getNom());

@@ -31,18 +31,8 @@ class utilisateurDao implements interfaceDao {
         return $utilisateur;
     }
 
-    public function update() {
+    public function update($utilisateur) {
         $sql = $this->conn->prepare("UPDATE utilisateur SET nomutilisateur = :nomutilisateur, motdepasse = :motdepasse, mail = :mail, role = :role, statut = :statut, identreprise = :identreprise WHERE idutilisateur = :idutilisateur");
-
-        $utilisateur = new utilisateur();
-
-        $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
-        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
-        $utilisateur->setMotDePasse($_POST['motdepasse']);
-        $utilisateur->setMail($_POST['mail']);
-        $utilisateur->setRole($_POST['role']);
-        $utilisateur->setStatut($_POST['statut']);
-        $utilisateur->setIdEntreprise($_POST['identreprise']);
 
         $sql->bindValue(':idutilisateur', $utilisateur->getIdUtilisateur(), PDO::PARAM_INT);
         $sql->bindValue(':nomutilisateur', $utilisateur->getNomUtilisateur());
@@ -55,18 +45,8 @@ class utilisateurDao implements interfaceDao {
         $sql->execute();
     }
 
-    public function create() {
+    public function create($utilisateur) {
         $sql = $this->conn->prepare("INSERT INTO utilisateur(idutilisateur, nomutilisateur, motdepasse, mail, role, statut, identreprise) VALUES(:idutilisateur, :nomutilisateur, :motdepasse, :mail, :role, :statut, :identreprise)");
-
-        $utilisateur = new utilisateur();
-
-        $utilisateur->setIdutilisateur($_POST['idutilisateur']);
-        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
-        $utilisateur->setMotDePasse($_POST['motdepasse']);
-        $utilisateur->setMail($_POST['mail']);
-        $utilisateur->setRole($_POST['role']);
-        $utilisateur->setStatut($_POST['statut']);
-        $utilisateur->setIdEntreprise($_POST['identreprise']);
 
         $sql->bindValue(':idutilisateur', $utilisateur->getIdUtilisateur(), PDO::PARAM_INT);
         $sql->bindValue(':nomutilisateur', $utilisateur->getNomUtilisateur());
