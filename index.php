@@ -14,9 +14,9 @@ $router = new AltoRouter();
 
 $router->setBasePath($_SERVER['BASE_URI']);
 
-$router->map('GET', '/', 'MainController#login', 'login');
+$router->map('GET', '/monReseau/[i:id]/', 'MainController#login', 'login');
 
-$router->map('GET', '/inscription', 'CompanyController#register', 'register');
+$router->map('GET', '/', 'CompanyController#register', 'register');
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'reseauSingle');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
@@ -27,7 +27,7 @@ $router->map('GET', '/monReseau/[i:id]/inscription', 'userController#register', 
 $router->map('GET', '/monReseau/admin', 'userController#getAll', 'admin');
 $router->map('GET', '/monCompte/[i:id]', 'userController#get', 'userSingle');
 $router->map('POST', '/monCompte/create', 'userController#create', 'userCreate');
-$router->map('POST', '/monCompte/delete', 'userController#delete', 'adminDelete');
+$router->map('POST', '/monCompte/delete', 'userController#delete', 'userDelete');
 $router->map('POST', '/monCompte/update', 'userController#update', 'userUpdate');
 
 $match = $router->match();

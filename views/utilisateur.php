@@ -18,7 +18,7 @@
             echo "<td>".$utilisateur['nomutilisateur'] . "</td>";
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
             echo "</form>";
-            echo "<td><a href='./monCompte/".$utilisateur['idutilisateur']."' class='btn btn-info'>Modifier</a></td>";
+            echo "<td><a href='http://localhost:8080/apache/Reseau-social-pro/monCompte/".$utilisateur['idutilisateur']."' class='btn btn-info'>Modifier</a></td>";
             echo "</tr>";
         }
         ?>
