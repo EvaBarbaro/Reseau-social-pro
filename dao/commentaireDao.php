@@ -17,6 +17,30 @@ class commentaireDao implements interfaceDao {
 
 
 
+
+    private function getInfoCommentaire($com) {
+        $commentaire = array();
+        $compteDao = new compteDao($this->conn);
+        $like_commentaireDao= new like_commentaireDao($this->conn,$this->idUtilisateur);
+        $commentaireInfo = array(
+         "idcommentaire"=>$com['idcommentaire'],
+         "description"=>$com['description'],
+         "Nombre Like"=>$com['like']
+         );
+        $commentaire["commentaireInfo"] = $commentaireInfo;
+        $like = $like_commentaireDao->Liked($com);
+        $commentaire["commentaire_Liked_Par_Utilisateur"] = $like;
+        $compte =  $compteDao->get($com['idcompte']);
+        $compteInfo = array(
+        "idcompte"=>$compte['idcompte'],
+        "nomutilisateur"=>$compte['nomutilisateur'],
+        "photo"=>$compte['photo']
+        );
+        $commentaire["commentaire_compte"] =$compteInfo;
+        return  $commentaire;
+    }
+
+
 /**
  * Get a single commentaire
  */ 
@@ -26,8 +50,11 @@ public function get($id){
     $pdoStatement = $this->conn->prepare($sql);
     $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
     $pdoStatement->execute();
-    $commentaire = $pdoStatement->fetch(PDO::FETCH_ASSOC);
-
+    $com = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+    $commentaire = array();
+    if($com){
+        $commentaire = $this-> getInfoCommentaire($com); 
+    }
     return $commentaire;
 
 }
@@ -43,8 +70,11 @@ public function getAll(){
 
     $pdoStatement = $this->conn->query($sql);
 
-    $commentaire = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-
+    $com = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+    $commentaire = array();
+    if($com){
+        $commentaire = $this-> getInfoCommentaire($com); 
+    }
     return $commentaire;
 }
 
@@ -62,29 +92,12 @@ public function getAllPostsComents($id){
     $pdoStatement->execute();
     //$pdoStatement = $this->conn->query($sql);
     $commentaires = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-    $compteDao = new compteDao($this->conn);
-    $like_commentaireDao= new like_commentaireDao($this->conn,$this->idUtilisateur);
     $commentaire = array();
     if($commentaires){
    
     
     foreach($commentaires as $com){
-       $commentaireAjouter = array();
-       $commentaireInfo = array(
-        "idcommentaire"=>$com['idcommentaire'],
-        "description"=>$com['description'],
-        "Nombre Like"=>$com['like']
-        );
-       $commentaireAjouter["commentaireInfo"] = $commentaireInfo;
-       $like = $like_commentaireDao->Liked($com);
-       $commentaireAjouter["commentaire_Liked_Par_Utilisateur"] = $like;
-       $compte =  $compteDao->get($com['idcompte']);
-       $compteInfo = array(
-       "idcompte"=>$compte['idcompte'],
-       "nomutilisateur"=>$compte['nomutilisateur'],
-       "photo"=>$compte['photo']
-       );
-       $commentaireAjouter["commentaire_compte"] =$compteInfo;
+       $commentaireAjouter = $this-> getInfoCommentaire($com);
        array_push($commentaire,$commentaireAjouter);
     }
 
