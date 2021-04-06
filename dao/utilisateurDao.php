@@ -12,7 +12,7 @@ class utilisateurDao implements interfaceDao {
     }
 
     public function get($id) {
-        $sql = "SELECT * FROM `urilisateur` WHERE `idutilisateur` = $id";
+        $sql = "SELECT * FROM `utilisateur` WHERE `idutilisateur` = $id";
 
         $pdoStatement = $this->conn->query($sql);
 
