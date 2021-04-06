@@ -23,7 +23,7 @@ $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCre
 $router->map('POST', '/monReseau/delete', 'CompanyController#delete', 'superAdminDelete');
 $router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpdate');
 
-$router->map('GET', '/monReseau/inscription', 'userController#register', 'userRegister');
+$router->map('GET', '/monReseau/[i:id]/inscription', 'userController#register', 'userRegister');
 $router->map('GET', '/monReseau/admin', 'userController#getAll', 'admin');
 $router->map('GET', '/monCompte/[i:id]', 'userController#get', 'userSingle');
 $router->map('POST', '/monCompte/create', 'userController#create', 'userCreate');

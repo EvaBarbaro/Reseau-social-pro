@@ -34,15 +34,20 @@ class UserController extends CoreController
         ]);
     }
 
-    public function register()
+    public function register($parameters)
     {
+        $entrepriseId = $parameters['id'];
+
         $this->show('utilisateurRegister', [
-            'title' => 'Social Connect - Inscription'
+            'title' => 'Social Connect - Inscription',
+            'entrepriseId' => $entrepriseId
         ]);
     }
 
     public function create()
     {
+        $entrepriseId = $_POST['identreprise'];
+
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
@@ -50,7 +55,7 @@ class UserController extends CoreController
 
         $utilisateurDao->create();
 
-        header('Location: http://localhost:8080/apache/Reseau-social-pro/monReseau/inscription');
+        header('Location: http://localhost:8080/apache/Reseau-social-pro/monReseau/'.$entrepriseId.'/inscription');
     }
 
     public function update()
