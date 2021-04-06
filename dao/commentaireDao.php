@@ -16,20 +16,26 @@ class commentaireDao implements interfaceDao {
     }
 
 
+    
 
-
+/**
+ * Get infos of a commentaire
+ */ 
     private function getInfoCommentaire($com) {
         $commentaire = array();
         $compteDao = new compteDao($this->conn);
         $like_commentaireDao= new like_commentaireDao($this->conn,$this->idUtilisateur);
+        // les infos dans la table commentaire
         $commentaireInfo = array(
          "idcommentaire"=>$com['idcommentaire'],
          "description"=>$com['description'],
          "Nombre Like"=>$com['like']
          );
         $commentaire["commentaireInfo"] = $commentaireInfo;
+        // savoir si l'utilisteur de la session a liké le commentaire ou pas 
         $like = $like_commentaireDao->Liked($com);
         $commentaire["commentaire_Liked_Par_Utilisateur"] = $like;
+        // les infos du créateur du commentaire
         $compte =  $compteDao->get($com['idcompte']);
         $compteInfo = array(
         "idcompte"=>$compte['idcompte'],
