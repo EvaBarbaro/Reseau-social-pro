@@ -14,7 +14,7 @@ $router = new AltoRouter();
 
 $router->setBasePath($_SERVER['BASE_URI']);
 
-$router->map('GET', '/monReseau/[i:id]/', 'MainController#login', 'login');
+$router->map('GET', '/monReseau/[i:id]/login', 'MainController#login', 'login');
 
 $router->map('GET', '/', 'CompanyController#register', 'register');
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');

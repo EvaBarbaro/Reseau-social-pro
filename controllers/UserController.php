@@ -2,6 +2,7 @@
 
 include_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../utils/DBData.php';
+require_once __DIR__ . '/../pathUrl.php';
 
 class UserController extends CoreController
 {
@@ -55,7 +56,7 @@ class UserController extends CoreController
 
         $utilisateurDao->create();
 
-        header('Location: http://localhost:8080/apache/Reseau-social-pro/monReseau/'.$entrepriseId.'/inscription');
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/inscription');
     }
 
     public function update()
@@ -68,7 +69,7 @@ class UserController extends CoreController
 
         $utilisateurDao->update();
 
-        header('Location: http://localhost:8080/apache/Reseau-social-pro/monCompte/'.$utilisateurId);
+        header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
     }
 
     public function delete()
@@ -81,6 +82,6 @@ class UserController extends CoreController
         $utilisateurDao = new utilisateurDao($db);
         $utilisateurDao->delete($utilisateurId);
 
-        header('Location: http://localhost:8080/apache/Reseau-social-pro/monReseau/admin');
+        header('Location: '.pathUrl().'monReseau/admin');
     }
 }

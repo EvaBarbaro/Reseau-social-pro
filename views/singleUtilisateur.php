@@ -1,12 +1,12 @@
 <div class="d-flex">
     <div id="logo">
-        <img src="http://localhost:8080/apache/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logoImg" class="img-thumbnail mt-4">
+        <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
 
-            <form action="http://localhost:8080/apache/Reseau-social-pro/monCompte/update" method="POST" class="col">
+            <form action=<?= pathUrl()."monCompte/update" ?> method="POST" class="col">
                 <input type="hidden" name="idutilisateur" value="<?= $viewVars['utilisateur']['idutilisateur'] ?>">
                 <div class="form-group row">
                     <label for="nomutilisateur" class="col-sm-4 col-form-label">Votre nom</label>

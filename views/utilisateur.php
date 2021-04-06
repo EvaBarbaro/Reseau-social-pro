@@ -12,13 +12,13 @@
         for ($index=0; $index < $length; $index++) { 
             $utilisateur = $viewVars['utilisateurList'][$index];
 
-            echo "<form action='http://localhost:8080/apache/Reseau-social-pro/monCompte/delete' method='POST'>";
+            echo "<form action=" . pathUrl()."monCompte/delete method='POST'>";
             echo "<input type='hidden' value='". $utilisateur['idutilisateur']."' name='idutilisateur' />";
             echo "<tr>";
             echo "<td>".$utilisateur['nomutilisateur'] . "</td>";
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
             echo "</form>";
-            echo "<td><a href='http://localhost:8080/apache/Reseau-social-pro/monCompte/".$utilisateur['idutilisateur']."' class='btn btn-info'>Modifier</a></td>";
+            echo "<td><a href='".pathUrl()."monCompte/".$utilisateur['idutilisateur']."' class='btn btn-info'>Modifier</a></td>";
             echo "</tr>";
         }
         ?>

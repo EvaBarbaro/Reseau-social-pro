@@ -5,13 +5,13 @@ $uniqueID = hexdec(uniqid());
 ?>
 <div class="d-flex">
     <div id="logo">
-        <img src="http://localhost:8080/apache/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logoImg" class="img-thumbnail mt-4">
+        <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
 
-            <form action="http://localhost:8080/apache/Reseau-social-pro/monCompte/create" method="POST" class="col">
+            <form action=<?= pathUrl()."monCompte/create" ?> method="POST" class="col">
                 <input type="hidden" name="idutilisateur" value="<?= $uniqueID ?>">
                 <div class="form-group row">
                     <label for="nomutilisateur" class="col-sm-4 col-form-label">Votre nom utilisateur</label>
@@ -35,7 +35,7 @@ $uniqueID = hexdec(uniqid());
                 <input type="hidden" name="statut" value="false">
                 <input type="hidden" name="identreprise" value="<?= $viewVars['entrepriseId'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-                <p class="mt-2 mx-auto" style="width:350px">Si vous avez déjà un compte <a class="text-info" href="http://localhost:8080/apache/Reseau-social-pro/">Connectez-vous</a> !</p>
+                <p class="mt-2 mx-auto" style="width:420px">Si vous avez déjà un compte <a href=<?= pathUrl()."monReseau/".$viewVars['entrepriseId']."/login" ?>>Connectez-vous</a> !</p>
             </form>
         </div>
 </div>
