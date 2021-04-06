@@ -10,6 +10,12 @@ class like_publicationDao implements interfaceLikeDao {
         $this->conn = $db;
         $this->idUtilisateur = $idUtilisateur;
     }
+    private function AddLike($obj) : bool{
+
+    }
+    private function DeleteLike($obj) : bool{
+
+    }
     public function Like_Unlike($obj){
         
     }

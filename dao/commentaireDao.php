@@ -25,6 +25,7 @@ class commentaireDao implements interfaceDao {
         $commentaire = array();
         $compteDao = new compteDao($this->conn);
         $like_commentaireDao= new like_commentaireDao($this->conn,$this->idUtilisateur);
+       
         // les infos dans la table commentaire
         $commentaireInfo = array(
          "idcommentaire"=>$com->getIdcommentaire(),
