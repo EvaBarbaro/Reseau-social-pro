@@ -7,6 +7,9 @@ include __DIR__ . '/utils/DBData.php';
 include __DIR__ . '/controllers/CoreController.php';
 include __DIR__ . '/controllers/MainController.php';
 include __DIR__ . '/controllers/CompanyController.php';
+
+include __DIR__ . '/controllers/ImageController.php';
+
 include __DIR__ . '/controllers/ErrorController.php';
 
 $router = new AltoRouter();
@@ -17,6 +20,10 @@ $router->map('GET', '/', 'MainController#login', 'login');
 
 $router->map('GET', '/inscription', 'CompanyController#register', 'register');
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
+
+$router->map('GET', '/mesImages', 'ImageController#getAll', 'mesImages');
+$router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
+
 $router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'reseauSingle');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
 $router->map('POST', '/monReseau/delete', 'CompanyController#delete', 'superAdminDelete');
