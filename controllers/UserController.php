@@ -1,7 +1,8 @@
 <?php
 
-include_once __DIR__.'/../dao/utilisateurDao.php';
-include_once __DIR__.'/../utils/DBData.php';
+require_once __DIR__.'/../dao/utilisateurDao.php';
+require_once __DIR__.'/../dao/compteDao.php';
+require_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
 
 class UserController extends CoreController
@@ -53,8 +54,10 @@ class UserController extends CoreController
         $db = $DBData->getConnection();
 
         $utilisateurDao = new utilisateurDao($db);
+        $compteDao = new compteDao($db);
 
         $utilisateur = new utilisateur();
+        $compte = new compte();
 
         $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
         $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
@@ -66,12 +69,24 @@ class UserController extends CoreController
 
         $utilisateurDao->create($utilisateur);
 
+        $compte->setIdCompte($_POST['idutilisateur']);
+        $compte->setNom(NULL);
+        $compte->setPrenom(NULL);
+        $compte->setPhoto(NULL);
+        $compte->setPoste(NULL);
+        $compte->setGrade(NULL);
+        $compte->setDepartement(NULL);
+        $compte->setDateEmbauche(NULL);
+
+        $compteDao->create($compte);
+
         header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/inscription');
     }
 
     public function update()
     {
         $utilisateurId = $_POST['idutilisateur'];
+        
         $DBData = new DBData();
         $db = $DBData->getConnection();
 

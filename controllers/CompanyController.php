@@ -13,7 +13,7 @@ class CompanyController extends CoreController
 
         $entrepriseDao = new entrepriseDao($db);
         $entrepriseList = $entrepriseDao->getAll();
-        $this->show('entreprise', [
+        $this->show('entreprises', [
             'title' => 'Social Connect - Back Office',
             'entrepriseList' => $entrepriseList
         ]);
