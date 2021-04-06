@@ -1,6 +1,6 @@
 <div class="d-flex">
     <div id="logo">
-        <img src="http://localhost:80/Reseau-social-pro/img/logo-social-connect.png" alt="logo" id="logoImg" class="img-thumbnail mt-4">
+        <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
 
         <div id="login">
@@ -18,8 +18,8 @@
                         <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-block">Confirmer</button>
-                    <p class="mt-2 mx-auto" style="width:420px">Si vous n'avez pas de compte <a href="./inscription">Créer votre réseau</a> !</p>
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
+                    <p class="mt-2 mx-auto" style="width:420px">Si vous n'avez pas de compte <a href=<?= pathUrl()."monReseau/".$viewVars['entrepriseId']."/inscription" ?>>Créez en un</a> !</p>
                 </form>
             </div>
         </div>

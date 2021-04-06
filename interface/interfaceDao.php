@@ -4,7 +4,7 @@
 interface interfaceDao {
     public function get($id);
     public function getAll();
-    public function update($obj);
-    public function create($obj);
+    public function update($entreprise);
+    public function create($entreprise);
     public function delete($id);
 }

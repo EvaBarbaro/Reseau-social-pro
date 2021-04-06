@@ -2,17 +2,13 @@
 
 class MainController extends CoreController
 {
-    public function login()
+    public function login($parameters)
     {
-        $this->show('login', [
-            'title' => 'Social Connect - Connexion'
-        ]);
-    }
+        $entrepriseId = $parameters['id'];
 
-    public function register()
-    {
-        $this->show('register', [
-            'title' => 'Social Connect - Inscription'
+        $this->show('login', [
+            'title' => 'Social Connect - Connexion',
+            'entrepriseId' => $entrepriseId
         ]);
     }
 }

@@ -32,7 +32,7 @@ class entrepriseDao implements interfaceDao {
     }
 
     public function update($entreprise) {
-        $sql = $this->conn->prepare("UPDATE entreprise SET identreprise = :identreprise, designation = :designation, logo = :logo, description = :description, url = :url, statut = :statut");
+        $sql = $this->conn->prepare("UPDATE entreprise SET designation = :designation, logo = :logo, description = :description, url = :url, statut = :statut WHERE identreprise = :identreprise");
 
         $sql->bindValue(':identreprise', $entreprise->getIdEntreprise(), PDO::PARAM_INT);
         $sql->bindValue(':designation', $entreprise->getDesignation());
@@ -45,7 +45,7 @@ class entrepriseDao implements interfaceDao {
     }
 
     public function create($entreprise) {
-        $sql = $this->conn->prepare("INSERT INTO entreprise(identreprise, designation, logo, description, url, statut) VALUES(:identreprise, :designation, :logo, :description, :url, statut)");
+        $sql = $this->conn->prepare("INSERT INTO entreprise(identreprise, designation, logo, description, url, statut) VALUES(:identreprise, :designation, :logo, :description, :url, :statut)");
 
         $sql->bindValue(':identreprise', $entreprise->getIdEntreprise(), PDO::PARAM_INT);
         $sql->bindValue(':designation', $entreprise->getDesignation());
@@ -53,11 +53,11 @@ class entrepriseDao implements interfaceDao {
         $sql->bindValue(':description', $entreprise->getDescription());
         $sql->bindValue(':url', $entreprise->getUrl());
         $sql->bindValue(':statut', $entreprise->getStatut(), PDO::PARAM_INT);
-    
+
         $sql->execute();
     }
 
     public function delete($id) {
-        $this->conn->execute("DELETE FROM personnages WHERE id = $id");
+        $this->conn->exec("DELETE FROM entreprise WHERE identreprise = $id");
     }
 }
