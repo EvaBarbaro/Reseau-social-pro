@@ -18,6 +18,44 @@ class publicationDao implements interfaceDao {
     }
 
 
+
+
+/**
+ * Get infos of a publication
+ */ 
+    private function getInfoPublication($pub) {
+        $compteDao = new compteDao($this->conn);
+        $commentaireDao = new commentaireDao($this->conn,$this->idUtilisateur);
+        $like_publicationDao = new like_publicationDao($this->conn,$this->idUtilisateur);
+        $publication = array();
+         // les infos dans la table publication
+         $pubInfo = array(
+            "idpublication"=>$pub['idpublication'],
+            "description"=>$pub['description'],
+            "imageurl"=>$pub['imageurl'],
+            "Nombre Like"=>$pub['like'],
+            "statut"=>$pub['statut']
+            );
+        $publication["publicationInfos"] = $pubInfo;
+        $like = $like_publicationDao->Liked($pub);
+        $publication["publication_Liked_Par_Utilisateur"] = $like;
+        $compte =  $compteDao->get($pub['idcompte']);
+        // les infos du créateur de la publication
+        $compteInfo = array(
+        "idcompte"=>$compte['idcompte'],
+        "nomutilisateur"=>$compte['nomutilisateur'],
+        "photo"=>$compte['photo']
+        );
+        $publication["comptePublication"] = $compteInfo;
+        // les commentaires de la publication
+        $commentaires =  $commentaireDao->getAllPostsComents($pub['idpublication']);
+        $publication["commentaires"] = $commentaires;
+        return $publication;
+    }
+
+
+
+
 /**
  * Get a single publication
  */ 
@@ -27,8 +65,16 @@ class publicationDao implements interfaceDao {
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
         $pdoStatement->execute();
-        $publication = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+        $pub = $pdoStatement->fetch(PDO::FETCH_ASSOC);
 
+        $coms = array();
+        $publication = array();
+        if($pub){
+      
+            // publication à retourner
+            $publication = $this->getInfoPublication($pub);
+ 
+         }
         return $publication;
     }
 
@@ -48,36 +94,12 @@ class publicationDao implements interfaceDao {
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
         $pdoStatement->execute();
         $publications = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-        $compteDao = new compteDao($this->conn);
-        $commentaireDao = new commentaireDao($this->conn,$this->idUtilisateur);
-        $like_publicationDao = new like_publicationDao($this->conn,$this->idUtilisateur);
+  
         $coms = array();
         $publication = array();
         foreach($publications as $pub){
             // publication à ajouté
-            $publicationAjouter=array();
-            // les infos dans la table publication
-            $pubInfo = array(
-                "idpublication"=>$pub['idpublication'],
-                "description"=>$pub['description'],
-                "imageurl"=>$pub['imageurl'],
-                "Nombre Like"=>$pub['like'],
-                "statut"=>$pub['statut']
-                );
-            $publicationAjouter["publicationInfos"] = $pubInfo;
-            $like = $like_publicationDao->Liked($pub);
-            $publicationAjouter["publication_Liked_Par_Utilisateur"] = $like;
-            $compte =  $compteDao->get($pub['idcompte']);
-            // les infos du créateur de la publication
-            $compteInfo = array(
-            "idcompte"=>$compte['idcompte'],
-            "nomutilisateur"=>$compte['nomutilisateur'],
-            "photo"=>$compte['photo']
-            );
-            $publicationAjouter["comptePublication"] = $compteInfo;
-            // les commentaires de la publication
-            $commentaires =  $commentaireDao->getAllPostsComents($pub['idpublication']);
-            $publicationAjouter["commentaires"] = $commentaires;
+            $publicationAjouter = $this->getInfoPublication($pub);
             array_push($publication,$publicationAjouter);
          }
         return $publication;
