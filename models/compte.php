@@ -1,14 +1,6 @@
 <?php 
 
 class compte {
-private int $idcompte;
-private string $nom;
-private string $prenom;
-private string $photo;
-private string $poste;
-private string $grade;
-private string $departement;
-private string $date_embauche;
 
     public $idCompte;
     public $nom;
