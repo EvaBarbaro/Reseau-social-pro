@@ -19,7 +19,7 @@ class like_commentaireDao implements interfaceLikeDao {
         $sql = "SELECT * FROM like_commentaire WHERE idcommentaire = :idCommentaire AND idcompte= :idCompte";
 
         $pdoStatement = $this->conn->prepare($sql);
-        $pdoStatement->bindValue(':idCommentaire', $obj['idcommentaire'], PDO::PARAM_INT);
+        $pdoStatement->bindValue(':idCommentaire', $obj->getIdcommentaire(), PDO::PARAM_INT);
         $pdoStatement->bindValue(':idCompte',  $this->idUtilisateur, PDO::PARAM_INT);
         $pdoStatement->execute();
         $commentaireLiked = $pdoStatement->fetch(PDO::FETCH_ASSOC);

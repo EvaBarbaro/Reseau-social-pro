@@ -10,7 +10,7 @@ class publication {
  */ 
 private string $idpublication;
 private string $description;
-private string $image;
+private string $imageurl;
 private int $like;
 private string $statut;
 private string $idcompte; 
@@ -59,21 +59,21 @@ return $this;
 }
 
 /**
- * Get the value of image
+ * Get the value of imageurl
  */ 
-public function getImage()
+public function getImageurl()
 {
-return $this->image;
+return $this->imageurl;
 }
 
 /**
- * Set the value of image
+ * Set the value of imageurl
  *
  * @return  self
  */ 
-public function setImage($image)
+public function setImageurl($imageurl)
 {
-$this->image = $image;
+$this->imageurl = $imageurl;
 
 return $this;
 }

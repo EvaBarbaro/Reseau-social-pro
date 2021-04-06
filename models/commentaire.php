@@ -11,6 +11,7 @@ class commentaire {
 private string $idcommentaire;
 private string $description;
 private int $like;
+private int $idcompte;
 private string $idpublication;
 
 
@@ -95,18 +96,43 @@ $this->idpublication = $idpublication;
 return $this;
 }
 
+/**
+ * Get the value of idcompte
+ *
+ * @return int
+ */
+public function getIdcompte() : int 
+{
+return $this->idcompte;
+}
 
+/**
+ * Set the value of idcompte
+ *
+ * @param int $idcompte
+ *
+ * @return self
+ */
+public function setIdcompte(int $idcompte) : self
+{
+$this->idcompte = $idcompte;
+
+return $this;
+}
 
 
 /**
  * Construct
  */ 
-public function __construct($idcommentaire,$description,$idpublication)
+public function __construct($idcommentaire,$description,$idpublication,$like,$idcompte)
 {
     $this->setIdcommentaire($idcommentaire);
     $this->setDescription($description);
-    $this->setlike(0);
+    $this->setlike($like);
     $this->setIdpublication($idpublication);
+    $this->setIdcompte($idcompte);
 }
+
+
 
 }
