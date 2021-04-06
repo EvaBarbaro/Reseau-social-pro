@@ -4,6 +4,7 @@ include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/commentaire.php';
 include_once __DIR__.'/compteDao.php';
+include_once __DIR__.'/compteDao.php';
 
 class commentaireDao implements interfaceDao {
     private $conn;

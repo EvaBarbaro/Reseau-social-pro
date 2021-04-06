@@ -9,10 +9,11 @@ include_once __DIR__.'/compteDao.php';
 class publicationDao implements interfaceDao {
 
     private $conn;
-    private $idUtilisateur=1;
+    private $idUtilisateur;
 
     public function __construct($db){
         $this->conn = $db;
+        $this->idUtilisateur = 1;
     }
 
 
@@ -40,7 +41,7 @@ class publicationDao implements interfaceDao {
         $sql = "SELECT * FROM publication p WHERE (statut='public') OR 
         (statut='amis' AND idcompte = 
         (SELECT amis.idcompte FROM amis WHERE 
-        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte))";
+        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte)) OR (idpublication=:id)";
 
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
