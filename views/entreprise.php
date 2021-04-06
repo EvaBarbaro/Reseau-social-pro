@@ -12,7 +12,7 @@
         for ($index=0; $index < $length; $index++) { 
             $entreprise = $viewVars['entrepriseList'][$index];
 
-            echo "<form action='http://localhost/apache/Reseau-social-pro/monReseau/delete' method='POST'>";
+            echo "<form action='http://localhost:8080/apache/Reseau-social-pro/monReseau/delete' method='POST'>";
             echo "<input type='hidden' value='". $entreprise['identreprise']."' name='identreprise' />";
             echo "<tr>";
             echo "<td>".$entreprise['designation'] . "</td>";
