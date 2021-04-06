@@ -10,6 +10,12 @@ class compteDao implements interfaceDao {
     public function __construct($db){
         $this->conn = $db;
     }
+
+
+
+/**
+ * Get single compte
+ */ 
     public function get($id){
        // $id= (int)$id;
         $sql = "SELECT idcompte , nomutilisateur , mail , role , statut,
