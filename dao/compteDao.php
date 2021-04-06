@@ -12,12 +12,12 @@ class compteDao implements interfaceDao {
     }
     public function get($id){
        // $id= (int)$id;
-        $sql = "SELECT compte.idutilisateur , nomutilisateur , mail , role , statut,
-         	identreprise , idcompte , nom , prenom , photo , poste
+        $sql = "SELECT idcompte , nomutilisateur , mail , role , statut,
+         	identreprise , nom , prenom , photo , poste
             grade , departement , date_embauche   
             FROM compte JOIN utilisateur
-            ON compte.idutilisateur = utilisateur.idutilisateur
-            WHERE compte.idutilisateur=:id";
+            ON compte.idcompte = utilisateur.idutilisateur
+            WHERE compte.idcompte=:id";
         //$pdoStatement = $this->conn->query($sql);
 
         $pdoStatement = $this->conn->prepare($sql);
