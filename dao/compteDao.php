@@ -77,7 +77,7 @@ class compteDao implements interfaceDao {
     public function create($compte) {
         $sql = $this->conn->prepare("INSERT INTO compte(idcompte, nom, prenom, photo, poste, grade, departement, date_embauche) VALUES(:idcompte, :nom, :prenom, :photo, :poste, :grade, :departement, :date_embauche)");
 
-        $sql->bindValue(':idCompte', $compte->getIdCompte(), PDO::PARAM_INT);
+        $sql->bindValue(':idcompte', $compte->getIdCompte(), PDO::PARAM_INT);
         $sql->bindValue(':nom', $compte->getNom());
         $sql->bindValue(':prenom', $compte->getPrenom());
         $sql->bindValue(':photo', $compte->getPhoto());
