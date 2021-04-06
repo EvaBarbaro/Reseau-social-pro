@@ -40,7 +40,7 @@ class publicationDao implements interfaceDao {
         // savoir si l'utilisteur de la session a liké la publication ou pas 
         $like = $like_publicationDao->Liked($pub);
         $publication["publication_Liked_Par_Utilisateur"] = $like;
-        $compte =  $compteDao->get($pub->getIdcompte());
+        $compte =  $compteDao->getCompteInfos($pub->getIdcompte());
         // les infos du créateur de la publication
         $compteInfo = array(
         "idcompte"=>$compte['idcompte'],

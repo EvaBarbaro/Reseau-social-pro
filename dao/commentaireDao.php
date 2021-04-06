@@ -37,7 +37,7 @@ class commentaireDao implements interfaceDao {
         $like = $like_commentaireDao->Liked($com);
         $commentaire["commentaire_Liked_Par_Utilisateur"] = $like;
         // les infos du créateur du commentaire
-        $compte =  $compteDao->get($com->getIdcompte());
+        $compte =  $compteDao->getCompteInfos($com->getIdcompte());
         $compteInfo = array(
         "idcompte"=>$compte['idcompte'],
         "nomutilisateur"=>$compte['nomutilisateur'],
