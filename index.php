@@ -30,6 +30,9 @@ $router->map('POST', '/monCompte/create', 'userController#create', 'userCreate')
 $router->map('POST', '/monCompte/delete', 'userController#delete', 'userDelete');
 $router->map('POST', '/monCompte/update', 'userController#update', 'userUpdate');
 
+$router->map('GET', '/mesImages', 'ImageController#getAll', 'mesImages');
+$router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
+
 $match = $router->match();
 
 if ($match != false) {
