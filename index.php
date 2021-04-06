@@ -39,7 +39,6 @@ if ($match != false) {
     $methodName = $controllerInformations[1];
 
     $controller = new $controllerName($router);
-
     $controller->$methodName($match['params']);
 
 } else {

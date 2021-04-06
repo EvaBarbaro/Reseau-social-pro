@@ -1,7 +1,8 @@
 <?php
 
-include_once __DIR__.'/../dao/entrepriseDao.php';
-include_once __DIR__.'/../utils/DBData.php';
+require_once __DIR__.'/../dao/entrepriseDao.php';
+require_once __DIR__.'/../utils/DBData.php';
+require_once __DIR__ . '/../pathUrl.php';
 
 class CompanyController extends CoreController
 {
@@ -29,7 +30,7 @@ class CompanyController extends CoreController
         $entreprise = $entrepriseDao->get($entrepriseId);
 
         $this->show('singleEntreprise', [
-            'title' => 'Social Connect - Back Office',
+            'title' => 'Social Connect - Mon Réseau',
             'entreprise' => $entreprise
         ]);
     }
@@ -50,7 +51,7 @@ class CompanyController extends CoreController
 
         $entrepriseDao->create();
 
-        header('Location: http://localhost/apache/Reseau-social-pro/inscription');
+        header('Location: '.pathUrl());
     }
 
     public function update()
@@ -63,7 +64,7 @@ class CompanyController extends CoreController
 
         $entrepriseDao->update();
 
-        header('Location: http://localhost/apache/Reseau-social-pro/monReseau/'.$entrepriseId);
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId);
     }
 
     public function delete()
@@ -76,6 +77,6 @@ class CompanyController extends CoreController
         $entrepriseDao = new entrepriseDao($db);
         $entrepriseDao->delete($entrepriseId);
 
-        header('Location: http://localhost/apache/Reseau-social-pro/superAdmin');
+        header('Location: '.pathUrl().'superAdmin');
     }
 }
