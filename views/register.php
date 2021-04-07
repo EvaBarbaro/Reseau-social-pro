@@ -52,8 +52,8 @@ $uniqueUserID = hexdec(uniqid());
                     <input type="email" class="form-control" name="mail" id="mail" placeholder="Votre email">
                     </div>
                 </div>
-                <input type="hidden" name="role" value="user">
-                <input type="hidden" name="statut" value="true">
+                <input type="hidden" name="role" value="admin">
+                <input type="hidden" name="statut" value=<?= true ?>>
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>
         </div>
