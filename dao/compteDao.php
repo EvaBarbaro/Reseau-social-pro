@@ -20,7 +20,8 @@ class compteDao implements interfaceDao {
 
         return $compte;
     }
-    public function getCompteInfos($id){
+
+    public function getCompteInfos($id) {
      
         $compte = array();
         $sql = "SELECT idcompte , nomutilisateur , mail , role , statut,
@@ -48,7 +49,8 @@ class compteDao implements interfaceDao {
          $compte['date_embauche']=$compteModel->getDateEmbauche();
          $compte['nomutilisateur']=$cmpt['nomutilisateur'];
          return $compte;
-     }
+    }
+    
     public function getAll() {
         $sql = "SELECT * FROM compte";
 
