@@ -2,6 +2,7 @@
 
 include_once __DIR__.'/../dao/ImageDao.php';
 include_once __DIR__.'/../utils/DBData.php';
+require_once __DIR__ . '/../pathUrl.php';
 
 class ImageController extends CoreController
 {
@@ -32,6 +33,59 @@ class ImageController extends CoreController
             'title' => 'Social Connect - Back Office',
             'image' => $image
         ]);
+    }
+    public function create()
+    {
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $imageDao = new imageDao($db);
+        $image = new image();
+
+        $image->setIdimage($_POST['idimage']);
+        $image->setTitre($_POST['titre']);
+        $image->setImageUrl($_POST['imageurl']);
+        $image->setIdcompte($_POST['idcompte']);
+        
+
+        $imageDao->create($image);
+
+        header('Location: '.pathUrl());
+    }
+
+    public function update()
+    {
+        $imageId = $_POST['idimage'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $imageDao = new imageDao($db);
+        $image = new image();
+
+        $image->setIdimage($_POST['idimage']);
+        $image->setTitre($_POST['titre']);
+        $image->setImageUrl($_POST['imageurl']);
+        $image->setIdcompte($_POST['idcompte']);
+       
+        $imageDao->update($image);
+
+        header('Location: '.pathUrl().'monImage/'.$imageId);
+    }
+
+    
+
+    public function delete()
+    {
+        $imageId = $_POST['idimage'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $imageDao = new imageDao($db);
+        $imageDao->delete($imageId);
+
+        header('Location: '.pathUrl().'mesImages');
     }
  
 
