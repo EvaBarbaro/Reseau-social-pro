@@ -45,16 +45,17 @@ class AccountController extends CoreController
 
         $compteDao = new compteDao($db);
 
-        $compte = new compte();
-
-        $compte->setIdCompte($_POST['idcompte']);
-        $compte->setNom($_POST['nom']);
-        $compte->setPrenom($_POST['prenom']);
-        $compte->setPhoto($_POST['photo']);
-        $compte->setPoste($_POST['poste']);
-        $compte->setGrade($_POST['grade']);
-        $compte->setDepartement($_POST['departement']);
-        $compte->setDateEmbauche($_POST['date_embauche']);
+        $compte = new compte
+        (
+            $_POST['idcompte'],
+            $_POST['nom'],
+            $_POST['prenom'],
+            $_POST['photo'],
+            $_POST['poste'],
+            $_POST['grade'],
+            $_POST['departement'],
+            $_POST['date_embauche']
+        );
 
         $compteDao->update($compte);
 

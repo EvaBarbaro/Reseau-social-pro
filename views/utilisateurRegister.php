@@ -32,7 +32,7 @@ $uniqueID = hexdec(uniqid());
                     </div>
                 </div>
                 <input type="hidden" name="role" value="user">
-                <input type="hidden" name="statut" value="false">
+                <input type="hidden" name="statut" value=<?= false ?>>
                 <input type="hidden" name="identreprise" value="<?= $viewVars['entrepriseId'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
                 <p class="mt-2 mx-auto" style="width:420px">Si vous avez déjà un compte <a href=<?= pathUrl()."monReseau/".$viewVars['entrepriseId']."/login" ?>>Connectez-vous</a> !</p>

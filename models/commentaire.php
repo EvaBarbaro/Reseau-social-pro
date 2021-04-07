@@ -8,11 +8,11 @@ class commentaire {
 /**
  * Attributes
  */ 
-private string $idcommentaire;
-private string $description;
-private int $like;
-private int $idcompte;
-private string $idpublication;
+private $idcommentaire;
+private $description;
+private $like;
+private $idcompte;
+private $idpublication;
 
 
 

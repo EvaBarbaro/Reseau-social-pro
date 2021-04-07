@@ -1,13 +1,13 @@
 <?php 
 
 class utilisateur {
-    public $idUtilisateur;
-    public $nomUtilisateur;
-    public $motDePasse;
-    public $mail;
-    public $role;
-    public $statut;
-    public $idEntreprise;
+    private $idUtilisateur;
+    private $nomUtilisateur;
+    private $motDePasse;
+    private $mail;
+    private $role;
+    private $statut;
+    private $idEntreprise;
 
     /**
      * Get the value of idUtilisateur

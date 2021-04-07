@@ -7,13 +7,15 @@ require_once __DIR__ . '/../pathUrl.php';
 
 class UserController extends CoreController
 {
-    public function getAll()
+    public function getAll($parameters)
     {
+        $utilisateurId = $parameters['id'];
+
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $utilisateurDao = new utilisateurDao($db);
-        $utilisateurList = $utilisateurDao->getAll();
+        $utilisateurList = $utilisateurDao->getAll($utilisateurId);
         $this->show('utilisateurs', [
             'title' => 'Social Connect - Réseau Back Office - Utilisateurs',
             'utilisateurList' => $utilisateurList
@@ -57,7 +59,6 @@ class UserController extends CoreController
         $compteDao = new compteDao($db);
 
         $utilisateur = new utilisateur();
-        $compte = new compte();
 
         $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
         $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
@@ -69,14 +70,17 @@ class UserController extends CoreController
 
         $utilisateurDao->create($utilisateur);
 
-        $compte->setIdCompte($_POST['idutilisateur']);
-        $compte->setNom(NULL);
-        $compte->setPrenom(NULL);
-        $compte->setPhoto(NULL);
-        $compte->setPoste(NULL);
-        $compte->setGrade(NULL);
-        $compte->setDepartement(NULL);
-        $compte->setDateEmbauche(NULL);
+        $compte = new compte
+        (
+            $_POST['idutilisateur'],
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL
+        );
 
         $compteDao->create($compte);
 

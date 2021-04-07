@@ -8,8 +8,8 @@ class like_commentaire {
 /**
  * Attributes
  */ 
-private string $idcompte;
-private string $idcommentaire;
+private $idcompte;
+private $idcommentaire;
  
 
 /**

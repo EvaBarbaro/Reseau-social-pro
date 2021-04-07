@@ -8,12 +8,12 @@ class publication {
 /**
  * Attributes
  */ 
-private string $idpublication;
-private string $description;
-private string $imageurl;
-private int $like;
-private string $statut;
-private string $idcompte; 
+private $idpublication;
+private $description;
+private $imageurl;
+private $like;
+private $statut;
+private $idcompte; 
 
 
 
