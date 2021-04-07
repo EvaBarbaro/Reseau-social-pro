@@ -125,10 +125,11 @@ class publicationDao implements interfaceDao {
             $pubId = hexdec(uniqid());
         } while(!empty($this->get($pubId)));
         $sql = "INSERT INTO publication (idpublication,description,publication.like,statut,idcompte";
-        if(isset($publication->getImageurl())){
+        if($publication->getImageurl()!==null){
             $sql=$sql.",imageurl";
         }
-        $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte", if(isset($publication->getImageurl())){
+        $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte";
+         if($publication->getImageurl()!==null){
             $sql=$sql.",:imageurl";
         }
         $sql=$sql.")";
@@ -136,7 +137,7 @@ class publicationDao implements interfaceDao {
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':pubId', $pubId, PDO::PARAM_INT);
         $pdoStatement->bindValue(':description',$publication->getDescription());
-        if(isset($publication->getImageurl())){
+        if($publication->getImageurl()!==null){
         $pdoStatement->bindValue(':imageurl',$publication->getImageurl());
         }
         $pdoStatement->bindValue(':like', 0, PDO::PARAM_INT);
@@ -155,14 +156,14 @@ class publicationDao implements interfaceDao {
  */ 
 public function update($publication){
     $sql = "UPDATE publication SET description=:description , statut=:statut";  
-    if(isset($publication->getImageurl())){
+    if($publication->getImageurl()!==null){
         $sql=$sql.",imageurl=:imageurl";
     }
     $sql = $sql." WHERE idpublication=:pubId";
     $pdoStatement = $this->conn->prepare($sql);
     $pdoStatement->bindValue(':pubId', $publication->getIdpublication(), PDO::PARAM_INT);
     $pdoStatement->bindValue(':description', $publication->getDescription());
-    if(isset($publication->getImageurl())){
+    if($publication->getImageurl()!==null){
     $pdoStatement->bindValue(':imageurl', $publication->getImageurl());
     }
     $pdoStatement->bindValue(':statut', $publication->getStatut());

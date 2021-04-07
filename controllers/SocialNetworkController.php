@@ -5,6 +5,8 @@ include_once __DIR__.'/../models/publication.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../dao/commentaireDao.php';
 include_once __DIR__.'/../models/commentaire.php';
+include_once __DIR__.'/../dao/like_publicationDao.php';
+include_once __DIR__.'/../models/like_publication.php';
 
 class SocialNetworkController extends CoreController
 {
@@ -15,21 +17,21 @@ class SocialNetworkController extends CoreController
         //à remplacer par la variable idutilisateur de la session courante
         $idUtilisateur = 1696278514562148;
        
-        $publicationList = $this->getPubliactions($db,$idUtilisateur);
+        $publicationList = $this->getPublications($db,$idUtilisateur);
         $this->show('socialHome', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList
         ]);
     }
 
-    public function getPubliactions($db,$idUtilisateur) {
+    public function getPublications($db,$idUtilisateur) {
        
         $publicationDao = new publicationDao($db,$idUtilisateur);
         $publicationList = $publicationDao->getAll();
         return $publicationList;
     }
     
-    public function getPubliaction($db,$idUtilisateur) {
+    public function getPublication($db,$idUtilisateur) {
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
         $publicationDao = new publicationDao($db,$idUtilisateur);
@@ -37,7 +39,7 @@ class SocialNetworkController extends CoreController
         return $publication;
     }
 
-    public function createPubliaction($db,$idUtilisateur) {
+    public function createPublication($db,$idUtilisateur) {
         $publication = new publication();
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
@@ -49,7 +51,7 @@ class SocialNetworkController extends CoreController
         return $res;
     }
 
-    public function updatePubliaction($db,$idUtilisateur) {
+    public function updatePublication($db,$idUtilisateur) {
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
         $publication->setDescription($_POST['description']);
@@ -62,7 +64,15 @@ class SocialNetworkController extends CoreController
         return $res;
     }
 
-    public function deletePubliaction($db,$idUtilisateur) {
+    public function deletePublication($db,$idUtilisateur) {
+        $publication = new publication();
+        $publication->setIdpublication($_POST['idpublication']);
+        $publicationDao = new publicationDao($db,$idUtilisateur);
+        $publication = $publicationDao->delete($publication->getIdpublication());
+        return $publication;
+    }
+
+    public function LikeUnlikePublication($db,$idUtilisateur) {
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
         $publicationDao = new publicationDao($db,$idUtilisateur);
