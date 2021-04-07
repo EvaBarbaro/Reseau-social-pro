@@ -73,10 +73,10 @@ class SocialNetworkController extends CoreController
     }
 
     public function LikeUnlikePublication($db,$idUtilisateur) {
-        $publication = new publication();
-        $publication->setIdpublication($_POST['idpublication']);
-        $publicationDao = new publicationDao($db,$idUtilisateur);
-        $publication = $publicationDao->delete($publication->getIdpublication());
-        return $publication;
+        $like_publication = new like_publication();
+        $like_publication->setIdpublication($_POST['idpublication']);
+        $like_publicationDao = new like_publicationDao($db,$idUtilisateur);
+        $like_publicationDao->Like_Unlike($like_publication->getIdpublication());
+        
     }
 }
