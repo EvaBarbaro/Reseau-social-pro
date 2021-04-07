@@ -116,31 +116,74 @@ class publicationDao implements interfaceDao {
 
 
     
-/**
- * Update one publication
- */ 
-    public function update($publication){
-
-    }
-    
-
-
-    
+   
 /**
  * Create one publication
  */ 
     public function create($publication){
-
-    }
-        
-
-
+        do {
+            $pubId = hexdec(uniqid());
+        } while(!empty($this->get($pubId)));
+        $sql = "INSERT INTO publication (idpublication,description,publication.like,statut,idcompte";
+        if(isset($publication->getImageurl())){
+            $sql=$sql.",imageurl";
+        }
+        $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte", if(isset($publication->getImageurl())){
+            $sql=$sql.",:imageurl";
+        }
+        $sql=$sql.")";
     
+        $pdoStatement = $this->conn->prepare($sql);
+        $pdoStatement->bindValue(':pubId', $pubId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':description',$publication->getDescription());
+        if(isset($publication->getImageurl())){
+        $pdoStatement->bindValue(':imageurl',$publication->getImageurl());
+        }
+        $pdoStatement->bindValue(':like', 0, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':statut',$publication->getStatut());
+        $pdoStatement->bindValue(':idcompte', $this->idUtilisateur, PDO::PARAM_INT);
+        $res = $pdoStatement->execute();
+        //$res = 1 (true) if sucess
+        return $res;
+    }
+
+
+
+
+/**
+ * Update one publication
+ */ 
+public function update($publication){
+    $sql = "UPDATE publication SET description=:description , statut=:statut";  
+    if(isset($publication->getImageurl())){
+        $sql=$sql.",imageurl=:imageurl";
+    }
+    $sql = $sql." WHERE idpublication=:pubId";
+    $pdoStatement = $this->conn->prepare($sql);
+    $pdoStatement->bindValue(':pubId', $publication->getIdpublication(), PDO::PARAM_INT);
+    $pdoStatement->bindValue(':description', $publication->getDescription());
+    if(isset($publication->getImageurl())){
+    $pdoStatement->bindValue(':imageurl', $publication->getImageurl());
+    }
+    $pdoStatement->bindValue(':statut', $publication->getStatut());
+    $res = $pdoStatement->execute();
+    //$res = 1 (true) if sucess
+    return $res;
+}
+
+
+
+      
 /**
  * Delete one publication
  */ 
     public function delete($id){
-
+        $sql = "DELETE FROM publication WHERE idpublication=:pubId";
+        $pdoStatement = $this->conn->prepare($sql);
+        $pdoStatement->bindValue(':pubId', $id, PDO::PARAM_INT);
+        $res = $pdoStatement->execute();
+        //$res = 1 (true) if sucess
+        return $res;
     }
 
    

@@ -139,7 +139,9 @@ return $this;
 }
 
 
-
+public function __isset($property){
+    return isset($this->$property);
+} 
 
 /**
  * Construct
