@@ -69,9 +69,9 @@ class publicationDao implements interfaceDao {
         $pub = $pdoStatement->fetch(PDO::FETCH_ASSOC);
         $publicationModel = new publication($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
         $publicationModel->setImageurl($pub['imageurl']);
-        $coms = array();
+        
         $publication = array();
-        if($pub){
+        if(!emty($pub)){
       
             // publication à retourner
             $publication = $this->getInfoPublication($publicationModel);
@@ -97,16 +97,19 @@ class publicationDao implements interfaceDao {
         $pdoStatement->execute();
         $publications = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
         
-        $coms = array();
+        
         $publication = array();
-        foreach($publications as $pub){
+        if(!empty($publications)){
+            foreach($publications as $pub){
 
-            $publicationModel = new publication($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
-            $publicationModel->setImageurl($pub['imageurl']);
-            // publication à ajouté
-            $publicationAjouter = $this->getInfoPublication($publicationModel);
-            array_push($publication,$publicationAjouter);
-         }
+                $publicationModel = new publication($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
+                $publicationModel->setImageurl($pub['imageurl']);
+                // publication à ajouté
+                $publicationAjouter = $this->getInfoPublication($publicationModel);
+                array_push($publication,$publicationAjouter);
+             }
+        }
+
         return $publication;
     }
     
@@ -140,11 +143,5 @@ class publicationDao implements interfaceDao {
 
     }
 
-    /**
-     * Get the value of idUtilisateur
-     */
-    public function getIdUtilisateur()
-    {
-        return $this->idUtilisateur;
-    }
+   
 }
