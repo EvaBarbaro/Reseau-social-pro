@@ -57,7 +57,6 @@ class UserController extends CoreController
         $compteDao = new compteDao($db);
 
         $utilisateur = new utilisateur();
-        $compte = new compte();
 
         $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
         $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
@@ -69,14 +68,17 @@ class UserController extends CoreController
 
         $utilisateurDao->create($utilisateur);
 
-        $compte->setIdCompte($_POST['idutilisateur']);
-        $compte->setNom(NULL);
-        $compte->setPrenom(NULL);
-        $compte->setPhoto(NULL);
-        $compte->setPoste(NULL);
-        $compte->setGrade(NULL);
-        $compte->setDepartement(NULL);
-        $compte->setDateEmbauche(NULL);
+        $compte = new compte
+        (
+            $_POST['idutilisateur'],
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL
+        );
 
         $compteDao->create($compte);
 

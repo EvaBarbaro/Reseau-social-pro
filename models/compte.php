@@ -2,14 +2,14 @@
 
 class compte {
 
-    public $idCompte;
-    public $nom;
-    public $prenom;
-    public $photo;
-    public $poste;
-    public $grade;
-    public $departement;
-    public $date_embauche;
+    private $idCompte;
+    private $nom;
+    private $prenom;
+    private $photo;
+    private $poste;
+    private $grade;
+    private $departement;
+    private $date_embauche;
 
     /**
      * Get the value of idCompte
@@ -170,6 +170,7 @@ class compte {
 
         return $this;
     }
+    
     public function __construct($idcompte,$nom,$prenom,$photo,$poste,$grade,$departement,$date_embauche)
     {
     $this->setIdcompte($idcompte);

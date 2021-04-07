@@ -1,12 +1,12 @@
 <?php 
 
 class entreprise {
-    public $idEntreprise;
-    public $designation;
-    public $logo;
-    public $description;
-    public $url;
-    public $statut;
+    private $idEntreprise;
+    private $designation;
+    private $logo;
+    private $description;
+    private $url;
+    private $statut;
 
     /**
      * Get the value of idEntreprise
