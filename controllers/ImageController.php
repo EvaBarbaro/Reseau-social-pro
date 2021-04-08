@@ -50,7 +50,7 @@ class ImageController extends CoreController
 
         $imageDao->create($image);
 
-        header('Location: '.pathUrl());
+        header('Location: '.pathUrl()."mesImages");
     }
 
     public function update()
@@ -73,8 +73,6 @@ class ImageController extends CoreController
         header('Location: '.pathUrl().'monImage/'.$imageId);
     }
 
-    
-
     public function delete()
     {
         $imageId = $_POST['idimage'];
@@ -88,13 +86,10 @@ class ImageController extends CoreController
         header('Location: '.pathUrl().'mesImages');
     }
  
-
-    public function register()
+    public function preCreate()
     {
-        $this->show('register', [
+        $this->show('imageEnCreation', [
             'title' => 'Social Connect - Inscription'
         ]);
     }
-
-    
 }

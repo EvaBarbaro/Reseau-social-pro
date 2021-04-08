@@ -4,10 +4,10 @@
     </div>
 
         <div id="register">
-        <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
+        <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification de l'image</h1>
 
             <form action=<?= pathUrl()."monImage/update" ?> method="POST" class="col">
-                <input type="hidden" name="identreprise" value="<?= $viewVars['image']['idimage'] ?>">
+                <input type="hidden" name="idimage" value="<?= $viewVars['image']['idimage'] ?>">
                 
                 <div class="form-group row">
                     <label for="titre" class="col-sm-4 col-form-label">Titre de l'image</label>
@@ -22,36 +22,10 @@
                     <input type="text" class="form-control" name="imageurl" id="imageurl" value="<?= $viewVars['image']['imageurl'] ?>">
                     </div>
                 </div>
+
+                <input type="hidden" name="idcompte" value="<?= $viewVars['image']['idcompte'] ?>">
                 
-                <div class="form-group row">
-                    <label for="description" class="col-sm-4 col-form-label">Compte propriétaire</label>
-                    <div class="col-sm-8">
-                    <input type="text" class="form-control" name="description" id="description" value="<?= $viewVars['image']['idcompte'] ?>">
-                    </div>
-                </div>
-                
-                <!--<input type="hidden" name="url" value="<?= $viewVars['entreprise']['url'] ?>">-->
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>
         </div>
 </div>
-
-
-
-
-
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Image</h1>
-</body>
-</html>
--->
