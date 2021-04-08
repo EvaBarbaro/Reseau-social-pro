@@ -1,5 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-  <a class="navbar-brand" href="<?php echo pathUrl().'monReseau/1696278527184852'?>">LOGO ENTREPRISE</a>
+<?php
+echo $_SESSION['entrepriseLogo'];
+    ?>
+    <a class="navbar-brand" href="<?php echo pathUrl().'monReseau/1696278527184852'?>">LOGO ENTREPRISE</a>
+  
+    <?php
+
+
+?>
+  
  
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
