@@ -44,7 +44,19 @@ class ImageController extends CoreController
 
         $image->setIdimage($_POST['idimage']);
         $image->setTitre($_POST['titre']);
-        $image->setImageUrl($_POST['imageurl']);
+
+        if (isset($_FILES["imageurl"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["imageurl"]["name"]));
+            $tempname = $_FILES["imageurl"]["tmp_name"];    
+            $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $image->setImageUrl($uniqueFileName.'.'.$extension);
+            }
+        }
+
         $image->setIdcompte($_POST['idcompte']);
         
 
@@ -65,7 +77,19 @@ class ImageController extends CoreController
 
         $image->setIdimage($_POST['idimage']);
         $image->setTitre($_POST['titre']);
-        $image->setImageUrl($_POST['imageurl']);
+
+        if (isset($_FILES["imageurl"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["imageurl"]["name"]));
+            $tempname = $_FILES["imageurl"]["tmp_name"];    
+            $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $image->setImageUrl($uniqueFileName.'.'.$extension);
+            }
+        }
+        
         $image->setIdcompte($_POST['idcompte']);
        
         $imageDao->update($image);

@@ -55,7 +55,19 @@ class CompanyController extends CoreController
 
         $entreprise->setIdEntreprise($_POST['identreprise']);
         $entreprise->setDesignation($_POST['designation']);
-        $entreprise->setLogo($_POST['logo']);
+
+        if (isset($_FILES["logo"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["logo"]["name"]));
+            $tempname = $_FILES["logo"]["tmp_name"];    
+            $folder =  __DIR__ . '/../public/logoImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $entreprise->setLogo($uniqueFileName.'.'.$extension);
+            }
+        }
+
         $entreprise->setDescription($_POST['description']);
         $entreprise->setUrl($_POST['url']);
         $entreprise->setStatut($_POST['statut']);
@@ -88,7 +100,7 @@ class CompanyController extends CoreController
 
         $compteDao->create($compte);
 
-        header('Location: '.pathUrl());
+        header('Location: '.pathUrl().'monReseau/'.$_POST['identreprise'].'/login');
     }
 
     public function update()
@@ -103,7 +115,19 @@ class CompanyController extends CoreController
 
         $entreprise->setIdEntreprise($_POST['identreprise']);
         $entreprise->setDesignation($_POST['designation']);
-        $entreprise->setLogo($_POST['logo']);
+
+        if (isset($_FILES["logo"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["logo"]["name"]));
+            $tempname = $_FILES["logo"]["tmp_name"];    
+            $folder = __DIR__ . '/../public/logoImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $entreprise->setLogo($uniqueFileName.'.'.$extension);
+            }
+        }
+
         $entreprise->setDescription($_POST['description']);
         $entreprise->setUrl($_POST['url']);
         $entreprise->setStatut(true);
