@@ -6,13 +6,15 @@ require_once __DIR__ . '/../pathUrl.php';
 
 class ImageController extends CoreController
 {
-    public function getAll()
+    public function getAll($parameters)
     {
+        $imageId = $parameters['id'];
+
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $imageDao = new imageDao($db);
-        $imageList = $imageDao->getAll();
+        $imageList = $imageDao->getAll($imageId);
         $this->show('image', [
             'title' => 'Social Connect - Back Office',
             'imageList' => $imageList

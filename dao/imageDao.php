@@ -1,8 +1,9 @@
-<?php 
-include_once __DIR__.'/../interface/interfaceDao.php';
+<?php
+
+include_once __DIR__.'/../interface/interfaceUtilisateurDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/image.php';
-class imageDao implements interfaceDao {
+class imageDao implements interfaceUtilisateurDao {
     private $conn; 
         
     public function create($image){
@@ -50,8 +51,8 @@ class imageDao implements interfaceDao {
     }
     
 
-    public function getAll(){
-        $sql 	= "SELECT * FROM image";
+    public function getAll($id){
+        $sql 	= "SELECT * FROM image WHERE idcompte =" .$id;
         $result = $this->conn->query($sql); 
         $images = $result->fetchAll();
         return $images;
