@@ -7,6 +7,7 @@ include __DIR__ . '/utils/DBData.php';
 include __DIR__ . '/controllers/CoreController.php';
 include __DIR__ . '/controllers/MainController.php';
 include __DIR__ . '/controllers/CompanyController.php';
+include __DIR__ . '/controllers/ImageController.php';
 include __DIR__ . '/controllers/UserController.php';
 include __DIR__ . '/controllers/AccountController.php';
 include __DIR__ . '/controllers/ErrorController.php';
@@ -22,20 +23,20 @@ $router->map('GET', '/', 'CompanyController#register', 'register');
 
 $router->map('GET', '/socialHome', 'SocialNetworkController#home', 'socialHome');
 
-$router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
-
 $router->map('GET', '/mesImages', 'ImageController#getAll', 'mesImages');
 $router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
-$router->map('GET', '/monImage/update', 'ImageController#get', 'monImageUpdate');
+$router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
+$router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDelete');
+$router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpdate');
 
-
+$router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'reseauSingle');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
 $router->map('POST', '/monReseau/delete', 'CompanyController#delete', 'superAdminDelete');
 $router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpdate');
 
 $router->map('GET', '/monReseau/[i:id]/inscription', 'UserController#register', 'userRegister');
-$router->map('GET', '/monReseau/admin', 'UserController#getAll', 'admin');
+$router->map('GET', '/monReseau/[i:id]/admin', 'UserController#getAll', 'admin');
 $router->map('GET', '/monCompte/[i:id]', 'UserController#get', 'userSingle');
 $router->map('POST', '/monCompte/create', 'UserController#create', 'userCreate');
 $router->map('POST', '/monCompte/delete', 'UserController#delete', 'userDelete');

@@ -8,8 +8,8 @@ class like_publication {
 /**
  * Attributes
  */ 
-private string $idcompte;
-private string $idpublication;
+private $idcompte;
+private $idpublication;
  
 
 /**

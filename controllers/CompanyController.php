@@ -48,6 +48,8 @@ class CompanyController extends CoreController
         $db = $DBData->getConnection();
 
         $entrepriseDao = new entrepriseDao($db);
+        $utilisateurDao = new utilisateurDao($db);
+        $compteDao = new compteDao($db);
 
         $entreprise = new entreprise();
 
@@ -59,6 +61,32 @@ class CompanyController extends CoreController
         $entreprise->setStatut($_POST['statut']);
 
         $entrepriseDao->create($entreprise);
+
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
+        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
+        $utilisateur->setMotDePasse($_POST['motdepasse']);
+        $utilisateur->setMail($_POST['mail']);
+        $utilisateur->setRole($_POST['role']);
+        $utilisateur->setStatut($_POST['statut']);
+        $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+        $utilisateurDao->create($utilisateur);
+
+        $compte = new compte
+        (
+            $_POST['idutilisateur'],
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL
+        );
+
+        $compteDao->create($compte);
 
         header('Location: '.pathUrl());
     }

@@ -7,13 +7,15 @@ require_once __DIR__ . '/../pathUrl.php';
 
 class UserController extends CoreController
 {
-    public function getAll()
+    public function getAll($parameters)
     {
+        $utilisateurId = $parameters['id'];
+
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $utilisateurDao = new utilisateurDao($db);
-        $utilisateurList = $utilisateurDao->getAll();
+        $utilisateurList = $utilisateurDao->getAll($utilisateurId);
         $this->show('utilisateurs', [
             'title' => 'Social Connect - Réseau Back Office - Utilisateurs',
             'utilisateurList' => $utilisateurList

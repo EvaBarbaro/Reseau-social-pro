@@ -1,6 +1,7 @@
 <?php
 
 $uniqueID = hexdec(uniqid());
+$uniqueUserID = hexdec(uniqid());
 
 ?>
 <div class="d-flex">
@@ -32,6 +33,27 @@ $uniqueID = hexdec(uniqid());
                     </div>
                 </div>
                 <input type="hidden" name="url" value=<?= pathUrl(). "monReseau/" . $uniqueID ?>>
+                <input type="hidden" name="idutilisateur" value="<?= $uniqueUserID ?>">
+                <div class="form-group row">
+                    <label for="nomutilisateur" class="col-sm-4 col-form-label">Votre nom utilisateur</label>
+                    <div class="col-sm-8">
+                    <input type="text" class="form-control" name="nomutilisateur" id="nomutilisateur" placeholder="Votre nom utilisateur" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="motdepasse" class="col-sm-4 col-form-label">Votre mot de passe</label>
+                    <div class="col-sm-8">
+                    <input type="password" class="form-control" name="motdepasse" id="motdepasse" placeholder="Votre mot de passe">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mail" class="col-sm-4 col-form-label">Votre email</label>
+                    <div class="col-sm-8">
+                    <input type="email" class="form-control" name="mail" id="mail" placeholder="Votre email">
+                    </div>
+                </div>
+                <input type="hidden" name="role" value="admin">
+                <input type="hidden" name="statut" value=<?= true ?>>
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>
         </div>
