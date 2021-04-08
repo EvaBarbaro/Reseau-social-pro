@@ -24,7 +24,7 @@ $router->map('GET', '/', 'CompanyController#register', 'register');
 
 $router->map('GET', '/socialHome', 'SocialNetworkController#home', 'socialHome');
 
-$router->map('GET', '/mesImages', 'ImageController#getAll', 'mesImages');
+$router->map('GET', '/monCompte/[i:id]/mesImages', 'ImageController#getAll', 'mesImages');
 $router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
 $router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
 $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDelete');
