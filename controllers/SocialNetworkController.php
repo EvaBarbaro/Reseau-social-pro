@@ -20,7 +20,8 @@ class SocialNetworkController extends CoreController
         $publicationList = $this->getPublications($db,$idUtilisateur);
         $this->show('socialHome', [
             'title' => 'Social Connect - Home',
-            'publicationList' => $publicationList
+            'publicationList' => $publicationList,
+            'idUtilisateur' => $idUtilisateur
         ]);
     }
 

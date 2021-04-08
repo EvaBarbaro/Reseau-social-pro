@@ -48,3 +48,9 @@ footer {
     opacity: 85%;
     color: antiquewhite;
 } */
+.card .user img{
+    border: solid transparent;
+    border-radius: 10rem;
+    height:2.5rem;
+    width:2.5rem;
+}

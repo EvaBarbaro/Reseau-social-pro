@@ -1,36 +1,22 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-  <a class="navbar-brand" href="#">LOGO</a>
- 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="<?php echo pathUrl().'socialHome'?>">Accueil <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"  href="<?php echo pathUrl().'mesImages'?>">Profil</a>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
 <?php
+require_once __DIR__ . '/networkNav.php';
 foreach($viewVars['publicationList'] as $pub){
 ?>
-<div class="card  mt-3" style="width: 18rem;">
+<div class="card  mt-3" style="width: 30rem;">
 <div class="card-header">
+<?php
+if(!empty($pub['comptePublication']['photo'])){
+    $img = $pub['comptePublication']['photo'];
+} else {
+    $img = pathUrl().'img/profil.png';
+}
+?>
+  <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
 <?php
  echo $pub['comptePublication']['nomutilisateur'];
 ?>
   </div>
-<?php
-if(!empty($pub['comptePublication']['photo'])){
-?>
-  <img src="..." class="card-img-top" alt="Image introuvable">
-  <?php
-}
-  ?>
-  
+</div>
   <div class="card-body">
     <p class="card-text"><?php
     echo $pub['publicationInfos']['description'];
@@ -43,20 +29,21 @@ if(!empty($pub['comptePublication']['photo'])){
 <?php
 foreach($pub['commentaires'] as $com){
 ?>
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 30rem;">
 <div class="card-header">
 <?php
- echo "commentateur ".$com['commentaire_compte']['nomutilisateur'];
+if(!empty($com['commentaire_compte']['photo'])){
+    $img = $com['commentaire_compte']['photo'];
+} else {
+    $img = pathUrl().'img/profil.png';
+}
+?>
+  <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+<?php
+ echo $com['commentaire_compte']['nomutilisateur'];
 ?>
   </div>
-<?php
-if(!empty($com['commentaire_compte']['photo'])){
-?>
-  <img src="..." class="card-img-top" alt="Image introuvable">
-  <?php
-}
-  ?>
-  
+  </div>
   <div class="card-body">
     <p class="card-text"><?php
     echo $com['commentaireInfo']['description'];
