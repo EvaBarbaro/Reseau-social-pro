@@ -3,11 +3,16 @@
 	<table class="table table-bordered table-striped mt-4">
 		<tr>
 			<th>Nom</th>
+            <th>Image</th>
             <th width="70px">Supprimer</th>
             <th width="70px">Modifier</th>
 		</tr>
+
+
+        
         <?php
         $length = count($viewVars['imageList']);
+       
 
         for ($index=0; $index < $length; $index++) { 
             $image = $viewVars['imageList'][$index];
@@ -16,6 +21,9 @@
             echo "<input type='hidden' value='". $image['idimage']."' name='idimage' />";
             echo "<tr>";
             echo "<td>".$image['titre'] . "</td>";
+            echo "<td><img src=".pathUrl()."/public/albumImages/". $image['imageurl']." alt='logo' id='logoImg' width='80'  class='img-thumbnail mt-4'></td>";
+        //    echo "<td><img src=".pathUrl()."public/albumImages/MonImageFnac.jpg alt='logo' id='logoImg' height='50' height='50' class='img-thumbnail mt-4'></td>";
+            
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
             echo "</form>";
             echo "<td><a href='./monImage/".$image['idimage']."' class='btn btn-info'>Modifier</a></td>";
