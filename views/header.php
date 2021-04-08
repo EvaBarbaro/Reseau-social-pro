@@ -8,6 +8,8 @@ if (isset($viewVars['title'])) {
     $pageTitle = $viewVars['title'];
 }
 
+session_start();
+
 ?>
 
 <!DOCTYPE html>

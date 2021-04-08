@@ -114,7 +114,6 @@ class UserController extends CoreController
     public function delete()
     {
         $utilisateurId = $_POST['idutilisateur'];
-        $entrepriseId = $_POST['identreprise'];
 
         $DBData = new DBData();
         $db = $DBData->getConnection();
@@ -122,6 +121,6 @@ class UserController extends CoreController
         $utilisateurDao = new utilisateurDao($db);
         $utilisateurDao->delete($utilisateurId);
 
-        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/admin');
+        header('Location: '.pathUrl().'monReseau/admin');
     }
 }
