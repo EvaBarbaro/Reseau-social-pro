@@ -6,13 +6,13 @@ $uniqueUserID = hexdec(uniqid());
 ?>
 <div class="d-flex">
     <div id="logo">
-        <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
+        <img src=<?= pathUrl()."public/img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
 
-            <form action=<?= pathUrl()."monReseau/create" ?> method="POST" class="col">
+            <form enctype="multipart/form-data" action=<?= pathUrl()."monReseau/create" ?> method="POST" class="col">
                 <input type="hidden" name="identreprise" value="<?= $uniqueID ?>">
                 <div class="form-group row">
                     <label for="designation" class="col-sm-4 col-form-label">Nom de votre entreprise</label>
@@ -21,9 +21,9 @@ $uniqueUserID = hexdec(uniqid());
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="logo" class="col-sm-4 col-form-label">Logo</label>
+                    <label for="logoInput" class="col-sm-4 col-form-label">Logo</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="logo" id="logoInput" placeholder="Logo">
+                    <input type="file" name="logo" id="logoInput" placeholder="Logo">
                     </div>
                 </div>
                 <div class="form-group row">

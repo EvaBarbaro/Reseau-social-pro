@@ -10,8 +10,8 @@ include __DIR__ . '/controllers/CompanyController.php';
 include __DIR__ . '/controllers/ImageController.php';
 include __DIR__ . '/controllers/UserController.php';
 include __DIR__ . '/controllers/AccountController.php';
-include __DIR__ . '/controllers/ErrorController.php';
 include __DIR__ . '/controllers/SocialNetworkController.php';
+include __DIR__ . '/controllers/ErrorController.php';
 
 $router = new AltoRouter();
 
@@ -44,7 +44,7 @@ $router->map('POST', '/monCompte/create', 'UserController#create', 'userCreate')
 $router->map('POST', '/monCompte/delete', 'UserController#delete', 'userDelete');
 $router->map('POST', '/monCompte/update', 'UserController#update', 'userUpdate');
 
-$router->map('GET', '/monReseau/admin/informations', 'AccountController#getAll', 'adminAccounts');
+$router->map('GET', '/monReseau/[i:id]/admin/informations', 'AccountController#getAll', 'adminAccounts');
 $router->map('GET', '/monCompte/[i:id]/mesInformations', 'AccountController#get', 'accountSingle');
 $router->map('POST', '/mesInformations/update', 'AccountController#update', 'accountUpdate');
 

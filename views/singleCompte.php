@@ -1,12 +1,12 @@
 <div class="d-flex">
     <div id="logo">
-        <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
+        <img src=<?= pathUrl()."public/img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
 
-            <form action=<?= pathUrl()."mesInformations/update" ?> method="POST" class="col">
+            <form enctype="multipart/form-data" action=<?= pathUrl()."mesInformations/update" ?> method="POST" class="col">
                 <input type="hidden" name="idcompte" value="<?= $viewVars['compte']['idcompte'] ?>">
                 <div class="form-group row">
                     <label for="nom" class="col-sm-4 col-form-label">Votre nom</label>
@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label for="photo" class="col-sm-4 col-form-label">Votre photo de profil</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="photo" id="photo" value="<?= $viewVars['compte']['photo'] ?>">
+                    <input type="file" name="photo" id="photo" value="<?= $viewVars['compte']['photo'] ?>">
                     </div>
                 </div>
                 <div class="form-group row">
