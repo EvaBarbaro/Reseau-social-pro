@@ -8,7 +8,7 @@ foreach($viewVars['publicationList'] as $pub){
 if(!empty($pub['comptePublication']['photo'])){
     $img = $pub['comptePublication']['photo'];
 } else {
-    $img = pathUrl().'img/profil.png';
+    $img = pathUrl().'public/img/profil.png';
 }
 ?>
   <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
@@ -35,7 +35,7 @@ foreach($pub['commentaires'] as $com){
 if(!empty($com['commentaire_compte']['photo'])){
     $img = $com['commentaire_compte']['photo'];
 } else {
-    $img = pathUrl().'img/profil.png';
+    $img = pathUrl().'public/img/profil.png';
 }
 ?>
   <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
