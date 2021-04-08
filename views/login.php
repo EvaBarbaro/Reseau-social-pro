@@ -5,17 +5,17 @@
 
         <div id="login">
             <h1 class="mt-4 mb-4 mx-auto" style="width:200px">Connexion</h1>
-                <form method="POST" class="col">
+                <form action=<?= pathUrl()."monReseau/".$viewVars['entrepriseId']."/logged" ?> method="POST" class="col">
                     <div class="form-group row">
-                        <label for="inputUsername" class="col-sm-4 col-form-label">Nom d'utilisateur</label>
+                        <label for="nomutilisateur" class="col-sm-4 col-form-label">Nom d'utilisateur</label>
                         <div class="col-sm-8">
-                        <input type="text" class="form-control" name="username" id="inputUsername" placeholder="Nom d'utilisateur" required>
+                        <input type="text" class="form-control" name="nomutilisateur" id="nomutilisateur" placeholder="Nom d'utilisateur" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">Mot de passe</label>
+                        <label for="motdepasse" class="col-sm-4 col-form-label">Mot de passe</label>
                         <div class="col-sm-8">
-                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" required>
+                        <input type="password" class="form-control" name="motdepasse" id="motdepasse" placeholder="Mot de passe" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
