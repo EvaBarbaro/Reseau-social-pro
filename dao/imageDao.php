@@ -3,10 +3,7 @@ include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/image.php';
 class imageDao implements interfaceDao {
-    private $conn;
-
-    
-        
+    private $conn; 
         
     public function create($image){
         $sql = $this->conn->prepare("INSERT INTO image(idimage, titre, imageurl, idcompte) 
@@ -19,15 +16,9 @@ class imageDao implements interfaceDao {
         $sql->execute();
     }
 
-
-    
     public function delete($id){     
         $this->conn->exec("DELETE FROM image WHERE idimage = $id");    
     }
-        /*public function delete($id) {
-        $this->conn->exec("DELETE FROM entreprise WHERE identreprise = $id");
-        }*/
-    
     
     public function update($image){
         $sql = $this->conn->prepare("UPDATE image SET titre = :titre, 
@@ -35,7 +26,7 @@ class imageDao implements interfaceDao {
         $image = new image();   
 
         $image->setIdimage($_POST['idimage']);
-        $image->setTitre($_POST['tire']);
+        $image->setTitre($_POST['titre']);
         $image->setImageUrl($_POST['imageurl']);
         $image->setIdcompte($_POST['idcompte']);
 

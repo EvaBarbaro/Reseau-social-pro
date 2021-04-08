@@ -29,6 +29,7 @@ $router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
 $router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
 $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDelete');
 $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpdate');
+$router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEnCreation');
 
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'reseauSingle');

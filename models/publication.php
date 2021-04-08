@@ -138,13 +138,10 @@ $this->idcompte = $idcompte;
 return $this;
 }
 
-
-
-
 /**
  * Construct
  */ 
-public function __construct($idpublication,$description,$statut,$idcompte)
+public function construct($idpublication,$description,$statut,$idcompte)
 {
     $this->setIdpublication($idpublication);
     $this->setDescription($description);

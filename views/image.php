@@ -12,7 +12,7 @@
         for ($index=0; $index < $length; $index++) { 
             $image = $viewVars['imageList'][$index];
 
-            echo "<form action='http://localhost/apache/Reseau-social-pro/monReseau/delete' method='POST'>";
+            echo "<form action=".pathUrl()."monImage/delete method='POST'>";
             echo "<input type='hidden' value='". $image['idimage']."' name='idimage' />";
             echo "<tr>";
             echo "<td>".$image['titre'] . "</td>";
@@ -23,4 +23,13 @@
         }
         ?>
     </table>
+    <br>
+    <h2 class="mt-4"></h2>
+    <h2 class="mt-4">Insérer une nouvelle image</h2>
+    
+    <?php
+      echo "<td><a href='./imageEnCreation"."' class='btn btn-block btn-primary'>Insérer</a></td>";
+    ?>
+
+
 </div>
