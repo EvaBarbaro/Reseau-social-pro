@@ -32,6 +32,16 @@ class loginDao {
             $_SESSION['role'] = $row['role'];
             $_SESSION['message'] = "";
 
+            $sqlLogo = $this->conn->prepare("SELECT logo FROM entreprise WHERE identreprise= :identreprise");
+
+            $sqlLogo->bindValue('identreprise', $row['identreprise']);
+    
+            $sqlLogo->execute();
+
+            $rowLogo = $sqlLogo->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION['logo'] = $rowLogo['logo'];
+
             header('Location: '.pathUrl().'monReseau/'.$row['identreprise']);
         } else {
             session_start();
