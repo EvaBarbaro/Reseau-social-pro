@@ -1,16 +1,16 @@
-<?php
-
-if (!empty($_SESSION['message'])) {
-    echo $_SESSION['message'];
-}
-
-?>
 <div class="d-flex">
     <div id="logo">
         <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
 
         <div id="login">
+            <?php
+
+                if (!empty($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
+
+            ?>
             <h1 class="mt-4 mb-4 mx-auto" style="width:200px">Connexion</h1>
                 <form action=<?= pathUrl()."monReseau/".$viewVars['entrepriseId']."/logged" ?> method="POST" class="col">
                     <div class="form-group row">

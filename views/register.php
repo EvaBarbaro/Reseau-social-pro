@@ -21,9 +21,9 @@ $uniqueUserID = hexdec(uniqid());
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="logo" class="col-sm-4 col-form-label">Logo</label>
+                    <label for="logoInput" class="col-sm-4 col-form-label">Logo</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="logo" id="logoInput" placeholder="Logo">
+                    <input type="file" name="logo" id="logoInput" placeholder="Logo">
                     </div>
                 </div>
                 <div class="form-group row">
