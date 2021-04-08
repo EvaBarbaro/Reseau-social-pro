@@ -34,14 +34,14 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   </div>
   <div class="card-footer">
   <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
+  <a class="btn btn-primary" data-toggle="collapse" href="#addComment" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Commenter
   </a>
   
 </p>
-<div class="collapse" id="collapseExample">
+<div class="collapse" id="addComment">
   <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+   Formulaire pour commenter
   </div>
 </div>
   </div>
