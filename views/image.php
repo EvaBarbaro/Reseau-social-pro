@@ -8,6 +8,7 @@
 		</tr>
         <?php
         $length = count($viewVars['imageList']);
+       
 
         for ($index=0; $index < $length; $index++) { 
             $image = $viewVars['imageList'][$index];
@@ -16,6 +17,8 @@
             echo "<input type='hidden' value='". $image['idimage']."' name='idimage' />";
             echo "<tr>";
             echo "<td>".$image['titre'] . "</td>";
+            echo "<td><img src=".pathUrl()."albumImages/image1.jpg alt='logo' id='logoImg' class='img-thumbnail mt-4'></td>";
+            
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
             echo "</form>";
             echo "<td><a href='./monImage/".$image['idimage']."' class='btn btn-info'>Modifier</a></td>";
