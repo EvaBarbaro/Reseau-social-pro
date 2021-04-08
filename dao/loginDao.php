@@ -31,9 +31,12 @@ class loginDao {
             $_SESSION['nomutilisateur'] = $row['nomutilisateur'];
             $_SESSION['mail'] = $row['mail'];
             $_SESSION['role'] = $row['role'];
+            $_SESSION['message'] = "";
 
             header('Location: '.pathUrl().'monReseau/'.$row['identreprise']);
         } else {
+            session_start();
+            $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe ou nom d'utilisateur est incorrect !</div>";
             header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');
         }
     }

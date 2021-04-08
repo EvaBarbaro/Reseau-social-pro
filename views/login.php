@@ -1,3 +1,10 @@
+<?php
+
+if (!empty($_SESSION['message'])) {
+    echo $_SESSION['message'];
+}
+
+?>
 <div class="d-flex">
     <div id="logo">
         <img src=<?= pathUrl()."img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
