@@ -11,11 +11,10 @@ class loginDao {
     }
 
     public function loginUser($utilisateur, $entrepriseId) {
-        $sql = $this->conn->prepare("SELECT * FROM utilisateur WHERE nomutilisateur = :nomutilisateur and motdepasse = :motdepasse and identreprise = :identreprise and statut = " .true);
+        $sql = $this->conn->prepare("SELECT * FROM utilisateur WHERE nomutilisateur = :nomutilisateur and motdepasse = :motdepasse and statut = " .true);
 
         $sql->bindValue('nomutilisateur', $utilisateur->getNomUtilisateur());
         $sql->bindValue('motdepasse', $utilisateur->getMotDePasse());
-        $sql->bindValue('identreprise', $utilisateur->getIdEntreprise());
 
         $sql->execute();
 
