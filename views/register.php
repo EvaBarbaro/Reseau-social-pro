@@ -12,7 +12,7 @@ $uniqueUserID = hexdec(uniqid());
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
 
-            <form action=<?= pathUrl()."monReseau/create" ?> method="POST" class="col">
+            <form enctype="multipart/form-data" action=<?= pathUrl()."monReseau/create" ?> method="POST" class="col">
                 <input type="hidden" name="identreprise" value="<?= $uniqueID ?>">
                 <div class="form-group row">
                     <label for="designation" class="col-sm-4 col-form-label">Nom de votre entreprise</label>

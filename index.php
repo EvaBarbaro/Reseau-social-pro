@@ -10,8 +10,8 @@ include __DIR__ . '/controllers/CompanyController.php';
 include __DIR__ . '/controllers/ImageController.php';
 include __DIR__ . '/controllers/UserController.php';
 include __DIR__ . '/controllers/AccountController.php';
-include __DIR__ . '/controllers/ErrorController.php';
 include __DIR__ . '/controllers/SocialNetworkController.php';
+include __DIR__ . '/controllers/ErrorController.php';
 
 $router = new AltoRouter();
 
