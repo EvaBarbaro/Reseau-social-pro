@@ -50,7 +50,7 @@ class ImageController extends CoreController
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["imageurl"]["name"]));
             $tempname = $_FILES["imageurl"]["tmp_name"];    
-            $folder = 'albumImages/'.$uniqueFileName.'.'.$extension;
+            $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
                 $image->setImageUrl($uniqueFileName.'.'.$extension);
@@ -83,7 +83,7 @@ class ImageController extends CoreController
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["imageurl"]["name"]));
             $tempname = $_FILES["imageurl"]["tmp_name"];    
-            $folder = 'albumImages/'.$uniqueFileName.'.'.$extension;
+            $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
                 $image->setImageUrl($uniqueFileName.'.'.$extension);

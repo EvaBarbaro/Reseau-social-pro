@@ -45,12 +45,24 @@ class AccountController extends CoreController
 
         $compteDao = new compteDao($db);
 
+        if (isset($_FILES["photo"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["photo"]["name"]));
+            $tempname = $_FILES["photo"]["tmp_name"];    
+            $folder = __DIR__ . '/../public/profilImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $comptePhoto = $uniqueFileName.'.'.$extension;
+            }
+        }
+
         $compte = new compte
         (
             $_POST['idcompte'],
             $_POST['nom'],
             $_POST['prenom'],
-            $_POST['photo'],
+            $comptePhoto,
             $_POST['poste'],
             $_POST['grade'],
             $_POST['departement'],
