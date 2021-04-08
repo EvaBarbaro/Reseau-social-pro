@@ -19,21 +19,7 @@ class CompanyController extends CoreController
         ]);
     }
 
-    public function get($parameters)
-    {
-        $entrepriseId = $parameters['id'];
-
-        $DBData = new DBData();
-        $db = $DBData->getConnection();
-
-        $entrepriseDao = new entrepriseDao($db);
-        $entreprise = $entrepriseDao->get($entrepriseId);
-
-        $this->show('singleEntreprise', [
-            'title' => 'Social Connect - Mon Réseau',
-            'entreprise' => $entreprise
-        ]);
-    }
+  
 
     public function register()
     {

@@ -1,34 +1,78 @@
-<div class="d-flex">
-    <div id="logo">
-        <img src=<?= pathUrl()."public/img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
-    </div>
+<?php
+require_once __DIR__ . '/networkNav.php';
+?>
 
-        <div id="register">
-        <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
-
-            <form enctype="multipart/form-data" action=<?= pathUrl()."monReseau/update" ?> method="POST" class="col">
-                <input type="hidden" name="identreprise" value="<?= $viewVars['entreprise']['identreprise'] ?>">
-                <div class="form-group row">
-                    <label for="designation" class="col-sm-4 col-form-label">Nom de votre entreprise</label>
-                    <div class="col-sm-8">
-                    <input type="text" class="form-control" name="designation" id="designation" value="<?= $viewVars['entreprise']['designation'] ?>" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="logo" class="col-sm-4 col-form-label">Logo</label>
-                    <div class="col-sm-8">
-                    <input type="file" name="logo" id="logoInput" value="<?= $viewVars['entreprise']['logo'] ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="description" class="col-sm-4 col-form-label">Description</label>
-                    <div class="col-sm-8">
-                    <input type="text" class="form-control" name="description" id="description" value="<?= $viewVars['entreprise']['description'] ?>">
-                    </div>
-                </div>
-                <input type="hidden" name="url" value="<?= $viewVars['entreprise']['url'] ?>">
-                <input type="hidden" name="statut" value="<?= $viewVars['entreprise']['statut'] ?>">
-                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-            </form>
-        </div>
+<?php
+foreach($viewVars['publicationList'] as $pub){
+?>
+<div class="card  mt-3 offset-2" style="width: 45rem;">
+<div class="card-header">
+<?php
+if(!empty($pub['comptePublication']['photo'])){
+    $img =  pathUrl().'public/profilImages/'.$pub['comptePublication']['photo'];
+} else {
+    $img = pathUrl().'public/img/profil.png';
+}
+?>
+  <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+<?php
+ echo $pub['comptePublication']['nomutilisateur'];
+?>
+  </div>
 </div>
+<?php
+if(!empty($pub['publicationInfos']['imageurl'])){
+    ?><img src="<?php echo  pathUrl().'public/publicationImages/'.$pub['publicationInfos']['imageurl'];?>" class="card-img-top" alt="Image introuvable">
+    <?php
+
+} 
+?>
+  <div class="card-body">
+    <p class="card-text"><?php
+    echo $pub['publicationInfos']['description'];
+?></p>
+  </div>
+  <div class="card-footer">
+  <p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+  </div>
+</div>
+<?php
+foreach($pub['commentaires'] as $com){
+?>
+<div class="card  offset-2" style="width: 45rem;">
+<div class="card-header">
+<?php
+if(!empty($com['commentaire_compte']['photo'])){
+    $img =  pathUrl().'public/profilImages/'.$com['commentaire_compte']['photo'];
+} else {
+    $img = pathUrl().'public/img/profil.png';
+}
+?>
+  <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+<?php
+ echo $com['commentaire_compte']['nomutilisateur'];
+?>
+  </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><?php
+    echo $com['commentaireInfo']['description'];
+?></p>
+  </div>
+  <div class="card-footer">
+    Card footer
+  </div>
+</div>
+<?php
+}
+}?>

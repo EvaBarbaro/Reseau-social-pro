@@ -11,14 +11,17 @@ include_once __DIR__.'/../models/like_publication.php';
 class SocialNetworkController extends CoreController
 {
     // page d'acceuil du réseau social
-    public function home()
+    public function home($parameters)
     {
+        $entrepriseId = $parameters['id'];
+
         $DBData = new DBData();
         $db = $DBData->getConnection();
         //à remplacer par la variable idutilisateur de la session courante
         $idUtilisateur = 1696278514562148;
-        $publicationList = $this->getPublications($db,$idUtilisateur);
-        $this->show('socialHome', [
+
+        $publicationList = $this->getPublications($db,$idUtilisateur,$entrepriseId);
+        $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList,
             'idUtilisateur' => $idUtilisateur
@@ -26,9 +29,9 @@ class SocialNetworkController extends CoreController
     }
 
     // get toutes les publication(amis et public)
-    public function getPublications($db,$idUtilisateur) {
+    public function getPublications($db,$idUtilisateur,$entrepriseId) {
        
-        $publicationDao = new publicationDao($db,$idUtilisateur);
+        $publicationDao = new publicationDao($db,$idUtilisateur,$entrepriseId);
         $publicationList = $publicationDao->getAll();
         return $publicationList;
     }
@@ -37,7 +40,7 @@ class SocialNetworkController extends CoreController
     public function getPublication($db,$idUtilisateur) {
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
-        $publicationDao = new publicationDao($db,$idUtilisateur);
+        $publicationDao = new publicationDao($db,$idUtilisateur,null);
         $publication = $publicationDao->get($publication->getIdpublication());
         return $publication;
     }
@@ -50,7 +53,7 @@ class SocialNetworkController extends CoreController
         if(isset($_POST['imageurl'])) {
             $publication->setImageurl($_POST['imageurl']);
         }
-        $publicationDao = new publicationDao($db,$idUtilisateur);
+        $publicationDao = new publicationDao($db,$idUtilisateur,null);
         $res = $publicationDao->create($publication);
         return $res;
     }
@@ -64,7 +67,7 @@ class SocialNetworkController extends CoreController
         if(isset($_POST['imageurl'])) {
             $publication->setImageurl($_POST['imageurl']);
         }
-        $publicationDao = new publicationDao($db,$idUtilisateur);
+        $publicationDao = new publicationDao($db,$idUtilisateur,null);
         $res = $publicationDao->update($publication);
         return $res;
     }
@@ -73,7 +76,7 @@ class SocialNetworkController extends CoreController
     public function deletePublication($db,$idUtilisateur) {
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
-        $publicationDao = new publicationDao($db,$idUtilisateur);
+        $publicationDao = new publicationDao($db,$idUtilisateur,null);
         $publication = $publicationDao->delete($publication->getIdpublication());
         return $publication;
     }
@@ -82,7 +85,7 @@ class SocialNetworkController extends CoreController
     public function LikeUnlikePublication($db,$idUtilisateur) {
         $like_publication = new like_publication();
         $like_publication->setIdpublication($_POST['idpublication']);
-        $like_publicationDao = new like_publicationDao($db,$idUtilisateur);
+        $like_publicationDao = new like_publicationDao($db,$idUtilisateur,null);
         $like_publicationDao->Like_Unlike($like_publication->getIdpublication());  
     }
 

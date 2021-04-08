@@ -22,8 +22,6 @@ $router->map('POST', '/monReseau/[i:id]/logged', 'LoginController#logged', 'logg
 
 $router->map('GET', '/', 'CompanyController#register', 'register');
 
-$router->map('GET', '/socialHome', 'SocialNetworkController#home', 'socialHome');
-
 $router->map('GET', '/monCompte/[i:id]/mesImages', 'ImageController#getAll', 'mesImages');
 $router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
 $router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
@@ -32,7 +30,7 @@ $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpda
 $router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEnCreation');
 
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
-$router->map('GET', '/monReseau/[i:id]', 'CompanyController#get', 'reseauSingle');
+$router->map('GET', '/monReseau/[i:id]', 'SocialNetworkController#home', 'reseauSingle');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
 $router->map('POST', '/monReseau/delete', 'CompanyController#delete', 'superAdminDelete');
 $router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpdate');

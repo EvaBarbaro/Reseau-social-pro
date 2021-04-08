@@ -11,10 +11,11 @@ class publicationDao implements interfaceDao {
 
     private $conn;
     private $idUtilisateur;
-
-    public function __construct($db,$idUtilisateur){
+    private $entrepriseId;
+    public function __construct($db,$idUtilisateur,$entrepriseId){
         $this->conn = $db;
         $this->idUtilisateur = $idUtilisateur;
+        $this->entrepriseId = $entrepriseId;
     }
 
 
@@ -90,13 +91,14 @@ class publicationDao implements interfaceDao {
  * Get all publication
  */ 
     public function getAll(){
-        $sql = "SELECT * FROM publication p WHERE (statut='public') OR 
-        (statut='amis' AND idcompte = 
+        $sql = "SELECT * FROM publication p , utilisateur t WHERE (t.identreprise=:identreprise AND P.idcompte = t.idutilisateur ) AND ( (p.statut='public') OR 
+        (p.statut='amis' AND p.idcompte = 
         (SELECT amis.idcompte FROM amis WHERE 
-        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte)) OR (idcompte=:id)";
+        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte)) OR (idcompte=:id) )";
 
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':identreprise',$this->entrepriseId, PDO::PARAM_INT);
         $pdoStatement->execute();
         $publications = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
         
