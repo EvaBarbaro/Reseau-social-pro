@@ -100,7 +100,6 @@ public function getAllPostsComents($id){
     $pdoStatement = $this->conn->prepare($sql);
     $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
     $pdoStatement->execute();
-    //$pdoStatement = $this->conn->query($sql);
     $commentaires = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
     $commentaire = array();
     if(!empty($commentaires)){
@@ -115,23 +114,6 @@ public function getAllPostsComents($id){
 }
     return $commentaire;
 
-}
-
-
-
-
-/**
-* Update one commentaire
-*/ 
-public function update($commentaire){
-    $sql = "UPDATE commentaire SET description=:description WHERE idcommentaire=:comId";
-
-    $pdoStatement = $this->conn->prepare($sql);
-    $pdoStatement->bindValue(':comId', $commentaire->getIdcommentaire(), PDO::PARAM_INT);
-    $pdoStatement->bindValue(':description', $commentaire->getDescription());
-    $res = $pdoStatement->execute();
-    //$res = 1 (true) if sucess
-    return $res;
 }
 
 
@@ -156,6 +138,24 @@ public function create($commentaire){
     //$res = 1 (true) if sucess
     return $res;
 }
+
+
+
+
+/**
+* Update one commentaire
+*/ 
+public function update($commentaire){
+    $sql = "UPDATE commentaire SET description=:description WHERE idcommentaire=:comId";
+
+    $pdoStatement = $this->conn->prepare($sql);
+    $pdoStatement->bindValue(':comId', $commentaire->getIdcommentaire(), PDO::PARAM_INT);
+    $pdoStatement->bindValue(':description', $commentaire->getDescription());
+    $res = $pdoStatement->execute();
+    //$res = 1 (true) if sucess
+    return $res;
+}
+
     
 
 
