@@ -100,9 +100,9 @@ ALTER TABLE `AMIS` ADD FOREIGN KEY (`idcompte_ami`) REFERENCES `COMPTE` (`idcomp
 ALTER TABLE `AMIS` ADD FOREIGN KEY (`idcompte`) REFERENCES `COMPTE` (`idcompte`) ON DELETE CASCADE;
 
 INSERT INTO ENTREPRISE VALUES 
-(1696278527184852,'Google','Logo Google','Je suis Google', 'http://localhost/apache/Reseau-social-pro/monReseau/1696278527184852', true),
-(1696278531096786,'Fnac', 'Logo Fnac', 'Je suis la Fnac', 'http://localhost/apache/Reseau-social-pro/monReseau/1696278531096786', true),
-(1696278577788060,'Amazon', 'Logo Amazon', 'Je suis Amazon', 'http://localhost/apache/Reseau-social-pro/monReseau/1696278577788060', true)
+(1696278527184852,'Google','LogoGoogle.jpg','Je suis Google', 'monReseau/1696278527184852', true),
+(1696278531096786,'Fnac', 'LogoFnac.png', 'Je suis la Fnac', 'monReseau/1696278531096786', true),
+(1696278577788060,'Amazon', 'LogoAmazon.png', 'Je suis Amazon', 'monReseau/1696278577788060', true)
 ;
 
 INSERT INTO UTILISATEUR VALUES 
@@ -115,12 +115,12 @@ INSERT INTO UTILISATEUR VALUES
 ;
 
 INSERT INTO COMPTE VALUES 
-(1696278514562148,'Google', 'Jean', 'maPhotoGoogle.jpg', 'Superviseur', 'Manager', 'Developpement', '2019-02-15'),
-(1696278527895410,'Fnac', 'Luiza', 'maPhotoFnac.jpg', 'Superviseur', 'Manager', 'Communication', '2017-05-17'),
-(1696278537845651,'Amazon', 'Nathalie', 'maPhotoAmazon.jpg', 'Superviseur', 'Manager', 'Relation Presse', '2015-07-02'),
-(1696278547894512,'Doe', 'Jane', 'maPhotoGoogle.jpg', 'Developpeur', 'Employe', 'Developpement', '2020-07-25'),
-(1696278547894513,'Onyme', 'Anne', 'maPhotoFnac.jpg', 'Community manager', 'Employe', 'Communication', '2021-01-05'),
-(1696278547894514,'Drake', 'Nathan', 'maPhotoAmazon.jpg', 'Assistant', 'Employe', 'Communication', '2019-11-01')
+(1696278514562148,'Google', 'Jean', 'maPhotoJean.jpg', 'Superviseur', 'Manager', 'Developpement', '2019-02-15'),
+(1696278527895410,'Fnac', 'Luiza', 'maPhotoLuiza.jpg', 'Superviseur', 'Manager', 'Communication', '2017-05-17'),
+(1696278537845651,'Amazon', 'Nathalie', 'maPhotoNath.jpg', 'Superviseur', 'Manager', 'Relation Presse', '2015-07-02'),
+(1696278547894512,'Doe', 'Jane', 'maPhotoJane.jpg', 'Developpeur', 'Employe', 'Developpement', '2020-07-25'),
+(1696278547894513,'Onyme', 'Anne', 'maPhotoAnne.jpg', 'Community manager', 'Employe', 'Communication', '2021-01-05'),
+(1696278547894514,'Drake', 'Nathan', 'maPhotoNate.jpg', 'Assistant', 'Employe', 'Communication', '2019-11-01')
 ;
 
 INSERT INTO IMAGE VALUES 
