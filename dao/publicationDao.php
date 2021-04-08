@@ -40,14 +40,16 @@ class publicationDao implements interfaceDao {
         // savoir si l'utilisteur de la session a liké la publication ou pas 
         $like = $like_publicationDao->Liked($pub);
         $publication["publication_Liked_Par_Utilisateur"] = $like;
-        $compte =  $compteDao->getCompteInfos($pub->getIdcompte());
         // les infos du créateur de la publication
+        $compte =  $compteDao->getCompteInfos($pub->getIdcompte());
+        if(!empty($compte)){
         $compteInfo = array(
         "idcompte"=>$compte['idcompte'],
         "nomutilisateur"=>$compte['nomutilisateur'],
         "photo"=>$compte['photo']
         );
         $publication["comptePublication"] = $compteInfo;
+        }
         // les commentaires de la publication
         $commentaires =  $commentaireDao->getAllPostsComents($pub->getIdpublication());
         $publication["commentaires"] = $commentaires;
@@ -67,13 +69,14 @@ class publicationDao implements interfaceDao {
         $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
         $pdoStatement->execute();
         $pub = $pdoStatement->fetch(PDO::FETCH_ASSOC);
-        $publicationModel = new publication($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
-        $publicationModel->setImageurl($pub['imageurl']);
-        
+       
         $publication = array();
-        if(!emty($pub)){
+        if(!empty($pub)){
       
             // publication à retourner
+            $publicationModel = new publication();
+            $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
+            $publicationModel->setImageurl($pub['imageurl']);
             $publication = $this->getInfoPublication($publicationModel);
  
          }
@@ -101,8 +104,8 @@ class publicationDao implements interfaceDao {
         $publication = array();
         if(!empty($publications)){
             foreach($publications as $pub){
-
-                $publicationModel = new publication($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
+                $publicationModel = new publication();
+                $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
                 $publicationModel->setImageurl($pub['imageurl']);
                 // publication à ajouté
                 $publicationAjouter = $this->getInfoPublication($publicationModel);

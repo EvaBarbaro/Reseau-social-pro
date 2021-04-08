@@ -38,12 +38,14 @@ class commentaireDao implements interfaceDao {
         $commentaire["commentaire_Liked_Par_Utilisateur"] = $like;
         // les infos du créateur du commentaire
         $compte =  $compteDao->getCompteInfos($com->getIdcompte());
+        if(!empty($compte)){
         $compteInfo = array(
         "idcompte"=>$compte['idcompte'],
         "nomutilisateur"=>$compte['nomutilisateur'],
         "photo"=>$compte['photo']
         );
         $commentaire["commentaire_compte"] =$compteInfo;
+        }
         return  $commentaire;
     }
 
@@ -60,7 +62,8 @@ public function get($id){
     $com = $pdoStatement->fetch(PDO::FETCH_ASSOC);
     $commentaire = array();
     if(!empty($com)){
-    $commentaireModel = new commentaire($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
+    $commentaireModel = new commentaire();
+    $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
     $commentaire = $this-> getInfoCommentaire($commentaireModel); 
     
     }
@@ -80,7 +83,8 @@ public function getAll(){
     $pdoStatement = $this->conn->query($sql);
 
     $com = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-    $commentaireModel = new commentaire($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
+    $commentaireModel = new commentaire();
+    $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
     $commentaire = array();
     if(!empty($com)){
         $commentaire = $this-> getInfoCommentaire($commentaireModel); 
@@ -106,7 +110,8 @@ public function getAllPostsComents($id){
    
     
     foreach($commentaires as $com){
-       $commentaireModel = new commentaire($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
+       $commentaireModel = new commentaire();
+       $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
        $commentaireAjouter = $this-> getInfoCommentaire($commentaireModel);
        array_push($commentaire,$commentaireAjouter);
     }

@@ -35,7 +35,7 @@ class compteDao implements interfaceDao {
          $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
          $pdoStatement->execute();
          $cmpt = $pdoStatement->fetch(PDO::FETCH_ASSOC);
- 
+         if(!empty($cmpt)){
          $compteModel = new compte($cmpt['idcompte'],$cmpt['nom'],$cmpt['prenom'],$cmpt['photo'],$cmpt['poste'],
          $cmpt['grade'],$cmpt['departement'],$cmpt['date_embauche']);
  
@@ -48,6 +48,7 @@ class compteDao implements interfaceDao {
          $compte['departement']=$compteModel->getDepartement();
          $compte['date_embauche']=$compteModel->getDateEmbauche();
          $compte['nomutilisateur']=$cmpt['nomutilisateur'];
+         }
          return $compte;
     }
     

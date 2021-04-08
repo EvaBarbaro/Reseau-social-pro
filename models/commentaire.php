@@ -124,7 +124,7 @@ return $this;
 /**
  * Construct
  */ 
-public function __construct($idcommentaire,$description,$idpublication,$like,$idcompte)
+public function construct($idcommentaire,$description,$idpublication,$like,$idcompte)
 {
     $this->setIdcommentaire($idcommentaire);
     $this->setDescription($description);

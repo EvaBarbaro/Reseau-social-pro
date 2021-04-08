@@ -17,7 +17,6 @@ class SocialNetworkController extends CoreController
         $db = $DBData->getConnection();
         //à remplacer par la variable idutilisateur de la session courante
         $idUtilisateur = 1696278514562148;
-       
         $publicationList = $this->getPublications($db,$idUtilisateur);
         $this->show('socialHome', [
             'title' => 'Social Connect - Home',
