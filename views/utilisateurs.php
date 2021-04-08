@@ -14,6 +14,7 @@
 
             echo "<form action=" . pathUrl()."monCompte/delete method='POST'>";
             echo "<input type='hidden' value='". $utilisateur['idutilisateur']."' name='idutilisateur' />";
+            echo "<input type='hidden' value='". $utilisateur['identreprise']."' name='identreprise' />";
             echo "<tr>";
             echo "<td>".$utilisateur['nomutilisateur'] . "</td>";
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";

@@ -5,7 +5,7 @@ require './altorouter/AltoRouter.php';
 include __DIR__ . '/utils/DBData.php';
 
 include __DIR__ . '/controllers/CoreController.php';
-include __DIR__ . '/controllers/MainController.php';
+include __DIR__ . '/controllers/LoginController.php';
 include __DIR__ . '/controllers/CompanyController.php';
 include __DIR__ . '/controllers/ImageController.php';
 include __DIR__ . '/controllers/UserController.php';
@@ -17,7 +17,8 @@ $router = new AltoRouter();
 
 $router->setBasePath($_SERVER['BASE_URI']);
 
-$router->map('GET', '/monReseau/[i:id]/login', 'MainController#login', 'login');
+$router->map('GET', '/monReseau/[i:id]/login', 'LoginController#login', 'login');
+$router->map('POST', '/monReseau/[i:id]/logged', 'LoginController#logged', 'logged');
 
 $router->map('GET', '/', 'CompanyController#register', 'register');
 
