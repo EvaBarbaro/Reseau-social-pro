@@ -10,7 +10,7 @@ class loginDao {
         $this->conn = $db;
     }
 
-    public function loginUser($utilisateur) {
+    public function loginUser($utilisateur, $entrepriseId) {
         $sql = $this->conn->prepare("SELECT * FROM utilisateur WHERE nomutilisateur = :nomutilisateur and motdepasse = :motdepasse and identreprise = :identreprise and statut = " .true);
 
         $sql->bindValue('nomutilisateur', $utilisateur->getNomUtilisateur());
@@ -25,7 +25,7 @@ class loginDao {
 
         if($count == 1 && !empty($row)) {
             session_start();
-            
+
             $_SESSION['idutilisateur']   = $row['idutilisateur'];
             $_SESSION['identreprise'] = $row['identreprise'];
             $_SESSION['nomutilisateur'] = $row['nomutilisateur'];
@@ -34,7 +34,7 @@ class loginDao {
 
             header('Location: '.pathUrl().'monReseau/'.$row['identreprise']);
         } else {
-            echo "Votre mot de passe ou votre nom d'utilisateur n'est pas valide";
+            header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');
         }
     }
 }

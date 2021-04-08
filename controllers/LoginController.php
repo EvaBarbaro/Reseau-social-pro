@@ -33,6 +33,6 @@ class LoginController extends CoreController
         $utilisateur->setIdEntreprise($entrepriseId);
 
 
-        $loginDao->loginUser($utilisateur);
+        $loginDao->loginUser($utilisateur, $entrepriseId);
     }
 }
