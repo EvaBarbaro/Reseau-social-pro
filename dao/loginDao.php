@@ -24,6 +24,8 @@ class loginDao {
         $row = $sql->fetch(PDO::FETCH_ASSOC);
 
         if($count == 1 && !empty($row)) {
+            session_start();
+            
             $_SESSION['idutilisateur']   = $row['idutilisateur'];
             $_SESSION['identreprise'] = $row['identreprise'];
             $_SESSION['nomutilisateur'] = $row['nomutilisateur'];
