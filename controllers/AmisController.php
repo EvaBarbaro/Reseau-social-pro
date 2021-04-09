@@ -4,9 +4,9 @@ include_once __DIR__.'/../dao/amisDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
 
-class ImageController extends CoreController
+class AmisController extends CoreController
 {
-    public function getAll()
+    public function getListe()
     {
         $DBData = new DBData();
         $db = $DBData->getConnection();
@@ -19,7 +19,7 @@ class ImageController extends CoreController
         ]);
     }
 
-    public function get($parameters)
+  /*  public function get($parameters)
     {
         $imageId = $parameters['id'];
 
@@ -114,6 +114,8 @@ class ImageController extends CoreController
     {
         $this->show('imageEnCreation', [
             'title' => 'Social Connect - Inscription'
-        ]);
+        ]); 
     }
+*/
+
 }
