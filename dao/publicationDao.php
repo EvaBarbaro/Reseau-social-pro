@@ -92,9 +92,9 @@ class publicationDao implements interfaceDao {
  */ 
     public function getAll(){
         $sql = "SELECT p.* FROM publication p , utilisateur t WHERE (t.identreprise=:identreprise AND P.idcompte = t.idutilisateur ) AND ( (p.statut='public') OR 
-        (p.statut='amis' AND p.idcompte = 
-        (SELECT amis.idcompte FROM amis WHERE 
-        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte)) OR (idcompte=:id) )";
+        (p.statut='amis' AND p.idcompte IN 
+        (SELECT amis.idcompte FROM amis WHERE ((amis.idcompte=p.idcompte AND amis.idcompte_ami=:id)OR(
+        amis.idcompte=:id AND amis.idcompte_ami=p.idcompte)))) OR (idcompte=:id) )";
 
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
