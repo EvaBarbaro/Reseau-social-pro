@@ -1,5 +1,8 @@
 <?php 
-require_once __DIR__ . '/networkNav.php';
+
+    require_once __DIR__ . '/networkNav.php';
+    require_once __DIR__ . '/accountNav.php';
+
 ?>
 <div class="d-flex">
     <div id="logo">

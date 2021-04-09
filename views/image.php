@@ -1,3 +1,9 @@
+<?php 
+
+    require_once __DIR__ . '/networkNav.php';
+    require_once __DIR__ . '/accountNav.php';
+
+?>
 <div class="container">
 	<h2 class="mt-4">Toutes les images</h2>
 	<table class="table table-bordered table-striped mt-4">
