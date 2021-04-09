@@ -91,7 +91,7 @@ class publicationDao implements interfaceDao {
  * Get all publication
  */ 
     public function getAll(){
-        $sql = "SELECT * FROM publication p , utilisateur t WHERE (t.identreprise=:identreprise AND P.idcompte = t.idutilisateur ) AND ( (p.statut='public') OR 
+        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE (t.identreprise=:identreprise AND P.idcompte = t.idutilisateur ) AND ( (p.statut='public') OR 
         (p.statut='amis' AND p.idcompte = 
         (SELECT amis.idcompte FROM amis WHERE 
         amis.idcompte=:id AND amis.idcompte_ami=p.idcompte)) OR (idcompte=:id) )";

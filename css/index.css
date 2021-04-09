@@ -54,3 +54,38 @@ footer {
     height:2.5rem;
     width:2.5rem;
 }
+
+.navbar-brand img{
+    height:3.6rem;
+    width:4rem;
+}
+
+.dropdown button img , .dropdown-item img{
+    height:-1rem;
+    width:-1rem;
+}
+
+.dropdown button {
+    background-color: transparent;
+    border: none;
+    width:4.5rem;
+}
+.dropdown button:hover , .dropdown-item:active  {
+    background-color: transparent;
+  
+}
+
+.dropdown{
+    width:2.5rem; 
+    display:inline;
+}
+/*
+.dropdown-menu{
+    width: -10rem !important; 
+   
+}*/
+
+.card-footer .card-img-top {
+    height:2rem;
+    width:2rem;
+}

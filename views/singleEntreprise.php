@@ -1,11 +1,21 @@
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
 ?>
-
+</div>
+</div>
+<div class="row">
+<div class="col-lg-2 offset-lg-2">
 <?php
+$i=0;
 foreach($viewVars['publicationList'] as $pub){
+  $i++;
 ?>
-<div class="card  mt-3 offset-2" style="width: 45rem;">
+
+ 
+<div class="card  mt-3" style="width: 45rem;">
 <div class="card-header">
 <?php
 if(!empty($pub['comptePublication']['photo'])){
@@ -18,6 +28,21 @@ if(!empty($pub['comptePublication']['photo'])){
 <?php
  echo $pub['comptePublication']['nomutilisateur'];
 ?>
+<div class="dropdown offset-8">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <?php if($pub['publicationInfos']['statut']==="public") {
+    $img ="public.png";
+  } else {
+    $img ="amis.png";
+  } ?>
+  <img src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    
+  </div>
+</div>
   </div>
 </div>
 <?php
@@ -34,14 +59,31 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   </div>
   <div class="card-footer">
   <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#addComment" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Commenter
+  <?php if($pub['publication_Liked_Par_Utilisateur']) {
+    $img ="unlike.png";
+  } else {
+    $img ="like.png";
+  } ?>
+  <img src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+  <?php echo $pub['publicationInfos']['Nombre Like']; ?>
+  <a class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <img src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
   </a>
   
 </p>
-<div class="collapse" id="addComment">
+<div class="collapse" id="addComment<?php echo $i;?>">
   <div class="card card-body">
-   Formulaire pour commenter
+   <!-- Formulaire pour commenter-->
+   <form>
+  <div class="form-group">
+ 
+    <textarea class="form-control" id="validationTextarea" placeholder="Commenter"></textarea>
+  </div>
+  <div class="form-group">
+  <button type="submit" class="btn btn-primary">Envoyer</button>
+</div>
+</form>
+<!-- Formulaire pour commenter-->
   </div>
 </div>
   </div>
@@ -49,7 +91,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 <?php
 foreach($pub['commentaires'] as $com){
 ?>
-<div class="card  offset-2" style="width: 45rem;">
+<div class="card" style="width: 45rem;">
 <div class="card-header">
 <?php
 if(!empty($com['commentaire_compte']['photo'])){
@@ -70,9 +112,22 @@ if(!empty($com['commentaire_compte']['photo'])){
 ?></p>
   </div>
   <div class="card-footer">
-    Card footer
+  <p>
+  <?php if($com['commentaire_Liked_Par_Utilisateur']) {
+    $img ="unlike.png";
+  } else {
+    $img ="like.png";
+  } ?>
+  <img src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+  <?php echo $com['commentaireInfo']['Nombre Like']; ?>
+</p>
   </div>
 </div>
+
+
 <?php
 }
 }?>
+</div>
+</div>
+</div>
