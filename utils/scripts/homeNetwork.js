@@ -19,7 +19,7 @@ $(document).ready(function(){
             $(this).attr("src",filename+"public/img/like.png");
             $(this).attr("id","like.png");
         }
-        else {
+        else if($(this).attr("id")=="like.png") {
             $(this).attr("src",filename+"public/img/unlike.png");
             $(this).attr("id","unlike.png");
         }

@@ -106,7 +106,7 @@ if(!empty($pub['comptePublication']['photo'])){
 </div>
 <?php
 if(!empty($pub['publicationInfos']['imageurl'])){
-    ?><img src="<?php echo  pathUrl().'public/publicationImages/'.$pub['publicationInfos']['imageurl'];?>" class="card-img-top" alt="Image introuvable">
+    ?><img src="<?php echo  pathUrl().'public/publicationImages/'.$pub['publicationInfos']['imageurl'];?>" class="card-img-top rounded-0" alt="Image introuvable">
     <?php
 
 } 
@@ -126,7 +126,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   <img id="<?php echo $img; ?>" type="button" src="<?php  echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
   <a class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  <img src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
+  <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
   </a>
   
 </p>
@@ -150,7 +150,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 <?php
 foreach($pub['commentaires'] as $com){
 ?>
-<div class="card  rounded-0" style="width: 45rem;">
+<div class="card rounded-0" style="width: 45rem;">
 <div class="card-header" style="background-color:#F0F0F0;">
 <?php
 if(!empty($com['commentaire_compte']['photo'])){
