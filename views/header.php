@@ -22,4 +22,4 @@ session_start();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href=<?= pathUrl()."css/index.css" ?>>
 </head>
-<body class="container-fluid">
+<body class="container-fluid pb-4">

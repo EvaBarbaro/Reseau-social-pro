@@ -11,11 +11,10 @@ class loginDao {
     }
 
     public function loginUser($utilisateur, $entrepriseId) {
-        $sql = $this->conn->prepare("SELECT * FROM utilisateur u , entreprise e WHERE u.nomutilisateur = :nomutilisateur and u.motdepasse = :motdepasse and u.identreprise = :identreprise and u.statut = " .true." AND u.identreprise =t.identreprise");
+        $sql = $this->conn->prepare("SELECT * FROM utilisateur WHERE nomutilisateur = :nomutilisateur and motdepasse = :motdepasse and statut = " .true);
 
         $sql->bindValue('nomutilisateur', $utilisateur->getNomUtilisateur());
         $sql->bindValue('motdepasse', $utilisateur->getMotDePasse());
-        $sql->bindValue('identreprise', $utilisateur->getIdEntreprise());
 
         $sql->execute();
 
@@ -32,7 +31,17 @@ class loginDao {
             $_SESSION['mail'] = $row['mail'];
             $_SESSION['role'] = $row['role'];
             $_SESSION['message'] = "";
-            $_SESSION['entrepriseLogo'] = $row['logo'];
+
+            $sqlLogo = $this->conn->prepare("SELECT logo FROM entreprise WHERE identreprise= :identreprise");
+
+            $sqlLogo->bindValue('identreprise', $row['identreprise']);
+    
+            $sqlLogo->execute();
+
+            $rowLogo = $sqlLogo->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION['logo'] = $rowLogo['logo'];
+
             header('Location: '.pathUrl().'monReseau/'.$row['identreprise']);
         } else {
             session_start();

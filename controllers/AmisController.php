@@ -1,23 +1,21 @@
 <?php
 
-include_once __DIR__.'/../dao/imageDao.php';
+include_once __DIR__.'/../dao/amisDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
 
 class ImageController extends CoreController
 {
-    public function getAll($parameters)
+    public function getAll()
     {
-        $imageId = $parameters['id'];
-
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
-        $imageDao = new imageDao($db);
-        $imageList = $imageDao->getAll($imageId);
+        $amisDao = new amisDao($db);
+        $amisList = $amisDao->getAll();
         $this->show('image', [
             'title' => 'Social Connect - Back Office',
-            'imageList' => $imageList
+            'iamisList' => $amisList
         ]);
     }
 
