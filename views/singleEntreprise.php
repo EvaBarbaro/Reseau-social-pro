@@ -14,14 +14,15 @@ require_once __DIR__ . '/networkNav.php';
 <div class="card-header">
  <div class="pubHeader">
  Publier
-<div class="dropdown offset-9">
+ 
+<div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
  
-  <img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable">
+  <img  src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable">
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
-    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    <a class="dropdown-item" ><img type="button" id="public" src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    <a class="dropdown-item" ><img type="button" id="amis" src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
     
   </div>
 </div>
@@ -73,14 +74,23 @@ if(!empty($pub['comptePublication']['photo'])){
 <?php
  echo $pub['comptePublication']['nomutilisateur'];
 ?>
-<div class="dropdown offset-8">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <?php if($pub['publicationInfos']['statut']==="public") {
     $img ="public.png";
   } else {
     $img ="amis.png";
   } ?>
-  <img src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+  <div class="visibilité">
+  <img class="offset-9" src="<?php echo pathUrl().'public/img/'.$img;?>"> 
+</div>
+<!--
+<div class="dropdown offset-8">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <?php/* if($pub['publicationInfos']['statut']==="public") {
+    $img ="public.png";
+  } else {
+    $img ="amis.png";
+  } */?>
+  <img src="<?php/* echo pathUrl().'public/img/'.$img;*/?>" class="card-img-top" alt="Image introuvable">
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
@@ -88,6 +98,7 @@ if(!empty($pub['comptePublication']['photo'])){
     
   </div>
 </div>
+-->
   </div>
 </div>
 <?php
