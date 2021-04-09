@@ -8,6 +8,51 @@ require_once __DIR__ . '/networkNav.php';
 </div>
 <div class="row">
 <div class="col-lg-2 offset-lg-2">
+  <!-- formulaire d'ajout publication -->
+  
+  <div class="card  mt-3" style="width: 45rem;">
+<div class="card-header">
+ <div class="pubHeader">
+ Publier
+<div class="dropdown offset-9">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ 
+  <img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable">
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    
+  </div>
+</div>
+</div> 
+</div>
+
+  <div class="card-body">
+  <form>
+  <div class="form-group">
+ 
+    <textarea class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="pubImage">Ajouter une image</label>
+    <input type="file" class="form-control-file" id="pubImage">
+  </div>
+  <div class="form-group">
+  <button type="submit" class="btn btn-primary">Envoyer</button>
+</div>
+</form>
+  </div>
+  <div class="card-footer">
+  <p>
+ 
+  
+</p>
+
+  </div>
+</div>
+  <!-- formulaire d'ajout publication -->
+
 <?php
 $i=0;
 foreach($viewVars['publicationList'] as $pub){
@@ -24,7 +69,7 @@ if(!empty($pub['comptePublication']['photo'])){
     $img = pathUrl().'public/img/profil.png';
 }
 ?>
-  <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+  <div class="pubHeader" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
 <?php
  echo $pub['comptePublication']['nomutilisateur'];
 ?>
@@ -100,7 +145,7 @@ if(!empty($com['commentaire_compte']['photo'])){
     $img = pathUrl().'public/img/profil.png';
 }
 ?>
-  <div class="user" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+  <div class="pubHeader" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
 <?php
  echo $com['commentaire_compte']['nomutilisateur'];
 ?>

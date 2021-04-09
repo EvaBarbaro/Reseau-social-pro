@@ -48,7 +48,7 @@ footer {
     opacity: 85%;
     color: antiquewhite;
 } */
-.card .user img{
+.card .pubHeader img{
     border: solid transparent;
     border-radius: 10rem;
     height:2.5rem;
