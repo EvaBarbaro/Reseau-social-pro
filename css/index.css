@@ -48,7 +48,6 @@ footer {
     opacity: 85%;
     color: antiquewhite;
 } */
-
 .card .pubHeader img{
     border: solid transparent;
     border-radius: 10rem;
@@ -56,7 +55,7 @@ footer {
     width:2.5rem;
 }
 .card .pubHeader .visibilité{
-    display: inline;
+    display: inline-block;
 }
 
 .card .pubHeader .visibilité img{
@@ -66,8 +65,8 @@ footer {
 }
 
 .navbar-brand img{
-    height:3.6rem;
-    width:4rem;
+    height:3.5rem;
+    width:3.5rem;
 }
 
 .dropdown button img , .dropdown-item img{
@@ -89,13 +88,18 @@ footer {
     width:2.5rem; 
     display:inline;
 }
-/*
+
 .dropdown-menu{
-    width: -10rem !important; 
+    size: auto!important; 
    
-}*/
+}
 
 .card-footer .card-img-top {
     height:2rem;
     width:2rem;
+}
+
+.user{
+    display:inline-block;
+    width:35rem;
 }

@@ -12,4 +12,17 @@ $(document).ready(function(){
         }
         
       }); 
+
+      $(".card-footer").find("img").on( "click", function() {
+      
+        if($(this).attr("id")=="unlike.png"){
+            $(this).attr("src",filename+"public/img/like.png");
+            $(this).attr("id","like.png");
+        }
+        else {
+            $(this).attr("src",filename+"public/img/unlike.png");
+            $(this).attr("id","unlike.png");
+        }
+        
+      }); 
 });

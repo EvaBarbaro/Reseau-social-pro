@@ -10,7 +10,7 @@ require_once __DIR__ . '/networkNav.php';
 <div class="col-lg-2 offset-lg-2">
   <!-- formulaire d'ajout publication -->
   
-  <div class="card  mt-3" style="width: 45rem;">
+  <div class="card  rounded-0 mt-3" style="width: 45rem;">
 <div class="card-header">
  <div class="pubHeader">
  Publier
@@ -61,7 +61,7 @@ foreach($viewVars['publicationList'] as $pub){
 ?>
 
  
-<div class="card  mt-3" style="width: 45rem;">
+<div class="card  mt-3  rounded-0" style="width: 45rem;">
 <div class="card-header">
 <?php
 if(!empty($pub['comptePublication']['photo'])){
@@ -71,16 +71,19 @@ if(!empty($pub['comptePublication']['photo'])){
 }
 ?>
   <div class="pubHeader" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+  <div class="user">
 <?php
+
  echo $pub['comptePublication']['nomutilisateur'];
 ?>
+</div>
   <?php if($pub['publicationInfos']['statut']==="public") {
     $img ="public.png";
   } else {
     $img ="amis.png";
   } ?>
   <div class="visibilité">
-  <img class="offset-9" src="<?php echo pathUrl().'public/img/'.$img;?>"> 
+  <img class="offset-11" src="<?php echo pathUrl().'public/img/'.$img;?>"> 
 </div>
 <!--
 <div class="dropdown offset-8">
@@ -120,7 +123,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   } else {
     $img ="like.png";
   } ?>
-  <img src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+  <img id="<?php echo $img; ?>" type="button" src="<?php  echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
   <a class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
   <img src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
@@ -147,8 +150,8 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 <?php
 foreach($pub['commentaires'] as $com){
 ?>
-<div class="card" style="width: 45rem;">
-<div class="card-header">
+<div class="card  rounded-0" style="width: 45rem;">
+<div class="card-header" style="background-color:#F0F0F0;">
 <?php
 if(!empty($com['commentaire_compte']['photo'])){
     $img =  pathUrl().'public/profilImages/'.$com['commentaire_compte']['photo'];
@@ -167,14 +170,14 @@ if(!empty($com['commentaire_compte']['photo'])){
     echo $com['commentaireInfo']['description'];
 ?></p>
   </div>
-  <div class="card-footer">
+  <div class="card-footer" style="background-color:#F0F0F0;">
   <p>
   <?php if($com['commentaire_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
-  <img src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+  <img id="<?php echo $img; ?>" type="button" src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
   <?php echo $com['commentaireInfo']['Nombre Like']; ?>
 </p>
   </div>
