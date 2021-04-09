@@ -32,7 +32,7 @@
             
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
             echo "</form>";
-            echo "<td><a href='./monImage/".$image['idimage']."' class='btn btn-info'>Modifier</a></td>";
+            echo "<td><a href=".pathUrl()."monImage/".$image['idimage']." class='btn btn-info'>Modifier</a></td>";
             echo "</tr>";
         }
         ?>

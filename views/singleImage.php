@@ -16,12 +16,7 @@
                     </div>
                 </div>
                 
-                <div class="form-group row">
-                    <label for="imageurl" class="col-sm-4 col-form-label">Url</label>
-                    <div class="col-sm-8">
-                    <input type="file" name="imageurl" id="imageurl" value="<?= $viewVars['image']['imageurl'] ?>">
-                    </div>
-                </div>
+                <input type="hidden" name="imageurl" value="<?= $viewVars['image']['imageurl'] ?>">
 
                 <input type="hidden" name="idcompte" value="<?= $viewVars['image']['idcompte'] ?>">
                 
