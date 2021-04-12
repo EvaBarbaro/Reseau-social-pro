@@ -48,6 +48,7 @@ class imageDao implements interfaceUtilisateurDao {
     public function getAll($id){
         $sql 	= "SELECT * FROM image WHERE idcompte =" .$id;
         $result = $this->conn->query($sql); 
+        // (fetchAll-->) Transforme le bloc registrement de result en tableau de ligne
         $images = $result->fetchAll();
         return $images;
     }

@@ -26,16 +26,18 @@
                     <input type="text" class="form-control" name="prenom" id="prenom" value="<?= $viewVars['compte']['prenom'] ?>">
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="photo" class="col-sm-4 col-form-label">Votre photo de profil</label>
                     <div class="col-sm-8">
                     <input type="file" name="photo" id="photo" value="<?= $viewVars['compte']['photo'] ?>">
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="poste" class="col-sm-4 col-form-label">Votre poste</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="poste" id="poste" value="<?= $viewVars['compte']['poste'] ?>">
+                    <input type="text" class="form-control" name="poste" id="poste" value="<?= $viewVars['compte']['poste'] ?>"> 
                     </div>
                 </div>
                 <div class="form-group row">
@@ -56,7 +58,9 @@
                     <input type="date" class="form-control" name="date_embauche" id="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
                     </div>
                 </div>
+
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
+
             </form>
         </div>
 </div>

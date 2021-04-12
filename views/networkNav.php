@@ -1,5 +1,16 @@
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-  <a class="navbar-brand" href="<?php echo pathUrl().'monReseau/'.$_SESSION['identreprise']?>"><img src= <?= pathUrl().'public/logoImages/'.$_SESSION['logo'] ?> class="rounded-circle" width="70px"></a>
+
+<pre>
+  <?php var_dump($_SESSION); ?> 
+</pre>
+
+
+
+  <a class="navbar-brand" href="<?php echo pathUrl().'monReseau/'.$_SESSION['identreprise']?>"><img 
+                            src= <?= pathUrl().'public/logoImages/'.$_SESSION['logo'] ?> 
+                            class="rounded-circle" width="70px"></a>
   
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
