@@ -29,6 +29,9 @@ $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDele
 $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpdate');
 $router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEnCreation');
 
+$router->map('POST', '/monReseau/test', 'SocialNetworkController#test', 'reseauSingleTest');
+$router->map('POST', '/monReseau/[i:id]', 'SocialNetworkController#home', 'reseauSingle3');
+
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'SocialNetworkController#home', 'reseauSingle');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');

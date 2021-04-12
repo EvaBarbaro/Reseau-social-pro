@@ -10,6 +10,17 @@ include_once __DIR__.'/../models/like_publication.php';
 
 class SocialNetworkController extends CoreController
 {
+    public function test(){
+        $idUtilisateur = 1696278514562148;
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+        $publication = new publication();
+        $publication->setDescription("test");
+        $publication->setStatut("public");
+       
+        $publicationDao = new publicationDao($db,$idUtilisateur,null);
+        $res = $publicationDao->create($publication);
+    }
     // page d'acceuil du réseau social
     public function home($parameters)
     {

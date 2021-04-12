@@ -25,4 +25,28 @@ $(document).ready(function(){
         }
         
       }); 
+     
 });
+function test(a){
+    alert("clicked");
+    alert(a);
+
+    var xhttp = new XMLHttpRequest();
+    alert("1");
+    xhttp.onreadystatechange = function() {
+        alert("2");
+      if (this.readyState == 4 && this.status == 200) {
+        alert(this.readyState);
+      // document.getElementById("demo").innerHTML = this.responseText;
+      }else {
+          alert(this.status);
+      }
+    };
+    alert("3");
+    xhttp.open("GET", filename+"monReseau/test"+str, true);
+    alert("4");
+    xhttp.send();
+    alert("5");
+
+   
+ }

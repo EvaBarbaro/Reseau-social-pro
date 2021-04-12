@@ -68,12 +68,12 @@ footer {
     height:3.3rem;
     width:3.5rem;
 }
-
-.dropdown button img , .dropdown-item img{
-    height:-1rem;
-    width:-1rem;
+/*.btn-secondary.dropdown-toggle {
+    
+    background-color:none;
+    border-color: none;
 }
-
+*/
 .dropdown button {
     background-color: transparent;
     border: none;
@@ -89,9 +89,8 @@ footer {
     display:inline;
 }
 
-.dropdown-menu{
-    size: auto!important; 
-   
+.dropdown-menu {
+    min-width: 0.2rem!important;
 }
 
 .card-footer .card-img-top {
@@ -103,3 +102,10 @@ footer {
     display:inline-block;
     width:35rem;
 }
+/*
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+    color: #fff!important;
+    background-color: #fa00003b!important;
+    border-color: #0088ff!important;
+}
+*/

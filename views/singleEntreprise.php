@@ -1,8 +1,28 @@
+
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if(isset($_POST['test'])){?>
+    <script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       echo "done";
+      }
+    };
+    xmlhttp.open("GET", <?php echo pathUrl()."/monReseau/test";?> + str, true);
+    xmlhttp.send();
+    </script>
+    <?php
+  }
+}
 ?>
 </div>
 </div>
@@ -37,7 +57,7 @@ require_once __DIR__ . '/networkNav.php';
   </div>
   <div class="form-group">
     <label for="pubImage">Ajouter une image</label>
-    <input type="file" class="form-control-file" id="pubImage">
+    <input type="file" class="form-control-file" name="pubImage" id="pubImage">
   </div>
   <div class="form-group">
   <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -118,13 +138,16 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   </div>
   <div class="card-footer">
   <p>
+ 
   <?php if($pub['publication_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
-  <img id="<?php echo $img; ?>" type="button" src="<?php  echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+ <?php echo"<button value='b' onClick=test('".$pub['publicationInfos']['description']."')  name='test'><img id='$img'  type='button' src=".pathUrl()."'public/img/".$img." class='card-img-top' alt='Image introuvable'></button>'";
+?>
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
+ 
   <a class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
   <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
   </a>
