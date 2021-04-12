@@ -141,11 +141,11 @@ return $this;
 /**
  * Construct
  */ 
-public function construct($idpublication,$description,$statut,$idcompte)
+public function construct($idpublication,$description,$statut,$idcompte,$like)
 {
     $this->setIdpublication($idpublication);
     $this->setDescription($description);
-    $this->setlike(0);
+    $this->setlike($like);
     $this->setStatut($statut);
     $this->setIdcompte($idcompte);
 }

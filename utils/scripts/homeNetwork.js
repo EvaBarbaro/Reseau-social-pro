@@ -1,6 +1,9 @@
+var url = window.location.href;
+var filename = url.substring(0,url.lastIndexOf('monReseau'));
+var idEntreprise = url.substring(url.lastIndexOf('/')+1,url.lastIndexOf(''));
+var networkLink = filename+"monReseau/"+idEntreprise;
 $(document).ready(function(){
-    var url = window.location.href;
-    var filename = url.substring(0,url.lastIndexOf('monReseau'));
+
    
     $(".dropdown-item").find("img").on( "click", function() {
       
@@ -27,26 +30,29 @@ $(document).ready(function(){
       }); 
      
 });
-function test(a){
-    alert("clicked");
-    alert(a);
-
-    var xhttp = new XMLHttpRequest();
-    alert("1");
-    xhttp.onreadystatechange = function() {
-        alert("2");
-      if (this.readyState == 4 && this.status == 200) {
-        alert(this.readyState);
-      // document.getElementById("demo").innerHTML = this.responseText;
-      }else {
-          alert(this.status);
+$(function() {
+  $( "form" ).on( "submit", function(e) {
+    //alert("submit");
+    
+       var dataString = $(this).serialize();
+        var link="";
+        if($(this).attr("name")=="likeUnlikePub") {
+          
+          link="/LikeUnlikePublication"; 
+        }
+        
+    if(link!==""){
+      alert("link= "+networkLink+link);
+       $.ajax({
+         type: "POST",
+         url: networkLink+link,
+         data: dataString,
+         success: function () {
+          $(document).load(window.location.href);
+         }
+       });
       }
-    };
-    alert("3");
-    xhttp.open("GET", filename+"monReseau/test"+str, true);
-    alert("4");
-    xhttp.send();
-    alert("5");
-
-   
- }
+       e.preventDefault();
+     });
+    
+});

@@ -138,19 +138,26 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   </div>
   <div class="card-footer">
   <p>
- 
+
+  <div id="likeUnlikePub_form">
+<form name="likeUnlikePub" action="">
   <?php if($pub['publication_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
- <?php echo"<button value='b' onClick=test('".$pub['publicationInfos']['description']."')  name='test'><img id='$img'  type='button' src=".pathUrl()."'public/img/".$img." class='card-img-top' alt='Image introuvable'></button>'";
-?>
+  <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+  <input type="image" id="<?=$img; ?>" name="likeUnlikePubButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
- 
   <a class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
   <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
   </a>
+</form>
+</div>
+
+ 
+ 
+ 
   
 </p>
 <div class="collapse" id="addComment<?php echo $i;?>">

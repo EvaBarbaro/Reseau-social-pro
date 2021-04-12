@@ -76,7 +76,7 @@ class publicationDao implements interfaceDao {
       
             // publication à retourner
             $publicationModel = new publication();
-            $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
+            $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like']);
             $publicationModel->setImageurl($pub['imageurl']);
             $publication = $this->getInfoPublication($publicationModel);
  
@@ -107,7 +107,7 @@ class publicationDao implements interfaceDao {
         if(!empty($publications)){
             foreach($publications as $pub){
                 $publicationModel = new publication();
-                $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte']);
+                $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like']);
                 $publicationModel->setImageurl($pub['imageurl']);
                 // publication à ajouté
                 $publicationAjouter = $this->getInfoPublication($publicationModel);

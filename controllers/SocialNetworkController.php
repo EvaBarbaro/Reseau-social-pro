@@ -8,69 +8,70 @@ include_once __DIR__.'/../models/commentaire.php';
 include_once __DIR__.'/../dao/like_publicationDao.php';
 include_once __DIR__.'/../models/like_publication.php';
 
+
 class SocialNetworkController extends CoreController
 {
-    public function test(){
-        $idUtilisateur = 1696278514562148;
+   public $entrepriseId;
+   public $db;
+   public $idUtilisateur;
+   
+    public function init($entrepriseId){
         $DBData = new DBData();
-        $db = $DBData->getConnection();
-        $publication = new publication();
-        $publication->setDescription("test");
-        $publication->setStatut("public");
-       
-        $publicationDao = new publicationDao($db,$idUtilisateur,null);
-        $res = $publicationDao->create($publication);
+        $this->db = $DBData->getConnection();
+        //à remplacer par la variable idutilisateur de la session courante
+        $this->idUtilisateur = 1696278514562148;
+        $this->entrepriseId = $entrepriseId;
+        
     }
+ 
     // page d'acceuil du réseau social
     public function home($parameters)
     {
-        $entrepriseId = $parameters['id'];
+        $this->init($parameters['id']);
 
-        $DBData = new DBData();
-        $db = $DBData->getConnection();
-        //à remplacer par la variable idutilisateur de la session courante
-        $idUtilisateur = 1696278514562148;
-
-        $publicationList = $this->getPublications($db,$idUtilisateur,$entrepriseId);
+        $publicationList = $this->getPublications($parameters);
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList,
-            'idUtilisateur' => $idUtilisateur
+            'idUtilisateur' => $this->idUtilisateur
         ]);
     }
 
     // get toutes les publication(amis et public)
-    public function getPublications($db,$idUtilisateur,$entrepriseId) {
-       
-        $publicationDao = new publicationDao($db,$idUtilisateur,$entrepriseId);
+    public function getPublications($parameters) {
+        $this->init($parameters['id']);
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,$this->entrepriseId);
         $publicationList = $publicationDao->getAll();
         return $publicationList;
     }
     
     // get une publication selon id
-    public function getPublication($db,$idUtilisateur) {
+    public function getPublication($parameters) {
+        $this->init($parameters['id']);
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
-        $publicationDao = new publicationDao($db,$idUtilisateur,null);
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $publication = $publicationDao->get($publication->getIdpublication());
         return $publication;
     }
 
     // créer une nouvelle publication
-    public function createPublication($db,$idUtilisateur) {
+    public function createPublication($parameters) {
+        $this->init($parameters['id']);
         $publication = new publication();
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
         if(isset($_POST['imageurl'])) {
             $publication->setImageurl($_POST['imageurl']);
         }
-        $publicationDao = new publicationDao($db,$idUtilisateur,null);
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $res = $publicationDao->create($publication);
         return $res;
     }
 
     // modifier une publication
-    public function updatePublication($db,$idUtilisateur) {
+    public function updatePublication($parameters) {
+        $this->init($parameters['id']);
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
         $publication->setDescription($_POST['description']);
@@ -78,89 +79,98 @@ class SocialNetworkController extends CoreController
         if(isset($_POST['imageurl'])) {
             $publication->setImageurl($_POST['imageurl']);
         }
-        $publicationDao = new publicationDao($db,$idUtilisateur,null);
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $res = $publicationDao->update($publication);
         return $res;
     }
 
     // supprimer une publication
-    public function deletePublication($db,$idUtilisateur) {
+    public function deletePublication($parameters) {
+        $this->init($parameters['id']);
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
-        $publicationDao = new publicationDao($db,$idUtilisateur,null);
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $publication = $publicationDao->delete($publication->getIdpublication());
         return $publication;
     }
 
     // like/unlike une publication
-    public function LikeUnlikePublication($db,$idUtilisateur) {
-        $like_publication = new like_publication();
-        $like_publication->setIdpublication($_POST['idpublication']);
-        $like_publicationDao = new like_publicationDao($db,$idUtilisateur,null);
-        $like_publicationDao->Like_Unlike($like_publication->getIdpublication());  
+    public function LikeUnlikePublication($parameters) {
+        $this->init($parameters['id']);
+        $like_publication = new like_publication($this->idUtilisateur,$_POST['idpublication']);
+        //$like_publication->setIdpublication($_POST['idpublication']);
+        //var_dump($_POST['idpublication']);
+        $like_publicationDao = new like_publicationDao($this->db,$this->idUtilisateur);
+        $like_publicationDao->Like_Unlike($like_publication);  
     }
 
     // get tous les commentaires dans la base de données
-    public function getCommentaires($db,$idUtilisateur) {
-       
-        $commentaireDao = new commentaireDao($db,$idUtilisateur);
+    public function getCommentaires($parameters) {
+        $this->init($parameters['id']);
+        $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $commentaireList = $commentaireDao->getAll();
         return $commentaireList;
     }
 
     // get tous les commmentaires d'une publication(fonction incluse dans getPublications)
-    public function getCommentairesPublication($db,$idUtilisateur) {
+    public function getCommentairesPublication($parameters) {
+        $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setIdpublication($_POST['idpublication']);
-        $commentaireDao = new commentaireDao($db,$idUtilisateur);
+        $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $commentaireList = $commentaireDao->getAllPostsComents($commentaire->getIdpublication());
         return $commentaireList;
     }
 
     // get un commentaire selon son id
-    public function getCommentaire($db,$idUtilisateur) {
+    public function getCommentaire($parameters) {
+        $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setIdcommentaire($_POST['idcommentaire']);
-        $commentaireDao = new commentaireDao($db,$idUtilisateur);
+        $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $commentaire = $commentaireDao->get($commentaire->getIdcommentaire());
         return $commentaire;
     }
 
     // créer un nouveau commentaire
-    public function createCommentaire($db,$idUtilisateur) {
+    public function createCommentaire($parameters) {
+        $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setDescription($_POST['description']);
         $commentaire->setIdpublication($_POST['idpublication']);
-        $commentaireDao = new commentaireDao($db,$idUtilisateur);
+        $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $res = $commentaireDao->create($commentaire);
         return $res;
     }
 
     // modifier un commentaire
-    public function updateCommentaire($db,$idUtilisateur) {
+    public function updateCommentaire($parameters) {
+        $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setIdcommentaire($_POST['idcommentaire']);
         $commentaire->setDescription($_POST['description']);
-        $commentaireDao = new commentaireDao($db,$idUtilisateur);
+        $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $res = $commentaireDao->update($commentaire);
         return $res;
     }
 
     // supprimer un commentaire
-    public function deleteCommentaire($db,$idUtilisateur) {
+    public function deleteCommentaire($parameters) {
+        $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setIdcommentaire($_POST['idcommentaire']);
-        $commentaireDao = new commentaireDao($db,$idUtilisateur);
+        $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $commentaire = $commentaireDao->delete($commentaire->getIdcommentaire());
         return $commentaire;
     }
 
     // like/unlike un commentaire
-    public function LikeUnlikeCommentaire($db,$idUtilisateur) {
+    public function LikeUnlikeCommentaire($parameters) {
+        $this->init($parameters['id']);
         $like_commentaire = new like_commentaire();
         $like_commentaire->setIdcommentaire($_POST['idcommentaire']);
-        $like_commentaireDao = new like_commentaireDao($db,$idUtilisateur);
-        $like_commentaireDao->Like_Unlike($like_commentaire->getIdcommentaire());  
+        $like_commentaireDao = new like_commentaireDao($this->db,$this->idUtilisateur);
+        $like_commentaireDao->Like_Unlike($like_commentaire);  
     }
 
 }

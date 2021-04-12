@@ -90,22 +90,27 @@ footer {
 }
 
 .dropdown-menu {
-    min-width: 0.2rem!important;
+    min-width: 1rem;
 }
 
 .card-footer .card-img-top {
     height:2rem;
     width:2rem;
+    display:inline;
+}
+
+.submitLike{
+    display:inline;
 }
 
 .user{
     display:inline-block;
     width:35rem;
 }
-/*
+
 .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
-    color: #fff!important;
-    background-color: #fa00003b!important;
-    border-color: #0088ff!important;
+    color: #fff;
+    background-color: #fff;
+    border-color:#fff;
 }
-*/
+
