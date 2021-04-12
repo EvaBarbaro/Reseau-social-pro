@@ -9,5 +9,11 @@
   <li class="nav-item">
     <a class="nav-link album" href="<?= pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/mesImages'?>">Mon Album</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link password" href="<?= pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/monMotDePasse'?>">Modifier mon mot de passe</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link profilImage" href="<?= pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/maPhotoDeProfil'?>">Modifier ma photo de profil</a>
+  </li>
 </ul>
 </div>

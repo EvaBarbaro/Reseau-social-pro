@@ -38,6 +38,22 @@ class UserController extends CoreController
         ]);
     }
 
+    public function getPass($parameters)
+    {
+        $utilisateurId = $parameters['id'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $utilisateurDao = new utilisateurDao($db);
+        $utilisateur = $utilisateurDao->get($utilisateurId);
+
+        $this->show('singlePassword', [
+            'title' => 'Social Connect - Mon Compte',
+            'utilisateur' => $utilisateur
+        ]);
+    }
+
     public function register($parameters)
     {
         $entrepriseId = $parameters['id'];
@@ -100,7 +116,6 @@ class UserController extends CoreController
 
         $utilisateur->setIdutilisateur($_POST['idutilisateur']);
         $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
-        $utilisateur->setMotDePasse($_POST['motdepasse']);
         $utilisateur->setMail($_POST['mail']);
         $utilisateur->setRole($_POST['role']);
         $utilisateur->setStatut($_POST['statut']);
@@ -109,6 +124,42 @@ class UserController extends CoreController
         $utilisateurDao->update($utilisateur);
 
         header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+    }
+
+    public function updatePass()
+    {
+        $utilisateurId = $_POST['idutilisateur'];
+        
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $utilisateurDao = new utilisateurDao($db);
+
+        $singleUtilisateur = $utilisateurDao->get($utilisateurId);
+
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setIdutilisateur($_POST['idutilisateur']);
+
+        if (empty($_POST['oldmotdepasse']) || empty($_POST['newmotdepasse'])) {
+            session_start();
+            $utilisateur->setMotDePasse($singleUtilisateur['motdepasse']);
+            $_SESSION['message'] = "<div class='alert alert-danger'>Veuillez remplir tous les champs !</div>"; 
+        } else if (hash('sha256', $_POST['oldmotdepasse']) !== $singleUtilisateur['motdepasse']) {
+            session_start();
+            $utilisateur->setMotDePasse($singleUtilisateur['motdepasse']);
+            $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe ne correspond pas à l'ancien !</div>"; 
+        } else {
+            session_start();
+            $utilisateur->setMotDePasse(hash('sha256',$_POST['newmotdepasse']));
+            $_SESSION['message'] = "<div class='alert alert-success'>Votre mot de passe a bien été modifié !</div>"; 
+        }
+        
+        $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+        $utilisateurDao->updatePassword($utilisateur);
+
+        header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
     }
 
     public function delete()
