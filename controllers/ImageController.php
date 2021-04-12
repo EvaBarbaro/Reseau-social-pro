@@ -15,9 +15,14 @@ class ImageController extends CoreController
 
         $imageDao = new imageDao($db);
         $imageList = $imageDao->getAll($imageId);
+
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($imageId);
+
         $this->show('image', [
             'title' => 'Social Connect - Back Office',
-            'imageList' => $imageList
+            'imageList' => $imageList,
+            'compte' => $compte
         ]);
     }
 

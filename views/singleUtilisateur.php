@@ -5,9 +5,9 @@
 
 ?>
 <div class="d-flex">
-    <div id="logo">
-        <img src=<?= pathUrl()."public/img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
-    </div>
+<?php
+    require_once __DIR__ . '/asideProfil.php';
+?>
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>

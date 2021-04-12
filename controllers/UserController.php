@@ -32,9 +32,13 @@ class UserController extends CoreController
         $utilisateurDao = new utilisateurDao($db);
         $utilisateur = $utilisateurDao->get($utilisateurId);
 
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($utilisateurId);
+
         $this->show('singleUtilisateur', [
             'title' => 'Social Connect - Mon Compte',
-            'utilisateur' => $utilisateur
+            'utilisateur' => $utilisateur,
+            'compte' => $compte
         ]);
     }
 
@@ -48,9 +52,13 @@ class UserController extends CoreController
         $utilisateurDao = new utilisateurDao($db);
         $utilisateur = $utilisateurDao->get($utilisateurId);
 
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($utilisateurId);
+
         $this->show('singlePassword', [
             'title' => 'Social Connect - Mon Compte',
-            'utilisateur' => $utilisateur
+            'utilisateur' => $utilisateur,
+            'compte' => $compte
         ]);
     }
 
