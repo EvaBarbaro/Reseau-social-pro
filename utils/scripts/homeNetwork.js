@@ -42,13 +42,13 @@ $(function() {
         }
         
     if(link!==""){
-      alert("link= "+networkLink+link);
+     // alert("link= "+networkLink+link);
        $.ajax({
          type: "POST",
          url: networkLink+link,
          data: dataString,
          success: function () {
-          $(document).load(window.location.href);
+        $("#networkHomePage").load(networkLink);
          }
        });
       }

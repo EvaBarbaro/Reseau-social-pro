@@ -1,31 +1,14 @@
 
-
+<div id="networkHomePage">
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
-
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if(isset($_POST['test'])){?>
-    <script>
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-       echo "done";
-      }
-    };
-    xmlhttp.open("GET", <?php echo pathUrl()."/monReseau/test";?> + str, true);
-    xmlhttp.send();
-    </script>
-    <?php
-  }
-}
 ?>
 </div>
 </div>
+
 <div class="row">
 <div class="col-lg-2 offset-lg-2">
   <!-- formulaire d'ajout publication -->
@@ -217,6 +200,7 @@ if(!empty($com['commentaire_compte']['photo'])){
 <?php
 }
 }?>
+</div>
 </div>
 </div>
 </div>
