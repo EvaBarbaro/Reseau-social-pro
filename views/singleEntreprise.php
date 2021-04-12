@@ -185,13 +185,18 @@ if(!empty($com['commentaire_compte']['photo'])){
   </div>
   <div class="card-footer" style="background-color:#F0F0F0;">
   <p>
+  <div id="likeUnlikeCom_form">
+<form name="likeUnlikeCom" action="">
   <?php if($com['commentaire_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
-  <img id="<?php echo $img; ?>" type="button" src="<?php echo pathUrl().'public/img/'.$img;?>" class="card-img-top" alt="Image introuvable">
+    <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
+  <input type="image" id="<?=$img; ?>" name="likeUnlikeComButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
   <?php echo $com['commentaireInfo']['Nombre Like']; ?>
+</div>
+</form>
 </p>
   </div>
 </div>

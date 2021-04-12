@@ -7,7 +7,8 @@ include_once __DIR__.'/../dao/commentaireDao.php';
 include_once __DIR__.'/../models/commentaire.php';
 include_once __DIR__.'/../dao/like_publicationDao.php';
 include_once __DIR__.'/../models/like_publication.php';
-
+include_once __DIR__.'/../dao/like_commentaireDao.php';
+include_once __DIR__.'/../models/like_commentaire.php';
 
 class SocialNetworkController extends CoreController
 {
@@ -168,10 +169,17 @@ class SocialNetworkController extends CoreController
     // like/unlike un commentaire
     public function LikeUnlikeCommentaire($parameters) {
         $this->init($parameters['id']);
-        $like_commentaire = new like_commentaire();
-        $like_commentaire->setIdcommentaire($_POST['idcommentaire']);
+        $like_commentaire = new like_commentaire($this->idUtilisateur,$_POST['idcommentaire']);
+        //$like_commentaire->setIdcommentaire($_POST['idcommentaire']);
         $like_commentaireDao = new like_commentaireDao($this->db,$this->idUtilisateur);
-        $like_commentaireDao->Like_Unlike($like_commentaire);  
+        $like_commentaireDao->Like_Unliked($like_commentaire);  
+       /* $publication = new publication();
+        $publication->setDescription($parameters['id']);
+        $publication->setStatut("amis");
+       
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
+        $res = $publicationDao->create($publication);
+        return $res;*/
     }
 
 }

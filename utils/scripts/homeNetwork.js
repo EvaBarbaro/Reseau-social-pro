@@ -2,6 +2,7 @@ var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
 var idEntreprise = url.substring(url.lastIndexOf('/')+1,url.lastIndexOf(''));
 var networkLink = filename+"monReseau/"+idEntreprise;
+alert(networkLink );
 $(document).ready(function(){
 
    
@@ -40,15 +41,20 @@ $(function() {
           
           link="/LikeUnlikePublication"; 
         }
-        
+      else if($(this).attr("name")=="likeUnlikeCom") {
+          
+          link="/LikeUnlikeCommentaire"; 
+        }
     if(link!==""){
-     // alert("link= "+networkLink+link);
+     alert("link= "+networkLink+link);
        $.ajax({
          type: "POST",
          url: networkLink+link,
          data: dataString,
          success: function () {
-        $("#networkHomePage").load(networkLink);
+           
+      //  $("#networkHomePage").load(networkLink);
+        
          }
        });
       }
