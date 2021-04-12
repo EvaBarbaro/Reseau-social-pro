@@ -29,6 +29,7 @@
 
                 echo "<form action=".pathUrl()."monImage/delete method='POST'>";
                 echo "<input type='hidden' value='". $image['idimage']."' name='idimage' />";
+                echo "<input type='hidden' value='". $image['idcompte']."' name='idcompte' />";
                 echo "<tr>";
                 echo "<td>".$image['titre'] . "</td>";
                 echo "<td><img src=".pathUrl()."/public/albumImages/". $image['imageurl']." alt='logo' id='logoImg' width='80'  class='img-thumbnail mt-4'></td>";

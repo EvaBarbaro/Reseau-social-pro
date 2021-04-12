@@ -29,7 +29,7 @@ $uniqueID = hexdec(uniqid());
                     </div>
                 </div>
 
-                <input type="hidden" name="idcompte" value="1696278514562148">
+                <input type="hidden" name="idcompte" value=<?= $_SESSION['idutilisateur'] ?>>
 
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>

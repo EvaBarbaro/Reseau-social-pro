@@ -69,7 +69,7 @@ class ImageController extends CoreController
 
         $imageDao->create($image);
 
-        header('Location: '.pathUrl()."mesImages");
+        header('Location: '.pathUrl()."monCompte/".$_POST['idcompte']."/mesImages");
     }
 
     public function update()
@@ -102,7 +102,7 @@ class ImageController extends CoreController
         $imageDao = new imageDao($db);
         $imageDao->delete($imageId);
 
-        header('Location: '.pathUrl().'mesImages');
+        header('Location: '.pathUrl()."monCompte/".$_POST['idcompte']."/mesImages");
     }
  
     public function preCreate()
