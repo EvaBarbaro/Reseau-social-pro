@@ -27,12 +27,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="photo" class="col-sm-4 col-form-label">Votre photo de profil</label>
-                    <div class="col-sm-8">
-                    <input type="file" name="photo" id="photo" value="<?= $viewVars['compte']['photo'] ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="poste" class="col-sm-4 col-form-label">Votre poste</label>
                     <div class="col-sm-8">
                     <input type="text" class="form-control" name="poste" id="poste" value="<?= $viewVars['compte']['poste'] ?>">
