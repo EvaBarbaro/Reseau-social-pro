@@ -28,8 +28,6 @@
             echo "<tr>";
             echo "<td>".$image['titre'] . "</td>";
             echo "<td><img src=".pathUrl()."/public/albumImages/". $image['imageurl']." alt='logo' id='logoImg' width='80'  class='img-thumbnail mt-4'></td>";
-        //    echo "<td><img src=".pathUrl()."public/albumImages/MonImageFnac.jpg alt='logo' id='logoImg' height='50' height='50' class='img-thumbnail mt-4'></td>";
-            
             echo "<td><button type='submit' class='btn btn-danger'>Supprimer</button>";
             echo "</form>";
             echo "<td><a href=".pathUrl()."monImage/".$image['idimage']." class='btn btn-info'>Modifier</a></td>";
