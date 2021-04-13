@@ -10,9 +10,11 @@ $(document).ready(function(){
       
         if($(this).attr("id")=="public"){
             $(".dropdown").children(":first").find("img").attr("src",filename+"public/img/public.png");
+            $("#statut").attr("value","public");
         }
         else {
             $(".dropdown").children(":first").find("img").attr("src",filename+"public/img/amis.png");
+            $("#statut").attr("value","amis");
         }
         
       }); 
@@ -48,6 +50,20 @@ $(document).ready(function(){
          
           e.preventDefault();
         }
+
+        else if($(this).attr("name").includes("AddCom")) {
+          
+          link="/createCommentaire"; 
+         
+          e.preventDefault();
+        }
+
+        else if($(this).attr("name")=="AddPub") {
+          
+          link="/createPublication"; 
+        
+          e.preventDefault();
+        }
         
     if(link!=="") {
 
@@ -58,7 +74,7 @@ $(document).ready(function(){
         });
 
         xhr.done(function() {
-          $("#networkHomePage").load(networkLink);
+          $("#networkHomePage").load(networkLink+" #pageToLaod");
           console.log(xhr);
         })
       }

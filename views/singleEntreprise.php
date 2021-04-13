@@ -1,5 +1,5 @@
 <div id="networkHomePage">
-
+<div id="pageToLaod">
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
@@ -21,25 +21,28 @@ require_once __DIR__ . '/networkNav.php';
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
  
-  <img  src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable">
+  <img name="statut" value="public" src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable">
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" ><img type="button" id="public" src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
     <a class="dropdown-item" ><img type="button" id="amis" src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
     
   </div>
+  
 </div>
 </div> 
 </div>
 
   <div class="card-body">
-  <form>
+  <form name="AddPub" action="">
   <div class="form-group">
  
-    <textarea class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
+    <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
   </div>
   <div class="form-group">
     <label for="pubImage">Ajouter une image</label>
+    <input type="hidden" name="statut" value="public" id="statut" class="text-input"/>
+
     <input type="file" class="form-control-file" name="pubImage" id="pubImage">
   </div>
   <div class="form-group">
@@ -47,6 +50,7 @@ require_once __DIR__ . '/networkNav.php';
 </div>
 </form>
   </div>
+ 
   <div class="card-footer">
   <p>
  
@@ -59,7 +63,8 @@ require_once __DIR__ . '/networkNav.php';
 
 <?php
 $i=0;
-foreach($viewVars['publicationList'] as $pub){
+$tab = array_reverse($viewVars['publicationList'],true);
+foreach($tab as $pub){
   $i++;
 ?>
 
@@ -146,10 +151,10 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 <div class="collapse" id="addComment<?php echo $i;?>">
   <div class="card card-body">
    <!-- Formulaire pour commenter-->
-   <form>
+   <form name="AddCom<?=$i;?>" action="">
   <div class="form-group">
- 
-    <textarea class="form-control" id="validationTextarea" placeholder="Commenter"></textarea>
+  <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+    <textarea class="form-control" name="description" id="validationTextarea" placeholder="Commenter"></textarea>
   </div>
   <div class="form-group">
   <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -161,10 +166,11 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   </div>
 </div>
 <?php
-foreach($pub['commentaires'] as $com){
+$tabCom = array_reverse($pub['commentaires'],true);
+foreach($tabCom as $com){
 ?>
 <div class="card rounded-0" style="width: 45rem;">
-<div class="card-header" style="background-color:#F0F0F0;">
+<div class="card-header rounded-0" style="background-color:#7A92B1;">
 <?php
 if(!empty($com['commentaire_compte']['photo'])){
     $img =  pathUrl().'public/profilImages/'.$com['commentaire_compte']['photo'];
@@ -183,7 +189,7 @@ if(!empty($com['commentaire_compte']['photo'])){
     echo $com['commentaireInfo']['description'];
 ?></p>
   </div>
-  <div class="card-footer" style="background-color:#F0F0F0;">
+  <div class="card-footer rounded-0" style="background-color:#7A92B1;">
   <p>
   <div id="likeUnlikeCom_form">
 <form name="likeUnlikeCom<?=$i;?>" action="">
@@ -207,6 +213,8 @@ if(!empty($com['commentaire_compte']['photo'])){
 }?>
 </div>
 </div>
+</div>
+
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

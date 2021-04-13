@@ -30,7 +30,10 @@ $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpda
 $router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEnCreation');
 
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikePublication', 'SocialNetworkController#LikeUnlikePublication', 'reseauSingleLikeUnlikePublication');
+$router->map('POST', '/monReseau/[i:id]/createPublication', 'SocialNetworkController#createPublication', 'reseauSinglecreatePublication');
+
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikeCommentaire', 'SocialNetworkController#LikeUnlikeCommentaire', 'reseauSingleLikeUnlikeCommentaire');
+$router->map('POST', '/monReseau/[i:id]/createCommentaire', 'SocialNetworkController#createCommentaire', 'reseauSinglecreateCommentaire');
 
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'SocialNetworkController#home', 'reseauSingle');
