@@ -9,13 +9,13 @@ class UserController extends CoreController
 {
     public function getAll($parameters)
     {
-        $utilisateurId = $parameters['id'];
+        $entrepriseId = $parameters['id'];
 
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $utilisateurDao = new utilisateurDao($db);
-        $utilisateurList = $utilisateurDao->getAll($utilisateurId);
+        $utilisateurList = $utilisateurDao->getAll($entrepriseId);
 
         $this->show('utilisateurs', [
             'title' => 'Social Connect - Réseau Back Office - Utilisateurs',

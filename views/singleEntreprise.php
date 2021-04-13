@@ -3,6 +3,8 @@
 <div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
+
+// var_dump($viewVars['utilisateurList']);
 ?>
 </div>
 </div>

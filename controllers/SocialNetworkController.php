@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
 include_once __DIR__.'/../models/publication.php';
 include_once __DIR__.'/../utils/DBData.php';
@@ -21,10 +22,15 @@ class SocialNetworkController extends CoreController
         $idUtilisateur = 1696278514562148;
 
         $publicationList = $this->getPublications($db,$idUtilisateur,$entrepriseId);
+
+        $utilisateurDao = new utilisateurDao($db);
+        $utilisateurList = $utilisateurDao->getAll($entrepriseId);
+
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList,
-            'idUtilisateur' => $idUtilisateur
+            'idUtilisateur' => $idUtilisateur,
+            'utilisateurList' => $utilisateurList
         ]);
     }
 
