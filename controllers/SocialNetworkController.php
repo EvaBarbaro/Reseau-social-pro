@@ -188,7 +188,7 @@ class SocialNetworkController extends CoreController
         $like_commentaire = new like_commentaire($this->idUtilisateur,$_POST['idcommentaire']);
         //$like_commentaire->setIdcommentaire($_POST['idcommentaire']);
         $like_commentaireDao = new like_commentaireDao($this->db,$this->idUtilisateur);
-        $like_commentaireDao->Like_Unliked($like_commentaire);  
+        $like_commentaireDao->Like_Unlike($like_commentaire);  
        /* $publication = new publication();
         $publication->setDescription($parameters['id']);
         $publication->setStatut("amis");

@@ -186,7 +186,7 @@ if(!empty($com['commentaire_compte']['photo'])){
   <div class="card-footer" style="background-color:#F0F0F0;">
   <p>
   <div id="likeUnlikeCom_form">
-<form name="likeUnlikeCom" action="">
+<form name="likeUnlikeCom<?=$i;?>" action="">
   <?php if($com['commentaire_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {

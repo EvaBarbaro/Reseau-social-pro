@@ -45,14 +45,16 @@ $(document).ready(function(){
       else if($(this).attr("name").includes("likeUnlikeCom")) {
           
           link="/LikeUnlikeCommentaire"; 
+         
           e.preventDefault();
         }
+        
     if(link!=="") {
-    // alert("link= "+networkLink+link);
+
        var xhr = $.ajax({
          type: "POST",
          url: networkLink+link,
-         data: dataString,
+         data: dataString
         });
 
         xhr.done(function() {
