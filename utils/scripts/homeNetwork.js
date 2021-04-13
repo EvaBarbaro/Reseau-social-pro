@@ -60,7 +60,9 @@ $(document).ready(function(){
 
         else if($(this).attr("name")=="AddPub") {
           
-          link="/createPublication"; 
+          link="/createPublication";
+
+          dataString = new FormData(this);
         
           e.preventDefault();
         }
@@ -70,7 +72,10 @@ $(document).ready(function(){
        var xhr = $.ajax({
          type: "POST",
          url: networkLink+link,
-         data: dataString
+         data: dataString,
+         processData: false,
+         contentType: false,
+         cache: false
         });
 
         xhr.done(function() {
@@ -81,7 +86,7 @@ $(document).ready(function(){
           $('title').first().remove();
           $("#networkHomePage:nth-child(1)").children().find('meta').remove();
           $("#networkHomePage:nth-child(1)").children().find('link').remove();*/
-          console.log(xhr);
+          console.log(dataString);
         })
       }
     });

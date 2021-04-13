@@ -5,6 +5,9 @@
 <div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
+echo '<pre>';
+var_dump($_FILES);
+echo '<pre>';
 ?>
 </div>
 </div>
@@ -34,7 +37,7 @@ require_once __DIR__ . '/networkNav.php';
 </div>
 
   <div class="card-body">
-  <form name="AddPub" action="" enctype="multipart/form-data">
+  <form id="formPub" name="AddPub" action="" enctype="multipart/form-data">
   <div class="form-group">
  
     <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
