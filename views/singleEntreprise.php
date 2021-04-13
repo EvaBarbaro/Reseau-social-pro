@@ -1,5 +1,5 @@
 <div id="networkHomePage">
-<div id="pageToLaod">
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
@@ -63,8 +63,10 @@ require_once __DIR__ . '/networkNav.php';
 
 <?php
 $i=0;
-$tab = array_reverse($viewVars['publicationList'],true);
-foreach($tab as $pub){
+$list=$viewVars['publicationList'];
+$tab = array_reverse($list,true);
+//print_r($viewVars['publicationList']);
+foreach($viewVars['publicationList'] as $pub){
   $i++;
 ?>
 
@@ -167,7 +169,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 </div>
 <?php
 $tabCom = array_reverse($pub['commentaires'],true);
-foreach($tabCom as $com){
+foreach($pub['commentaires'] as $com){
 ?>
 <div class="card rounded-0" style="width: 45rem;">
 <div class="card-header rounded-0" style="background-color:#7A92B1;">
@@ -184,7 +186,7 @@ if(!empty($com['commentaire_compte']['photo'])){
 ?>
   </div>
   </div>
-  <div class="card-body">
+  <div class="card-body" style="background-color:#B4C1D3;">
     <p class="card-text"><?php
     echo $com['commentaireInfo']['description'];
 ?></p>
@@ -216,6 +218,6 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 
 </div>
-</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>

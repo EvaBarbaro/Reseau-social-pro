@@ -117,7 +117,7 @@ public function getAllPostsComents($id){
     }
 
 }
-    return $commentaire;
+    return array_reverse($commentaire);
 
 }
 

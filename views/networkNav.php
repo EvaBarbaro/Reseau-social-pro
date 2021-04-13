@@ -5,7 +5,7 @@
 <!--<pre>
   <?php //var_dump($_SESSION); ?> 
 </pre> -->
-
+<!--
 <pre>
         <b><p style="color:red;" >Variable SESSION</p></b>    <?php var_dump($_SESSION); ?> 
         <b><p style="color:red;">Variable viewvars</p> </b>    <?php var_dump($viewVars); ?> 
@@ -13,7 +13,7 @@
         <b><p style="color:red;">Variable getAll</p></b>   <?php var_dump($_GET); ?> 
         <b><p style="color:red;">Variable FILES</p> </b>    <?php var_dump($_FILES); ?> 
 </pre>
-
+-->
 
 
   <a class="navbar-brand" href="<?php echo pathUrl().'monReseau/'.$_SESSION['identreprise']?>"><img 

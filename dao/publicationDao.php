@@ -115,7 +115,7 @@ class publicationDao implements interfaceDao {
              }
         }
 
-        return $publication;
+        return array_reverse($publication);
     }
     
 
