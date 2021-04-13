@@ -34,7 +34,7 @@ require_once __DIR__ . '/networkNav.php';
 </div>
 
   <div class="card-body">
-  <form name="AddPub" action="">
+  <form name="AddPub" action="" enctype="multipart/form-data">
   <div class="form-group">
  
     <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
@@ -63,8 +63,7 @@ require_once __DIR__ . '/networkNav.php';
 
 <?php
 $i=0;
-$list=$viewVars['publicationList'];
-$tab = array_reverse($list,true);
+
 //print_r($viewVars['publicationList']);
 foreach($viewVars['publicationList'] as $pub){
   $i++;

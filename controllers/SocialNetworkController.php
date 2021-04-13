@@ -62,9 +62,9 @@ class SocialNetworkController extends CoreController
         $publication = new publication();
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
-
+    
         if (isset($_FILES["pubImage"])) {
-  
+
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["pubImage"]["name"]));
             $tempname = $_FILES["pubImage"]["tmp_name"];    
