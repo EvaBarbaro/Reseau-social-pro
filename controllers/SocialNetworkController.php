@@ -119,8 +119,7 @@ class SocialNetworkController extends CoreController
         //$like_publication->setIdpublication($_POST['idpublication']);
         //var_dump($_POST['idpublication']);
         $like_publicationDao = new like_publicationDao($this->db,$this->idUtilisateur);
-        $like_publicationDao->Like_Unlike($like_publication); 
-       
+        $like_publicationDao->Like_Unlike($like_publication);      
     }
 
     // get tous les commentaires dans la base de données

@@ -1,8 +1,8 @@
 var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
-var idEntreprise = url.substring(url.lastIndexOf('/')+1,url.lastIndexOf(''));
+var idEntreprise = url.substring(url.lastIndexOf('/')+1,url.lastIndexOf('/')+17);
 var networkLink = filename+"monReseau/"+idEntreprise;
-//alert(networkLink );
+
 $(document).ready(function(){
 
    
@@ -16,7 +16,7 @@ $(document).ready(function(){
         }
         
       }); 
-
+/*
       $(".card-footer").find("img").on( "click", function() {
       
         if($(this).attr("id")=="unlike.png"){
@@ -28,37 +28,36 @@ $(document).ready(function(){
             $(this).attr("id","unlike.png");
         }
         
-      }); 
+      }); */
      
 });
-$(function() {
-  $( "form" ).on( "submit", function(e) {
+
+  $( "form" ).submit(function(e) {
     //alert("submit");
-    
-       var dataString = $(this).serialize();
+
+        var dataString = $(this).serialize();
         var link="";
-        if($(this).attr("name")=="likeUnlikePub") {
+        if($(this).attr("name").includes("likeUnlikePub")) {
           
           link="/LikeUnlikePublication"; 
+          e.preventDefault();
         }
-      else if($(this).attr("name")=="likeUnlikeCom") {
+      else if($(this).attr("name").includes("likeUnlikeCom")) {
           
           link="/LikeUnlikeCommentaire"; 
+          e.preventDefault();
         }
-    if(link!==""){
+    if(link!=="") {
     // alert("link= "+networkLink+link);
-       $.ajax({
+       var xhr = $.ajax({
          type: "POST",
          url: networkLink+link,
          data: dataString,
-         success: function () {
-           
-       $("#networkHomePage").load(networkLink);
-        
-         }
-       });
+        });
+
+        xhr.done(function() {
+          $("#networkHomePage").load(networkLink);
+          console.log(xhr);
+        })
       }
-       e.preventDefault();
-     });
-    
-});
+    });

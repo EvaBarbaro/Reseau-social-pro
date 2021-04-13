@@ -1,5 +1,5 @@
-
 <div id="networkHomePage">
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
@@ -123,7 +123,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   <p>
 
   <div id="likeUnlikePub_form">
-<form name="likeUnlikePub" action="">
+<form name="likeUnlikePub<?=$i;?>" id="likeUnlikePub">
   <?php if($pub['publication_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
@@ -209,3 +209,5 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>
