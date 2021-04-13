@@ -9,9 +9,11 @@
       <li class="nav-item profil">
         <a class="nav-link"  href="<?php echo pathUrl().'monCompte/'.$_SESSION['idutilisateur']?>">Profil</a>
       </li>
-      <form method="POST">
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <form method="POST" action="<?= pathUrl().'monReseau/logout' ?>">
         <input type="hidden" name="identreprise" id="identreprise" value=<?= $_SESSION['identreprise'] ?>>
-        <input type="submit" name="logout" class="btn btn-info" value="Déconnexion">
+        <input type="submit" class="btn btn-info" value="Déconnexion">
       </form>
     </ul>
   </div>
