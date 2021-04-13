@@ -40,7 +40,7 @@
     <h2 class="mt-4">Insérer une nouvelle image</h2>
     
     <?php
-      //echo "<td><a href='imageEnCreation.php"."' class='btn btn-block btn-primary'>Insérer</a></td>";
+    
       echo "<td><a href=".pathUrl()."imageEnCreation class='btn btn-block btn-primary'>Insérer</a></td>";
     ?>
 
