@@ -129,3 +129,18 @@ footer {
     height:2rem;
     width:2rem;
 }
+
+.fakeTextInput {
+    border: none;
+    display: inline;
+    font-family: inherit;
+    font-size: inherit;
+    padding: none;
+    width: auto;
+    background-color: transparent;
+}
+
+.fakeTextInput:focus {
+    border: none;
+    outline: none;
+}

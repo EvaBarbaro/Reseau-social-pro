@@ -1,5 +1,5 @@
 <div class="container">
-	<h2 class="mt-4">Toutes les entreprises</h2>
+	<h2 class="mt-4">Tout les comptes</h2>
 	<table class="table table-bordered table-striped mt-4">
 		<tr>
 			<th>Nom</th>

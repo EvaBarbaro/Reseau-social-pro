@@ -3,6 +3,7 @@
         var infosClass = $('.infos');
         var albumClass = $('.album');
         var passwordClass = $('.password');
+        var usersClass = $('.users');
         
         if(window.location.href == accountClass.attr('href')) {
             accountClass.addClass('active');
@@ -24,6 +25,11 @@
             accountClass.removeClass('active');
             infosClass.removeClass('active');
             albumClass.removeClass('active');
+        } else if (window.location.href == usersClass.attr('href')) {
+            usersClass.addClass('active');
+            accountClass.removeClass('active');
+            infosClass.removeClass('active');
+            albumClass.removeClass('active');
+            passwordClass.removeClass('active');
         }
-
   });

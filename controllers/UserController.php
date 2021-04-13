@@ -16,6 +16,7 @@ class UserController extends CoreController
 
         $utilisateurDao = new utilisateurDao($db);
         $utilisateurList = $utilisateurDao->getAll($utilisateurId);
+
         $this->show('utilisateurs', [
             'title' => 'Social Connect - Réseau Back Office - Utilisateurs',
             'utilisateurList' => $utilisateurList
@@ -168,6 +169,33 @@ class UserController extends CoreController
         $utilisateurDao->updatePassword($utilisateur);
 
         header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
+    }
+
+    public function updateAdmin()
+    {
+        $entrepriseId = $_POST['identreprise'];
+        
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $utilisateurDao = new utilisateurDao($db);
+
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setIdutilisateur($_POST['idutilisateur']);
+        $utilisateur->setRole($_POST['role']);
+        
+        if ($_POST['statut'] == NULL) {
+            $utilisateur->setStatut(0);
+        } else {
+            $utilisateur->setStatut($_POST['statut']);
+        }
+        
+        $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+        $utilisateurDao->updateAdmin($utilisateur);
+
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/admin');
     }
 
     public function delete()
