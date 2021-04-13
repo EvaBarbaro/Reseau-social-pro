@@ -144,3 +144,7 @@ footer {
     border: none;
     outline: none;
 }
+
+#deleteAccount {
+    width: 100%;
+}

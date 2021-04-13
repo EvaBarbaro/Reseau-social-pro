@@ -31,5 +31,10 @@
                 <input type="hidden" name="identreprise" value="<?= $viewVars['utilisateur']['identreprise'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>
+            <form action=<?= pathUrl()."monCompte/deleteUser" ?> method='POST'>
+                <input type='hidden' value=<?= $viewVars['utilisateur']['idutilisateur'] ?> name='idutilisateur' />
+                <input type='hidden' value=<?= $viewVars['utilisateur']['identreprise'] ?> name='identreprise' />
+                <input type="submit" class="fakeTextInput text-danger mt-4" id="deleteAccount" value="Supprimer mon compte" readonly>
+            </form>
         </div>
 </div>

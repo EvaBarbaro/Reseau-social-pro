@@ -42,6 +42,7 @@ $router->map('GET', '/monCompte/[i:id]', 'UserController#get', 'userSingle');
 $router->map('GET', '/monCompte/[i:id]/monMotDePasse', 'UserController#getPass', 'userSinglePassword');
 $router->map('POST', '/monCompte/create', 'UserController#create', 'userCreate');
 $router->map('POST', '/monCompte/delete', 'UserController#delete', 'userDelete');
+$router->map('POST', '/monCompte/deleteUser', 'UserController#deleteUser', 'userDeleteSingle');
 $router->map('POST', '/monCompte/update', 'UserController#update', 'userUpdate');
 $router->map('POST', '/monCompte/updateAdmin', 'UserController#updateAdmin', 'userUpdateAdmin');
 $router->map('POST', '/monCompte/updatePassword', 'UserController#updatePass', 'userUpdatePassword');

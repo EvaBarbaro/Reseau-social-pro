@@ -211,4 +211,21 @@ class UserController extends CoreController
 
         header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/admin');
     }
+
+    public function deleteUser()
+    {
+        $utilisateurId = $_POST['idutilisateur'];
+        $entrepriseId = $_POST['identreprise'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $utilisateurDao = new utilisateurDao($db);
+        $utilisateurDao->delete($utilisateurId);
+
+        session_start();
+        session_destroy();
+
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');
+    }
 }
