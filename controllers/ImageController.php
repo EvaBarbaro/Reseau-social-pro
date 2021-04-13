@@ -15,9 +15,14 @@ class ImageController extends CoreController
 
         $imageDao = new imageDao($db);
         $imageList = $imageDao->getAll($imageId);
+
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($imageId);
+
         $this->show('image', [
             'title' => 'Social Connect - Back Office',
-            'imageList' => $imageList
+            'imageList' => $imageList,
+            'compte' => $compte
         ]);
     }
 
@@ -64,7 +69,7 @@ class ImageController extends CoreController
 
         $imageDao->create($image);
 
-        header('Location: '.pathUrl()."mesImages");
+        header('Location: '.pathUrl()."monCompte/".$_POST['idcompte']."/mesImages");
     }
 
     public function update()
@@ -97,7 +102,7 @@ class ImageController extends CoreController
         $imageDao = new imageDao($db);
         $imageDao->delete($imageId);
 
-        header('Location: '.pathUrl().'mesImages');
+        header('Location: '.pathUrl()."monCompte/".$_POST['idcompte']."/mesImages");
     }
  
     public function preCreate()

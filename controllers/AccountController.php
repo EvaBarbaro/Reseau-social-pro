@@ -45,7 +45,9 @@ class AccountController extends CoreController
 
         $compteDao = new compteDao($db);
 
-        if (isset($_FILES["photo"])) {
+        $comptePhoto = $_POST['photo'];
+
+        if (isset($_FILES["photo"]) && !empty($_FILES["photo"])) {
   
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["photo"]["name"]));

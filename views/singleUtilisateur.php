@@ -5,9 +5,9 @@
 
 ?>
 <div class="d-flex">
-    <div id="logo">
-        <img src=<?= pathUrl()."public/img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
-    </div>
+<?php
+    require_once __DIR__ . '/asideProfil.php';
+?>
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
@@ -18,12 +18,6 @@
                     <label for="nomutilisateur" class="col-sm-4 col-form-label">Votre nom</label>
                     <div class="col-sm-8">
                     <input type="text" class="form-control" name="nomutilisateur" id="nomutilisateur" value="<?= $viewVars['utilisateur']['nomutilisateur'] ?>" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="motdepasse" class="col-sm-4 col-form-label">Votre mot de passe</label>
-                    <div class="col-sm-8">
-                    <input type="password" class="form-control" name="motdepasse" id="motdepasse" value="<?= $viewVars['utilisateur']['motdepasse'] ?>">
                     </div>
                 </div>
                 <div class="form-group row">

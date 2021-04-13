@@ -1,9 +1,9 @@
 <?php
 
-include_once __DIR__.'/../interface/interfaceUtilisateurDao.php';
+include_once __DIR__.'/../interface/interfaceImageDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/image.php';
-class imageDao implements interfaceUtilisateurDao {
+class imageDao implements interfaceImageDao {
     private $conn; 
     public function __construct($db){   $this->conn = $db;  }
         

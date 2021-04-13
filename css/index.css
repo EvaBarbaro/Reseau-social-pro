@@ -11,8 +11,38 @@ body {
     background-color: transparent;
 }
 
+#photoImg {
+    margin-left: 5em;
+    width: 250px;
+    object-fit: contain;
+    border: none;
+}
+
+#photoName {
+    color: white;
+    text-align: center;
+    margin-left: 2em;
+    font-size: 2em;
+}
+
+#profilContent {
+    position: relative;
+}
+
+#photoFile {
+    display: none;
+}
+
+#newPhotoFile {
+    cursor: pointer;
+    width: 50px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
 #logo {
-    padding-right: 10em;
+    padding-right: 5em;
     padding-bottom: 82vh;
     background: rgb(185,43,39);
     background: linear-gradient(90deg, rgba(185,43,39,1) 21%, rgba(21,101,192,1) 100%);
