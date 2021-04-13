@@ -9,7 +9,7 @@ class ImageController extends CoreController
     public function getAll($parameters)
     {
         $imageId = $parameters['id'];
-
+       
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
@@ -20,6 +20,26 @@ class ImageController extends CoreController
         $compte = $compteDao->get($imageId);
 
         $this->show('image', [
+            'title' => 'Social Connect - Back Office',
+            'imageList' => $imageList,
+            'compte' => $compte
+        ]);
+    }
+
+    public function getAllMonMur($parameters)
+    {
+        $imageId = $parameters['id'];
+       
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $imageDao = new imageDao($db);
+        $imageList = $imageDao->getAll($imageId);
+
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($imageId);
+
+        $this->show('imageMonMur', [
             'title' => 'Social Connect - Back Office',
             'imageList' => $imageList,
             'compte' => $compte
@@ -52,9 +72,25 @@ class ImageController extends CoreController
         $image->setIdimage($_POST['idimage']);
         $image->setTitre($_POST['titre']);
 
+        ?>
+        <pre>
+        Variable SESSION
+        <?php var_dump($_SESSION); ?> 
+        Variable POST
+        <?php var_dump($_POST); ?> 
+        Variable FILES
+        <?php var_dump($_FILES); ?> 
+        </pre>
+        <?php
+        
+
+       
+
         if (isset($_FILES["imageurl"])) {
-  
+
+            // (uniqid() --> génére un identifiant unique, basé sur la date et heure)
             $uniqueFileName = uniqid();
+
             $extension = end(explode(".", $_FILES["imageurl"]["name"]));
             $tempname = $_FILES["imageurl"]["tmp_name"];    
             $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
