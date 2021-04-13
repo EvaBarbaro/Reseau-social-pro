@@ -38,9 +38,11 @@ $router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpd
 $router->map('GET', '/monReseau/[i:id]/inscription', 'UserController#register', 'userRegister');
 $router->map('GET', '/monReseau/[i:id]/admin', 'UserController#getAll', 'admin');
 $router->map('GET', '/monCompte/[i:id]', 'UserController#get', 'userSingle');
+$router->map('GET', '/monCompte/[i:id]/monMotDePasse', 'UserController#getPass', 'userSinglePassword');
 $router->map('POST', '/monCompte/create', 'UserController#create', 'userCreate');
 $router->map('POST', '/monCompte/delete', 'UserController#delete', 'userDelete');
 $router->map('POST', '/monCompte/update', 'UserController#update', 'userUpdate');
+$router->map('POST', '/monCompte/updatePassword', 'UserController#updatePass', 'userUpdatePassword');
 
 $router->map('GET', '/monReseau/[i:id]/admin/informations', 'AccountController#getAll', 'adminAccounts');
 $router->map('GET', '/monCompte/[i:id]/mesInformations', 'AccountController#get', 'accountSingle');

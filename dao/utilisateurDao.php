@@ -32,12 +32,30 @@ class utilisateurDao implements interfaceUtilisateurDao {
     }
 
     public function update($utilisateur) {
-        $sql = $this->conn->prepare("UPDATE utilisateur SET nomutilisateur = :nomutilisateur, motdepasse = :motdepasse, mail = :mail, role = :role, statut = :statut, identreprise = :identreprise WHERE idutilisateur = :idutilisateur");
+        $sql = $this->conn->prepare("UPDATE utilisateur SET nomutilisateur = :nomutilisateur, mail = :mail, identreprise = :identreprise WHERE idutilisateur = :idutilisateur");
 
         $sql->bindValue(':idutilisateur', $utilisateur->getIdUtilisateur(), PDO::PARAM_INT);
         $sql->bindValue(':nomutilisateur', $utilisateur->getNomUtilisateur());
-        $sql->bindValue(':motdepasse', $utilisateur->getMotDePasse());
         $sql->bindValue(':mail', $utilisateur->getMail());
+        $sql->bindValue(':identreprise', $utilisateur->getIdEntreprise(), PDO::PARAM_INT);
+    
+        $sql->execute();
+    }
+
+    public function updatePassword($utilisateur) {
+        $sql = $this->conn->prepare("UPDATE utilisateur SET motdepasse = :motdepasse, identreprise = :identreprise WHERE idutilisateur = :idutilisateur");
+
+        $sql->bindValue(':idutilisateur', $utilisateur->getIdUtilisateur(), PDO::PARAM_INT);
+        $sql->bindValue(':motdepasse', $utilisateur->getMotDePasse());
+        $sql->bindValue(':identreprise', $utilisateur->getIdEntreprise(), PDO::PARAM_INT);
+    
+        $sql->execute();
+    }
+
+    public function updateAdmin($utilisateur) {
+        $sql = $this->conn->prepare("UPDATE utilisateur SET role = :role, statut = :statut, identreprise = :identreprise WHERE idutilisateur = :idutilisateur");
+
+        $sql->bindValue(':idutilisateur', $utilisateur->getIdUtilisateur(), PDO::PARAM_INT);
         $sql->bindValue(':role', $utilisateur->getRole());
         $sql->bindValue(':statut', $utilisateur->getStatut(), PDO::PARAM_INT);
         $sql->bindValue(':identreprise', $utilisateur->getIdEntreprise(), PDO::PARAM_INT);

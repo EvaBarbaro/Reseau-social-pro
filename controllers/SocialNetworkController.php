@@ -50,9 +50,19 @@ class SocialNetworkController extends CoreController
         $publication = new publication();
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
-        if(isset($_POST['imageurl'])) {
-            $publication->setImageurl($_POST['imageurl']);
+
+        if (isset($_FILES["pubImage"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["pubImage"]["name"]));
+            $tempname = $_FILES["pubImage"]["tmp_name"];    
+            $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $publication->setImageurl($uniqueFileName.'.'.$extension);
+            }
         }
+
         $publicationDao = new publicationDao($db,$idUtilisateur,null);
         $res = $publicationDao->create($publication);
         return $res;
@@ -64,8 +74,16 @@ class SocialNetworkController extends CoreController
         $publication->setIdpublication($_POST['idpublication']);
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
-        if(isset($_POST['imageurl'])) {
-            $publication->setImageurl($_POST['imageurl']);
+        if (!empty($_FILES["pubImage"])) {
+  
+            $uniqueFileName = uniqid();
+            $extension = end(explode(".", $_FILES["pubImage"]["name"]));
+            $tempname = $_FILES["pubImage"]["tmp_name"];    
+            $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
+          
+            if (move_uploaded_file($tempname, $folder))  {
+                $publication->setImageurl($uniqueFileName.'.'.$extension);
+            }
         }
         $publicationDao = new publicationDao($db,$idUtilisateur,null);
         $res = $publicationDao->update($publication);
