@@ -19,6 +19,7 @@ $router->setBasePath($_SERVER['BASE_URI']);
 
 $router->map('GET', '/monReseau/[i:id]/login', 'LoginController#login', 'login');
 $router->map('POST', '/monReseau/[i:id]/logged', 'LoginController#logged', 'logged');
+$router->map('POST', '/monReseau/logout', 'LoginController#logout', 'logout');
 
 $router->map('GET', '/', 'CompanyController#register', 'register');
 

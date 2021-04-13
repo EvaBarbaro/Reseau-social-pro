@@ -9,7 +9,10 @@
       <li class="nav-item profil">
         <a class="nav-link"  href="<?php echo pathUrl().'monCompte/'.$_SESSION['idutilisateur']?>">Profil</a>
       </li>
-      
+      <form method="POST">
+        <input type="hidden" name="identreprise" id="identreprise" value=<?= $_SESSION['identreprise'] ?>>
+        <input type="submit" name="logout" class="btn btn-info" value="Déconnexion">
+      </form>
     </ul>
   </div>
 </nav>
