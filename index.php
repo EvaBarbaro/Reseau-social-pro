@@ -22,7 +22,10 @@ $router->map('POST', '/monReseau/[i:id]/logged', 'LoginController#logged', 'logg
 
 $router->map('GET', '/', 'CompanyController#register', 'register');
 
-$router->map('GET', '/monCompte/[i:id]/mesImages', 'ImageController#getAll', 'mesImages');  //ici
+//ici, le id est le idutilisateur de la table utilisateur (table compte)
+$router->map('GET', '/monCompte/[i:id]/mesImages', 'ImageController#getAll', 'mesImages');  
+$router->map('GET', '/monCompte/[i:id]/MonMur', 'ImageController#getAllMonMur', 'MonMur');  
+
 $router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
 $router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
 $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDelete');
@@ -37,7 +40,7 @@ $router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpd
 
 $router->map('GET', '/monReseau/[i:id]/inscription', 'UserController#register', 'userRegister');
 $router->map('GET', '/monReseau/[i:id]/admin', 'UserController#getAll', 'admin');
-$router->map('GET', '/monCompte/[i:id]', 'UserController#get', 'userSingle');
+$router->map('GET', '/monCompte/[i:id]', 'UserController#get', 'userSingle'); // Mon Compte
 $router->map('GET', '/monCompte/[i:id]/monMotDePasse', 'UserController#getPass', 'userSinglePassword');
 $router->map('POST', '/monCompte/create', 'UserController#create', 'userCreate');
 $router->map('POST', '/monCompte/delete', 'UserController#delete', 'userDelete');

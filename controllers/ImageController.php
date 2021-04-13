@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+
 include_once __DIR__.'/../dao/imageDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
@@ -20,6 +20,26 @@ class ImageController extends CoreController
         $compte = $compteDao->get($imageId);
 
         $this->show('image', [
+            'title' => 'Social Connect - Back Office',
+            'imageList' => $imageList,
+            'compte' => $compte
+        ]);
+    }
+
+    public function getAllMonMur($parameters)
+    {
+        $imageId = $parameters['id'];
+       
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $imageDao = new imageDao($db);
+        $imageList = $imageDao->getAll($imageId);
+
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($imageId);
+
+        $this->show('imageMonMur', [
             'title' => 'Social Connect - Back Office',
             'imageList' => $imageList,
             'compte' => $compte
@@ -85,11 +105,7 @@ class ImageController extends CoreController
 
         $imageDao->create($image);
 
-<<<<<<< HEAD
-        //header('Location: '.pathUrl()."mesImages");
-=======
         header('Location: '.pathUrl()."monCompte/".$_POST['idcompte']."/mesImages");
->>>>>>> 6f0ce064cd7ceea807f0c51fc07acd161b2f5e13
     }
 
     public function update()
