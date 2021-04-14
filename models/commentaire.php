@@ -120,17 +120,37 @@ $this->idcompte = $idcompte;
 return $this;
 }
 
+/**
+ * Get the value of dateCom
+ */ 
+public function getDateCom()
+{
+return $this->dateCom;
+}
+
+/**
+ * Set the value of dateCom
+ *
+ * @return  self
+ */ 
+public function setDateCom($dateCom)
+{
+$this->dateCom = $dateCom;
+
+return $this;
+}
 
 /**
  * Construct
  */ 
-public function construct($idcommentaire,$description,$idpublication,$like,$idcompte)
+public function construct($idcommentaire,$description,$idpublication,$like,$idcompte,$dateCom)
 {
     $this->setIdcommentaire($idcommentaire);
     $this->setDescription($description);
     $this->setlike($like);
     $this->setIdpublication($idpublication);
     $this->setIdcompte($idcompte);
+    $this->setDateCom($dateCom);
 }
 
 

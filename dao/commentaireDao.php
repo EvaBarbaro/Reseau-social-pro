@@ -30,7 +30,8 @@ class commentaireDao implements interfaceDao {
         $commentaireInfo = array(
          "idcommentaire"=>$com->getIdcommentaire(),
          "description"=>$com->getDescription(),
-         "Nombre Like"=>$com->getLike()
+         "Nombre Like"=>$com->getLike(),
+         "date" =>date("d/m/Y H:i",strtotime($com->getDateCom()))
          );
         $commentaire["commentaireInfo"] = $commentaireInfo;
         // savoir si l'utilisteur de la session a liké le commentaire ou pas 
@@ -63,7 +64,7 @@ public function get($id){
     $commentaire = array();
     if(!empty($com)){
     $commentaireModel = new commentaire();
-    $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
+    $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte'],$com['dateCom']);
     $commentaire = $this-> getInfoCommentaire($commentaireModel); 
     
     }
@@ -78,13 +79,13 @@ public function get($id){
 * Get all commentaire
 */ 
 public function getAll(){
-    $sql = "SELECT * FROM commentaire";
+    $sql = "SELECT * FROM commentaire ORDER BY dateCom DESC";
 
     $pdoStatement = $this->conn->query($sql);
 
     $com = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
     $commentaireModel = new commentaire();
-    $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
+    $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte'],$com['dateCom']);
     $commentaire = array();
     if(!empty($com)){
         $commentaire = $this-> getInfoCommentaire($commentaireModel); 
@@ -99,7 +100,7 @@ public function getAll(){
  * Get all publication commentaire
  */ 
 public function getAllPostsComents($id){
-    $sql = "SELECT * FROM commentaire WHERE idpublication = :id";
+    $sql = "SELECT * FROM commentaire WHERE idpublication = :id ORDER BY dateCom DESC";
 
     $pdoStatement = $this->conn->prepare($sql);
     $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
@@ -111,13 +112,13 @@ public function getAllPostsComents($id){
     
     foreach($commentaires as $com){
        $commentaireModel = new commentaire();
-       $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte']);
+       $commentaireModel->construct($com['idcommentaire'],$com['description'],$com['idpublication'],$com['like'],$com['idcompte'],$com['dateCom']);
        $commentaireAjouter = $this-> getInfoCommentaire($commentaireModel);
        array_push($commentaire,$commentaireAjouter);
     }
 
 }
-    return array_reverse($commentaire);
+    return $commentaire;
 
 }
 
@@ -131,7 +132,7 @@ public function create($commentaire){
     do {
         $comId = hexdec(uniqid());
     } while(!empty($this->get($comId)));
-    $sql = "INSERT INTO commentaire (idcommentaire,description,commentaire.like,idpublication,idcompte) VALUES (:comId,:description,:like,:idpublication,:idcompte)";
+    $sql = "INSERT INTO commentaire (idcommentaire,description,commentaire.like,idpublication,idcompte,dateCom) VALUES (:comId,:description,:like,:idpublication,:idcompte,:dateCom)";
 
     $pdoStatement = $this->conn->prepare($sql);
     $pdoStatement->bindValue(':comId', $comId, PDO::PARAM_INT);
@@ -139,6 +140,8 @@ public function create($commentaire){
     $pdoStatement->bindValue(':like', 0, PDO::PARAM_INT);
     $pdoStatement->bindValue(':idpublication', $commentaire->getIdpublication(), PDO::PARAM_INT);
     $pdoStatement->bindValue(':idcompte', $this->idUtilisateur, PDO::PARAM_INT);
+    $pdoStatement->bindValue(':dateCom',date("Y-m-d H:i:sa"));
+
     $res = $pdoStatement->execute();
     //$res = 1 (true) if sucess
     return $res;

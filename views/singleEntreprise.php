@@ -186,7 +186,7 @@ if(!empty($com['commentaire_compte']['photo'])){
 <?php
  echo $com['commentaire_compte']['nomutilisateur'];
 ?>
-  <small id="dateCom" style="display:inline;" class="form-text font-weight-bold" >14/04/2021 14:02</small>
+  <small id="dateCom" style="display:inline;" class="form-text font-weight-bold" ><?= $com['commentaireInfo']['date']?></small>
 
   </div>
   </div>
