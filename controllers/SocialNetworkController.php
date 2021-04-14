@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
 include_once __DIR__.'/../models/publication.php';
@@ -21,7 +21,7 @@ class SocialNetworkController extends CoreController
         $DBData = new DBData();
         $this->db = $DBData->getConnection();
         //à remplacer par la variable idutilisateur de la session courante
-        $this->idUtilisateur = 1696278514562148;
+        $this->idUtilisateur = $_SESSION['idutilisateur'];
         $this->entrepriseId = $entrepriseId;
         
     }
