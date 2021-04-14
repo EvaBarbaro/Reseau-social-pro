@@ -25,9 +25,12 @@ $router->map('GET', '/', 'CompanyController#register', 'register');
 
 //ici, le id est le idutilisateur de la table utilisateur (table compte)
 $router->map('GET', '/monCompte/[i:id]/mesImages', 'ImageController#getAll', 'mesImages');  
-$router->map('GET', '/monCompte/[i:id]/MonMur', 'ImageController#getAllMonMur', 'MonMur');  
+//$router->map('GET', '/monCompte/[i:id]/MonMur', 'ImageController#getAllMonMur', 'MonMur');  
 
-$router->map('GET', '/monImage/[i:id]', 'ImageController#get', 'monImage');
+$router->map('GET', '/monImageM/[i:id]', 'ImageController#get', 'monImageM');
+$router->map('GET', '/monImageD/[i:id]', 'ImageController#getD', 'monImageD');
+//$router->map('GET', '/monImage/[i:id]', 'ImageController#delete', 'monImage');
+
 $router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
 $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDelete');
 $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpdate');
