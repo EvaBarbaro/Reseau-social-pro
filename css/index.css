@@ -146,14 +146,14 @@ footer {
 .card-text{
     white-space:pre;
     }
-
+/*
 .iconFooter{
-    display:inline;
+    display:inline; 
 }
 
 input[type=image]{
-    display:inline; 
-}
+    display:inline-block; 
+}*/
 .fakeTextInput {
     border: none;
     display: inline;
