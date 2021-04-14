@@ -26,26 +26,6 @@ class ImageController extends CoreController
         ]);
     }
 
-    public function getAllMonMur($parameters)
-    {
-        $imageId = $parameters['id'];
-       
-        $DBData = new DBData();
-        $db = $DBData->getConnection();
-
-        $imageDao = new imageDao($db);
-        $imageList = $imageDao->getAll($imageId);
-
-        $compteDao = new compteDao($db);
-        $compte = $compteDao->get($imageId);
-
-        $this->show('imageMonMur', [
-            'title' => 'Social Connect - Back Office',
-            'imageList' => $imageList,
-            'compte' => $compte
-        ]);
-    }
-
     public function get($parameters)
     {
         $imageId = $parameters['id'];
