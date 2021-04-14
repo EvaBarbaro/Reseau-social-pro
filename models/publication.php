@@ -14,7 +14,7 @@ private $imageurl;
 private $like;
 private $statut;
 private $idcompte; 
-
+private $datePub; 
 
 
 
@@ -139,15 +139,36 @@ return $this;
 }
 
 /**
+ * Get the value of datePub
+ */ 
+public function getDatePub()
+{
+return $this->datePub;
+}
+
+/**
+ * Set the value of datePub
+ *
+ * @return  self
+ */ 
+public function setDatePub($datePub)
+{
+$this->datePub = $datePub;
+
+return $this;
+}
+
+/**
  * Construct
  */ 
-public function construct($idpublication,$description,$statut,$idcompte,$like)
+public function construct($idpublication,$description,$statut,$idcompte,$like,$datePub)
 {
     $this->setIdpublication($idpublication);
     $this->setDescription($description);
     $this->setlike($like);
     $this->setStatut($statut);
     $this->setIdcompte($idcompte);
+    $this->setDatePub($datePub);
 }
 
 }

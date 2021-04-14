@@ -5,9 +5,6 @@
 <div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
-/*echo '<pre>';
-var_dump($_FILES);
-echo '<pre>';*/
 ?>
 </div>
 </div>
@@ -88,6 +85,8 @@ if(!empty($pub['comptePublication']['photo'])){
 
  echo $pub['comptePublication']['nomutilisateur'];
 ?>
+  <small id="datePub" style="display:inline;" class="form-text font-weight-bold text-primary" ><?=$pub['publicationInfos']['date']?></small>
+
 </div>
   <?php if($pub['publicationInfos']['statut']==="public") {
     $img ="public.png";
@@ -183,9 +182,12 @@ if(!empty($com['commentaire_compte']['photo'])){
 }
 ?>
   <div class="pubHeader" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
+
 <?php
  echo $com['commentaire_compte']['nomutilisateur'];
 ?>
+  <small id="dateCom" style="display:inline;" class="form-text font-weight-bold" >14/04/2021 14:02</small>
+
   </div>
   </div>
   <div class="card-body" style="background-color:#B4C1D3;">

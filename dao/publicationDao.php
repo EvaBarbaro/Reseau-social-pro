@@ -35,7 +35,8 @@ class publicationDao implements interfaceDao {
             "description"=>$pub->getDescription(),
             "imageurl"=>$pub->getImageurl(),
             "Nombre Like"=>$pub->getLike(),
-            "statut"=>$pub->getStatut()
+            "statut"=>$pub->getStatut(),
+            "date" =>date("d/m/Y H:i",strtotime($pub->getDatePub()))
             );
         $publication["publicationInfos"] = $pubInfo;
         // savoir si l'utilisteur de la session a liké la publication ou pas 
@@ -76,7 +77,7 @@ class publicationDao implements interfaceDao {
       
             // publication à retourner
             $publicationModel = new publication();
-            $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like']);
+            $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like'],$pub['datePub']);
             $publicationModel->setImageurl($pub['imageurl']);
             $publication = $this->getInfoPublication($publicationModel);
  
@@ -91,10 +92,10 @@ class publicationDao implements interfaceDao {
  * Get all publication
  */ 
     public function getAll(){
-        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE ( (t.identreprise=:identreprise) AND (p.idcompte = t.idutilisateur) ) AND ( (p.idcompte=:id) OR (p.statut='public') OR 
-        ( (p.statut='amis') AND (p.idcompte IN 
+        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE ( (t.identreprise=:identreprise) AND (p.idcompte = t.idutilisateur) ) AND ( (p.statut='public') OR (p.idcompte=:id) OR 
+        ( (p.statut='amis') AND (p.idcompte  IN 
         (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
-        (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) ) )";
+        (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) ) ) ORDER BY datePub DESC";
 
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
@@ -107,7 +108,7 @@ class publicationDao implements interfaceDao {
         if(!empty($publications)){
             foreach($publications as $pub){
                 $publicationModel = new publication();
-                $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like']);
+                $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like'],$pub['datePub']);
                 $publicationModel->setImageurl($pub['imageurl']);
                 // publication à ajouté
                 $publicationAjouter = $this->getInfoPublication($publicationModel);
@@ -115,7 +116,7 @@ class publicationDao implements interfaceDao {
              }
         }
 
-        return array_reverse($publication);
+        return $publication;
     }
     
 
@@ -129,11 +130,11 @@ class publicationDao implements interfaceDao {
         do {
             $pubId = hexdec(uniqid());
         } while(!empty($this->get($pubId)));
-        $sql = "INSERT INTO publication (idpublication,description,publication.like,statut,idcompte";
+        $sql = "INSERT INTO publication (idpublication,description,publication.like,statut,idcompte,datePub";
         if($publication->getImageurl()!==null){
             $sql=$sql.",imageurl";
         }
-        $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte";
+        $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte,:datePub";
          if($publication->getImageurl()!==null){
             $sql=$sql.",:imageurl";
         }
@@ -141,6 +142,7 @@ class publicationDao implements interfaceDao {
     
         $pdoStatement = $this->conn->prepare($sql);
         $pdoStatement->bindValue(':pubId', $pubId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':datePub',date("Y-m-d H:i:sa"));
         $pdoStatement->bindValue(':description',$publication->getDescription());
         if($publication->getImageurl()!==null){
         $pdoStatement->bindValue(':imageurl',$publication->getImageurl());

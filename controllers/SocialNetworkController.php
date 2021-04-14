@@ -86,7 +86,8 @@ class SocialNetworkController extends CoreController
         $publication->setIdpublication($_POST['idpublication']);
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
-        if (!empty($_FILES["pubImage"])) {
+      
+      /*  if (!empty($_FILES["pubImage"])) {
   
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["pubImage"]["name"]));
@@ -96,7 +97,7 @@ class SocialNetworkController extends CoreController
             if (move_uploaded_file($tempname, $folder))  {
                 $publication->setImageurl($uniqueFileName.'.'.$extension);
             }
-        }
+        }*/
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $res = $publicationDao->update($publication);
         return $res;
