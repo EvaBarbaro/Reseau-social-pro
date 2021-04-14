@@ -1,10 +1,10 @@
 <?php
 
-include_once __DIR__.'/../interface/interfaceDao.php';
+include_once __DIR__.'/../interface/interfaceCompteDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../models/compte.php';
 
-class compteDao implements interfaceDao {
+class compteDao implements interfaceCompteDao {
     private $conn;
 
     public function __construct($db){
@@ -52,8 +52,8 @@ class compteDao implements interfaceDao {
          return $compte;
     }
     
-    public function getAll() {
-        $sql = "SELECT * FROM compte";
+    public function getAll($identreprise) {
+        $sql = "SELECT u.identreprise, u.nomutilisateur, c.photo, c.idcompte FROM compte AS c JOIN utilisateur AS u ON u.idutilisateur = c.idcompte WHERE u.identreprise = $identreprise";
 
         $pdoStatement = $this->conn->query($sql);
 

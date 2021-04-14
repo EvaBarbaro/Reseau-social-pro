@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
+require_once __DIR__.'/../dao/compteDao.php';
 include_once __DIR__.'/../models/publication.php';
 include_once __DIR__.'/../utils/DBData.php';
 include_once __DIR__.'/../dao/commentaireDao.php';
@@ -30,17 +31,32 @@ class SocialNetworkController extends CoreController
     public function home($parameters)
     {
         $this->init($parameters['id']);
+        
+        session_start();
+
+        $entrepriseId = $parameters['id'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+        //à remplacer par la variable idutilisateur de la session courante
+        $idUtilisateur = 1696278514562148;
 
         $publicationList = $this->getPublications($parameters);
 
         $utilisateurDao = new utilisateurDao($this->db );
         $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
 
+        $compteDao = new compteDao($db);
+        $compteList = $compteDao->getAll($_SESSION['identreprise']);
+
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList,
             'idUtilisateur' => $this->idUtilisateur,
-            'utilisateurList' => $utilisateurList
+            'utilisateurList' => $utilisateurList,
+            'idUtilisateur' => $idUtilisateur,
+            'utilisateurList' => $utilisateurList,
+            'compteList' => $compteList
         ]);
     }
 
@@ -61,6 +77,30 @@ class SocialNetworkController extends CoreController
         $publication = $publicationDao->get($publication->getIdpublication());
         return $publication;
     }
+
+        // get toutes les publications d'un idcompte
+        public function getPublicationByUser($parameters) {
+
+            $idCompte = $parameters['id'];
+
+            $publication = new publication();
+            $publication->setIdpublication($idCompte);
+
+            $DBData = new DBData();
+            $db = $DBData->getConnection();
+
+            $publicationDao = new publicationDao($db,$idCompte,null);
+            $publicationByUser = $publicationDao->getByUser($publication->getIdpublication());
+
+            $compteDao = new compteDao($db);
+            $compte = $compteDao->get($idCompte);
+
+            $this->show('publicationsByUser', [
+                'title' => 'Social Connect - Mes publications',
+                'publicationByUser' => $publicationByUser,
+                'compte' => $compte
+            ]);
+        }
 
     // créer une nouvelle publication
     public function createPublication($parameters) {
@@ -89,23 +129,24 @@ class SocialNetworkController extends CoreController
     public function updatePublication($parameters) {
         $this->init($parameters['id']);
         $publication = new publication();
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $idCompte = $_POST['idcompte'];
+
         $publication->setIdpublication($_POST['idpublication']);
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
       
-      /*  if (!empty($_FILES["pubImage"])) {
-  
-            $uniqueFileName = uniqid();
-            $extension = end(explode(".", $_FILES["pubImage"]["name"]));
-            $tempname = $_FILES["pubImage"]["tmp_name"];    
-            $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
-          
-            if (move_uploaded_file($tempname, $folder))  {
-                $publication->setImageurl($uniqueFileName.'.'.$extension);
-            }
-        }*/
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
+        $publication->setImageurl($_POST['imageurl']);
+
+        $publicationDao = new publicationDao($db,$idCompte,null);
         $res = $publicationDao->update($publication);
+
+        header('Location: '.pathUrl().'monCompte/'.$idCompte.'/mesPublications');
+        
         return $res;
     }
 

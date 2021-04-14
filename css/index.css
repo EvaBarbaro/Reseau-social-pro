@@ -163,6 +163,36 @@ footer {
     outline: none;
 }
 
+.imagePostUser {
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.postDescUser {
+    resize: none;
+    width: 75%;
+    height: 2em;
+}
+
+.bi-person-plus-fill {
+    cursor: pointer;
+}
+
+.bi-person-check {
+    cursor: pointer;
+}
+
+/* .updateTitlePostInput {
+    border: 1px solid black;
+    outline: solid;
+    background-color: white;
+}
+
+.updateTitlePostInput:focus {
+    border: 1px solid black;
+    outline: solid;
+} */
+
 #deleteAccount {
     width: 100%;
 }
