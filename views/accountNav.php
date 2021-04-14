@@ -1,7 +1,7 @@
 <div>
 <ul class="nav nav-tabs justify-content-center">
   <li class="nav-item">
-    <a class="nav-link pub" href="<?= pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/mesPublications'?>">Mes publications</a>
+    <a class="nav-link post" href="<?= pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/mesPublications'?>">Mes publications</a>
   </li>
   <li class="nav-item">
     <a class="nav-link account" href="<?= pathUrl().'monCompte/'.$_SESSION['idutilisateur']?>">Mon Compte</a>
