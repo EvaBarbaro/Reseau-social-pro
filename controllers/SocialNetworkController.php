@@ -15,6 +15,8 @@ class SocialNetworkController extends CoreController
     // page d'acceuil du réseau social
     public function home($parameters)
     {
+        session_start();
+
         $entrepriseId = $parameters['id'];
 
         $DBData = new DBData();
@@ -27,11 +29,15 @@ class SocialNetworkController extends CoreController
         $utilisateurDao = new utilisateurDao($db);
         $utilisateurList = $utilisateurDao->getAll($entrepriseId);
 
+        $compteDao = new compteDao($db);
+        $compteList = $compteDao->getAll($_SESSION['identreprise']);
+
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList,
             'idUtilisateur' => $idUtilisateur,
-            'utilisateurList' => $utilisateurList
+            'utilisateurList' => $utilisateurList,
+            'compteList' => $compteList
         ]);
     }
 

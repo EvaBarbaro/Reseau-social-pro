@@ -8,11 +8,13 @@ class AccountController extends CoreController
 {
     public function getAll()
     {
+        session_start();
+
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $compteDao = new compteDao($db);
-        $compteList = $compteDao->getAll();
+        $compteList = $compteDao->getAll($_SESSION['identreprise']);
 
         $this->show('comptes', [
             'title' => 'Social Connect - Réseau Back Office - Comptes',

@@ -153,6 +153,15 @@ footer {
 .postDescUser {
     resize: none;
     width: 75%;
+    height: 2em;
+}
+
+.bi-person-plus-fill {
+    cursor: pointer;
+}
+
+.bi-person-check {
+    cursor: pointer;
 }
 
 /* .updateTitlePostInput {
