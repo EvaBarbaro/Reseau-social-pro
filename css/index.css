@@ -143,4 +143,6 @@ footer {
     background-color: #fff;
     border-color:#fff;
 }
-
+.card-text{
+    white-space:pre;
+    }
