@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
 include_once __DIR__.'/../models/publication.php';
 include_once __DIR__.'/../utils/DBData.php';
@@ -31,10 +32,15 @@ class SocialNetworkController extends CoreController
         $this->init($parameters['id']);
 
         $publicationList = $this->getPublications($parameters);
+
+        $utilisateurDao = new utilisateurDao($this->db );
+        $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
+
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
             'publicationList' => $publicationList,
-            'idUtilisateur' => $this->idUtilisateur
+            'idUtilisateur' => $this->idUtilisateur,
+            'utilisateurList' => $utilisateurList
         ]);
     }
 

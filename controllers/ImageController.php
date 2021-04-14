@@ -72,20 +72,6 @@ class ImageController extends CoreController
         $image->setIdimage($_POST['idimage']);
         $image->setTitre($_POST['titre']);
 
-        ?>
-        <pre>
-        Variable SESSION
-        <?php var_dump($_SESSION); ?> 
-        Variable POST
-        <?php var_dump($_POST); ?> 
-        Variable FILES
-        <?php var_dump($_FILES); ?> 
-        </pre>
-        <?php
-        
-
-       
-
         if (isset($_FILES["imageurl"])) {
 
             // (uniqid() --> génére un identifiant unique, basé sur la date et heure)

@@ -9,13 +9,14 @@ class UserController extends CoreController
 {
     public function getAll($parameters)
     {
-        $utilisateurId = $parameters['id'];
+        $entrepriseId = $parameters['id'];
 
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $utilisateurDao = new utilisateurDao($db);
-        $utilisateurList = $utilisateurDao->getAll($utilisateurId);
+        $utilisateurList = $utilisateurDao->getAll($entrepriseId);
+
         $this->show('utilisateurs', [
             'title' => 'Social Connect - Réseau Back Office - Utilisateurs',
             'utilisateurList' => $utilisateurList
@@ -170,6 +171,33 @@ class UserController extends CoreController
         header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
     }
 
+    public function updateAdmin()
+    {
+        $entrepriseId = $_POST['identreprise'];
+        
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $utilisateurDao = new utilisateurDao($db);
+
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setIdutilisateur($_POST['idutilisateur']);
+        $utilisateur->setRole($_POST['role']);
+        
+        if ($_POST['statut'] == NULL) {
+            $utilisateur->setStatut(0);
+        } else {
+            $utilisateur->setStatut($_POST['statut']);
+        }
+        
+        $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+        $utilisateurDao->updateAdmin($utilisateur);
+
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/admin');
+    }
+
     public function delete()
     {
         $utilisateurId = $_POST['idutilisateur'];
@@ -182,5 +210,22 @@ class UserController extends CoreController
         $utilisateurDao->delete($utilisateurId);
 
         header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/admin');
+    }
+
+    public function deleteUser()
+    {
+        $utilisateurId = $_POST['idutilisateur'];
+        $entrepriseId = $_POST['identreprise'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $utilisateurDao = new utilisateurDao($db);
+        $utilisateurDao->delete($utilisateurId);
+
+        session_start();
+        session_destroy();
+
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');
     }
 }

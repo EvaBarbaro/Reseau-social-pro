@@ -1,6 +1,15 @@
+<?php
+
+if ($viewVars['compte']['photo'] == NULL) {
+    $profileImage = "default158978.png";
+} else {
+    $profileImage = $viewVars['compte']['photo'];
+}
+
+?>
 <div id="logo">
     <div id="profilContent">
-    <img src=<?= pathUrl()."public/profilImages/".$viewVars['compte']['photo'] ?> alt="logo" id="photoImg" class="rounded-circle mt-4">
+    <img src=<?= pathUrl()."public/profilImages/".$profileImage ?> alt="logo" id="photoImg" class="rounded-circle mt-4">
         <form id="formPhotoFile" enctype="multipart/form-data" action=<?= pathUrl()."mesInformations/update" ?> method="POST">
             <input type="hidden" name="idcompte" value="<?= $viewVars['compte']['idcompte'] ?>">
             <img id="newPhotoFile" src=<?= pathUrl()."public/img/pencil.png" ?> alt="bouton modification">

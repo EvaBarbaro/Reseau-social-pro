@@ -32,7 +32,16 @@ class LoginController extends CoreController
         $utilisateur->setMotDePasse(hash('sha256' ,$_POST['motdepasse']));
         $utilisateur->setIdEntreprise($entrepriseId);
 
-
         $loginDao->loginUser($utilisateur, $entrepriseId);
+    }
+
+    public function logout()
+    {
+        $entrepriseId = $_POST['identreprise'];
+
+        session_start();
+        session_destroy();
+
+        header("Location: ".pathUrl()."monReseau/".$entrepriseId."/login");
     }
 }
