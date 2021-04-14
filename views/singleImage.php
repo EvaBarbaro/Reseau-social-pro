@@ -6,16 +6,6 @@
     <div id="logo">
         <img src=<?= pathUrl()."public/img/logo-social-connect.png" ?> alt="logo" id="logoImg" class="img-thumbnail mt-4">
     </div>
-    
-
-        <pre>
-        <b><p style="color:blue;" >Variable SESSION</p></b>    <?php var_dump($_SESSION); ?> 
-        <b><p style="color:red;">Variable viewvars et image</p> </b>    <?php var_dump($viewVars); ?> 
-        <b><p style="color:red;"> Variable POST</p></b>   <?php var_dump($_POST); ?> 
-        <b><p style="color:red;">Variable getAll</p></b>   <?php var_dump($_GET); ?> 
-        <b><p style="color:red;">Variable FILES</p> </b>    <?php var_dump($_FILES); ?> 
-        </pre>
-
 
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification de l'image</h1>

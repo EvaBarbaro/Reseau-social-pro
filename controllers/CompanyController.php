@@ -57,11 +57,6 @@ class CompanyController extends CoreController
         $entreprise->setDesignation($_POST['designation']);
 
         if (isset($_FILES["logo"])) {
-            ?>
-            <pre>
-            <? var_dump ($_FILES); php?>
-            </pre>
-            <?php
   
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["logo"]["name"]));
