@@ -1,15 +1,12 @@
 <div id="networkHomePage">
 
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-12">
+
 <?php
 require_once __DIR__ . '/networkNav.php';
 
 // var_dump($viewVars['utilisateurList']);
 ?>
-</div>
-</div>
+
 
 <div class="row">
 <div class="col-lg-2 offset-lg-2">
@@ -223,7 +220,7 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 </div>
 
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>
