@@ -137,11 +137,19 @@ if(!empty($pub['publicationInfos']['imageurl'])){
     $img ="like.png";
   } ?>
   <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+  <div class="iconFooter">
   <input type="image" id="<?=$img; ?>" name="likeUnlikePubButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
+  <div class="iconFooter">
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
-  <a class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
+</div>
+<div class="iconFooter">
+  <a style="display:inline;" class="btn offset-10" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+ 
+  <img  id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
+  <?=count($pub['commentaires'])?>
   </a>
+</div>
+</div>
 </form>
 </div>
 

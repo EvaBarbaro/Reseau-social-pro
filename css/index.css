@@ -147,7 +147,13 @@ footer {
     white-space:pre;
     }
 
+.iconFooter{
+    display:inline;
+}
 
+input[type=image]{
+    display:inline; 
+}
 .fakeTextInput {
     border: none;
     display: inline;
