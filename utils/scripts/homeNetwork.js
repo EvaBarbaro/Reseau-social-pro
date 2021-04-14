@@ -31,68 +31,73 @@ $(document).ready(function(){
         }
         
       }); */
-     
-});
+      $( "form" ).submit(function(e) {
+        //alert("submit");
+            var sendFile=false;
+            var dataString = $(this).serialize();
+            var link="";
+            if($(this).attr("name").includes("likeUnlikePub")) {
+             // alert("like Pub");
+              link="/LikeUnlikePublication"; 
+              e.preventDefault();
+            }
+          else if($(this).attr("name").includes("likeUnlikeCom")) {
+              
+              link="/LikeUnlikeCommentaire"; 
+             
+              e.preventDefault();
+            }
+    
+            else if($(this).attr("name").includes("AddCom")) {
+              
+              link="/createCommentaire"; 
+             
+              e.preventDefault();
+            }
+    
+            else if($(this).attr("name")=="AddPub") {
+              
+              link="/createPublication";
+    
+              dataString = new FormData(this);
+              sendFile=true;
+              e.preventDefault();
+            }
+            
+        if(link!=="") {
+            if(sendFile){
+           var xhr = $.ajax({
+             type: "POST",
+             url: networkLink+link,
+             data: dataString,
+             processData: false,
+             contentType: false,
+             cache: false
+            });
+          } else {
+            var xhr = $.ajax({
+              type: "POST",
+              url: networkLink+link,
+              data: dataString
+            });
+          }
+            xhr.done(function() {
+             // $("#networkHomePage").html("");
+              $("#networkHomePage").load(networkLink);
+              $('footer').first().remove();
+             /* $('script').each(function() {
 
-  $( "form" ).submit(function(e) {
-    //alert("submit");
-        var sendFile=false;
-        var dataString = $(this).serialize();
-        var link="";
-        if($(this).attr("name").includes("likeUnlikePub")) {
-         // alert("like Pub");
-          link="/LikeUnlikePublication"; 
-          e.preventDefault();
-        }
-      else if($(this).attr("name").includes("likeUnlikeCom")) {
-          
-          link="/LikeUnlikeCommentaire"; 
-         
-          e.preventDefault();
-        }
-
-        else if($(this).attr("name").includes("AddCom")) {
-          
-          link="/createCommentaire"; 
-         
-          e.preventDefault();
-        }
-
-        else if($(this).attr("name")=="AddPub") {
-          
-          link="/createPublication";
-
-          dataString = new FormData(this);
-          sendFile=true;
-          e.preventDefault();
-        }
+                if (this.src === 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js') {
         
-    if(link!=="") {
-        if(sendFile){
-       var xhr = $.ajax({
-         type: "POST",
-         url: networkLink+link,
-         data: dataString,
-         processData: false,
-         contentType: false,
-         cache: false
+                  this.parentNode.removeChild( this );
+                }
+            });*/
+            /*  $('meta').first().remove();
+              $('title').first().remove();
+              $("#networkHomePage:nth-child(1)").children().find('meta').remove();
+              $("#networkHomePage:nth-child(1)").children().find('link').remove();*/
+              console.log(dataString);
+            })
+          }
         });
-      } else {
-        var xhr = $.ajax({
-          type: "POST",
-          url: networkLink+link,
-          data: dataString
-        });
-      }
-        xhr.done(function() {
-         // $("#networkHomePage").html("");
-          $("#networkHomePage").load(networkLink);
-        //  $('footer').first().remove();
-        /*  $('meta').first().remove();
-          $('title').first().remove();
-          $("#networkHomePage:nth-child(1)").children().find('meta').remove();
-          $("#networkHomePage:nth-child(1)").children().find('link').remove();*/
-          console.log(dataString);
-        })
-      }
-    });
+});

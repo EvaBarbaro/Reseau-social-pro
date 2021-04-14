@@ -27,8 +27,8 @@ echo '<pre>';*/
   <img name="statut" value="public" src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable">
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" ><img type="button" id="public" src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
-    <a class="dropdown-item" ><img type="button" id="amis" src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
+    <a class="dropdown-item" ><img type="button" id="public" src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top drop" alt="Image introuvable"></a>
+    <a class="dropdown-item" ><img type="button" id="amis" src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top drop" alt="Image introuvable"></a>
     
   </div>
   
@@ -220,6 +220,6 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>
