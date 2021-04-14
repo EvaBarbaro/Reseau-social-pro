@@ -224,6 +224,9 @@ class UserController extends CoreController
         $utilisateurDao->delete($utilisateurId);
 
         session_start();
+
+        $_SESSION['message'] = "<div class='alert alert-danger'>Votre compte a été supprimé !</div>";
+
         session_destroy();
 
         header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');

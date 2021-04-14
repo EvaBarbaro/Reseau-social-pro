@@ -85,6 +85,18 @@ class publicationDao implements interfaceDao {
     }
 
 
+    /**
+     * Get publication pour un utilisateur
+     */ 
+    public function getByUser($id){
+        $sql = "SELECT * FROM publication WHERE idcompte = $id";
+
+        $pdoStatement = $this->conn->query($sql);
+
+        $publication = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $publication;
+    }
 
     
 /**
