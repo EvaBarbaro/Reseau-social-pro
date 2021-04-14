@@ -154,6 +154,21 @@ footer {
 input[type=image]{
     display:inline-block; 
 }*/
+
+.btn-xs {
+    font-size: xx-small;
+    color: white;
+}
+
+#memberLink {
+    text-decoration: none;
+    color: black;
+}
+
+#memberLink:hover {
+    opacity: 70%;
+}
+
 .fakeTextInput {
     border: none;
     display: inline;
