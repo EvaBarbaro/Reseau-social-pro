@@ -5,9 +5,9 @@
 <div class="col-lg-12">
 <?php
 require_once __DIR__ . '/networkNav.php';
-echo '<pre>';
+/*echo '<pre>';
 var_dump($_FILES);
-echo '<pre>';
+echo '<pre>';*/
 ?>
 </div>
 </div>

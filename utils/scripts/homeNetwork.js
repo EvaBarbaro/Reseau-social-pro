@@ -36,11 +36,11 @@ $(document).ready(function(){
 
   $( "form" ).submit(function(e) {
     //alert("submit");
-
+        var sendFile=false;
         var dataString = $(this).serialize();
         var link="";
         if($(this).attr("name").includes("likeUnlikePub")) {
-          
+         // alert("like Pub");
           link="/LikeUnlikePublication"; 
           e.preventDefault();
         }
@@ -63,12 +63,12 @@ $(document).ready(function(){
           link="/createPublication";
 
           dataString = new FormData(this);
-        
+          sendFile=true;
           e.preventDefault();
         }
         
     if(link!=="") {
-
+        if(sendFile){
        var xhr = $.ajax({
          type: "POST",
          url: networkLink+link,
@@ -77,7 +77,13 @@ $(document).ready(function(){
          contentType: false,
          cache: false
         });
-
+      } else {
+        var xhr = $.ajax({
+          type: "POST",
+          url: networkLink+link,
+          data: dataString
+        });
+      }
         xhr.done(function() {
          // $("#networkHomePage").html("");
           $("#networkHomePage").load(networkLink);
