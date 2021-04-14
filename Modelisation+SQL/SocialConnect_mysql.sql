@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 09 avr. 2021 à 18:25
+-- Généré le : mer. 14 avr. 2021 à 16:12
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `socialconnect`
 --
-
+CREATE DATABASE IF NOT EXISTS `SOCIALCONNECT` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `SOCIALCONNECT`;
 -- --------------------------------------------------------
 
 --
@@ -55,18 +56,19 @@ CREATE TABLE `commentaire` (
   `description` varchar(100) DEFAULT NULL,
   `like` int(11) NOT NULL,
   `idpublication` bigint(20) NOT NULL,
-  `idcompte` bigint(20) NOT NULL
+  `idcompte` bigint(20) NOT NULL,
+  `dateCom` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commentaire`
 --
 
-INSERT INTO `commentaire` (`idcommentaire`, `description`, `like`, `idpublication`, `idcompte`) VALUES
-(1696278514562205, 'descriptionAmazon', 0, 1696278514561638, 1696278537845651),
-(1696278514565563, 'descriptionGoogle', 0, 1696278514561268, 1696278514562148),
-(1696278514565607, 'descriptionDoe', 2, 1696278514560951, 1696278547894512),
-(1696278514567789, 'CommentGoogle', 1, 1696278514567744, 1696278547894512);
+INSERT INTO `commentaire` (`idcommentaire`, `description`, `like`, `idpublication`, `idcompte`, `dateCom`) VALUES
+(1696278514562205, 'descriptionAmazon', 0, 1696278514561638, 1696278537845651, '2021-04-14 15:59:18'),
+(1696278514565563, 'descriptionGoogle', 0, 1696278514561268, 1696278514562148, '2021-04-13 15:59:18'),
+(1696278514565607, 'descriptionDoe', 2, 1696278514560951, 1696278547894512, '2021-04-12 15:59:18'),
+(1696278514567789, 'CommentGoogle', 1, 1696278514567744, 1696278547894512, '2021-04-12 15:59:18');
 
 -- --------------------------------------------------------
 
@@ -180,6 +182,8 @@ CREATE TABLE `like_publication` (
 --
 
 INSERT INTO `like_publication` (`idcompte`, `idpublication`) VALUES
+(1696278514562148, 1696278514567029),
+(1696278514562148, 1696278514567744),
 (1696278527895410, 1696278514560951),
 (1696278537845651, 1696278514568239),
 (1696278547894514, 1696278514568239);
@@ -196,20 +200,21 @@ CREATE TABLE `publication` (
   `imageurl` varchar(100) DEFAULT NULL,
   `like` int(11) NOT NULL,
   `statut` varchar(42) DEFAULT NULL,
-  `idcompte` bigint(20) NOT NULL
+  `idcompte` bigint(20) NOT NULL,
+  `datePub` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `publication`
 --
 
-INSERT INTO `publication` (`idpublication`, `description`, `imageurl`, `like`, `statut`, `idcompte`) VALUES
-(1696278514560951, 'descriptionOnyme', 'uneImageOnyme.jpg', 1, 'public', 1696278547894513),
-(1696278514561268, 'descriptionFnac', 'uneImageFnac.jpg', 0, 'public', 1696278527895410),
-(1696278514561638, 'descriptionDrake', 'uneImageDrake.jpg', 0, 'public', 1696278547894514),
-(1696278514567029, 'descriptionDoe', 'uneImageDoe.jpg', 0, 'amis', 1696278547894512),
-(1696278514567744, 'descriptionGoogle', 'uneImageGoogle.jpg', 0, 'public', 1696278514562148),
-(1696278514568239, 'descriptionAmazon', 'uneImageAmazon.jpg', 2, 'public', 1696278537845651);
+INSERT INTO `publication` (`idpublication`, `description`, `imageurl`, `like`, `statut`, `idcompte`, `datePub`) VALUES
+(1696278514560951, 'descriptionOnyme', 'uneImageOnyme.jpg', 1, 'public', 1696278547894513, '2021-02-17 11:09:47'),
+(1696278514561268, 'descriptionFnac', 'uneImageFnac.jpg', 0, 'public', 1696278527895410, '2021-02-08 13:09:47'),
+(1696278514561638, 'descriptionDrake', 'uneImageDrake.jpg', 0, 'public', 1696278547894514, '2021-04-05 15:09:47'),
+(1696278514567029, 'descriptionDoe', 'uneImageDoe.jpg', 1, 'amis', 1696278547894512, '2021-04-07 15:09:47'),
+(1696278514567744, 'descriptionGoogle', 'uneImageGoogle.jpg', 1, 'public', 1696278514562148, '2021-04-01 14:17:07'),
+(1696278514568239, 'descriptionAmazon', 'uneImageAmazon.jpg', 2, 'public', 1696278537845651, '2021-04-14 00:00:00');
 
 -- --------------------------------------------------------
 
