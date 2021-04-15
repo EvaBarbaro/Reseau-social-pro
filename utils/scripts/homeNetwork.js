@@ -18,6 +18,10 @@ $(document).ready(function(){
         }
         
       }); 
+      $("#reset").on( "click", function() {
+        $("#networkHomePage").load(networkLink);
+        $('footer').first().remove();
+      });
 /*
       $(".card-footer").find("img").on( "click", function() {
       

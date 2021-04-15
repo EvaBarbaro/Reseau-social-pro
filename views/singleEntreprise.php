@@ -64,6 +64,7 @@ require_once __DIR__ . '/asideMember.php';
   </div>
 </div>
   <!-- formulaire d'ajout publication -->
+  <img name="reset"  id="reset" style="width:4em;cursor: pointer;margin-left:20em;" src="<?php echo pathUrl().'public/img/reset.png';?>" class="card-img-top mt-3" alt="Image introuvable">
 
 <?php
 $i=0;
