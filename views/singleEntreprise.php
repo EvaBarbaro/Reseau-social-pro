@@ -3,8 +3,6 @@
 
 <?php
 require_once __DIR__ . '/networkNav.php';
-echo session_status();
-// var_dump($viewVars['utilisateurList']);
 ?>
 
 
