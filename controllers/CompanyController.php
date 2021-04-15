@@ -105,7 +105,6 @@ class CompanyController extends CoreController
 
     public function update()
     {
-        $entrepriseId = $_POST['identreprise'];
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
@@ -132,11 +131,16 @@ class CompanyController extends CoreController
 
         $entreprise->setDescription($_POST['description']);
         $entreprise->setUrl($_POST['url']);
-        $entreprise->setStatut(true);
+
+        if ($_POST['statut'] == NULL) {
+            $entreprise->setStatut(0);
+        } else {
+            $entreprise->setStatut($_POST['statut']);
+        }
 
         $entrepriseDao->update($entreprise);
 
-        header('Location: '.pathUrl().'monReseau/'.$entrepriseId);
+        header('Location: '.pathUrl().'superAdmin');
     }
 
     public function delete()

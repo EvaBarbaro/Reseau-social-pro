@@ -37,13 +37,13 @@
                 </td>
                 <td>
                 <div class="form-check">
-                    <input name="statut" class="form-check-input" type="checkbox" id="checkStatut<?= $index?>" <?php if($utilisateur['statut'] == 1){echo "checked";} ?>>
+                    <input name="statut" class="form-check-input" type="checkbox" value="<?= $utilisateur['statut'] ?>" id="checkStatut<?= $index?>" <?php if($utilisateur['statut'] == 1){echo "checked";} ?>>
                     <label class="form-check-label" for="checkStatut<?= $index?>">
                         Activé/Désactivé un compte
                     </label>
                 </div>
                 </td>
-                <td><button type='submit' class='btn btn-info'>Modifier</button>
+                <td><button type='submit' class='btn btn-info'>Modifier</button></td>
             </form>
                 <td> <!-- Button trigger modal -->
                 <button id="deleteAccount" type="button" class="btn btn-danger" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$utilisateur['idutilisateur'] ?>">
