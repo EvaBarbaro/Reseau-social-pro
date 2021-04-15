@@ -25,9 +25,15 @@
 
     <h2 class="mt-4">
         Toutes mes images
+        <?php
+            if ($viewVars['compte']['idcompte'] === $_SESSION['idutilisateur']) {
+        ?>
         <button id="insertImageButton" class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
             Ajouter une image
         </button>
+        <?php
+            }
+        ?>
     </h2>
     <div class="collapse" id="collapseImage">
     <div class="card card-body mb-4">
@@ -72,7 +78,9 @@
                             <div class="btn-group ">
                                 <?php //echo "<a href=".pathUrl()."monImageD/".$image['idimage']." class='btn btn-danger btn-xs' >Supprimer</a>" ?> 
                                     <div class="container">
-
+                                        <?php
+                                            if ($image['idcompte'] === $_SESSION['idutilisateur']) {
+                                        ?>
                                         <!-- Trigger the modal with a button modifier-->
                                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="<?= '#myModal'.$image['idimage'] 
                                         ?>">Suprimer</button>
@@ -163,9 +171,7 @@
 
                                                 </div><!--  div modal-content  -->
                                             </div><!--  div modal-dialog  -->
-                                        </div><!--  div modal-fade  -->
-
-                                                                            
+                                        </div><!--  div modal-fade  -->                              
                                     </div><!--  div container  -->
                                     <!-- <button type='submit' class='btn btn-danger'>Supprimer</button> -->
                                 <!-- <?php //echo "<a href=".pathUrl()."monImageM/".$image['idimage']." class='btn btn-info btn-xs'>Modifier</a>" ?> -->
@@ -175,14 +181,15 @@
                 <!-- </a> -->
             </div><!-- div-thumbnail -->                            
         </div><!-- div-col-md-3 -->
-        <?php    }   ?>
+        <?php
+                }
+            }  
+        ?>
         </div><!-- div-truc --> 
     </div><!-- div-row -->
 </div><!-- div-truc --> 
 </div><!-- div-container -->
-</div><!-- div-d-flex --> 
-</body>   
-</html>
+</div><!-- div-d-flex -->
 </div><!--  div container  -->
 
 </div><!--  div d-flex  -->             
