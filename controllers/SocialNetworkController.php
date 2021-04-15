@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
 include_once __DIR__.'/../models/publication.php';

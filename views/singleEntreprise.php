@@ -3,7 +3,7 @@
 
 <?php
 require_once __DIR__ . '/networkNav.php';
-echo $_SESSION['idutilisateur'];
+echo session_status();
 // var_dump($viewVars['utilisateurList']);
 ?>
 
@@ -126,7 +126,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
     echo $pub['publicationInfos']['description'];
 ?></p>
   </div>
-  <div class="card-footer">
+  <div class="card-footer footerComm">
   <p>
 
   <div id="likeUnlikePub_form">
@@ -143,9 +143,9 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
 
 
-  <a style="display:inline;"  class="btn offset-9" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn offset-10 buttonCom" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
  
-  <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top" alt="Image introuvable">
+  <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top imgComm" alt="Image introuvable">
   
   </a>
 
