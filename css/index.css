@@ -147,6 +147,18 @@ footer {
     width:35rem;
 }
 
+.truc {
+    color: black;
+    background-color: rgba(50, 100, 100, .2);
+    padding : 20px;
+    border-radius: 5px;    
+}
+
+.inner-div {
+margin: 0 auto;
+width: 100px; 
+}
+
 .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
     color: #fff;
     background-color: #fff;

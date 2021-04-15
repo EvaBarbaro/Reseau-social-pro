@@ -6,32 +6,6 @@
 <?php require_once __DIR__ . '/asideProfil.php'; ?>
 <div class="container">
         
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <!--<title>Bootstrap Example</title> -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        .truc {
-      color: black;
-      background-color: rgba(50, 100, 100, .2);
-      padding : 20px;
-      border-radius: 5px;
-      
-    }
-    .inner-div {
-     margin: 0 auto;
-     width: 100px; 
-    }
-
-
-     </style>
-</head>
-<body>
 <div class="d-flex">
 
 <div class="container">    
@@ -72,8 +46,8 @@
         ?>  
         <div class="col-md-3">
             <div class="thumbnail">    
-                <?php   echo     "<a href=".pathUrl()."public/albumImages/". $image['imageurl']." target='_blank'>"   ?>
-                <?php   echo     "<img src=".pathUrl()."public/albumImages/". $image['imageurl']." alt='Lights' style='width:100%'></a>"  ?>  
+                <a href="<?= pathUrl()."public/albumImages/". $image['imageurl']?>" target='_blank'>
+                <img src=<?= pathUrl()."public/albumImages/". $image['imageurl']?> alt='Lights' width=100% height="100vh"></a>
                     <div class="caption">
                         <p >    <?php  $t = $viewVars['imageList'][$index]['titre']; echo $t;   ?>  </p>
                         <p>
