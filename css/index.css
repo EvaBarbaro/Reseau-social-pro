@@ -124,6 +124,10 @@ footer {
     border-color: none;
 }
 */
+/*
+a .dropdown-item{
+    cursor: pointer!important;
+}*/
 .dropdown button {
     background-color: transparent;
     border: none;

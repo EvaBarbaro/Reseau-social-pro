@@ -6,9 +6,12 @@ var networkLink = filename+"monReseau/"+idEntreprise;
 $(document).ready(function(){
 
    
-    $(".dropdown-item").find("img").on( "click", function() {
+    $(".dropdown-item").on( "click", function() {
       
-        if($(this).attr("id")=="public"){
+        if($(this).find("a").attr("id")=="allPubs"){
+          $("#networkHomePage").load(url);
+        }      
+        if($(this).find("img").attr("id")=="public"){
             $(".dropdown").children(":first").find("img").attr("src",filename+"public/img/public.png");
             $("#statut").attr("value","public");
         }
@@ -19,7 +22,8 @@ $(document).ready(function(){
         
       }); 
     $("#reset").on( "click", function() {
-            $("#networkHomePage").load(networkLink);
+      alert("reset url = "+url);
+            $("#networkHomePage").load(url);
             $('footer').first().remove();
           });     
 

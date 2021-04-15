@@ -15,6 +15,18 @@ require_once __DIR__ . '/asideMember.php';
 ?>
 </div>
 <div class="col-lg-2">
+  <!-- Example single danger button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Visiblité
+  </button>
+  <div class="dropdown-menu">
+    <a id="allPubs" style="cursor: pointer;" class="dropdown-item">Toutes les publications</a>
+    <a id="publicPubs" style="cursor: pointer;" class="dropdown-item">public</a>
+    <a id="amisPubs" style="cursor: pointer;" class="dropdown-item">amis</a>
+  
+  </div>
+</div>
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">
