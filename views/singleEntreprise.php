@@ -3,7 +3,7 @@
 
 <?php
 require_once __DIR__ . '/networkNav.php';
-
+echo $_SESSION['idutilisateur'];
 // var_dump($viewVars['utilisateurList']);
 ?>
 
