@@ -82,20 +82,27 @@ footer {
     opacity: 85%;
     color: antiquewhite;
 } */
+
 .card .pubHeader img{
-    border: solid transparent;
-    border-radius: 10rem;
+  
     height:2.5rem;
     width:2.5rem;
 }
+
+.card .pubHeader .card-img-top{
+    border: solid transparent;
+    border-radius: 10rem;
+  
+}
+
 .card .pubHeader .visibilité{
     display: inline-block;
 }
 
 .card .pubHeader .visibilité img{
   
-    height: 2rem;
-    width:2rem;
+    height: 1.7rem;
+    width:1.7rem;
 }
 
 .navbar-brand img{

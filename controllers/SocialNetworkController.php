@@ -58,8 +58,6 @@ class SocialNetworkController extends CoreController
             'publicationList' => $publicationList,
             'idUtilisateur' => $this->idUtilisateur,
             'utilisateurList' => $utilisateurList,
-            'idUtilisateur' => $idUtilisateur,
-            'utilisateurList' => $utilisateurList,
             'compteList' => $compteList
         ]);
     }

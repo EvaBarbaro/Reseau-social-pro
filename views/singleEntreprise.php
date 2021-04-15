@@ -99,7 +99,7 @@ if(!empty($pub['comptePublication']['photo'])){
     $img ="amis.png";
   } ?>
   <div class="visibilité">
-  <img class="offset-11" src="<?php echo pathUrl().'public/img/'.$img;?>"> 
+  <img class="offset-11" src="<?php echo pathUrl().'public/img/'.$img;?>" > 
 </div>
 <!--
 <div class="dropdown offset-8">
@@ -183,8 +183,9 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   </div>
 </div>
 <?php
-$tabCom = array_reverse($pub['commentaires'],true);
+$j=0;
 foreach($pub['commentaires'] as $com){
+$j++;
 ?>
 <div class="card rounded-0" style="width: 45rem;">
 <div class="card-header rounded-0" style="background-color:#7A92B1;">
@@ -196,14 +197,46 @@ if(!empty($com['commentaire_compte']['photo'])){
 }
 ?>
   <div class="pubHeader" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
-
+  <div class="user">
 <?php
  echo $com['commentaire_compte']['nomutilisateur'];
 ?>
   <small id="dateCom" style="display:inline;" class="form-text font-weight-bold" ><?= $com['commentaireInfo']['date']?></small>
+  </div>
+  <?php if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){?><img name="deleteCom" 
+    id="deleteCom"
+    style="cursor:pointer;height: 2.1rem;width: 2.1rem;" src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  alt="Image introuvable"
+    data-toggle="modal" data-target="#deleteComModal<?=$j?>"
+    ><?php } ?>
+
+
+  
 
   </div>
   </div>
+  <!-- Modal -->
+<div class="modal fade" id="deleteComModal<?=$j?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deleteComModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteComModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Êtes vous sûrs de vouloir supprimer ?
+      </div>
+      <div class="modal-footer">
+      <form name="deleteComForm<?=$j;?>" id="deleteComForm">
+        <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" id="deleteComModal" class="btn btn-primary">Confirmer</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="card-body" style="background-color:#B4C1D3;">
     <p class="card-text"><?php
     echo $com['commentaireInfo']['description'];
