@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require './altorouter/AltoRouter.php';
 
 include __DIR__ . '/utils/DBData.php';
@@ -64,9 +68,31 @@ $router->map('POST', '/mesInformations/update', 'AccountController#update', 'acc
 
 $match = $router->match();
 
-if ($match != false) {
+if ($match !== false) {
+    if ($match['target'] === "ImageController#getAll" && empty($_SESSION)) {
+        $match = false;
+    } else if ($match['target'] === "SocialNetworkController#getPublicationByUser" && empty($_SESSION)) {
+        $match = false;
+    } else if ($match['target'] === "SocialNetworkController#home" && empty($_SESSION) || $match['target'] === "SocialNetworkController#home" && $match['params']['id'] !== $_SESSION['identreprise']) {
+        $match = false;
+    } else if ($match['target'] === "UserController#get" && empty($_SESSION) || $match['target'] === "UserController#get" && $match['params']['id'] !== $_SESSION['idutilisateur']) {
+        $match = false;
+    } else if ($match['target'] === "AccountController#get" && empty($_SESSION) || $match['target'] === "AccountController#get" && $match['params']['id'] !== $_SESSION['idutilisateur']) {
+        $match = false;
+    } else if ($match['target'] === "UserController#getPass" && empty($_SESSION) || $match['target'] === "UserController#getPass" && $match['params']['id'] !== $_SESSION['idutilisateur']) {
+        $match = false;
+    }  else if ($match['target'] === "UserController#getAll" && empty($_SESSION) || $match['target'] === "UserController#getAll" && $match['name'] !== $_SESSION['role']) {
+        $match = false;
+    } else if ($match['target'] === "UserController#getAll" && empty($_SESSION) || $match['target'] === "UserController#getAll" && $match['params']['id'] !== $_SESSION['identreprise']) {
+        $match = false;
+    }  else if ($match['target'] === "CompanyController#getAll" && empty($_SESSION) || $match['target'] === "CompanyController#getAll" && $match['name'] !== $_SESSION['role']) {
+        $match = false;
+    }
+}
+
+if ($match) {
     //explode()  retourne un tableau de chaînes de caractères, chacune d'elle étant 
-    // une sous-chaîne du paramètre string extraite en utilisant le séparateur separator.
+    //une sous-chaîne du paramètre string extraite en utilisant le séparateur separator.
     $controllerInformations = explode('#', $match['target']);
 
     $controllerName = $controllerInformations[0];
@@ -74,7 +100,7 @@ if ($match != false) {
 
     $controller = new $controllerName($router);
     
-    $controller->$methodName($match['params']); 
+    $controller->$methodName($match['params']);
     //$match['params'] --> prend un paramètre si il y en a un, par exemple le id de get(id).
 
 } else {
