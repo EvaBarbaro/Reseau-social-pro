@@ -10,6 +10,9 @@ if ($viewVars['compte']['photo'] == NULL) {
 <div id="logo">
     <div id="profilContent">
     <img src=<?= pathUrl()."public/profilImages/".$profileImage ?> alt="logo" id="photoImg" class="rounded-circle mt-4">
+        <?php
+        if ($viewVars['compte']['idcompte'] === $_SESSION['idutilisateur']) {
+        ?>
         <form id="formPhotoFile" enctype="multipart/form-data" action=<?= pathUrl()."mesInformations/update" ?> method="POST">
             <input type="hidden" name="idcompte" value="<?= $viewVars['compte']['idcompte'] ?>">
             <img id="newPhotoFile" src=<?= pathUrl()."public/img/pencil.png" ?> alt="bouton modification">
@@ -21,6 +24,9 @@ if ($viewVars['compte']['photo'] == NULL) {
             <input type="hidden" name="departement" value="<?= $viewVars['compte']['departement'] ?>">
             <input type="hidden" name="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
         </form>
+        <?php
+            }
+        ?>
     </div>
         <h1 id="photoName" class="mt-2"><?= $viewVars['compte']['prenom']." ".$viewVars['compte']['nom'] ?></h1>
     </div>

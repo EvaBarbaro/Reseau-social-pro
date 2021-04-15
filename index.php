@@ -41,6 +41,7 @@ $router->map('POST', '/monReseau/[i:id]/createCommentaire', 'SocialNetworkContro
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'SocialNetworkController#home', 'reseauSingle');
 $router->map('POST', '/mesPublications/update', 'SocialNetworkController#updatePublication', 'publicationUpdate');
+$router->map('POST', '/mesPublications/delete', 'SocialNetworkController#deletePublication', 'publicationDelete');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
 $router->map('POST', '/monReseau/delete', 'CompanyController#delete', 'superAdminDelete');
 $router->map('POST', '/monReseau/update', 'CompanyController#update', 'reseauUpdate');

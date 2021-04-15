@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
 require_once __DIR__.'/../dao/compteDao.php';
@@ -19,10 +23,11 @@ class SocialNetworkController extends CoreController
    public $idUtilisateur;
    
     public function init($entrepriseId){
+
         $DBData = new DBData();
         $this->db = $DBData->getConnection();
         //à remplacer par la variable idutilisateur de la session courante
-        $this->idUtilisateur = 1696278514562148;
+        $this->idUtilisateur = $_SESSION['idutilisateur'];
         $this->entrepriseId = $entrepriseId;
         
     }
@@ -31,8 +36,6 @@ class SocialNetworkController extends CoreController
     public function home($parameters)
     {
         $this->init($parameters['id']);
-        
-        session_start();
 
         $entrepriseId = $parameters['id'];
 
@@ -153,10 +156,17 @@ class SocialNetworkController extends CoreController
     // supprimer une publication
     public function deletePublication($parameters) {
         $this->init($parameters['id']);
+
+        $idCompte = $_POST['idcompte'];
+
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
+
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $publication = $publicationDao->delete($publication->getIdpublication());
+
+        header('Location: '.pathUrl().'monCompte/'.$idCompte.'/mesPublications');
+
         return $publication;
     }
 

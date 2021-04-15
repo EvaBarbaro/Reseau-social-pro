@@ -45,11 +45,33 @@
                 </td>
                 <td><button type='submit' class='btn btn-info'>Modifier</button>
             </form>
-            <form action=<?= pathUrl()."monCompte/delete" ?> method='POST'>
-                <input type='hidden' value=<?= $utilisateur['idutilisateur'] ?> name='idutilisateur' />
-                <input type='hidden' value=<?= $utilisateur['identreprise'] ?> name='identreprise' />
-                <td><button type='submit' class='btn btn-danger'>Supprimer</button>
-            </form>
+                <td> <!-- Button trigger modal -->
+                <button id="deleteAccount" type="button" class="btn btn-danger" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$utilisateur['idutilisateur'] ?>">
+                Supprimer
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="<?= 'userDelModalAdmin'.$utilisateur['idutilisateur'] ?>" tabindex="-1" role="dialog" aria-labelledby="userDelModalAdminLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="userDelModalAdminLabel">Comfirmez-vous la suppression du compte <?= $utilisateur['nomutilisateur'] ?> ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <form action=<?= pathUrl()."monCompte/delete" ?> method='POST'>
+                        <div class="modal-footer">
+                            <input type='hidden' value=<?= $utilisateur['idutilisateur'] ?> name='idutilisateur' />
+                            <input type='hidden' value=<?= $utilisateur['identreprise'] ?> name='identreprise' />
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    </form>
+                </td>
             </tr>
         <?php
         }
