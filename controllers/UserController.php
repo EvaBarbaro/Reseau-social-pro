@@ -109,7 +109,7 @@ class UserController extends CoreController
 
         $compteDao->create($compte);
 
-        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/inscription');
+        header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');
     }
 
     public function update()
