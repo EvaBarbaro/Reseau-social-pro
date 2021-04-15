@@ -26,26 +26,6 @@ class ImageController extends CoreController
         ]);
     }
 
-    public function getAllMonMur($parameters)
-    {
-        $imageId = $parameters['id'];
-       
-        $DBData = new DBData();
-        $db = $DBData->getConnection();
-
-        $imageDao = new imageDao($db);
-        $imageList = $imageDao->getAll($imageId);
-
-        $compteDao = new compteDao($db);
-        $compte = $compteDao->get($imageId);
-
-        $this->show('imageMonMur', [
-            'title' => 'Social Connect - Back Office',
-            'imageList' => $imageList,
-            'compte' => $compte
-        ]);
-    }
-
     public function get($parameters)
     {
         $imageId = $parameters['id'];
@@ -56,11 +36,28 @@ class ImageController extends CoreController
         $imageDao = new imageDao($db);
         $image = $imageDao->get($imageId);
 
-        $this->show('singleImage', [
+        $this->show('singleImageM', [
             'title' => 'Social Connect - Back Office',
             'image' => $image
         ]);
     }
+
+    public function getD($parameters)
+    {
+        $imageId = $parameters['id'];
+
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $imageDao = new imageDao($db);
+        $image = $imageDao->get($imageId);
+
+        $this->show('singleImageD', [
+            'title' => 'Social Connect - Back Office',
+            'image' => $image
+        ]);
+    }
+    
     public function create()
     {
         $DBData = new DBData();
@@ -96,7 +93,7 @@ class ImageController extends CoreController
 
     public function update()
     {
-        $imageId = $_POST['idimage'];
+        $userId = $_POST['idcompte'];
 
         $DBData = new DBData();
         $db = $DBData->getConnection();
@@ -111,7 +108,8 @@ class ImageController extends CoreController
        
         $imageDao->update($image);
 
-        header('Location: '.pathUrl().'monImage/'.$imageId);
+        //header('Location: '.pathUrl().'monImage/'.$imageId);
+        header('Location: '.pathUrl().'monCompte/'.$userId.'/mesImages');
     }
 
     public function delete()

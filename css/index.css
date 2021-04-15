@@ -165,6 +165,19 @@ input[type=image]{
 .footerComm {
     padding-bottom: 0;
 }
+.btn-xs {
+    font-size: xx-small;
+    color: white;
+}
+
+#memberLink {
+    text-decoration: none;
+    color: black;
+}
+
+#memberLink:hover {
+    opacity: 70%;
+}
 
 .fakeTextInput {
     border: none;
@@ -180,6 +193,36 @@ input[type=image]{
     border: none;
     outline: none;
 }
+
+.imagePostUser {
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.postDescUser {
+    resize: none;
+    width: 75%;
+    height: 2em;
+}
+
+.bi-person-plus-fill {
+    cursor: pointer;
+}
+
+.bi-person-check {
+    cursor: pointer;
+}
+
+/* .updateTitlePostInput {
+    border: 1px solid black;
+    outline: solid;
+    background-color: white;
+}
+
+.updateTitlePostInput:focus {
+    border: 1px solid black;
+    outline: solid;
+} */
 
 #deleteAccount {
     width: 100%;

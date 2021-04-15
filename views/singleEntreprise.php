@@ -7,7 +7,14 @@ require_once __DIR__ . '/networkNav.php';
 
 
 <div class="row">
-<div class="col-lg-2 offset-lg-2">
+<div class="col-lg-4">
+<?php
+
+require_once __DIR__ . '/asideMember.php';
+
+?>
+</div>
+<div class="col-lg-2">
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">
