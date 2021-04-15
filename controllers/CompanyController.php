@@ -126,6 +126,8 @@ class CompanyController extends CoreController
             if (move_uploaded_file($tempname, $folder))  {
                 $entreprise->setLogo($uniqueFileName.'.'.$extension);
             }
+        } else {
+            $entreprise->setLogo($_POST['logo']);
         }
 
         $entreprise->setDescription($_POST['description']);

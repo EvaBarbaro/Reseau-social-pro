@@ -1,4 +1,10 @@
 <div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Social-Connect</a>
+    <form class="form-inline" method="POST" action="<?= pathUrl().'superAdmin/logoutAdmin' ?>">
+        <button class="btn btn-info my-2 my-sm-0" type="submit">Déconnexion</button>
+    </form>
+    </nav>
 	<h2 class="mt-4">Toutes les entreprises</h2>
 	<table class="table table-bordered table-striped mt-4">
 		<tr>

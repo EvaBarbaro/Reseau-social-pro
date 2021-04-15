@@ -21,6 +21,10 @@ $router = new AltoRouter();
 
 $router->setBasePath($_SERVER['BASE_URI']);
 
+$router->map('GET', '/superAdmin/login', 'LoginController#loginAdmin', 'loginAdmin');
+$router->map('POST', '/superAdmin/loggedAdmin', 'LoginController#loggedAdmin', 'loggedAdmin');
+$router->map('POST', '/superAdmin/logoutAdmin', 'LoginController#logoutAdmin', 'logoutAdmin');
+
 $router->map('GET', '/monReseau/[i:id]/login', 'LoginController#login', 'login');
 $router->map('POST', '/monReseau/[i:id]/logged', 'LoginController#logged', 'logged');
 $router->map('POST', '/monReseau/logout', 'LoginController#logout', 'logout');
