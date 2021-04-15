@@ -8,20 +8,7 @@
         
 <div class="d-flex">
 
-<div class="container">    
-
-<br>
-<div class="truc">
-    <h2 class="mt-4">Insérer une nouvelle image</h2>
-    <!-- <div class="truc"> -->
-        <div  style='width: 80%' class="inner-div">
-            <?php echo "<td ><a href=".pathUrl()."imageEnCreation class='btn  btn-block btn-primary btn-justified';>Insérer</a></td>"; ?>
-        </div>
-    <!-- </div>     -->
-</div>
-<br><br><br>
-
-
+<div class="container mt-4">    
 
 <div class="truc">
 
@@ -36,7 +23,38 @@
         <b><p style="color:red;">Variable image</p> </b>    <?php // var_dump($image); ?> 
 </pre>  -->
 
-    <h2 class="mt-4">Toutes mes images</h2>
+    <h2 class="mt-4">
+        Toutes mes images
+        <button id="insertImageButton" class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
+            Ajouter une image
+        </button>
+    </h2>
+    <div class="collapse" id="collapseImage">
+    <div class="card card-body mb-4">
+        <form enctype="multipart/form-data" action=<?= pathUrl()."monImage/create" ?> method="POST" class="col">
+            <input type="hidden" name="idimage" value="<?= hexdec(uniqid()); ?>">
+
+            <div class="form-group row">
+                <label for="titre" class="col-sm-4 col-form-label">Titre de l'image</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre de l'image" required>
+                </div>
+            </div>
+
+    
+            <div class="form-group row">
+                <label for="imageurl" class="col-sm-4 col-form-label">Votre image</label>
+                <div class="col-sm-8">
+                <input type="file" name="imageurl" id="imageurl" placeholder="Votre image" required>
+                </div>
+            </div>
+
+            <input type="hidden" name="idcompte" value=<?= $_SESSION['idutilisateur'] ?>>
+
+            <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
+        </form>
+    </div>
+    </div>
     <div class="truc">                                               
     <div class="row">
         <?php
