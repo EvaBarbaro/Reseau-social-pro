@@ -99,18 +99,39 @@ class publicationDao implements interfaceDao {
         return $publication;
     }
 
-    
+    public function getAll(){}
 /**
  * Get all publication
  */ 
-    public function getAll(){
-        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE ( (t.identreprise=:identreprise) AND (p.idcompte = t.idutilisateur) ) AND ( (p.statut='public') OR (p.idcompte=:id) OR 
-        ( (p.statut='amis') AND (p.idcompte  IN 
-        (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
-        (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) ) ) ORDER BY datePub DESC";
+    public function getAllPublications($parameters){
+
+        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE (( (t.identreprise=:identreprise) AND (p.idcompte = t.idutilisateur) ) AND ( ";
+        if($parameters['visibilite']==="public"){
+            $sql=$sql."(p.statut='public')";
+        }
+        else if($parameters['visibilite']==="amis"){
+            $sql=$sql."( (p.statut='amis') AND (p.idcompte  IN 
+            (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
+            (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) )";
+        }
+        else {
+            $sql=$sql."(p.statut='public') OR (p.idcompte=:id) OR 
+            ( (p.statut='amis') AND (p.idcompte  IN 
+            (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
+            (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) )";
+        }
+        $sql=$sql.")) ";
+        if($parameters['order']==="popularite"){
+            $sql=$sql."ORDER BY p.like DESC";
+        }
+        else  {
+            $sql=$sql."ORDER BY datePub DESC";
+        }
 
         $pdoStatement = $this->conn->prepare($sql);
+        if( ($parameters['visibilite']==="amis")  || ( ( ($parameters['visibilite']!=="amis") ) && ($parameters['visibilite']!=="public"))){
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
+        }
         $pdoStatement->bindValue(':identreprise',$this->entrepriseId, PDO::PARAM_INT);
         $pdoStatement->execute();
         $publications = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);

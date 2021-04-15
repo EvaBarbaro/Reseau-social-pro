@@ -1,6 +1,6 @@
 var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
-var idEntreprise = url.substring(url.lastIndexOf('/')+1,url.lastIndexOf('/')+17);
+var idEntreprise = url.substring(url.lastIndexOf('monReseau')+10,url.lastIndexOf('monReseau')+26);
 var networkLink = filename+"monReseau/"+idEntreprise;
 
 $(document).ready(function(){
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 /*    $(".modal-footer").find("button").on( "click", function() {
       if($(this).attr("id").includes("deleteComModal")){
-        alert($(this).attr('value'));
+        //alert($(this).attr('value'));
       }
     });*/
 /*
@@ -52,21 +52,27 @@ $(document).ready(function(){
         $('.modal').removeData('bs.modal')
     });
 */
-/*$( ".modal" ).on('show.bs.modal', function(e){
-  e.preventDefault();
-  alert("I want this to appear after the modal has opened!");
+/*
+$(document.body).on('hidden.bs.modal', function () {
+  document.body.style.overflow="visible"; 
+});
+$( ".modal" ).on('show.bs.modal', function(e){
+ // e.preventDefault();
+  document.body.style.overflow="hidden"; 
+ // $('.modal').modal('show');
+});
+$( ".modal" ).find("button[type=submit]").on('click', function(e){
 
- 
-  
+     document.body.style.overflow="initial"; 
 });*/
       $( "form" ).submit(function(e) {
-        //alert("submit");
+        ////alert("submit");
             var sendFile=false;
             var dataString = $(this).serialize();
             var link="";
             var modal=false;
             if($(this).attr("name").includes("likeUnlikePub")) {
-             // alert("like Pub");
+             // //alert("like Pub");
               link="/LikeUnlikePublication"; 
               e.preventDefault();
             }
@@ -97,9 +103,9 @@ $(document).ready(function(){
               
               link="/deleteCommentaire";
               e.preventDefault();
-              modal=true;
+              // modal=true;
             }
-            
+          //alert(networkLink+link);
         if(link!=="") {
             if(sendFile){
            var xhr = $.ajax({
@@ -137,14 +143,22 @@ $(document).ready(function(){
              
       
 //window.scrollTo(0, parseInt(scrollY || '0') * -1);
-$("#networkHomePage").load(networkLink);
-              if(modal===true){
+             // $('.modal').modal('hide');
+           //  $('.modal').modal().hide();
+           ////alert("networkLink= "+networkLink);
+              $("#networkHomePage").load(url);
+
+             // document.body.style.overflow="initial"; 
+
+             // $('.modal').modal().hide();
+              
+              //if(modal===true){
                /* $('.modal').modal('dispose');
                var x = window.scrollX;
                var y = window.scrollY;*/
-               document.body.style.overflow="scroll";
+               
               // window.scrollTo(x, y);
-              }
+             // }
 
              
              

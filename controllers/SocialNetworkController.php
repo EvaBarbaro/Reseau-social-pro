@@ -66,7 +66,7 @@ class SocialNetworkController extends CoreController
     public function getPublications($parameters) {
         $this->init($parameters['id']);
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,$this->entrepriseId);
-        $publicationList = $publicationDao->getAll();
+        $publicationList = $publicationDao->getAllPublications($parameters);
         return $publicationList;
     }
     

@@ -83,6 +83,15 @@ footer {
     color: antiquewhite;
 } */
 
+.modal-open {
+    padding: 0 !important;
+    overflow-y: auto;
+}
+
+/* .modal {
+    background-color:rgba(128,128,128, 0.1);
+} */
+
 .card .pubHeader img{
   
     height:2.5rem;

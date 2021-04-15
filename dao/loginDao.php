@@ -42,7 +42,7 @@ class loginDao {
 
             $_SESSION['logo'] = $rowLogo['logo'];
 
-            header('Location: '.pathUrl().'monReseau/'.$row['identreprise']);
+            header('Location: '.pathUrl().'monReseau/'.$row['identreprise'].'/reseau/publications');
         } else {
             session_start();
             $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe ou nom d'utilisateur est incorrect !</div>";
