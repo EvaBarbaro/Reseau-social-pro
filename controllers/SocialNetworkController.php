@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once __DIR__.'/../dao/utilisateurDao.php';
 include_once __DIR__.'/../dao/publicationDao.php';
@@ -34,7 +36,7 @@ class SocialNetworkController extends CoreController
     {
         $this->init($parameters['id']);
         
-        session_start();
+        //session_start();
 
         $entrepriseId = $parameters['id'];
 
