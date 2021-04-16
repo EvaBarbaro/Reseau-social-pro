@@ -271,10 +271,10 @@ if(!empty($com['commentaire_compte']['photo'])){
   </div>
 </div>
   <div class="card-body" style="background-color:#B4C1D3;">
-    <p id="cardText" class="card-text" 
-       value=<?=$com['commentaireInfo']['description']?>>
-    <?= $com['commentaireInfo']['description']?>
-    </p>
+  <p class="card-text" id="cardText" value=<?=$com['commentaireInfo']['description']?>><?php
+    echo $com['commentaireInfo']['description'];
+?></p>
+    
   </div>
   <div class="card-footer rounded-0" style="background-color:#7A92B1;">
   <p>
