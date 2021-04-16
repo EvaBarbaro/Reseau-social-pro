@@ -22,9 +22,19 @@ require_once __DIR__ . '/asideMember.php';
   </button>
   <div class="dropdown-menu">
     <a id="allPubs" style="cursor: pointer;" class="dropdown-item">Toutes les publications</a>
-    <a id="publicPubs" style="cursor: pointer;" class="dropdown-item">public</a>
-    <a id="amisPubs" style="cursor: pointer;" class="dropdown-item">amis</a>
+    <a id="publicPubs" style="cursor: pointer;" class="dropdown-item">Public</a>
+    <a id="amisPubs" style="cursor: pointer;" class="dropdown-item">Amis</a>
   
+  </div>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Trier
+  </button>
+  <div class="dropdown-menu">
+    <a id="datePubs" style="cursor: pointer;" class="dropdown-item">Date de publication</a>
+    <a id="likePubs" style="cursor: pointer;" class="dropdown-item">Popularité</a> 
   </div>
 </div>
   <!-- formulaire d'ajout publication -->
