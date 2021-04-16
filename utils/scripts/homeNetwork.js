@@ -76,8 +76,16 @@ $(document).on('click', "#reset", function () {
    
 
   $(document).on('click', "#updateCom", function () {
-      alert(($(this).siblings( ["p .card-text"] ).value()));
-    });  
+    if($(this).parents(".card-header").siblings(".card-body").find("p#cardText").length){
+
+  var description = $(this).parents(".card-header").siblings(".card-body").find("p#cardText").attr("value");
+  $(this).parents(".card-header").siblings(".card-body").find("p#cardText").replaceWith( "<input type='text' value='"+description+"' class='form-control'>" );
+}
+else {
+
+  var description =  $(this).parents(".card-header").siblings(".card-body").find("input[type=text]").attr("value");
+  $(this).parents(".card-header").siblings(".card-body").find("input[type=text]").replaceWith( "<p class='card-text' id='cardText' value='"+description+"'>"+description+"</p>" );
+}});  
     
 
 $(document).on('submit', "form", function (e) {

@@ -1,6 +1,3 @@
-
-
-
 <?php
 require_once __DIR__ . '/networkNav.php';
 ?>
@@ -229,6 +226,7 @@ if(!empty($com['commentaire_compte']['photo'])){
   <?php if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){?>
   <img name="updateCom" 
        id="updateCom"
+       value="<?=$j?>"
        style="cursor:pointer;height: 2.5rem;width: 2.5rem;" 
        src="<?php echo pathUrl().'public/img/pencil.png';?>" 
        alt="Image introuvable"
@@ -273,13 +271,9 @@ if(!empty($com['commentaire_compte']['photo'])){
   </div>
 </div>
   <div class="card-body" style="background-color:#B4C1D3;">
-    <p class="card-text" 
-       value="<?php
-       echo $com['commentaireInfo']['description'];
-       ?>">
-    <?php
-    echo $com['commentaireInfo']['description'];
-    ?>
+    <p id="cardText" class="card-text" 
+       value=<?=$com['commentaireInfo']['description']?>>
+    <?= $com['commentaireInfo']['description']?>
     </p>
   </div>
   <div class="card-footer rounded-0" style="background-color:#7A92B1;">
