@@ -77,6 +77,10 @@ $(document).ready(function(){
             $('footer').first().remove();
           });     
 
+    $("#updateCom").on( "click", function() {
+
+      alert(($(this).siblings( ["p .card-text"] ).value()));
+    });  
 
       $( "form" ).submit(function(e) {
         
