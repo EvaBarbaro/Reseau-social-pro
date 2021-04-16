@@ -73,7 +73,7 @@ $(document).ready(function(){
 
     $("#reset").on( "click", function() {
     
-            $("#networkHomePage").load(url);
+            $("#networkHomePage").load(networkLink+"/"+visibilité+"/"+order);
             $('footer').first().remove();
           });     
 

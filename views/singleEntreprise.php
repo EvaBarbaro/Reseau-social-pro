@@ -15,28 +15,7 @@ require_once __DIR__ . '/asideMember.php';
 ?>
 </div>
 <div class="col-lg-2">
-  <!-- Example single danger button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Visiblité
-  </button>
-  <div class="dropdown-menu">
-    <a id="allPubs" style="cursor: pointer;" class="dropdown-item">Toutes les publications</a>
-    <a id="publicPubs" style="cursor: pointer;" class="dropdown-item">Public</a>
-    <a id="amisPubs" style="cursor: pointer;" class="dropdown-item">Amis</a>
-  
-  </div>
-</div>
-
-<div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Trier
-  </button>
-  <div class="dropdown-menu">
-    <a id="datePubs" style="cursor: pointer;" class="dropdown-item">Date de publication</a>
-    <a id="likePubs" style="cursor: pointer;" class="dropdown-item">Popularité</a> 
-  </div>
-</div>
+ 
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">
@@ -85,9 +64,30 @@ require_once __DIR__ . '/asideMember.php';
 
   </div>
 </div>
-  <!-- formulaire d'ajout publication -->
-  <img name="reset"  id="reset" style="width:4em;cursor: pointer;margin-left:20em;" src="<?php echo pathUrl().'public/img/reset.png';?>" class="card-img-top mt-3" alt="Image introuvable">
-
+  <!-- Bouton pour recharger les publications -->
+  <img name="reset"  id="reset" style="width:4em;cursor: pointer;margin-left:20em;" src="<?php echo pathUrl().'public/img/reset.png';?>" class="card-img-top mt-4" alt="Image introuvable">
+ <!-- Filtre visibilité -->
+ <div class="btn-group mt-4">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Visiblité
+  </button>
+  <div class="dropdown-menu">
+    <a id="allPubs" style="cursor: pointer;" class="dropdown-item">Toutes les publications</a>
+    <a id="publicPubs" style="cursor: pointer;" class="dropdown-item">Public</a>
+    <a id="amisPubs" style="cursor: pointer;" class="dropdown-item">Amis</a>
+  
+  </div>
+</div>
+  <!-- Trie selon dates ou likes -->
+<div class="btn-group mt-4">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Trier
+  </button>
+  <div class="dropdown-menu">
+    <a id="datePubs" style="cursor: pointer;" class="dropdown-item">Date de publication</a>
+    <a id="likePubs" style="cursor: pointer;" class="dropdown-item">Popularité</a> 
+  </div>
+</div>
 <?php
 $i=0;
 
