@@ -23,6 +23,7 @@ class SocialNetworkController extends CoreController
    public $idUtilisateur;
    
     public function init($entrepriseId){
+
         $DBData = new DBData();
         $this->db = $DBData->getConnection();
         //à remplacer par la variable idutilisateur de la session courante
@@ -35,8 +36,6 @@ class SocialNetworkController extends CoreController
     public function home($parameters)
     {
         $this->init($parameters['id']);
-        
-        //session_start();
 
         $entrepriseId = $parameters['id'];
 
@@ -155,10 +154,17 @@ class SocialNetworkController extends CoreController
     // supprimer une publication
     public function deletePublication($parameters) {
         $this->init($parameters['id']);
+
+        $idCompte = $_POST['idcompte'];
+
         $publication = new publication();
         $publication->setIdpublication($_POST['idpublication']);
+
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $publication = $publicationDao->delete($publication->getIdpublication());
+
+        header('Location: '.pathUrl().'monCompte/'.$idCompte.'/mesPublications');
+
         return $publication;
     }
 
@@ -238,7 +244,7 @@ class SocialNetworkController extends CoreController
         $like_commentaire = new like_commentaire($this->idUtilisateur,$_POST['idcommentaire']);
         //$like_commentaire->setIdcommentaire($_POST['idcommentaire']);
         $like_commentaireDao = new like_commentaireDao($this->db,$this->idUtilisateur);
-        $like_commentaireDao->Like_Unlike($like_commentaire);  
+        $like_commentaireDao->Like_Unlike($like_commentaire);
        /* $publication = new publication();
         $publication->setDescription($parameters['id']);
         $publication->setStatut("amis");

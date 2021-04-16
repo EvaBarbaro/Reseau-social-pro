@@ -49,4 +49,34 @@ class loginDao {
             header('Location: '.pathUrl().'monReseau/'.$entrepriseId.'/login');
         }
     }
+
+    public function loginAdmin($utilisateur) {
+        $sql = $this->conn->prepare("SELECT * FROM utilisateur WHERE nomutilisateur = :nomutilisateur AND motdepasse = :motdepasse AND statut = true AND role = 'superAdmin'");
+
+        $sql->bindValue('nomutilisateur', $utilisateur->getNomUtilisateur());
+        $sql->bindValue('motdepasse', $utilisateur->getMotDePasse());
+
+        $sql->execute();
+
+        $count = $sql->rowCount();
+
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if($count == 1 && !empty($row)) {
+            session_start();
+
+            $_SESSION['idutilisateur']   = $row['idutilisateur'];
+            $_SESSION['identreprise'] = $row['identreprise'];
+            $_SESSION['nomutilisateur'] = $row['nomutilisateur'];
+            $_SESSION['mail'] = $row['mail'];
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['message'] = "";
+
+            header('Location: '.pathUrl().'superAdmin');
+        } else {
+            session_start();
+            $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe ou nom d'utilisateur est incorrect !</div>";
+            header('Location: '.pathUrl().'superAdmin/login');
+        }
+    }
 }

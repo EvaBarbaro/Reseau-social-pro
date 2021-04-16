@@ -1,10 +1,4 @@
-<footer class="footer">
-			<div class="col-md-12"> 
-				<hr>
-					&copy; 2021
-				
-			</div>
-        </footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src=<?= pathUrl().'utils/scripts/navAccount.js' ?>></script>
 		<script src=<?= pathUrl().'utils/scripts/buttonFilePhoto.js' ?>></script>

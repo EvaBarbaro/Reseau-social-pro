@@ -31,10 +31,31 @@
                 <input type="hidden" name="identreprise" value="<?= $viewVars['utilisateur']['identreprise'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>
-            <form action=<?= pathUrl()."monCompte/deleteUser" ?> method='POST'>
-                <input type='hidden' value=<?= $viewVars['utilisateur']['idutilisateur'] ?> name='idutilisateur' />
-                <input type='hidden' value=<?= $viewVars['utilisateur']['identreprise'] ?> name='identreprise' />
-                <input type="submit" class="fakeTextInput text-danger mt-4" id="deleteAccount" value="Supprimer mon compte" readonly>
-            </form>
+                <!-- Button trigger modal -->
+                <button id="deleteAccount" type="button" class="fakeTextInput text-danger mt-4" data-toggle="modal" data-target="#userDelModal">
+                Supprimer mon compte
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="userDelModal" tabindex="-1" role="dialog" aria-labelledby="userDelModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="userDelModalLabel">Comfirmez-vous la suppression de votre compte ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <form action=<?= pathUrl()."monCompte/deleteUser" ?> method='POST'>
+                        <div class="modal-footer">
+                            <input type='hidden' value=<?= $viewVars['utilisateur']['idutilisateur'] ?> name='idutilisateur' />
+                            <input type='hidden' value=<?= $viewVars['utilisateur']['identreprise'] ?> name='identreprise' />
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    </form>
         </div>
 </div>

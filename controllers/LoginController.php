@@ -17,6 +17,13 @@ class LoginController extends CoreController
         ]);
     }
 
+    public function loginAdmin()
+    {
+        $this->show('loginAdmin', [
+            'title' => 'Social Connect - Connexion'
+        ]);
+    }
+
     public function logged($parameters)
     {
         $entrepriseId = $parameters['id'];
@@ -35,6 +42,21 @@ class LoginController extends CoreController
         $loginDao->loginUser($utilisateur, $entrepriseId);
     }
 
+    public function loggedAdmin()
+    {
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $loginDao = new loginDao($db);
+
+        $utilisateur = new utilisateur();
+
+        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
+        $utilisateur->setMotDePasse(hash('sha256' ,$_POST['motdepasse']));
+
+        $loginDao->loginAdmin($utilisateur);
+    }
+
     public function logout()
     {
         $entrepriseId = $_POST['identreprise'];
@@ -43,5 +65,13 @@ class LoginController extends CoreController
         session_destroy();
 
         header("Location: ".pathUrl()."monReseau/".$entrepriseId."/login");
+    }
+
+    public function logoutAdmin()
+    {
+        session_start();
+        session_destroy();
+        
+        header('Location: '.pathUrl().'superAdmin/login');
     }
 }
