@@ -1,11 +1,12 @@
-<div id="networkHomePage">
+
 
 
 <?php
 require_once __DIR__ . '/networkNav.php';
 ?>
-
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aJOTlE1K90k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div id="networkHomePage">
+<div id="test">
 <div class="row">
 <div class="col-lg-4">
 <?php
@@ -39,7 +40,7 @@ require_once __DIR__ . '/asideMember.php';
 </div>
 
   <div class="card-body">
-  <form id="formPub" name="AddPub" action="" enctype="multipart/form-data">
+  <form id="formPub" name="AddPub"  enctype="multipart/form-data">
   <div class="form-group">
  
     <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
@@ -158,7 +159,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   <p>
 
   <div id="likeUnlikePub_form">
-<form name="likeUnlikePub<?=$i;?>" id="likeUnlikePub">
+<form name="likeUnlikePub<?=$i;?>" id="likeUnlikePub" >
   <?php if($pub['publication_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
@@ -190,7 +191,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 <div class="collapse" id="addComment<?php echo $i;?>">
   <div class="card card-body">
    <!-- Formulaire pour commenter-->
-   <form name="AddCom<?=$i;?>" action="">
+   <form name="AddCom<?=$i;?>" >
   <div class="form-group">
   <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
     <textarea class="form-control" name="description" id="validationTextarea" placeholder="Commenter"></textarea>
@@ -262,7 +263,7 @@ if(!empty($com['commentaire_compte']['photo'])){
       Êtes vous sûrs de vouloir supprimer ?
       </div>
       <div class="modal-footer">
-      <form name="deleteComForm<?=$j;?>" id="deleteComForm">
+      <form name="deleteComForm<?=$j;?>" id="deleteComForm" >
         <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
         <button type="submit" id="deleteComModal" class="btn btn-primary">Confirmer</button>
@@ -284,7 +285,7 @@ if(!empty($com['commentaire_compte']['photo'])){
   <div class="card-footer rounded-0" style="background-color:#7A92B1;">
   <p>
   <div id="likeUnlikeCom_form">
-<form name="likeUnlikeCom<?=$i;?>" action="">
+<form name="likeUnlikeCom<?=$i;?>" >
   <?php if($com['commentaire_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
@@ -306,8 +307,8 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 </div>
 </div>
+</div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>
