@@ -2,8 +2,21 @@ var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
 var idEntreprise = url.substring(url.lastIndexOf('monReseau')+10,url.lastIndexOf('monReseau')+26);
 var networkLink = filename+"monReseau/"+idEntreprise;
-var visibilité = url.substring(url.lastIndexOf('monReseau')+27,url.lastIndexOf('/'));
-var order =  url.substring(url.lastIndexOf('/')+1);
+
+if(sessionStorage.getItem("visibilite") === null){
+  sessionStorage.setItem("visibilite", url.substring(url.lastIndexOf('monReseau')+27,url.lastIndexOf('/')));
+  var visibilité = sessionStorage.getItem("visibilite");
+} else {
+  var visibilité = sessionStorage.getItem("visibilite");
+}
+
+if(sessionStorage.getItem("order") === null){
+  sessionStorage.setItem("order", url.substring(url.lastIndexOf('/')+1));
+  var order = sessionStorage.getItem("order");
+} else {
+  var order = sessionStorage.getItem("order");
+}
+
 
 $(document).ready(function(){
 
@@ -11,32 +24,37 @@ $(document).ready(function(){
     $(".dropdown-item").on( "click", function() {
         // filtre = toutes les publications
         if($(this).attr("id")=="allPubs"){
-         
+          sessionStorage.setItem("visibilite","reseau");
+          
           $("#networkHomePage").load(url);
           $('footer').first().remove();
         }   
 
         // filtre = toutes les publications publics
         else if($(this).attr("id")=="publicPubs"){
-          
+          sessionStorage.setItem("visibilite","public");
+         
           $("#networkHomePage").load(networkLink+"/public/"+order);
           $('footer').first().remove();
         } 
         // filtre = toutes les publications amis
         else if($(this).attr("id")=="amisPubs"){
-       
+          sessionStorage.setItem("visibilite","amis");
+         
           $("#networkHomePage").load(networkLink+"/amis/"+order);
           $('footer').first().remove();
         } 
         // Trie = affichage des publications selon les dates
         else if($(this).attr("id")=="datePubs"){
-          
+          sessionStorage.setItem("order","publications");
+        
           $("#networkHomePage").load(networkLink+"/"+visibilité+"/publications");
           $('footer').first().remove();
         } 
         // Trie = affichage des publications selon les likes
         else if($(this).attr("id")=="likePubs"){
-         
+          sessionStorage.setItem("order","popularite");
+       
           $("#networkHomePage").load(networkLink+"/"+visibilité+"/popularite");
           $('footer').first().remove();
         } 

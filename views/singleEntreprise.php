@@ -225,11 +225,23 @@ if(!empty($com['commentaire_compte']['photo'])){
 ?>
   <small id="dateCom" style="display:inline;" class="form-text font-weight-bold" ><?= $com['commentaireInfo']['date']?></small>
   </div>
-  <?php if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){?><img name="deleteCom" 
-    id="deleteCom"
-    style="cursor:pointer;height: 2.1rem;width: 2.1rem;" src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  alt="Image introuvable"
-    data-toggle="modal" data-target="#deleteComModal<?=$j?>"
-    ><?php } ?>
+  <?php if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){?>
+  <img name="updateCom" 
+       id="updateCom"
+       style="cursor:pointer;height: 2.5rem;width: 2.5rem;" 
+       src="<?php echo pathUrl().'public/img/pencil.png';?>" 
+       alt="Image introuvable"
+  >
+  <img name="deleteCom" 
+       id="deleteCom"
+       style="cursor:pointer;height: 1.5rem;width: 1.5rem;" 
+       src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
+       alt="Image introuvable"
+       data-toggle="modal" 
+       data-target="#deleteComModal<?=$j?>"
+  >
+    
+    <?php } ?>
 
 
   
