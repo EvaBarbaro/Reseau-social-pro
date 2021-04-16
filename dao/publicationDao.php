@@ -112,7 +112,7 @@ class publicationDao implements interfaceDao {
         else if($parameters['visibilite']==="amis"){
             $sql=$sql."( (p.statut='amis') AND (p.idcompte  IN 
             (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
-            (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) )";
+            (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) OR (p.idcompte=:id) ) )";
         }
         else {
             $sql=$sql."(p.statut='public') OR (p.idcompte=:id) OR 
@@ -129,7 +129,7 @@ class publicationDao implements interfaceDao {
         }
 
         $pdoStatement = $this->conn->prepare($sql);
-        if( ($parameters['visibilite']==="amis")  || ( ( ($parameters['visibilite']!=="amis") ) && ($parameters['visibilite']!=="public"))){
+        if($parameters['visibilite']!=="public")  {
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
         }
         $pdoStatement->bindValue(':identreprise',$this->entrepriseId, PDO::PARAM_INT);

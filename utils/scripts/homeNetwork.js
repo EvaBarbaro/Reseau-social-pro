@@ -8,19 +8,36 @@ $(document).ready(function(){
    
     $(".dropdown-item").on( "click", function() {
       
-        if($(this).find("a").attr("id")=="allPubs"){
+        if($(this).attr("id")=="allPubs"){
+          alert(url);
           $("#networkHomePage").load(url);
-        }      
-        if($(this).find("img").attr("id")=="public"){
+          $('footer').first().remove();
+        }   
+
+        else if($(this).attr("id")=="publicPubs"){
+          alert(networkLink+"/public/publications");
+          $("#networkHomePage").load(networkLink+"/public/publications");
+          $('footer').first().remove();
+        } 
+
+        else if($(this).attr("id")=="amisPubs"){
+          alert(networkLink+"/amis/publications");
+          $("#networkHomePage").load(networkLink+"/amis/publications");
+          $('footer').first().remove();
+        } 
+
+        else if($(this).find("img").attr("id")=="public"){
             $(".dropdown").children(":first").find("img").attr("src",filename+"public/img/public.png");
             $("#statut").attr("value","public");
         }
+
         else {
             $(".dropdown").children(":first").find("img").attr("src",filename+"public/img/amis.png");
             $("#statut").attr("value","amis");
         }
         
       }); 
+
     $("#reset").on( "click", function() {
       alert("reset url = "+url);
             $("#networkHomePage").load(url);
@@ -128,7 +145,9 @@ $( ".modal" ).find("button[type=submit]").on('click', function(e){
             });
           }
             xhr.done(function() {
-              
+              $("#networkHomePage").load(url);  
+              $('footer').first().remove();
+              console.log(dataString);
              // $("#networkHomePage").html("");
           
              /* $('.modal').modal('dispose');
@@ -150,7 +169,7 @@ $( ".modal" ).find("button[type=submit]").on('click', function(e){
              // $('.modal').modal('hide');
            //  $('.modal').modal().hide();
            ////alert("networkLink= "+networkLink);
-              $("#networkHomePage").load(url);
+              
 
              // document.body.style.overflow="initial"; 
 
@@ -168,7 +187,7 @@ $( ".modal" ).find("button[type=submit]").on('click', function(e){
              
            
              // $("#networkHomePage").load(networkLink);
-              $('footer').first().remove();
+              
               //window.location = window.location;
              /* $('.modal').preventDefault();
               $('.modal').modal('hide');*/
@@ -192,7 +211,7 @@ $( ".modal" ).find("button[type=submit]").on('click', function(e){
               $('title').first().remove();
               $("#networkHomePage:nth-child(1)").children().find('meta').remove();
               $("#networkHomePage:nth-child(1)").children().find('link').remove();*/
-              console.log(dataString);
+             
             })
           }
         });
