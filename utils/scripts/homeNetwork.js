@@ -1,19 +1,10 @@
+sessionStorage.clear();  
 var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
 var idEntreprise = url.substring(url.lastIndexOf('monReseau')+10,url.lastIndexOf('monReseau')+26);
 var networkLink = filename+"monReseau/"+idEntreprise;
-
-if(sessionStorage.getItem("visibilite") === null){
-  alert("set session");
-  sessionStorage.setItem("visibilite", "reseau");
- 
-} 
-
-if(sessionStorage.getItem("order") === null){
-  alert("set session");
-  sessionStorage.setItem("order", "publications");
-  
-} 
+sessionStorage.setItem("visibilite", "reseau");
+sessionStorage.setItem("order", "publications");
 
 $(document).on('click', "#reset", function () {
 
