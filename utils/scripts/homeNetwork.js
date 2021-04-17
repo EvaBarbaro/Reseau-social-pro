@@ -78,19 +78,28 @@ $(document).on('click', "#reset", function () {
   $(document).on('click', "#updateCom", function () {
     if($(this).parents(".card-header").siblings(".card-body").find("p#cardText").length){
 
-  var description = $(this).parents(".card-header").siblings(".card-body").find("p#cardText").attr("value");
-  $(this).parents(".card-header").siblings(".card-body").find("p#cardText").replaceWith( "<input type='text' value='"+description+"' class='form-control'>" );
+  var description = $(this).parents(".card-header").siblings(".card-body").find("p#cardText").html();
+  var idcommentaire = $(this).parents(".card-header").siblings(".card-body").find("p#cardText").attr("value");
+  $(this).parents(".card-header").siblings(".card-body").find("p#cardText").replaceWith( "<form method='POST' name='updateCom"+idcommentaire+"'><input type='hidden' value="+idcommentaire+" name='idcommentaire'><input type='text' name='updateComInput' value='"+description+"' class='form-control'></form>" );
 }
 else {
 
   var description =  $(this).parents(".card-header").siblings(".card-body").find("input[type=text]").attr("value");
-  $(this).parents(".card-header").siblings(".card-body").find("input[type=text]").replaceWith( "<p class='card-text' id='cardText' value='"+description+"'>"+description+"</p>" );
+  $(this).parents(".card-header").siblings(".card-body").find("form").replaceWith( "<p class='card-text' id='cardText' value='"+description+"'>"+description+"</p>" );
 }});  
-    
 
+$(document).on('keyup', "input[type=text]", function (e) { 
+  var code = e.key; 
+  if(code==="Enter"){
+  
+  if($(this).attr("name").includes("updateComInput") ){
+    $(this).parent("form").submit();
+  } 
+}
+});  
 $(document).on('submit', "form", function (e) {
      
-  //e.preventDefault();
+ // e.preventDefault();
 
       var sendFile=false;
       var dataString = $(this).serialize();
@@ -130,9 +139,16 @@ $(document).on('submit', "form", function (e) {
         e.preventDefault();
        
       }
+      else if($(this).attr("name").includes("updateCom")) {
+       
+        link="/updateCommentaire"; 
+       
+        e.preventDefault();
+        
+      }
    
   if(link!=="") {
-   
+    
       if(sendFile){
      var xhr = $.ajax({
        type: "POST",
@@ -143,6 +159,7 @@ $(document).on('submit', "form", function (e) {
        cache: false
       });
     } else {
+      
       var xhr = $.ajax({
         type: "POST",
         url: networkLink+link,

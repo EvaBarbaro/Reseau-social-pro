@@ -249,7 +249,7 @@ class SocialNetworkController extends CoreController
         $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setIdcommentaire($_POST['idcommentaire']);
-        $commentaire->setDescription($_POST['description']);
+        $commentaire->setDescription($_POST['updateComInput']);
         $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $res = $commentaireDao->update($commentaire);
         return $res;
