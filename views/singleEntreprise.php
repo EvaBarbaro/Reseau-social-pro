@@ -237,7 +237,7 @@ if(!empty($com['commentaire_compte']['photo'])){
        src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
        alt="Image introuvable"
        data-toggle="modal" 
-       data-target="#deleteComModal<?=$j?>"
+       data-target="#deleteComModal<?=$com['commentaireInfo']['idcommentaire']?>"
   >
     
     <?php } ?>
@@ -248,7 +248,7 @@ if(!empty($com['commentaire_compte']['photo'])){
   </div>
   </div>
   <!-- Modal -->
-<div class="modal fade" id="deleteComModal<?=$j?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deleteComModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteComModal<?=$com['commentaireInfo']['idcommentaire']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deleteComModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">

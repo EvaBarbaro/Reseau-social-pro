@@ -5,13 +5,13 @@ var networkLink = filename+"monReseau/"+idEntreprise;
 
 if(sessionStorage.getItem("visibilite") === null){
   alert("set session");
-  sessionStorage.setItem("visibilite", url.substring(url.lastIndexOf('monReseau')+27,url.lastIndexOf('/')));
+  sessionStorage.setItem("visibilite", "reseau");
  
 } 
 
 if(sessionStorage.getItem("order") === null){
   alert("set session");
-  sessionStorage.setItem("order", url.substring(url.lastIndexOf('/')+1));
+  sessionStorage.setItem("order", "publications");
   
 } 
 

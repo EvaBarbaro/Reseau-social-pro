@@ -26,7 +26,6 @@ class SocialNetworkController extends CoreController
 
         $DBData = new DBData();
         $this->db = $DBData->getConnection();
-        //à remplacer par la variable idutilisateur de la session courante
         $this->idUtilisateur = $_SESSION['idutilisateur'];
         $this->entrepriseId = $entrepriseId;
         
@@ -41,10 +40,12 @@ class SocialNetworkController extends CoreController
 
         $DBData = new DBData();
         $db = $DBData->getConnection();
-        //à remplacer par la variable idutilisateur de la session courante
-        $idUtilisateur = 1696278514562148;
-
-        $publicationList = $this->getPublications($parameters);
+       
+        $filtre=array();
+        $filtre['visibilite']="reseau";
+        $filtre['order']="publications";
+        $filtre['id']=$parameters['id'];
+        $publicationList = $this->getPublications($filtre);
 
         $utilisateurDao = new utilisateurDao($this->db );
         $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
@@ -61,6 +62,32 @@ class SocialNetworkController extends CoreController
         ]);
     }
 
+  public function filtre($parameters)
+  {
+      $this->init($parameters['id']);
+
+      $entrepriseId = $parameters['id'];
+
+      $DBData = new DBData();
+      $db = $DBData->getConnection();
+     
+   
+      $publicationList = $this->getPublications($parameters);
+
+      $utilisateurDao = new utilisateurDao($this->db );
+      $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
+
+      $compteDao = new compteDao($db);
+      $compteList = $compteDao->getAll($_SESSION['identreprise']);
+
+      $this->show('singleEntreprise', [
+          'title' => 'Social Connect - Home',
+          'publicationList' => $publicationList,
+          'idUtilisateur' => $this->idUtilisateur,
+          'utilisateurList' => $utilisateurList,
+          'compteList' => $compteList
+      ]);
+  }
     // get toutes les publication(amis et public)
     public function getPublications($parameters) {
         $this->init($parameters['id']);
