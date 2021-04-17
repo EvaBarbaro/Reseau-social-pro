@@ -92,14 +92,14 @@ $(document).on('keyup', "input[type=text]", function (e) {
   var code = e.key; 
   if(code==="Enter"){
   
-  if($(this).attr("name").includes("updateComInput") ){
-    $(this).parent("form").submit();
-  } 
+ /* if($(this).attr("name").includes("updateComInput") ){
+  //  $(this).parent("form").submit();
+  } */
 }
 });  
 $(document).on('submit', "form", function (e) {
      
- // e.preventDefault();
+ //e.preventDefault();
 
       var sendFile=false;
       var dataString = $(this).serialize();
@@ -108,20 +108,20 @@ $(document).on('submit', "form", function (e) {
       if($(this).attr("name").includes("likeUnlikePub")) {
      
         link="/LikeUnlikePublication"; 
-        e.preventDefault();
+       e.preventDefault();
       }
     else if($(this).attr("name").includes("likeUnlikeCom")) {
         
         link="/LikeUnlikeCommentaire"; 
        
-        e.preventDefault();
+      e.preventDefault();
       }
 
       else if($(this).attr("name").includes("AddCom")) {
         
         link="/createCommentaire"; 
        
-        e.preventDefault();
+      e.preventDefault();
       }
 
       else if($(this).attr("name")=="AddPub") {
@@ -130,7 +130,7 @@ $(document).on('submit', "form", function (e) {
 
         dataString = new FormData(this);
         sendFile=true;
-      e.preventDefault();
+       e.preventDefault();
       }
 
       else if($(this).attr("name").includes("deleteComForm")) {
@@ -140,10 +140,11 @@ $(document).on('submit', "form", function (e) {
        
       }
       else if($(this).attr("name").includes("updateCom")) {
-       
-        link="/updateCommentaire"; 
-       
         e.preventDefault();
+        link="/updateCommentaire"; 
+       // alert(sessionStorage.getItem("visibilite"));
+        //alert(sessionStorage.getItem("order"));
+        
         
       }
    
@@ -167,7 +168,11 @@ $(document).on('submit', "form", function (e) {
       });
     }
       xhr.done(function() {
-      $("#networkHomePage").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/"+sessionStorage.getItem("order")+ " #test");  
+        console.log("visibilité= "+sessionStorage.getItem("visibilite"));
+        console.log("order= "+sessionStorage.getItem("order"));
+        var visibilite = sessionStorage.getItem("visibilite");
+        var order = sessionStorage.getItem("order");
+      $("#networkHomePage").load(networkLink+"/"+visibilite+"/"+order+ " #test");  
           });
       }
       });
