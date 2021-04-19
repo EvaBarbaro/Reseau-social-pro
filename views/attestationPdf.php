@@ -31,7 +31,7 @@ $dompdf->loadHtml(
         <h1 class='text-center'>Attestation de travail</h1>
         <p>Madame, monsieur</p>
         <p>Je soussigné, ".$_POST['prenom']." ".$_POST['nom'].",</p>
-        <p>Agissant en qualité de représentant de la société ".$_SESSION['entreprise']['designation']." atteste et certifie que ".$_POST['prenom']." ".$_POST['nom']
+        <p>Agissant en qualité de représentant de la société ".$_SESSION['designation'].", j'atteste et je certifie que ".$_POST['prenom']." ".$_POST['nom']
         ." est salarié de la socitété depuis le ".$_POST["date_embauche"]." en qualité de ".$_POST['grade']." au sein du département ".$_POST['departement']
         ." au poste de ".$_POST['poste'].".</p>
         <p>Cette attestation est délivré à la demande de l'intéressé pour faire valoir ce que de droit.</p>
