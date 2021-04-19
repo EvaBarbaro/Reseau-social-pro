@@ -10,6 +10,7 @@
 <?php
 
     require_once __DIR__ . '/asideProfil.php';
+
 ?>
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
@@ -19,7 +20,7 @@
                 <div class="form-group row">
                     <label for="nom" class="col-sm-4 col-form-label">Votre nom</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="nom" id="nom" value="<?= $viewVars['compte']['nom'] ?>" required>
+                    <input type="text" class="form-control" name="nom" id="nom" value="<?= $viewVars['compte']['nom'] ?>">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,7 +59,10 @@
                 
             </form>
             <br>
-                
+            <?php
+
+            if (!empty($viewVars['compte']['nom']) && !empty($viewVars['compte']['prenom']) && !empty($viewVars['compte']['poste']) && !empty($viewVars['compte']['grade']) && !empty($viewVars['compte']['departement']) && !empty($viewVars['compte']['date_embauche'])) {
+            ?>
             <form action=<?= pathUrl()."views/attestationPdf.php" ?> method="POST" class="col">      
                 <input type="hidden" name="nom" value="<?= $viewVars['compte']['nom'] ?>">
                 <input type="hidden" name="prenom" value="<?= $viewVars['compte']['prenom'] ?>">
@@ -69,5 +73,9 @@
                 <button type="submit" class="btn btn-info btn-lg btn-block">Obtenir une attestation de travail</button>         
             </form>
             <br>
+            <?php
+            }
+
+            ?>
         </div>
 </div>
