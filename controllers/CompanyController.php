@@ -109,7 +109,7 @@ class CompanyController extends CoreController
             $headers[] = "Content-type: text/html; charset=UTF-8";
     
             $headers[] = "To: ".$_POST['nomutilisateur']." <".$_POST['mail'].">";
-            $headers[] = "From: SocialConnect <socialConnect@domain.com>";
+            $headers[] = "From: SocialConnect <social.connect08@gmail.com>";
 
             if (empty($_POST['identreprise']) || empty($_POST['designation']) || empty($_FILES["logo"]["tmp_name"]) || empty($_POST['description']) || empty($_POST['url']) || empty($_POST['statut']) || empty($_POST['idutilisateur']) || empty($_POST['nomutilisateur']) || empty($_POST['motdepasse']) || empty($_POST['mail']) || empty($_POST['role']) || empty($_POST['statut']) || empty($_POST['identreprise'])){
                 $_SESSION['message'] = "<div class='alert alert-danger'>Veuillez remplir tous les champs !</div>";
@@ -137,7 +137,7 @@ class CompanyController extends CoreController
                 header('Location: '.pathUrl());
             } else {
                 if (mail($to, $subject, $message, implode("\r\n", $headers))) {
-                    $_SESSION['message'] = "<div class='alert alert-success'>Un mail de confirmation vous a été envoyé !</div>";
+                    $_SESSION['message'] = "<div class='alert alert-success'>Un mail de confirmation vous a été envoyé, vous pouvez accéder à votre réseau !</div>";
 
                     $compte = new compte
                     (
