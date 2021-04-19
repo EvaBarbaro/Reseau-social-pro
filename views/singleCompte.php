@@ -1,9 +1,10 @@
 <?php 
 
     require_once __DIR__ . '/networkNav.php';
-    require_once __DIR__ . '/accountNav.php';
-
+    require_once __DIR__ . '/accountNav.php'; 
+    
 ?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <div class="d-flex">
 
 <?php
@@ -51,9 +52,38 @@
                     <input type="date" class="form-control" name="date_embauche" id="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-
+                
+                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer </button>
+                
             </form>
+                <br>
+                
+            <form  action="/Reseau-social-pro/views/maFabrique_pdf.php" method="GET" class="col">      
+                <input type="hidden" name="attestation_1" value="1">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Obtenir une attestation de travaille_1_(ma Fabrique)</button>         
+            </form>    
+                <br>
+
+
+
+            
+                
+                
+<pre>   <?php $_SESSION['entreprise'] = $viewVars['entreprise']; ?>
+        <?php $_SESSION['compte'] = $viewVars['compte']; ?> 
+
+        <b><p style="color:red;" >Variable SESSION</p></b>      <?php  var_dump($_SESSION); ?> 
+        <b><p style="color:red;">Variable viewvars</p> </b>     <?php var_dump($viewVars); ?> 
+        <b><p style="color:red;"> Variable POST</p></b>         <?php var_dump($_POST); ?> 
+        <b><p style="color:red;">Variable GET</p></b>           <?php var_dump($_GET); ?> 
+        <b><p style="color:red;">Variable FILES</p> </b>        <?php // var_dump($_FILES); ?> 
+
+        <b><p style="color:red;">Variable image</p> </b>        <?php // var_dump($image); ?> 
+</pre> 
+
+           
+
+
+
         </div>
 </div>

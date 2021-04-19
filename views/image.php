@@ -28,7 +28,8 @@
         <?php
             if ($viewVars['compte']['idcompte'] === $_SESSION['idutilisateur']) {
         ?>
-        <button id="insertImageButton" class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
+        <button id="insertImageButton" class="btn btn-primary float-right" type="button" data-toggle="collapse" 
+        data-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
             Ajouter une image
         </button>
         <?php
