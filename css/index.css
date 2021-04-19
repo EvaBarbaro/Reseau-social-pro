@@ -231,8 +231,6 @@ input[type=image]{
 
 .postDescUser {
     resize: none;
-    width: 70%;
-    height: 2em;
 }
 
 .bi-person-plus-fill {
