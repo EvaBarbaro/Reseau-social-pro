@@ -8,6 +8,7 @@
 <div class="d-flex">
 
 <?php
+
     require_once __DIR__ . '/asideProfil.php';
 ?>
         <div id="register">
@@ -56,34 +57,17 @@
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer </button>
                 
             </form>
-                <br>
+            <br>
                 
-            <form  action="/Reseau-social-pro/views/maFabrique_pdf.php" method="GET" class="col">      
-                <input type="hidden" name="attestation_1" value="1">
-                <button type="submit" class="btn btn-success btn-lg btn-block">Obtenir une attestation de travaille_1_(ma Fabrique)</button>         
-            </form>    
-                <br>
-
-
-
-            
-                
-                
-<pre>   <?php $_SESSION['entreprise'] = $viewVars['entreprise']; ?>
-        <?php $_SESSION['compte'] = $viewVars['compte']; ?> 
-
-        <b><p style="color:red;" >Variable SESSION</p></b>      <?php  var_dump($_SESSION); ?> 
-        <b><p style="color:red;">Variable viewvars</p> </b>     <?php var_dump($viewVars); ?> 
-        <b><p style="color:red;"> Variable POST</p></b>         <?php var_dump($_POST); ?> 
-        <b><p style="color:red;">Variable GET</p></b>           <?php var_dump($_GET); ?> 
-        <b><p style="color:red;">Variable FILES</p> </b>        <?php // var_dump($_FILES); ?> 
-
-        <b><p style="color:red;">Variable image</p> </b>        <?php // var_dump($image); ?> 
-</pre> 
-
-           
-
-
-
+            <form action=<?= pathUrl()."views/attestationPdf.php" ?> method="POST" class="col">      
+                <input type="hidden" name="nom" value="<?= $viewVars['compte']['nom'] ?>">
+                <input type="hidden" name="prenom" value="<?= $viewVars['compte']['prenom'] ?>">
+                <input type="hidden" name="poste" value="<?= $viewVars['compte']['poste'] ?>">
+                <input type="hidden" name="grade" value="<?= $viewVars['compte']['grade'] ?>">
+                <input type="hidden" name="departement" value="<?= $viewVars['compte']['departement'] ?>">
+                <input type="hidden" name="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
+                <button type="submit" class="btn btn-info btn-lg btn-block">Obtenir une attestation de travaille</button>         
+            </form>
+            <br>
         </div>
 </div>
