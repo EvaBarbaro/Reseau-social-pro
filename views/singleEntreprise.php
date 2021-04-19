@@ -10,8 +10,10 @@ require_once __DIR__ . '/asideMember.php';
 
 ?>
 </div>
+
 <div class="col-lg-2">
- 
+<div id="Page" >
+<div id="loadPage" >
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">
@@ -332,7 +334,8 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 </div>
 </div>
-
+</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>

@@ -134,15 +134,16 @@ class SocialNetworkController extends CoreController
     public function createPublication($parameters) {
         $this->init($parameters['id']);
         $publication = new publication();
-        $publication->setDescription($_POST['description']);
-        $publication->setStatut($_POST['statut']);
+       
     
         if (isset($_FILES["pubMedia"])) {
 
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["pubMedia"]["name"]));
             $tempname = $_FILES["pubMedia"]["tmp_name"];  
+            var_dump($extension);
             if($extension==="mp4"){
+                
                  $folder = __DIR__ . '/../public/publicationVideos/'.$uniqueFileName.'.'.$extension;
                  if (move_uploaded_file($tempname, $folder))  {
                     $publication->setVideourl($uniqueFileName.'.'.$extension);
@@ -162,6 +163,8 @@ class SocialNetworkController extends CoreController
             }
          }
         }
+        $publication->setDescription($_POST['description']);
+        $publication->setStatut($_POST['statut']);
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $res = $publicationDao->create($publication);
         return $res;

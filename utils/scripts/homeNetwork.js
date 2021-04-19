@@ -145,8 +145,8 @@ $(document).on('submit', "form", function (e) {
         dataString = new FormData(this);
         sendFile=true;
         e.preventDefault();
-        partToUpdate=$("#Pub");
-        updatedContent="#loadPub";
+        partToUpdate=$("#Page");
+        updatedContent="#loadPage";
       }
 
       else if($(this).attr("name").includes("deleteComForm")) {
