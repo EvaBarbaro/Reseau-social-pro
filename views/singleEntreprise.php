@@ -198,7 +198,7 @@ else if(!empty($pub['publicationInfos']['fichierurl'])){
   <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top imgComm" alt="Image introuvable">
   
   </a>
-  <span id="ComPub">
+  <span id="ComPub<?=$pub['publicationInfos']['idpublication']?>">
   <span id="loadComPub<?=$pub['publicationInfos']['idpublication']?>">
  <?=count($pub['commentaires'])?>
 </span>

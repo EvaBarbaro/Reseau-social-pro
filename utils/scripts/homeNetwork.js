@@ -128,7 +128,7 @@ $(document).on('submit', "form", function (e) {
         e.preventDefault();
         var idpublication=$(this).find("input[type=hidden]").attr("value");
         
-        partToUpdate= $(this).parents().siblings().find("#ComPub");
+        partToUpdate= $(this).parents().siblings().find("#ComPub"+idpublication);
      
         updatedContent="#loadComPub"+idpublication;
         partToUpdate2= $(this).parents().find("#ComsPub"+idpublication);
@@ -155,8 +155,8 @@ $(document).on('submit', "form", function (e) {
         var idpublication=$(this).attr("value");
         console.log("parents");
         console.log($(this).parents(".card rounded-0"));
-        alert("delete = "+idpublication);
-        partToUpdate= $(this).parents().siblings().find("#ComPub");
+        
+        partToUpdate= $(this).parents().siblings().find("#ComPub"+idpublication);
      
         updatedContent="#loadComPub"+idpublication;
         partToUpdate2= $(this).parents().find("#ComsPub"+idpublication);
@@ -169,7 +169,7 @@ $(document).on('submit', "form", function (e) {
         partToUpdate=$("#Pub");
         updatedContent="#loadPub";
         partToUpdate2=  $(this).parents().find("#ComsPub"+idpublication);
-        alert(idpublication);
+       
         updatedContent2="#loadComsPub"+idpublication;
         
       }
