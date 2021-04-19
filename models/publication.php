@@ -11,6 +11,8 @@ class publication {
 private $idpublication;
 private $description;
 private $imageurl;
+private $videourl;
+private $fichierurl;
 private $like;
 private $statut;
 private $idcompte; 
@@ -157,6 +159,49 @@ $this->datePub = $datePub;
 
 return $this;
 }
+
+/**
+ * Get the value of videourl
+ */
+public function getVideourl()
+{
+return $this->videourl;
+}
+
+/**
+ * Set the value of videourl
+ *
+ * @return  self
+ */
+public function setVideourl($videourl)
+{
+$this->videourl = $videourl;
+
+return $this;
+}
+
+/**
+ * Get the value of fichierurl
+ */
+public function getFichierurl()
+{
+return $this->fichierurl;
+}
+
+/**
+ * Set the value of fichierurl
+ *
+ * @return  self
+ */
+public function setFichierurl($fichierurl)
+{
+$this->fichierurl = $fichierurl;
+
+return $this;
+}
+
+
+
 
 /**
  * Construct

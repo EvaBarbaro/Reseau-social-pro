@@ -41,10 +41,10 @@ require_once __DIR__ . '/asideMember.php';
     <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
   </div>
   <div class="form-group">
-    <label for="pubImage">Ajouter une image</label>
+    <label for="pubMedia">Ajouter une image/video/fichier</label>
     <input type="hidden" name="statut" value="public" id="statut" class="text-input"/>
 
-    <input type="file" class="form-control-file" name="pubImage" id="pubImage">
+    <input type="file" class="form-control-file" name="pubMedia" id="pubMedia">
   </div>
   <div class="form-group">
   <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -146,13 +146,24 @@ if(!empty($pub['publicationInfos']['imageurl'])){
     <?php
 
 } 
+else if(!empty($pub['publicationInfos']['videourl'])){
+  ?>
 
-?>
  <video width="720" height="640" controls>
-  <source src=<?=pathUrl().'public/video/vid2.mp4'?> type="video/mp4">
+  <source src=<?=pathUrl().'public/publicationVideos/'.$pub['publicationInfos']['videourl']?> type="video/mp4">
 
   Your browser does not support the video tag.
 </video> 
+<?php  }
+else if(!empty($pub['publicationInfos']['fichierurl'])){
+  ?>
+<div>
+    <object data="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>" type="application/pdf" width="720" height="640">
+        alt : <a href="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>">Télécharger</a>
+    </object>
+</div>
+<?php  }
+?>
   <div class="card-body">
  
 

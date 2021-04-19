@@ -34,6 +34,8 @@ class publicationDao implements interfaceDao {
             "idpublication"=>$pub->getIdpublication(),
             "description"=>$pub->getDescription(),
             "imageurl"=>$pub->getImageurl(),
+            "videourl"=>$pub->getVideourl(),
+            "fichierurl"=>$pub->getFichierurl(),
             "Nombre Like"=>$pub->getLike(),
             "statut"=>$pub->getStatut(),
             "date" =>date("d/m/Y H:i",strtotime($pub->getDatePub()))
@@ -143,6 +145,8 @@ class publicationDao implements interfaceDao {
                 $publicationModel = new publication();
                 $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like'],$pub['datePub']);
                 $publicationModel->setImageurl($pub['imageurl']);
+                $publicationModel->setVideourl($pub['videourl']);
+                $publicationModel->setFichierurl($pub['fichierurl']);
                 // publication à ajouté
                 $publicationAjouter = $this->getInfoPublication($publicationModel);
                 array_push($publication,$publicationAjouter);
@@ -167,9 +171,20 @@ class publicationDao implements interfaceDao {
         if($publication->getImageurl()!==null){
             $sql=$sql.",imageurl";
         }
+        else if($publication->getVideourl()!==null){
+            $sql=$sql.",videourl";
+        }
+        else if($publication->getFichierurl()!==null){
+            $sql=$sql.",fichierurl";
+        }
         $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte,:datePub";
          if($publication->getImageurl()!==null){
             $sql=$sql.",:imageurl";
+        }  else if($publication->getVideourl()!==null){
+            $sql=$sql.",:videourl";
+        }
+        else if($publication->getFichierurl()!==null){
+            $sql=$sql.",:fichierurl";
         }
         $sql=$sql.")";
     
@@ -179,6 +194,12 @@ class publicationDao implements interfaceDao {
         $pdoStatement->bindValue(':description',$publication->getDescription());
         if($publication->getImageurl()!==null){
         $pdoStatement->bindValue(':imageurl',$publication->getImageurl());
+        }
+        else if($publication->getVideourl()!==null){
+        $pdoStatement->bindValue(':videourl',$publication->getVideourl());
+        }
+        else if($publication->getFichierurl()!==null){
+        $pdoStatement->bindValue(':fichierurl',$publication->getFichierurl());
         }
         $pdoStatement->bindValue(':like', 0, PDO::PARAM_INT);
         $pdoStatement->bindValue(':statut',$publication->getStatut());

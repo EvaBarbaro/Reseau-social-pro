@@ -137,16 +137,30 @@ class SocialNetworkController extends CoreController
         $publication->setDescription($_POST['description']);
         $publication->setStatut($_POST['statut']);
     
-        if (isset($_FILES["pubImage"])) {
+        if (isset($_FILES["pubMedia"])) {
 
             $uniqueFileName = uniqid();
-            $extension = end(explode(".", $_FILES["pubImage"]["name"]));
-            $tempname = $_FILES["pubImage"]["tmp_name"];    
+            $extension = end(explode(".", $_FILES["pubMedia"]["name"]));
+            $tempname = $_FILES["pubMedia"]["tmp_name"];  
+            if($extension==="mp4"){
+                 $folder = __DIR__ . '/../public/publicationVideos/'.$uniqueFileName.'.'.$extension;
+                 if (move_uploaded_file($tempname, $folder))  {
+                    $publication->setVideourl($uniqueFileName.'.'.$extension);
+                 }
+            }  
+            else if($extension==="pdf"){
+                $folder = __DIR__ . '/../public/publicationFichiers/'.$uniqueFileName.'.'.$extension;
+                if (move_uploaded_file($tempname, $folder))  {
+                    $publication->setFichierurl($uniqueFileName.'.'.$extension);
+                }
+            }
+            else {
             $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
                 $publication->setImageurl($uniqueFileName.'.'.$extension);
             }
+         }
         }
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
         $res = $publicationDao->create($publication);
