@@ -41,7 +41,7 @@ require_once __DIR__ . '/asideMember.php';
     <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
   </div>
   <div class="form-group">
-    <label for="pubMedia">Ajouter une image/video/fichier</label>
+    <label for="pubMedia">Ajouter un media (image/video/fichier) </label>
     <input type="hidden" name="statut" value="public" id="statut" class="text-input"/>
 
     <input type="file" class="form-control-file" name="pubMedia" id="pubMedia">
