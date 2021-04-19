@@ -10,6 +10,13 @@
 ?>
 
         <div id="register">
+        <?php
+
+        if (!empty($_SESSION['message'])) {
+            echo $_SESSION['message'];
+        }
+
+        ?>
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
 
             <form action=<?= pathUrl()."monCompte/update" ?> method="POST" class="col">
@@ -26,8 +33,6 @@
                     <input type="email" class="form-control" name="mail" id="mail" value="<?= $viewVars['utilisateur']['mail'] ?>">
                     </div>
                 </div>
-                <input type="hidden" name="role" value="<?= $viewVars['utilisateur']['role'] ?>">
-                <input type="hidden" name="statut" value="<?= $viewVars['utilisateur']['statut'] ?>">
                 <input type="hidden" name="identreprise" value="<?= $viewVars['utilisateur']['identreprise'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
             </form>

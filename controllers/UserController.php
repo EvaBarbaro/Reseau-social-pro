@@ -109,7 +109,7 @@ class UserController extends CoreController
             </head>
             <body>
             <h1>Bonjour ".$_POST['nomutilisateur']."</h1>
-            <p>Votre compte a bien été créé mais vous devez attednre qu'un admin valide votre compte pour vous connecter.</p>
+            <p>Votre compte a bien été créé mais vous devez attendre qu'un admin valide votre compte pour vous connecter.</p>
             </body>
             </html>
             ";
@@ -178,19 +178,63 @@ class UserController extends CoreController
         $db = $DBData->getConnection();
 
         $utilisateurDao = new utilisateurDao($db);
+        $utilisateurGet = $utilisateurDao->get($utilisateurId);
 
         $utilisateur = new utilisateur();
 
-        $utilisateur->setIdutilisateur($_POST['idutilisateur']);
-        $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
-        $utilisateur->setMail($_POST['mail']);
-        $utilisateur->setRole($_POST['role']);
-        $utilisateur->setStatut($_POST['statut']);
-        $utilisateur->setIdEntreprise($_POST['identreprise']);
+        if (isset($_POST['idutilisateur'], $_POST['nomutilisateur'], $_POST['mail'], $_POST['identreprise'])) {
+            $utilisateur->setIdUtilisateur($_POST['idutilisateur']);
+            $utilisateur->setNomUtilisateur($_POST['nomutilisateur']);
+            $utilisateur->setMail($_POST['mail']);
+            $utilisateur->setIdEntreprise($_POST['identreprise']);
 
-        $utilisateurDao->update($utilisateur);
+            $to      = $_POST['mail'];
+    
+            $subject = "Votre compte SocialConnect";
+    
+            $message = "
+            <html>
+            <head>
+            <meta charset='UTF-8'>
+            <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Votre compte SocialConnect</title>
+            </head>
+            <body>
+            <h1>Bonjour ".$_POST['nomutilisateur']."</h1>
+            <p>Vos informations ont bien été modifié</p>
+            </body>
+            </html>
+            ";
+    
+            $headers[] = "MIME-Version: 1.0";
+            $headers[] = "Content-type: text/html; charset=UTF-8";
+    
+            $headers[] = "To: ".$_POST['nomutilisateur']." <".$_POST['mail'].">";
+            $headers[] = "From: SocialConnect <social.connect08@gmail.com>";
 
-        header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+            if (empty($_POST['idutilisateur']) || empty($_POST['nomutilisateur']) || empty($_POST['mail']) ||empty($_POST['identreprise'])){
+                $_SESSION['message'] = "<div class='alert alert-danger'>Veuillez remplir tous les champs !</div>";
+                header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+            } else if ($utilisateurGet['nomutilisateur'] !== $_POST['nomutilisateur'] && $utilisateurDao->getUsername($utilisateur) !== 0) {
+                    $_SESSION['message'] = "<div class='alert alert-danger'>Ce nom d'utilisateur existe déjà !</div>";
+                    header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+            } else if ($utilisateurGet['mail'] !== $_POST['mail'] && $utilisateurDao->getMail($utilisateur) !== 0) {
+                    $_SESSION['message'] = "<div class='alert alert-danger'>Ce mail existe déjà !</div>";
+                    header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+            } else {
+                if (mail($to, $subject, $message, implode("\r\n", $headers))) {
+                    $_SESSION['message'] = "<div class='alert alert-success'>Vos informations ont bien été modifiés, un mail de confirmation vous a été envoyé !</div>";
+
+                    $utilisateurDao->update($utilisateur);
+
+                    header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+                } else {
+                    $_SESSION['message'] = "<div class='alert alert-danger'>Cette adresse mail n'est pas valide, votre réseau n'a pas pu être créé.</div>";
+                    header('Location: '.pathUrl().'monCompte/'.$utilisateurId);
+                }
+            }
+        }
     }
 
     public function updatePass()
@@ -208,6 +252,9 @@ class UserController extends CoreController
 
         $utilisateur->setIdutilisateur($_POST['idutilisateur']);
 
+        $containsDigit   = preg_match('/\d/',          $_POST['newmotdepasse']);
+        $containsSpecial = preg_match('/[^a-zA-Z\d]/', $_POST['newmotdepasse']);
+
         if (empty($_POST['oldmotdepasse']) || empty($_POST['newmotdepasse'])) {
             session_start();
             $utilisateur->setMotDePasse($singleUtilisateur['motdepasse']);
@@ -216,17 +263,29 @@ class UserController extends CoreController
             session_start();
             $utilisateur->setMotDePasse($singleUtilisateur['motdepasse']);
             $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe ne correspond pas à l'ancien !</div>"; 
+        } else if (strlen($_POST['newmotdepasse']) < 8) {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe doit contenir 8 caractères minimum.</div>
+";
+            header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
+        } else if (!$containsDigit) {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe doit contenir un chiffre.</div>
+";
+            header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
+        } else if (!$containsSpecial) {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Votre mot de passe doit contenir un caractère spécial.</div>
+";
+            header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
         } else {
             session_start();
             $utilisateur->setMotDePasse(hash('sha256',$_POST['newmotdepasse']));
-            $_SESSION['message'] = "<div class='alert alert-success'>Votre mot de passe a bien été modifié !</div>"; 
+            $_SESSION['message'] = "<div class='alert alert-success'>Votre mot de passe a bien été modifié !</div>";
+
+            $utilisateur->setIdEntreprise($_POST['identreprise']);
+
+            $utilisateurDao->updatePassword($utilisateur);
+    
+            header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
         }
-        
-        $utilisateur->setIdEntreprise($_POST['identreprise']);
-
-        $utilisateurDao->updatePassword($utilisateur);
-
-        header('Location: '.pathUrl().'monCompte/'.$utilisateurId.'/monMotDePasse');
     }
 
     public function updateAdmin()
