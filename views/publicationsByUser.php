@@ -26,7 +26,7 @@ require_once __DIR__ . '/asideProfil.php';
             <img class="card-img-top" src=<?= pathUrl()."public/publicationImages/".$publication["imageurl"] ?> alt="Card image cap">
             <?php }  else if(!empty($publication["videourl"])){
             ?>
-             <video width="520" height="440" controls>
+             <video class="card-img-top" width="520" height="440" controls>
   <source src=<?=pathUrl().'public/publicationVideos/'.$publication['videourl']?> type="video/mp4">
 
   Your browser does not support the video tag.
@@ -34,7 +34,7 @@ require_once __DIR__ . '/asideProfil.php';
             <?php }  else if(!empty($publication["fichierurl"])){
             ?>
              <div>
-    <object data="<?=pathUrl().'public/publicationFichiers/'.$publication['fichierurl']?>" type="application/pdf" width="520" height="440">
+    <object class="card-img-top" data="<?=pathUrl().'public/publicationFichiers/'.$publication['fichierurl']?>" type="application/pdf" width="520" height="440">
 
     </object>
 </div>
