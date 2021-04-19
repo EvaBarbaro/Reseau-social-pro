@@ -100,7 +100,36 @@ class CompanyController extends CoreController
 
         $compteDao->create($compte);
 
-        header('Location: '.pathUrl().'monReseau/'.$_POST['identreprise'].'/login');
+        $to      = $_POST['mail'];
+
+        $subject = "Votre adresse de connexion SocialConnect";
+
+        $message = "
+        <html>
+        <head>
+        <title>Votre adresse de connexion SocialConnect</title>
+        </head>
+        <body>
+        <h1>Bonjour ".$_POST['nomutilisateur']."</h1>
+        <p>Veuillez trouver votre lien de connexion ci-dessous pour votre reseau".$_POST['designation']." :</p>
+        <p>".$_POST['url']."</p>
+        </body>
+        </html>
+        ";
+
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset=iso-8859-1";
+
+        $headers[] = "To: ".$_POST['nomutilisateur']." <".$_POST['mail'].">";
+        $headers[] = "From: SocialConnect <socialConnect@domain.com>";
+
+        if (mail($to, $subject, $message, implode("\r\n", $headers))) {
+            header('Location: '.pathUrl().'monReseau/'.$_POST['identreprise'].'/login');
+            $_SESSION['message'] = "<div class='alert alert-success'>Un mail de confirmation vous a été envoyé !</div>";
+        } else {
+            header('Location: '.pathUrl());
+            $_SESSION['message'] = "<div class='alert alert-danger'>Une erreur s'est produite, le mail de confirmation n'a pas pu être envoyé.</div>";
+        }
     }
 
     public function update()
