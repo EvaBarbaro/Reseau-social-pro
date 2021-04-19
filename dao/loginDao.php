@@ -32,15 +32,27 @@ class loginDao {
             $_SESSION['role'] = $row['role'];
             $_SESSION['message'] = "";
 
-            $sqlLogo = $this->conn->prepare("SELECT logo FROM entreprise WHERE identreprise= :identreprise");
+            $sqlCompany = $this->conn->prepare("SELECT logo, designation FROM entreprise WHERE identreprise= :identreprise");
 
-            $sqlLogo->bindValue('identreprise', $row['identreprise']);
+            $sqlCompany->bindValue('identreprise', $row['identreprise']);
     
-            $sqlLogo->execute();
+            $sqlCompany->execute();
 
-            $rowLogo = $sqlLogo->fetch(PDO::FETCH_ASSOC);
+            $rowCompany = $sqlCompany->fetch(PDO::FETCH_ASSOC);
 
-            $_SESSION['logo'] = $rowLogo['logo'];
+            $_SESSION['logo'] = $rowCompany['logo'];
+            $_SESSION['designation'] = $rowCompany['designation'];
+
+            $sqlBoss = $this->conn->prepare("SELECT c.nom, c.prenom FROM compte AS c JOIN utilisateur as u ON u.idutilisateur = c.idcompte WHERE u.identreprise= :identreprise AND c.poste = 'Superviseur'");
+
+            $sqlBoss->bindValue('identreprise', $row['identreprise']);
+    
+            $sqlBoss->execute();
+
+            $rowBoss = $sqlBoss->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION['bossNom'] = $rowBoss['nom'];
+            $_SESSION['bossPrenom'] = $rowBoss['prenom'];
 
             header('Location: '.pathUrl().'monReseau/'.$row['identreprise']);
         } else {

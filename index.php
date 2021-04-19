@@ -33,8 +33,6 @@ $router->map('GET', '/', 'CompanyController#register', 'register');
 
 //ici, le id est le idutilisateur de la table utilisateur (table compte)
 $router->map('GET', '/monCompte/[i:id]/mesImages', 'ImageController#getAll', 'mesImages');  
-// $router->map('GET', '/monCompte/[i:id]/MonMur', 'ImageController#getAllMonMur', 'MonMur');  
-
 $router->map('POST', '/monImage/create', 'ImageController#create', 'monImageCreate');
 $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDelete');
 $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpdate');
@@ -61,7 +59,7 @@ $router->map('GET', '/monReseau/[i:id]/inscription', 'UserController#register', 
 $router->map('GET', '/monReseau/[i:id]/admin', 'UserController#getAll', 'admin');
 $router->map('GET', '/monCompte/[i:id]', 'UserController#get', 'userSingle'); // Mon Compte
 $router->map('GET', '/monCompte/[i:id]/monMotDePasse', 'UserController#getPass', 'userSinglePassword');
-$router->map('GET', '/monCompte/[i:id]/mesPublications', 'SocialNetworkController#getPublicationByUser', 'userAllPublications');
+$router->map('GET', '/monCompte/[i:id]/mesPublications', 'SocialNetworkController#getPublicationByUser', 'userAllPublications');  //<--
 $router->map('POST', '/monCompte/create', 'UserController#create', 'userCreate');
 $router->map('POST', '/monCompte/delete', 'UserController#delete', 'userDelete');
 $router->map('POST', '/monCompte/deleteUser', 'UserController#deleteUser', 'userDeleteSingle');

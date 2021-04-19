@@ -1,12 +1,14 @@
 <?php 
 
     require_once __DIR__ . '/networkNav.php';
-    require_once __DIR__ . '/accountNav.php';
-
+    require_once __DIR__ . '/accountNav.php'; 
+    
 ?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <div class="d-flex">
 
 <?php
+
     require_once __DIR__ . '/asideProfil.php';
 ?>
         <div id="register">
@@ -51,9 +53,29 @@
                     <input type="date" class="form-control" name="date_embauche" id="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
-
+                
+                <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer </button>
+                
             </form>
+            <br>
+                
+            <form action=<?= pathUrl()."views/attestationPdf.php" ?> method="POST" class="col">      
+                <input type="hidden" name="nom" value="<?= $viewVars['compte']['nom'] ?>">
+                <input type="hidden" name="prenom" value="<?= $viewVars['compte']['prenom'] ?>">
+                <input type="hidden" name="poste" value="<?= $viewVars['compte']['poste'] ?>">
+                <input type="hidden" name="grade" value="<?= $viewVars['compte']['grade'] ?>">
+                <input type="hidden" name="departement" value="<?= $viewVars['compte']['departement'] ?>">
+                <input type="hidden" name="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
+                <button type="submit" class="btn btn-info btn-lg btn-block">Obtenir une attestation de travaille</button>         
+            </form>
+            <br>
+    <!-- <pre>
+        <b><p style="color:red;" >Variable SESSION</p></b>    <?php  //var_dump($_SESSION); ?> 
+        <b><p style="color:red;">Variable viewvars</p> </b>    <?php  //var_dump($viewVars); ?> 
+        <b><p style="color:red;"> Variable POST</p></b>   <?php  //var_dump($_POST); ?> 
+        <b><p style="color:red;">Variable getAll</p></b>   <?php  //var_dump($_GET); ?> 
+        <b><p style="color:red;">Variable FILES</p> </b>    <?php  //var_dump($_FILES); ?> 
+    </pre> -->
+
         </div>
 </div>
