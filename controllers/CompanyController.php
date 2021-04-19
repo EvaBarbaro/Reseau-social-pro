@@ -107,18 +107,21 @@ class CompanyController extends CoreController
         $message = "
         <html>
         <head>
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>Votre adresse de connexion SocialConnect</title>
         </head>
         <body>
         <h1>Bonjour ".$_POST['nomutilisateur']."</h1>
-        <p>Veuillez trouver votre lien de connexion ci-dessous pour votre reseau".$_POST['designation']." :</p>
+        <p>Veuillez trouver votre lien de connexion ci-dessous pour votre réseau ".$_POST['designation']." :</p>
         <p>".$_POST['url']."</p>
         </body>
         </html>
         ";
 
         $headers[] = "MIME-Version: 1.0";
-        $headers[] = "Content-type: text/html; charset=iso-8859-1";
+        $headers[] = "Content-type: text/html; charset=UTF-8";
 
         $headers[] = "To: ".$_POST['nomutilisateur']." <".$_POST['mail'].">";
         $headers[] = "From: SocialConnect <socialConnect@domain.com>";
