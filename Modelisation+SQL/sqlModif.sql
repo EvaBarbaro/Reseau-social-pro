@@ -1,5 +1,10 @@
 ALTER TABLE `PUBLICATION` ADD `videourl` varchar(100) DEFAULT NULL;
 ALTER TABLE `PUBLICATION` ADD `fichierurl` varchar(100) DEFAULT NULL;
+
+INSERT INTO `publication` (`idpublication`, `description`, `imageurl`, `like`, `statut`, `idcompte`, `datePub`, `videourl`, `fichierurl`) VALUES
+
+(1697475944022720, 'test pdf', NULL, 1, 'public', 1696278527895410, '2021-04-19 15:33:30', NULL, '607d86aa87ed8.pdf'),
+(1697476033531564, 'test video', '', 1, 'public', 1696278527895410, '2021-04-19 15:34:55', '607d86ffe4ac3.mp4', NULL);
 /*
 ALTER TABLE `PUBLICATION` ADD `datePub` DATETIME;
 ALTER TABLE `COMMENTAIRE` ADD `dateCom` DATETIME;
