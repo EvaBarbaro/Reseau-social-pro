@@ -10,6 +10,13 @@ $uniqueUserID = hexdec(uniqid());
     </div>
 
         <div id="register">
+        <?php
+
+        if (!empty($_SESSION['message'])) {
+            echo $_SESSION['message'];
+        }
+
+        ?>
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
 
             <form enctype="multipart/form-data" action=<?= pathUrl()."monReseau/create" ?> method="POST" class="col">
@@ -32,7 +39,7 @@ $uniqueUserID = hexdec(uniqid());
                     <input type="text" class="form-control" name="description" id="description" placeholder="Description">
                     </div>
                 </div>
-                <input type="hidden" name="url" value=<?= pathUrl(). "monReseau/" . $uniqueID ?>>
+                <input type="hidden" name="url" value=<?= pathUrl(). "monReseau/" . $uniqueID ."/login" ?>>
                 <input type="hidden" name="idutilisateur" value="<?= $uniqueUserID ?>">
                 <div class="form-group row">
                     <label for="nomutilisateur" class="col-sm-4 col-form-label">Votre nom utilisateur</label>
