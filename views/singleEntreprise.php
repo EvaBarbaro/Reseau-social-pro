@@ -146,10 +146,18 @@ if(!empty($pub['publicationInfos']['imageurl'])){
     <?php
 
 } 
+
 ?>
+ <video width="720" height="640" controls>
+  <source src=<?=pathUrl().'public/video/vid2.mp4'?> type="video/mp4">
+
+  Your browser does not support the video tag.
+</video> 
   <div class="card-body">
+ 
+
     <p class="card-text">
-   <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/aJOTlE1K90k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+   
 <?php
     echo $pub['publicationInfos']['description'];
 ?></p>
@@ -210,7 +218,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 
 </div>
 </div>
-<span id="ComsPub">
+<span id="ComsPub<?=$pub['publicationInfos']['idpublication']?>">
 <span id="loadComsPub<?=$pub['publicationInfos']['idpublication']?>">
 <?php
 $j=0;
@@ -271,7 +279,7 @@ if(!empty($com['commentaire_compte']['photo'])){
       Êtes vous sûrs de vouloir supprimer ?
       </div>
       <div class="modal-footer">
-      <form name="deleteComForm<?=$j;?>" id="deleteComForm" >
+      <form name="deleteComForm<?=$j;?>" id="deleteComForm" value="<?=$pub['publicationInfos']['idpublication']; ?>">
         <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
         <button type="submit" id="deleteComModal" class="btn btn-primary">Confirmer</button>
@@ -280,7 +288,7 @@ if(!empty($com['commentaire_compte']['photo'])){
     </div>
   </div>
 </div>
-  <div class="card-body" style="background-color:#B4C1D3;">
+  <div class="card-body" style="background-color:#B4C1D3;"  value="<?=$pub['publicationInfos']['idpublication']; ?>">
   <p class="card-text" id="cardText" value=<?=$com['commentaireInfo']['idcommentaire']?>><?php
     echo $com['commentaireInfo']['description'];
 ?></p>

@@ -79,15 +79,15 @@ else {
   $(this).parents(".card-header").siblings(".card-body").find("form").replaceWith( "<p class='card-text' id='cardText' value='"+description+"'>"+description+"</p>" );
 }});  
 
-$(document).on('keyup', "input[type=text]", function (e) { 
+/*$(document).on('keyup', "input[type=text]", function (e) { 
   var code = e.key; 
   if(code==="Enter"){
   
  /* if($(this).attr("name").includes("updateComInput") ){
   //  $(this).parent("form").submit();
-  } */
+  } 
 }
-});  
+});  */
 $(document).on('submit', "form", function (e) {
      
  //e.preventDefault();
@@ -127,11 +127,12 @@ $(document).on('submit', "form", function (e) {
        
         e.preventDefault();
         var idpublication=$(this).find("input[type=hidden]").attr("value");
-        alert("idpublication = "+idpublication);
+        
         partToUpdate= $(this).parents().siblings().find("#ComPub");
      
         updatedContent="#loadComPub"+idpublication;
-        partToUpdate2= $(this).parents().find("#ComsPub");
+        partToUpdate2= $(this).parents().find("#ComsPub"+idpublication);
+        
         updatedContent2="#loadComsPub"+idpublication;
      
       }
@@ -151,22 +152,24 @@ $(document).on('submit', "form", function (e) {
         
         link="/deleteCommentaire";
         e.preventDefault();
-        var idpublication=$(this).parents().siblings().find("#idpublication").attr("value");
+        var idpublication=$(this).attr("value");
+        console.log("parents");
+        console.log($(this).parents(".card rounded-0"));
         alert("delete = "+idpublication);
         partToUpdate= $(this).parents().siblings().find("#ComPub");
      
         updatedContent="#loadComPub"+idpublication;
-        partToUpdate2= $(this).parents().find("#ComsPub");
+        partToUpdate2= $(this).parents().find("#ComsPub"+idpublication);
         updatedContent2="#loadComsPub"+idpublication;
       }
       else if($(this).attr("name").includes("updateCom")) {
         e.preventDefault();
         link="/updateCommentaire"; 
-        var idpublication=$(this).find("#ComPub").attr("value");
+        var idpublication=$(this).parents(".card-body").attr("value");
         partToUpdate=$("#Pub");
         updatedContent="#loadPub";
-        partToUpdate2=  $(this).parents().siblings().find("#ComsPub");
-        console.log(partToUpdate2);
+        partToUpdate2=  $(this).parents().find("#ComsPub"+idpublication);
+        alert(idpublication);
         updatedContent2="#loadComsPub"+idpublication;
         
       }
