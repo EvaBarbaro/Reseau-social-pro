@@ -197,7 +197,8 @@ input[type=image]{
 }
 
 #pubModalDel {
-    margin-right: -22.5%;
+    margin-right: -9.5em;
+    margin-top: 2em;
 }
 
 .postButton {
