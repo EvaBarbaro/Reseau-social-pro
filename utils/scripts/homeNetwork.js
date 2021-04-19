@@ -166,10 +166,10 @@ $(document).on('submit', "form", function (e) {
         e.preventDefault();
         link="/updateCommentaire"; 
         var idpublication=$(this).parents(".card-body").attr("value");
-        partToUpdate=$("#Pub");
-        updatedContent="#loadPub";
-        partToUpdate2=  $(this).parents().find("#ComsPub"+idpublication);
-       
+        partToUpdate= $(this).parents().siblings().find("#ComPub"+idpublication);
+     
+        updatedContent="#loadComPub"+idpublication;
+        partToUpdate2= $(this).parents().find("#ComsPub"+idpublication);
         updatedContent2="#loadComsPub"+idpublication;
         
       }
