@@ -139,6 +139,7 @@ $(document).on('submit', "form", function (e) {
 
       else if($(this).attr("name")=="AddPub") {
         sessionStorage.setItem("order", "publications");
+        sessionStorage.setItem("visibilite", "reseau");
         link="/createPublication";
 
         dataString = new FormData(this);

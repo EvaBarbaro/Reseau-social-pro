@@ -162,17 +162,10 @@ else if(!empty($pub['publicationInfos']['fichierurl'])){
        
     </object>
 
-<?php  }
-?>
-  <div class="card-body">
- 
-
-    <p class="card-text">
-   
-<?php
-    echo $pub['publicationInfos']['description'];
-?></p>
-  </div>
+<?php  }?>
+<div class="card-body">
+  <p class="card-text"><?=$pub['publicationInfos']['description']?></p>
+</div>
   <div class="card-footer footerComm">
   <p>
 
