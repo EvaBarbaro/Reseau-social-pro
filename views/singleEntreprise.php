@@ -159,7 +159,7 @@ else if(!empty($pub['publicationInfos']['fichierurl'])){
   ?>
 <div>
     <object data="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>" type="application/pdf" width="720" height="640">
-        alt : <a href="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>">Télécharger</a>
+       
     </object>
 </div>
 <?php  }
