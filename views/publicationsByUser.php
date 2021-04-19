@@ -35,11 +35,11 @@ require_once __DIR__ . '/asideProfil.php';
                 </div>
                 <?php }  else if(!empty($publication["fichierurl"])){
                 ?>
-                <div>
+               
                 <object class="card-img-top" data="<?=pathUrl().'public/publicationFichiers/'.$publication['fichierurl']?>" type="application/pdf" width="520" height="440">
 
                 </object>
-                </div>
+               
                 <?php } ?> 
             <div class="card-body">
                 <?php

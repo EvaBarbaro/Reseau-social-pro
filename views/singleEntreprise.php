@@ -157,11 +157,11 @@ else if(!empty($pub['publicationInfos']['videourl'])){
 <?php  }
 else if(!empty($pub['publicationInfos']['fichierurl'])){
   ?>
-<div>
+
     <object data="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>" type="application/pdf" width="720" height="640">
        
     </object>
-</div>
+
 <?php  }
 ?>
   <div class="card-body">
