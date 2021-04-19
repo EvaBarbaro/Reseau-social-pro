@@ -8,7 +8,7 @@ sessionStorage.setItem("order", "publications");
 
 $(document).on('click', "#reset", function () {
 
-  $("#networkHomePage").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/"+sessionStorage.getItem("order")+ " #test");
+  $("#Pub").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/"+sessionStorage.getItem("order")+ " #loadPub");
 
 });     
 
@@ -19,7 +19,7 @@ $(document).on('click', "#reset", function () {
     if($(this).attr("id")=="allPubs"){
       sessionStorage.setItem("visibilite","reseau");
       
-      $("#networkHomePage").load(url+ " #test");
+      $("#Pub").load(url+ " #loadPub");
     
     }   
   
@@ -27,28 +27,28 @@ $(document).on('click', "#reset", function () {
     else if($(this).attr("id")=="publicPubs"){
       sessionStorage.setItem("visibilite","public");
      
-      $("#networkHomePage").load(networkLink+"/public/"+sessionStorage.getItem("order")+ " #test");
+      $("#Pub").load(networkLink+"/public/"+sessionStorage.getItem("order")+ " #loadPub");
     
     } 
     // filtre = toutes les publications amis
     else if($(this).attr("id")=="amisPubs"){
       sessionStorage.setItem("visibilite","amis");
      
-      $("#networkHomePage").load(networkLink+"/amis/"+sessionStorage.getItem("order")+ " #test");
+      $("#Pub").load(networkLink+"/amis/"+sessionStorage.getItem("order")+ " #loadPub");
     
     } 
     // Trie = affichage des publications selon les dates
     else if($(this).attr("id")=="datePubs"){
       sessionStorage.setItem("order","publications");
     
-      $("#networkHomePage").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/publications"+ " #test");
+      $("#Pub").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/publications"+ " #loadPub");
     
     } 
     // Trie = affichage des publications selon les likes
     else if($(this).attr("id")=="likePubs"){
       sessionStorage.setItem("order","popularite");
    
-      $("#networkHomePage").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/popularite"+ " #test");
+      $("#Pub").load(networkLink+"/"+sessionStorage.getItem("visibilite")+"/popularite"+ " #loadPub");
     
     } 
   
@@ -96,46 +96,78 @@ $(document).on('submit', "form", function (e) {
       var dataString = $(this).serialize();
       var link="";
       var modal=false;
+      var partToUpdate;
+      var updatedContent;
+      var partToUpdate2;
+      var updatedContent2;
       if($(this).attr("name").includes("likeUnlikePub")) {
      
         link="/LikeUnlikePublication"; 
-       e.preventDefault();
+        e.preventDefault();
+        var idpublication=$(this).find("input[type=hidden]").attr("value");
+        partToUpdate= $(this).find("#LikePub");
+     
+        updatedContent="#loadLikePub"+idpublication;
+  
       }
     else if($(this).attr("name").includes("likeUnlikeCom")) {
         
         link="/LikeUnlikeCommentaire"; 
        
-      e.preventDefault();
+        e.preventDefault();
+        var idcommentaire=$(this).find("input[type=hidden]").attr("value");
+        partToUpdate= $(this).find("#LikeCom");
+      
+        updatedContent="#loadLikeCom"+idcommentaire;
       }
 
       else if($(this).attr("name").includes("AddCom")) {
         
         link="/createCommentaire"; 
        
-      e.preventDefault();
+        e.preventDefault();
+        var idpublication=$(this).find("input[type=hidden]").attr("value");
+        alert("idpublication = "+idpublication);
+        partToUpdate= $(this).parents().siblings().find("#ComPub");
+     
+        updatedContent="#loadComPub"+idpublication;
+        partToUpdate2= $(this).parents().find("#ComsPub");
+        updatedContent2="#loadComsPub"+idpublication;
+     
       }
 
       else if($(this).attr("name")=="AddPub") {
-        
+        sessionStorage.setItem("order", "publications");
         link="/createPublication";
 
         dataString = new FormData(this);
         sendFile=true;
-       e.preventDefault();
+        e.preventDefault();
+        partToUpdate=$("#Pub");
+        updatedContent="#loadPub";
       }
 
       else if($(this).attr("name").includes("deleteComForm")) {
         
         link="/deleteCommentaire";
         e.preventDefault();
-       
+        var idpublication=$(this).parents().siblings().find("#idpublication").attr("value");
+        alert("delete = "+idpublication);
+        partToUpdate= $(this).parents().siblings().find("#ComPub");
+     
+        updatedContent="#loadComPub"+idpublication;
+        partToUpdate2= $(this).parents().find("#ComsPub");
+        updatedContent2="#loadComsPub"+idpublication;
       }
       else if($(this).attr("name").includes("updateCom")) {
         e.preventDefault();
         link="/updateCommentaire"; 
-       // alert(sessionStorage.getItem("visibilite"));
-        //alert(sessionStorage.getItem("order"));
-        
+        var idpublication=$(this).find("#ComPub").attr("value");
+        partToUpdate=$("#Pub");
+        updatedContent="#loadPub";
+        partToUpdate2=  $(this).parents().siblings().find("#ComsPub");
+        console.log(partToUpdate2);
+        updatedContent2="#loadComsPub"+idpublication;
         
       }
    
@@ -163,7 +195,16 @@ $(document).on('submit', "form", function (e) {
         console.log("order= "+sessionStorage.getItem("order"));
         var visibilite = sessionStorage.getItem("visibilite");
         var order = sessionStorage.getItem("order");
-      $("#networkHomePage").load(networkLink+"/"+visibilite+"/"+order+ " #test");  
+        if (link==="/createCommentaire") {
+          $(".collapse").collapse("hide");
+        }
+        partToUpdate.load(networkLink+"/"+visibilite+"/"+order+ " "+updatedContent);
+        if( (link==="/createCommentaire") || (link==="/deleteCommentaire") || (link==="/updateCommentaire")){
+         
+         
+          partToUpdate2.load(networkLink+"/"+visibilite+"/"+order+ " "+updatedContent2);
+
+        }
           });
       }
       });

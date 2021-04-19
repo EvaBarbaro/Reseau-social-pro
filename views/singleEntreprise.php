@@ -1,9 +1,7 @@
 <?php
 require_once __DIR__ . '/networkNav.php';
 ?>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aJOTlE1K90k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<div id="networkHomePage">
-<div id="test">
+
 <div class="row">
 <div class="col-lg-4">
 <?php
@@ -86,6 +84,8 @@ require_once __DIR__ . '/asideMember.php';
     <a id="likePubs" style="cursor: pointer;" class="dropdown-item">Popularité</a> 
   </div>
 </div>
+<div id="Pub">
+<div id="loadPub">
 <?php
 $i=0;
 
@@ -148,7 +148,9 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 } 
 ?>
   <div class="card-body">
-    <p class="card-text"><?php
+    <p class="card-text">
+   <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/aJOTlE1K90k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+<?php
     echo $pub['publicationInfos']['description'];
 ?></p>
   </div>
@@ -156,27 +158,32 @@ if(!empty($pub['publicationInfos']['imageurl'])){
   <p>
 
   <div id="likeUnlikePub_form">
+
 <form name="likeUnlikePub<?=$i;?>" id="likeUnlikePub" >
   <?php if($pub['publication_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
-  <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
-
+  <input type="hidden" name="idpublication" id="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+  <span id="LikePub">
+  <span id="loadLikePub<?=$pub['publicationInfos']['idpublication']?>">
   <input type="image" id="<?=$img; ?>" name="likeUnlikePubButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
   
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
-
+  </span>
+  </span>
 
   <a class="btn offset-10 buttonCom" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
  
   <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top imgComm" alt="Image introuvable">
   
   </a>
-
+  <span id="ComPub">
+  <span id="loadComPub<?=$pub['publicationInfos']['idpublication']?>">
  <?=count($pub['commentaires'])?>
-
+</span>
+</span>
 </form>
 </div>
 
@@ -187,21 +194,24 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 </p>
 <div class="collapse" id="addComment<?php echo $i;?>">
   <div class="card card-body">
-   <!-- Formulaire pour commenter-->
-   <form name="AddCom<?=$i;?>" >
-  <div class="form-group">
-  <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
-    <textarea class="form-control" name="description" id="validationTextarea" placeholder="Commenter"></textarea>
-  </div>
-  <div class="form-group">
-  <button type="submit" class="btn btn-primary">Envoyer</button>
-</div>
-</form>
-<!-- Formulaire pour commenter-->
-  </div>
-</div>
+    <!-- Formulaire pour commenter-->
+        <form name="AddCom<?=$i;?>" >
+          <div class="form-group">
+            <input type="hidden" name="idpublication" id="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+            <textarea class="form-control" name="description" id="validationTextarea" placeholder="Commenter"></textarea>
+          </div>
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+        </form>
+    <!-- Formulaire pour commenter-->
   </div>
 </div>
+
+</div>
+</div>
+<span id="ComsPub">
+<span id="loadComsPub<?=$pub['publicationInfos']['idpublication']?>">
 <?php
 $j=0;
 foreach($pub['commentaires'] as $com){
@@ -286,8 +296,12 @@ if(!empty($com['commentaire_compte']['photo'])){
     $img ="like.png";
   } ?>
     <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
+    <span id="LikeCom">
+  <span id="loadLikeCom<?=$com['commentaireInfo']['idcommentaire']?>">
   <input type="image" id="<?=$img; ?>" name="likeUnlikeComButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
   <?php echo $com['commentaireInfo']['Nombre Like']; ?>
+  </span>
+  </span>
 </div>
 </form>
 </p>
@@ -296,7 +310,11 @@ if(!empty($com['commentaire_compte']['photo'])){
 
 
 <?php
-}
+}?>
+</span>
+</span>
+<?php
+
 }?>
 </div>
 </div>
