@@ -80,6 +80,8 @@ if ($match !== false) {
         $match = false;
     } else if ($match['target'] === "SocialNetworkController#home" && empty($_SESSION) || $match['target'] === "SocialNetworkController#home" && $match['params']['id'] !== $_SESSION['identreprise']) {
         $match = false;
+    } else if ($match['target'] === "SocialNetworkController#filtre" && empty($_SESSION) || $match['target'] === "SocialNetworkController#filtre" && $match['params']['id'] !== $_SESSION['identreprise']) {
+        $match = false;
     } else if ($match['target'] === "UserController#get" && empty($_SESSION) || $match['target'] === "UserController#get" && $match['params']['id'] !== $_SESSION['idutilisateur']) {
         $match = false;
     } else if ($match['target'] === "AccountController#get" && empty($_SESSION) || $match['target'] === "AccountController#get" && $match['params']['id'] !== $_SESSION['idutilisateur']) {
