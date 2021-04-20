@@ -92,8 +92,15 @@ class publicationDao implements interfaceDao {
      * Get publication pour un utilisateur
      */ 
     public function getByUser($id){
-        $sql = "SELECT * FROM publication WHERE idcompte = $id";
-
+        $idUtilisateur=$_SESSION['idutilisateur'];
+        if($idUtilisateur===$id){
+            $sql = "SELECT * FROM publication WHERE idcompte = $id"; 
+        } else {
+            $sql = "SELECT p.* FROM publication p WHERE (idcompte = $id) AND ((p.statut='public') OR ( (p.statut='amis') AND (p.idcompte  IN 
+                (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=$idUtilisateur) ) OR (
+                (amis.idcompte= $idUtilisateur) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) ) )";
+        }
+        
         $pdoStatement = $this->conn->query($sql);
 
         $publication = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);

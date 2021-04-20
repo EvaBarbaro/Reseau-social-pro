@@ -14,6 +14,15 @@ require_once __DIR__ . '/asideMember.php';
 <div class="col-lg-2">
 <div id="Page" >
 <div id="loadPage" >
+<div id="cardErrorMessage" class="card mt-4" style="width: 45rem;"><?php
+
+if (!empty($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    $_SESSION['message']="";
+}
+
+?></div>
+
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">
@@ -121,7 +130,21 @@ if(!empty($pub['comptePublication']['photo'])){
     $img ="amis.png";
   } ?>
   <div class="visibilité">
-  <img class="offset-11" src="<?php echo pathUrl().'public/img/'.$img;?>" > 
+  <img <?php if($_SESSION['role']!=="modo") {?> class="offset-11"<?php } ?> src="<?php echo pathUrl().'public/img/'.$img;?>" > 
+  <?php if($_SESSION['role']==="modo"){
+    
+    
+    ?>
+  <img name="deletePub" 
+       id="deletePub"
+       style="cursor:pointer;height: 1.5rem;width: 1.5rem;" 
+       src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
+       alt="Image introuvable"
+       data-toggle="modal" 
+       data-target="#deletePubModal<?=$pub['publicationInfos']['idpublication']?>"
+  >
+    
+    <?php } ?>
 </div>
 <!--
 <div class="dropdown offset-8">
@@ -141,6 +164,29 @@ if(!empty($pub['comptePublication']['photo'])){
 </div>
 -->
   </div>
+     <!-- Modal -->
+     <div class="modal fade" id="deletePubModal<?=$pub['publicationInfos']['idpublication']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deletePubModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePubModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Êtes vous sûrs de vouloir supprimer ?
+      </div>
+      <div class="modal-footer">
+      <form name="deletePubForm<?=$j;?>" id="deletePubForm" value="<?=$pub['publicationInfos']['idpublication']; ?>">
+        <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" id="deletePubModal" class="btn btn-primary">Confirmer</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <?php
 if(!empty($pub['publicationInfos']['imageurl'])){

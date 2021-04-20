@@ -95,11 +95,11 @@ $(document).on('submit', "form", function (e) {
       var sendFile=false;
       var dataString = $(this).serialize();
       var link="";
-      var modal=false;
       var partToUpdate;
       var updatedContent;
       var partToUpdate2;
       var updatedContent2;
+      var hideSinglePub="";
       if($(this).attr("name").includes("likeUnlikePub")) {
      
         link="/LikeUnlikePublication"; 
@@ -110,7 +110,19 @@ $(document).on('submit', "form", function (e) {
         updatedContent="#loadLikePub"+idpublication;
   
       }
-    else if($(this).attr("name").includes("likeUnlikeCom")) {
+      else if($(this).attr("name").includes("deletePubForm")) {
+        
+        link="/deletePublication";
+        e.preventDefault();
+        var idpublication=$(this).attr("value");
+      
+        
+        partToUpdate= $("#Pub");
+
+        updatedContent= "#loadPub";
+
+      }
+     else if($(this).attr("name").includes("likeUnlikeCom")) {
         
         link="/LikeUnlikeCommentaire"; 
        
@@ -202,6 +214,7 @@ $(document).on('submit', "form", function (e) {
         if (link==="/createCommentaire") {
           $(".collapse").collapse("hide");
         }
+       
         partToUpdate.load(networkLink+"/"+visibilite+"/"+order+ " "+updatedContent);
         if( (link==="/createCommentaire") || (link==="/deleteCommentaire") || (link==="/updateCommentaire")){
          
