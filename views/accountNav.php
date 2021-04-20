@@ -45,11 +45,15 @@ if (!empty($viewVars['compte']['idcompte'])) {
   <?php
     }
   ?>
-
+  <?php
+    if ($_SESSION['idutilisateur'] === $idcompte) {
+  ?>
   <li class="nav-item">
   <a class="nav-link users" href="<?= pathUrl().'mesAmis/'.$idcompte ?>">Mes amis</a>
   </li>
-
+  <?php
+    }
+  ?>
   </li>
 </ul>
 </div>
