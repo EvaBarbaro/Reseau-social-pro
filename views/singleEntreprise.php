@@ -255,9 +255,21 @@ if(!empty($com['commentaire_compte']['photo'])){
        src="<?php echo pathUrl().'public/img/pencil.png';?>" 
        alt="Image introuvable"
   >
+  <?php } ?>
+  <?php if(($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']) || ($_SESSION['role']==="modo")){
+    $size;
+    if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){
+      $size="1.5rem";
+    }
+    else {
+      $size="2.6rem";
+    }
+    
+    
+    ?>
   <img name="deleteCom" 
        id="deleteCom"
-       style="cursor:pointer;height: 1.5rem;width: 1.5rem;" 
+       style="cursor:pointer;height: <?=$size?>;width: <?=$size?>;" 
        src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
        alt="Image introuvable"
        data-toggle="modal" 
