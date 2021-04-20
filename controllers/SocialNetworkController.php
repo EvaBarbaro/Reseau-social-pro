@@ -34,7 +34,7 @@ class SocialNetworkController extends CoreController
     // page d'acceuil du réseau social
     public function home($parameters)
     {
-        $_SESSION['message']="";
+        
         $this->init($parameters['id']);
 
         $entrepriseId = $parameters['id'];
@@ -148,6 +148,7 @@ class SocialNetworkController extends CoreController
                 
                  $folder = __DIR__ . '/../public/publicationVideos/'.$uniqueFileName.'.'.$extension;
                  if (move_uploaded_file($tempname, $folder))  {
+                    $_SESSION['message']="";
                     $publication->setVideourl($uniqueFileName.'.'.$extension);
 
                  }
@@ -155,6 +156,7 @@ class SocialNetworkController extends CoreController
             else if($extension==="pdf"){
                 $folder = __DIR__ . '/../public/publicationFichiers/'.$uniqueFileName.'.'.$extension;
                 if (move_uploaded_file($tempname, $folder))  {
+                    $_SESSION['message']="";
                     $publication->setFichierurl($uniqueFileName.'.'.$extension);
                 }
             }
@@ -162,16 +164,17 @@ class SocialNetworkController extends CoreController
             $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
+                $_SESSION['message']="";
                 $publication->setImageurl($uniqueFileName.'.'.$extension);
             }
          }
-         else {
-            $_SESSION['message'] = "<div class='alert alert-danger'>Format fichier non supporté.</div>";
-            return 0 ;
-         }
         }
-        if(!isset($_POST['description'])){
+
+        if (empty($_POST['statut'])) {
             $_SESSION['message'] = "<div class='alert alert-danger'>Fichier non supporté.</div>";
+            return 0 ;
+        } else if(empty($_POST['description']) && empty($_FILES["pubMedia"]["tmp_name"])) {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Veuillez entrer une description ou insérez un média.</div>";
             return 0 ;
         } else {
             $_SESSION['message']="";
@@ -179,9 +182,9 @@ class SocialNetworkController extends CoreController
             $publication->setStatut($_POST['statut']);
             $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
             $res = $publicationDao->create($publication);
-        
+        }
+
         return $res;
-    }
     }
     // modifier une publication
     public function updatePublication($parameters) {

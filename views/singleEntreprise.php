@@ -18,6 +18,7 @@ require_once __DIR__ . '/asideMember.php';
 
 if (!empty($_SESSION['message'])) {
     echo $_SESSION['message'];
+    $_SESSION['message']="";
 }
 
 ?></div>
