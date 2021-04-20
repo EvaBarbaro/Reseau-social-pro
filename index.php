@@ -73,7 +73,7 @@ $router->map('GET', '/monReseau/[i:id]/admin/informations', 'AccountController#g
 $router->map('GET', '/monCompte/[i:id]/mesInformations', 'AccountController#get', 'accountSingle');
 $router->map('POST', '/mesInformations/update', 'AccountController#update', 'accountUpdate');
 
-$router->map('GET', '/mesAmis/[i:id]', 'AmisController#getAll', 'accountamis' );
+$router->map('GET', '/monCompte/[i:id]/mesAmis', 'AmisController#getAll', 'accountamis' );
 $router->map('POST', '/mesAmis/delete', 'AmisController#delete', 'accountamisDelete' );
 
 $match = $router->match();
