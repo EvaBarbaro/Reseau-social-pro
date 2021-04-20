@@ -40,6 +40,7 @@ $router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEn
 
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikePublication', 'SocialNetworkController#LikeUnlikePublication', 'reseauSingleLikeUnlikePublication');
 $router->map('POST', '/monReseau/[i:id]/createPublication', 'SocialNetworkController#createPublication', 'reseauSinglecreatePublication');
+$router->map('POST', '/monReseau/[i:id]/deletePublication', 'SocialNetworkController#deletePublicationHome', 'reseauSingledeletePublication');
 
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikeCommentaire', 'SocialNetworkController#LikeUnlikeCommentaire', 'reseauSingleLikeUnlikeCommentaire');
 $router->map('POST', '/monReseau/[i:id]/createCommentaire', 'SocialNetworkController#createCommentaire', 'reseauSinglecreateCommentaire');

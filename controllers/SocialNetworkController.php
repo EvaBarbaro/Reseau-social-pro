@@ -195,7 +195,7 @@ class SocialNetworkController extends CoreController
         return $res;
     }
 
-    // supprimer une publication
+    // supprimer une publication dans mon compte
     public function deletePublication($parameters) {
         $this->init($parameters['id']);
 
@@ -212,6 +212,20 @@ class SocialNetworkController extends CoreController
         return $publication;
     }
 
+    // supprimer une publication dans home
+    public function deletePublicationHome($parameters) {
+        $this->init($parameters['id']);
+
+        $idCompte = $_POST['idcompte'];
+
+        $publication = new publication();
+        $publication->setIdpublication($_POST['idpublication']);
+
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
+        $publication = $publicationDao->delete($publication->getIdpublication());
+
+        return $publication;
+    }
     // like/unlike une publication
     public function LikeUnlikePublication($parameters) {
         $this->init($parameters['id']);

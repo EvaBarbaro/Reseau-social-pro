@@ -96,7 +96,7 @@ foreach($viewVars['publicationList'] as $pub){
   $i++;
 ?>
 
- 
+
 <div class="card  mt-3  rounded-0" style="width: 45rem;">
 <div class="card-header">
 <?php
@@ -115,33 +115,57 @@ if(!empty($pub['comptePublication']['photo'])){
   <small id="datePub" style="display:inline;" class="form-text font-weight-bold text-primary" ><?=$pub['publicationInfos']['date']?></small>
 
 </div>
+
   <?php if($pub['publicationInfos']['statut']==="public") {
     $img ="public.png";
   } else {
     $img ="amis.png";
   } ?>
   <div class="visibilité">
-  <img class="offset-11" src="<?php echo pathUrl().'public/img/'.$img;?>" > 
-</div>
-<!--
-<div class="dropdown offset-8">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <?php/* if($pub['publicationInfos']['statut']==="public") {
-    $img ="public.png";
-  } else {
-    $img ="amis.png";
-  } */?>
-  <img src="<?php/* echo pathUrl().'public/img/'.$img;*/?>" class="card-img-top" alt="Image introuvable">
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/public.png';?>" class="card-img-top" alt="Image introuvable"></a>
-    <a class="dropdown-item" href="#"><img src="<?php echo pathUrl().'public/img/amis.png';?>" class="card-img-top" alt="Image introuvable"></a>
+  <img <?php if($_SESSION['role']!=="modo") {?> class="offset-11"<?php } ?> src="<?php echo pathUrl().'public/img/'.$img;?>"  > 
+  
+  <?php if($_SESSION['role']==="modo"){
     
+    
+    ?>
+  <img name="deletePub" 
+       id="deletePub"
+       style="cursor:pointer;height: 1.5rem;width: 1.5rem;" 
+       src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
+       alt="Image introuvable"
+       data-toggle="modal" 
+       data-target="#deletePubModal<?=$pub['publicationInfos']['idpublication']?>"
+  >
+    
+    <?php } ?>
+    
+</div>
+
+  </div>
+   <!-- Modal -->
+   <div class="modal fade" id="deletePubModal<?=$pub['publicationInfos']['idpublication']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deletePubModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePubModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Êtes vous sûrs de vouloir supprimer ?
+      </div>
+      <div class="modal-footer">
+      <form name="deletePubForm<?=$j;?>" id="deletePubForm" value="<?=$pub['publicationInfos']['idpublication']; ?>">
+        <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" id="deletePubModal" class="btn btn-primary">Confirmer</button>
+      </form>
+      </div>
+    </div>
   </div>
 </div>
--->
-  </div>
-</div>
+
 <?php
 if(!empty($pub['publicationInfos']['imageurl'])){
     ?><img src="<?php echo  pathUrl().'public/publicationImages/'.$pub['publicationInfos']['imageurl'];?>" class="card-img-top rounded-0" alt="Image introuvable">
@@ -151,7 +175,7 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 else if(!empty($pub['publicationInfos']['videourl'])){
   ?>
 
- <video width="720" height="640" controls>
+ <video width="680" height="400" controls>
   <source src=<?=pathUrl().'public/publicationVideos/'.$pub['publicationInfos']['videourl']?> type="video/mp4">
 
   Your browser does not support the video tag.
@@ -160,7 +184,7 @@ else if(!empty($pub['publicationInfos']['videourl'])){
 else if(!empty($pub['publicationInfos']['fichierurl'])){
   ?>
 
-    <object data="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>" type="application/pdf" width="720" height="640">
+    <object data="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>" type="application/pdf" width="680" height="601">
        
     </object>
 
@@ -284,7 +308,7 @@ if(!empty($com['commentaire_compte']['photo'])){
   </div>
   </div>
   <!-- Modal -->
-<div class="modal fade" id="deleteComModal<?=$com['commentaireInfo']['idcommentaire']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deleteComModalLabel" aria-hidden="true">
+<div class="modal fade" id="deletePubModal<?=$pub['publicationInfos']['idpublication']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deletePubModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -305,6 +329,8 @@ if(!empty($com['commentaire_compte']['photo'])){
       </div>
     </div>
   </div>
+</div>
+ 
 </div>
   <div class="card-body" style="background-color:#B4C1D3;"  value="<?=$pub['publicationInfos']['idpublication']; ?>">
   <p class="card-text" id="cardText" value=<?=$com['commentaireInfo']['idcommentaire']?>><?php
@@ -335,13 +361,13 @@ if(!empty($com['commentaire_compte']['photo'])){
 </div>
 
 
-<?php
-}?>
-</span>
-</span>
-<?php
+<?php }?>
 
-}?>
+</span>
+</span>
+
+
+<?php }?>
 </div>
 </div>
 </div>
