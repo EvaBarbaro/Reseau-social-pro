@@ -49,7 +49,7 @@ require_once __DIR__ . '/asideProfil.php';
             <form class="formUpdatePost" action="<?= pathUrl()."mesPublications/update" ?>" method="POST">
                 <img id="<?='updateTitlePost'.$index?>" src="<?= pathUrl()."public/img/pencil.png" ?>" alt="bouton modifier description" width="5%" length="5%" class="imagePostUser float-left">
                 <textarea type="text" name="description" id="<?='descriptionPost'.$index?>" class="fakeTextInput postDescUser float-left" readonly><?= $publication["description"]?></textarea>
-                <button type='submit' class='btn btn-info float-right postButton'>Modifier</button>
+                <button type='submit' class='btn btn-info postButton'>Modifier</button>
                 <input type="hidden" name="idpublication" value=<?= $publication["idpublication"]?>>
                 <input type="hidden" name="imageurl" value=<?= $publication["imageurl"]?>>
                 <input type="hidden" name="like" value=<?= $publication["like"]?>>
@@ -59,7 +59,7 @@ require_once __DIR__ . '/asideProfil.php';
             <?php } ?>
              <!-- Button trigger modal -->
              <br>
-             <button id="pubModalDel" type="button" class="btn btn-danger float-right  postButton" data-toggle="modal" data-target="<?='#postModal'.$publication["idpublication"] ?>">
+             <button id="pubModalDel" type="button" class="btn btn-danger mt-0 postButton" data-toggle="modal" data-target="<?='#postModal'.$publication["idpublication"] ?>">
                 Supprimer
                 </button>
 
