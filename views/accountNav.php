@@ -45,5 +45,11 @@ if (!empty($viewVars['compte']['idcompte'])) {
   <?php
     }
   ?>
+
+  <li class="nav-item">
+  <a class="nav-link users" href="<?= pathUrl().'mesAmis/'.$idcompte ?>">Mes amis</a>
+  </li>
+
+  </li>
 </ul>
 </div>

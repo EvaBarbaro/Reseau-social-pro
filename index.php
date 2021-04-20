@@ -15,6 +15,7 @@ include __DIR__ . '/controllers/ImageController.php';
 include __DIR__ . '/controllers/UserController.php';
 include __DIR__ . '/controllers/AccountController.php';
 include __DIR__ . '/controllers/SocialNetworkController.php';
+include __DIR__ . '/controllers/AmisController.php';
 include __DIR__ . '/controllers/ErrorController.php';
 
 $router = new AltoRouter();
@@ -71,6 +72,9 @@ $router->map('POST', '/monCompte/updatePassword', 'UserController#updatePass', '
 $router->map('GET', '/monReseau/[i:id]/admin/informations', 'AccountController#getAll', 'adminAccounts');
 $router->map('GET', '/monCompte/[i:id]/mesInformations', 'AccountController#get', 'accountSingle');
 $router->map('POST', '/mesInformations/update', 'AccountController#update', 'accountUpdate');
+
+$router->map('GET', '/mesAmis/[i:id]', 'AmisController#getAll', 'accountamis' );
+$router->map('POST', '/mesAmis/delete', 'AmisController#delete', 'accountamisDelete' );
 
 $match = $router->match();
 
