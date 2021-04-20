@@ -49,9 +49,13 @@ body {
 
 #logo {
     padding-right: 5em;
-    padding-bottom: 87.8vh;
+    padding-bottom: 87.7vh;
     background: rgb(185,43,39);
     background: linear-gradient(90deg, rgba(185,43,39,1) 21%, rgba(21,101,192,1) 100%);
+}
+
+#buttonImage {
+    width: 6.5em;
 }
 
 #login {
