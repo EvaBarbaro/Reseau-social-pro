@@ -14,6 +14,14 @@ require_once __DIR__ . '/asideMember.php';
 <div class="col-lg-2">
 <div id="Page" >
 <div id="loadPage" >
+<div id="cardErrorMessage" class="card mt-4" style="width: 45rem;"><?php
+
+if (!empty($_SESSION['message'])) {
+    echo $_SESSION['message'];
+}
+
+?></div>
+
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">

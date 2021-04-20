@@ -114,6 +114,10 @@ footer {
     display: inline-block;
 }
 
+#cardErrorMessage {
+    border: none;
+}
+
 .card .pubHeader .visibilité img{
   
     height: 1.7rem;

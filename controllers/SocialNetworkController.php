@@ -140,13 +140,15 @@ class SocialNetworkController extends CoreController
 
             $uniqueFileName = uniqid();
             $extension = end(explode(".", $_FILES["pubMedia"]["name"]));
-            $tempname = $_FILES["pubMedia"]["tmp_name"];  
-            var_dump($extension);
+            $tempname = $_FILES["pubMedia"]["tmp_name"];
+            $fileSize = $_FILES['pubMedia']['size'];
+
             if($extension==="mp4"){
                 
                  $folder = __DIR__ . '/../public/publicationVideos/'.$uniqueFileName.'.'.$extension;
                  if (move_uploaded_file($tempname, $folder))  {
                     $publication->setVideourl($uniqueFileName.'.'.$extension);
+
                  }
             }  
             else if($extension==="pdf"){
@@ -163,13 +165,19 @@ class SocialNetworkController extends CoreController
             }
          }
         }
-        $publication->setDescription($_POST['description']);
-        $publication->setStatut($_POST['statut']);
-        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
-        $res = $publicationDao->create($publication);
+        if(!isset($_POST['description'])){
+            $_SESSION['message'] = "<div class='alert alert-danger'>Fichier non supporté.</div>";
+            return 0 ;
+        } else {
+            $_SESSION['message']="";
+            $publication->setDescription($_POST['description']);
+            $publication->setStatut($_POST['statut']);
+            $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
+            $res = $publicationDao->create($publication);
+        
         return $res;
     }
-
+    }
     // modifier une publication
     public function updatePublication($parameters) {
         $this->init($parameters['id']);
