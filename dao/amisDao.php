@@ -31,7 +31,7 @@ class amisDao  implements interfaceDao{
 
     // Obtention de la liste de tout les tuples d'amis de la table amis
     public function getAll(){
-        $sql 	= "SELECT a.idcompte FROM amis as a, utilisateur as u WHERE a.idcompte =".$_SESSION['idutilisateur']." AND u.idutilisateur = a.idcompte_ami";
+        $sql 	= "SELECT * FROM amis as a, utilisateur as u WHERE a.idcompte =".$_SESSION['idutilisateur']." AND u.idutilisateur = a.idcompte_ami";
         $result = $this->conn->query($sql); 
         $amis = $result->fetchAll(PDO::FETCH_ASSOC);
 

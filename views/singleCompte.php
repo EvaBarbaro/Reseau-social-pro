@@ -74,17 +74,6 @@
             </form>
             <br>
 
-            <form action=<?= pathUrl()."views/amis.php" ?> method="POST" class="col">      
-                <input type="hidden" name="nom" value="<?= $viewVars['compte']['nom'] ?>">
-                <input type="hidden" name="prenom" value="<?= $viewVars['compte']['prenom'] ?>">
-                <input type="hidden" name="poste" value="<?= $viewVars['compte']['poste'] ?>">
-                <input type="hidden" name="grade" value="<?= $viewVars['compte']['grade'] ?>">
-                <input type="hidden" name="departement" value="<?= $viewVars['compte']['departement'] ?>">
-                <input type="hidden" name="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
-                <button type="submit" class="btn btn-info btn-lg btn-block">Obtenir une attestation de travail</button>         
-            </form>
-
-
             <?php
             }
 
