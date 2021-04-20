@@ -21,6 +21,18 @@ class entrepriseDao implements interfaceDao {
         return $entreprise;
     }
 
+    public function getDesignation($entreprise) {
+        $sql = $this->conn->prepare("SELECT identreprise FROM `entreprise` WHERE `designation` = :designation");
+
+        $sql->bindValue(':designation', $entreprise->getDesignation());
+
+        $sql->execute();
+
+        $count = $sql->rowCount();
+
+        return $count;
+    }
+
     public function getAll() {
         $sql = "SELECT * FROM entreprise";
 

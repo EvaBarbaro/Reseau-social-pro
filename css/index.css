@@ -218,7 +218,8 @@ input[type=image]{
 }
 
 #pubModalDel {
-    margin-right: -22.5%;
+    margin-right: -9.5em;
+    margin-top: 2em;
 }
 
 .postButton {
@@ -251,8 +252,6 @@ input[type=image]{
 
 .postDescUser {
     resize: none;
-    width: 70%;
-    height: 2em;
 }
 
 .bi-person-plus-fill {
