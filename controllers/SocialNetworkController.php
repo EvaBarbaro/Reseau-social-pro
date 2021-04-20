@@ -34,6 +34,7 @@ class SocialNetworkController extends CoreController
     // page d'acceuil du réseau social
     public function home($parameters)
     {
+        $_SESSION['message']="";
         $this->init($parameters['id']);
 
         $entrepriseId = $parameters['id'];
