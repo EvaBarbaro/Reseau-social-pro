@@ -83,7 +83,7 @@
                                             if ($image['idcompte'] === $_SESSION['idutilisateur']) {
                                         ?>
                                         <!-- Trigger the modal with a button modifier-->
-                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="<?= '#myModal'.$image['idimage'] 
+                                        <button id="buttonImage" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="<?= '#myModal'.$image['idimage'] 
                                         ?>">Suprimer</button>
 
                                         <!-- Modal -->
@@ -129,7 +129,7 @@
                         <!-- ------------------------------ limite entre les deux modales ------------------------------ -->
                                         
                                         <!-- Trigger the modal with a button modifier-->
-                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="<?= '#myModal2'.$image['idimage'] 
+                                        <button id="buttonImage" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="<?= '#myModal2'.$image['idimage'] 
                                         ?>">Modifier</button>
 
                                         <!-- Modal -->
