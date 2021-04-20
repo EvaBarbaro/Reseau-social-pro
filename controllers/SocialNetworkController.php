@@ -157,12 +157,16 @@ class SocialNetworkController extends CoreController
                     $publication->setFichierurl($uniqueFileName.'.'.$extension);
                 }
             }
-            else {
+            else if(($extension==="png") || ($extension==="jpeg") || ($extension==="jpg") || ($extension==="gif")){
             $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
                 $publication->setImageurl($uniqueFileName.'.'.$extension);
             }
+         }
+         else {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Format fichier non supporté.</div>";
+            return 0 ;
          }
         }
         if(!isset($_POST['description'])){
