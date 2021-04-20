@@ -130,8 +130,14 @@ if(!empty($pub['comptePublication']['photo'])){
     $img ="amis.png";
   } ?>
   <div class="visibilité">
-  <img <?php if($_SESSION['role']!=="modo" || $_SESSION['role']!=="admin" || $_SESSION['role']!==$pub['comptePublication']['idcompte']) {?> class="offset-12"<?php } ?> src="<?php echo pathUrl().'public/img/'.$img;?>" > 
-  <?php if($_SESSION['role']==="modo" || $_SESSION['role'] ==="admin" || $_SESSION['role'] ===$pub['comptePublication']['idcompte']){
+  <img <?php
+  if($_SESSION['role']!=="modo" && $_SESSION['role']!=="admin" && $_SESSION['idutilisateur']!==$pub['comptePublication']['idcompte']) {
+    ?>
+    class="offset-11"
+    <?php
+    }
+    ?> src="<?php echo pathUrl().'public/img/'.$img;?>" > 
+  <?php if($_SESSION['role']==="modo" || $_SESSION['role'] ==="admin" || $_SESSION['idutilisateur'] ===$pub['comptePublication']['idcompte']){
     
     
     ?>
