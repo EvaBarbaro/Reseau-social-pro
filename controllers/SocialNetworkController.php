@@ -148,7 +148,7 @@ class SocialNetworkController extends CoreController
                 
                  $folder = __DIR__ . '/../public/publicationVideos/'.$uniqueFileName.'.'.$extension;
                  if (move_uploaded_file($tempname, $folder))  {
-                    $_SESSION['message']="";
+                    unset($_SESSION['message']);
                     $publication->setVideourl($uniqueFileName.'.'.$extension);
 
                  }
@@ -156,7 +156,7 @@ class SocialNetworkController extends CoreController
             else if($extension==="pdf"){
                 $folder = __DIR__ . '/../public/publicationFichiers/'.$uniqueFileName.'.'.$extension;
                 if (move_uploaded_file($tempname, $folder))  {
-                    $_SESSION['message']="";
+                    unset($_SESSION['message']);
                     $publication->setFichierurl($uniqueFileName.'.'.$extension);
                 }
             }
@@ -164,7 +164,7 @@ class SocialNetworkController extends CoreController
             $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
-                $_SESSION['message']="";
+                unset($_SESSION['message']);
                 $publication->setImageurl($uniqueFileName.'.'.$extension);
             }
          }
@@ -177,7 +177,7 @@ class SocialNetworkController extends CoreController
             $_SESSION['message'] = "<div class='alert alert-danger'>Veuillez entrer une description ou insérez un média.</div>";
             return 0 ;
         } else {
-            $_SESSION['message']="";
+            unset($_SESSION['message']);
             $publication->setDescription($_POST['description']);
             $publication->setStatut($_POST['statut']);
             $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
