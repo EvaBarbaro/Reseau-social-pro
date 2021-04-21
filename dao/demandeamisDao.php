@@ -20,19 +20,34 @@ class demandeamisDao {
             return $demandeamis;   
     }
 
-    // Obtention de la liste demandeamis de l'id passé en paramètre
+    // Obtention de la liste des gens qui m'ont demandé en ami, id passé en paramètre est mon id
     public function getAll($id1){
         $id1 = (string) $id1;
-        $sql = "SELECT * FROM demandeamis WHERE idcompte=".$id1 ;
+        $sql = "SELECT idcompte_demandeur FROM demandeAmis WHERE idcompte_solliciter=$id1" ;
 			$result = $this->conn->query($sql);
             $amiss = $result->fetch(PDO::FETCH_ASSOC);
             return $amiss;   
     }
 
-    public function createDemandeAmis($id1,$id2){}  
-    
+    // Obtention de la liste des gens que j'ai demandé en ami, id passé en paramètre est mon id
+    public function getAllDemandeur($id1){
+        $id1 = (string) $id1;
+        $sql = "SELECT idcompte_solliciter FROM demandeAmis WHERE idcompte_demandeur=$id1" ;
+			$result = $this->conn->query($sql);
+            $amiss = $result->fetch(PDO::FETCH_ASSOC);
+            return $amiss;   
+    }
 
-    public function deleteDemandeAmis($id1,$id2){}  
+    public function createDemandeAmis($id1,$id2){
+        $sql = $this->conn->prepare("INSERT INTO demandeAmis(idcompte_demandeur, idcompte_solliciter)VALUES($id1,$id2)"); 
+        $sql->execute();
+    }
+
+    public function deleteDemandeAmis($id1,$id2){
+        $this->conn->exec("DELETE FROM demandeAmis WHERE idcompte_demandeur = $id1 and idcompte_solliciter = $id2");
+
+    }
+
    
 
 //     SELECT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
@@ -48,7 +63,7 @@ u.idutilisateur = a.idcompte_ami AND NOT(
 b.idcompte = a.idcompte_ami and 
 b.idcompte_ami = "1696278514562148")
 */
-    
+    /*
     public function createInvite($idutilisateur,$idami){
         $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
         VALUES(:idcompte, :idcompte_ami )");
@@ -66,8 +81,9 @@ b.idcompte_ami = "1696278514562148")
         $sql->bindValue(':idcompte_ami', $idami, PDO::PARAM_INT);
         $sql->execute();
     }
+    */
 
-    // Efface la liste des amis de $id
+    /* Efface la liste des amis de $id
     public function delete($id){     
         $this->conn->exec("DELETE FROM amis WHERE idcompte = $id");    
     }
@@ -76,7 +92,7 @@ b.idcompte_ami = "1696278514562148")
     public function delete2($id1, $id2){     
         $this->conn->exec("DELETE FROM amis WHERE idcompte = $id1 && idcompte_ami = $id2");    
     }
-
+    */
 
     
 
