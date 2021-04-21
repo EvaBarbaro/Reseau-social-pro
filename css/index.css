@@ -2,6 +2,7 @@ body {
     position: relative;
     min-height: 100vh;
     width: 100%;
+    overflow-x: hidden!important;
 }
 
 #logoImg {
@@ -48,9 +49,13 @@ body {
 
 #logo {
     padding-right: 5em;
-    padding-bottom: 87.8vh;
+    padding-bottom: 87.7vh;
     background: rgb(185,43,39);
     background: linear-gradient(90deg, rgba(185,43,39,1) 21%, rgba(21,101,192,1) 100%);
+}
+
+#buttonImage {
+    width: 6.5em;
 }
 
 #login {
@@ -87,20 +92,40 @@ footer {
     opacity: 85%;
     color: antiquewhite;
 } */
+
+.modal-open {
+    padding: 0 !important;
+    overflow-y: auto;
+}
+
+/* .modal {
+    background-color:rgba(128,128,128, 0.1);
+} */
+
 .card .pubHeader img{
-    border: solid transparent;
-    border-radius: 10rem;
+  
     height:2.5rem;
     width:2.5rem;
 }
+
+.card .pubHeader .card-img-top{
+    border: solid transparent;
+    border-radius: 10rem;
+  
+}
+
 .card .pubHeader .visibilité{
     display: inline-block;
 }
 
+#cardErrorMessage {
+    border: none;
+}
+
 .card .pubHeader .visibilité img{
   
-    height: 2rem;
-    width:2rem;
+    height: 1.7rem;
+    width:1.7rem;
 }
 
 .navbar-brand img{
@@ -113,6 +138,10 @@ footer {
     border-color: none;
 }
 */
+/*
+a .dropdown-item{
+    cursor: pointer!important;
+}*/
 .dropdown button {
     background-color: transparent;
     border: none;
@@ -197,7 +226,8 @@ input[type=image]{
 }
 
 #pubModalDel {
-    margin-right: -22.5%;
+    margin-right: -9.5em;
+    margin-top: 2em;
 }
 
 .postButton {
@@ -230,8 +260,9 @@ input[type=image]{
 
 .postDescUser {
     resize: none;
-    width: 70%;
-    height: 2em;
+    width: 67%;
+    height: 6em;
+    margin-right: 10px;
 }
 
 .bi-person-plus-fill {

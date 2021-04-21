@@ -34,6 +34,8 @@ class publicationDao implements interfaceDao {
             "idpublication"=>$pub->getIdpublication(),
             "description"=>$pub->getDescription(),
             "imageurl"=>$pub->getImageurl(),
+            "videourl"=>$pub->getVideourl(),
+            "fichierurl"=>$pub->getFichierurl(),
             "Nombre Like"=>$pub->getLike(),
             "statut"=>$pub->getStatut(),
             "date" =>date("d/m/Y H:i",strtotime($pub->getDatePub()))
@@ -90,8 +92,15 @@ class publicationDao implements interfaceDao {
      * Get publication pour un utilisateur
      */ 
     public function getByUser($id){
-        $sql = "SELECT * FROM publication WHERE idcompte = $id";
-
+        $idUtilisateur=$_SESSION['idutilisateur'];
+        if($idUtilisateur===$id){
+            $sql = "SELECT * FROM publication WHERE idcompte = $id ORDER BY datePub DESC"; 
+        } else {
+            $sql = "SELECT p.* FROM publication p WHERE (idcompte = $id) AND ((p.statut='public') OR ( (p.statut='amis') AND (p.idcompte  IN 
+                (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=$idUtilisateur) ) OR (
+                (amis.idcompte= $idUtilisateur) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) ) ) ORDER BY datePub DESC";
+        }
+        
         $pdoStatement = $this->conn->query($sql);
 
         $publication = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
@@ -99,18 +108,39 @@ class publicationDao implements interfaceDao {
         return $publication;
     }
 
-    
+    public function getAll(){}
 /**
  * Get all publication
  */ 
-    public function getAll(){
-        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE ( (t.identreprise=:identreprise) AND (p.idcompte = t.idutilisateur) ) AND ( (p.statut='public') OR (p.idcompte=:id) OR 
-        ( (p.statut='amis') AND (p.idcompte  IN 
-        (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
-        (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) ) ) ORDER BY datePub DESC";
+    public function getAllPublications($parameters){
+
+        $sql = "SELECT p.* FROM publication p , utilisateur t WHERE (( (t.identreprise=:identreprise) AND (p.idcompte = t.idutilisateur) ) AND ( ";
+        if($parameters['visibilite']==="public"){
+            $sql=$sql."(p.statut='public')";
+        }
+        else if($parameters['visibilite']==="amis"){
+            $sql=$sql."( (p.statut='amis') AND (p.idcompte  IN 
+            (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
+            (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) OR (p.idcompte=:id) ) )";
+        }
+        else {
+            $sql=$sql."(p.statut='public') OR (p.idcompte=:id) OR 
+            ( (p.statut='amis') AND (p.idcompte  IN 
+            (SELECT amis.idcompte FROM amis WHERE ( ( (amis.idcompte=p.idcompte) AND (amis.idcompte_ami=:id) ) OR (
+            (amis.idcompte=:id) AND (amis.idcompte_ami=p.idcompte) ) ) ) ) )";
+        }
+        $sql=$sql.")) ";
+        if($parameters['order']==="popularite"){
+            $sql=$sql."ORDER BY p.like DESC";
+        }
+        else  {
+            $sql=$sql."ORDER BY datePub DESC";
+        }
 
         $pdoStatement = $this->conn->prepare($sql);
+        if($parameters['visibilite']!=="public")  {
         $pdoStatement->bindValue(':id', $this->idUtilisateur, PDO::PARAM_INT);
+        }
         $pdoStatement->bindValue(':identreprise',$this->entrepriseId, PDO::PARAM_INT);
         $pdoStatement->execute();
         $publications = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
@@ -122,6 +152,8 @@ class publicationDao implements interfaceDao {
                 $publicationModel = new publication();
                 $publicationModel->construct($pub['idpublication'],$pub['description'],$pub['statut'],$pub['idcompte'],$pub['like'],$pub['datePub']);
                 $publicationModel->setImageurl($pub['imageurl']);
+                $publicationModel->setVideourl($pub['videourl']);
+                $publicationModel->setFichierurl($pub['fichierurl']);
                 // publication à ajouté
                 $publicationAjouter = $this->getInfoPublication($publicationModel);
                 array_push($publication,$publicationAjouter);
@@ -146,9 +178,20 @@ class publicationDao implements interfaceDao {
         if($publication->getImageurl()!==null){
             $sql=$sql.",imageurl";
         }
+        else if($publication->getVideourl()!==null){
+            $sql=$sql.",videourl";
+        }
+        else if($publication->getFichierurl()!==null){
+            $sql=$sql.",fichierurl";
+        }
         $sql=$sql.") VALUES (:pubId,:description,:like,:statut,:idcompte,:datePub";
          if($publication->getImageurl()!==null){
             $sql=$sql.",:imageurl";
+        }  else if($publication->getVideourl()!==null){
+            $sql=$sql.",:videourl";
+        }
+        else if($publication->getFichierurl()!==null){
+            $sql=$sql.",:fichierurl";
         }
         $sql=$sql.")";
     
@@ -158,6 +201,12 @@ class publicationDao implements interfaceDao {
         $pdoStatement->bindValue(':description',$publication->getDescription());
         if($publication->getImageurl()!==null){
         $pdoStatement->bindValue(':imageurl',$publication->getImageurl());
+        }
+        else if($publication->getVideourl()!==null){
+        $pdoStatement->bindValue(':videourl',$publication->getVideourl());
+        }
+        else if($publication->getFichierurl()!==null){
+        $pdoStatement->bindValue(':fichierurl',$publication->getFichierurl());
         }
         $pdoStatement->bindValue(':like', 0, PDO::PARAM_INT);
         $pdoStatement->bindValue(':statut',$publication->getStatut());

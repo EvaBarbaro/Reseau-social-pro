@@ -10,6 +10,7 @@
 <?php
 
     require_once __DIR__ . '/asideProfil.php';
+
 ?>
         <div id="register">
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Modification</h1>
@@ -19,7 +20,7 @@
                 <div class="form-group row">
                     <label for="nom" class="col-sm-4 col-form-label">Votre nom</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="nom" id="nom" value="<?= $viewVars['compte']['nom'] ?>" required>
+                    <input type="text" class="form-control" name="nom" id="nom" value="<?= $viewVars['compte']['nom'] ?>">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,7 +59,10 @@
                 
             </form>
             <br>
-                
+            <?php
+
+            if (!empty($viewVars['compte']['nom']) && !empty($viewVars['compte']['prenom']) && !empty($viewVars['compte']['poste']) && !empty($viewVars['compte']['grade']) && !empty($viewVars['compte']['departement']) && !empty($viewVars['compte']['date_embauche'])) {
+            ?>
             <form action=<?= pathUrl()."views/attestationPdf.php" ?> method="POST" class="col">      
                 <input type="hidden" name="nom" value="<?= $viewVars['compte']['nom'] ?>">
                 <input type="hidden" name="prenom" value="<?= $viewVars['compte']['prenom'] ?>">
@@ -66,16 +70,13 @@
                 <input type="hidden" name="grade" value="<?= $viewVars['compte']['grade'] ?>">
                 <input type="hidden" name="departement" value="<?= $viewVars['compte']['departement'] ?>">
                 <input type="hidden" name="date_embauche" value="<?= $viewVars['compte']['date_embauche'] ?>">
-                <button type="submit" class="btn btn-info btn-lg btn-block">Obtenir une attestation de travaille</button>         
+                <button type="submit" class="btn btn-info btn-lg btn-block">Obtenir une attestation de travail</button>         
             </form>
             <br>
-    <!-- <pre>
-        <b><p style="color:red;" >Variable SESSION</p></b>    <?php  //var_dump($_SESSION); ?> 
-        <b><p style="color:red;">Variable viewvars</p> </b>    <?php  //var_dump($viewVars); ?> 
-        <b><p style="color:red;"> Variable POST</p></b>   <?php  //var_dump($_POST); ?> 
-        <b><p style="color:red;">Variable getAll</p></b>   <?php  //var_dump($_GET); ?> 
-        <b><p style="color:red;">Variable FILES</p> </b>    <?php  //var_dump($_FILES); ?> 
-    </pre> -->
 
+            <?php
+            }
+
+            ?>
         </div>
 </div>

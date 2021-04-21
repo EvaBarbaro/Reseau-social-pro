@@ -31,6 +31,30 @@ class utilisateurDao implements interfaceUtilisateurDao {
         return $utilisateur;
     }
 
+    public function getUsername($utilisateur) {
+        $sql = $this->conn->prepare("SELECT idutilisateur FROM `utilisateur` WHERE `nomutilisateur` = :nomutilisateur");
+
+        $sql->bindValue(':nomutilisateur', $utilisateur->getNomUtilisateur());
+
+        $sql->execute();
+
+        $count = $sql->rowCount();
+
+        return $count;
+    }
+
+    public function getMail($utilisateur) {
+        $sql = $this->conn->prepare("SELECT idutilisateur FROM `utilisateur` WHERE `mail` = :mail");
+
+        $sql->bindValue(':mail', $utilisateur->getMail());
+
+        $sql->execute();
+
+        $count = $sql->rowCount();
+
+        return $count;
+    }
+
     public function update($utilisateur) {
         $sql = $this->conn->prepare("UPDATE utilisateur SET nomutilisateur = :nomutilisateur, mail = :mail, identreprise = :identreprise WHERE idutilisateur = :idutilisateur");
 

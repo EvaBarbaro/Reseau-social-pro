@@ -6,116 +6,96 @@ require_once __DIR__ . '/../pathUrl.php';
 
 class AmisController extends CoreController
 {
-    public function getListe()
+    public function getAll()
     {
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
         $amisDao = new amisDao($db);
         $amisList = $amisDao->getAll();
-        $this->show('image', [
-            'title' => 'Social Connect - Back Office',
-            'iamisList' => $amisList
+
+        $compteDao = new compteDao($db);
+        $compte = $compteDao->get($_SESSION['idutilisateur']);
+
+        $this->show('amis', [
+            'title' => 'Social Connect - Mes Amis',
+            'amisList' => $amisList,
+            'compte' => $compte
         ]);
     }
 
-  /*  public function get($parameters)
-    {
-        $imageId = $parameters['id'];
+    // public function get($parameters)
+    // {
+    //     $imageId = $parameters['id'];
 
+    //     $DBData = new DBData();
+    //     $db = $DBData->getConnection();
+
+    //     $imageDao = new imageDao($db);
+    //     $image = $imageDao->get($imageId);
+
+    //     $this->show('singleImage', [
+    //         'title' => 'Social Connect - Back Office',
+    //         'image' => $image
+    //     ]);
+    // }
+
+    public function createOne()
+    {
         $DBData = new DBData();
         $db = $DBData->getConnection();
 
-        $imageDao = new imageDao($db);
-        $image = $imageDao->get($imageId);
-
-        $this->show('singleImage', [
-            'title' => 'Social Connect - Back Office',
-            'image' => $image
-        ]);
-    }
-    public function create()
-    {
-        $DBData = new DBData();
-        $db = $DBData->getConnection();
-
-        $imageDao = new imageDao($db);
-        $image = new image();
-
-        $image->setIdimage($_POST['idimage']);
-        $image->setTitre($_POST['titre']);
-
-        if (isset($_FILES["imageurl"])) {
-  
-            $uniqueFileName = uniqid();
-            $extension = end(explode(".", $_FILES["imageurl"]["name"]));
-            $tempname = $_FILES["imageurl"]["tmp_name"];    
-            $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
-          
-            if (move_uploaded_file($tempname, $folder))  {
-                $image->setImageUrl($uniqueFileName.'.'.$extension);
-            }
-        }
-
-        $image->setIdcompte($_POST['idcompte']);
-        
-
-        $imageDao->create($image);
-
-        header('Location: '.pathUrl()."mesImages");
     }
 
-    public function update()
+    public function createTwo()
     {
-        $imageId = $_POST['idimage'];
-
         $DBData = new DBData();
         $db = $DBData->getConnection();
+    }
 
-        $imageDao = new imageDao($db);
-        $image = new image();
+    // public function update()
+    // {
+    //     $imageId = $_POST['idimage'];
 
-        $image->setIdimage($_POST['idimage']);
-        $image->setTitre($_POST['titre']);
+    //     $DBData = new DBData();
+    //     $db = $DBData->getConnection();
 
-        if (isset($_FILES["imageurl"])) {
+    //     $imageDao = new imageDao($db);
+    //     $image = new image();
+
+    //     $image->setIdimage($_POST['idimage']);
+    //     $image->setTitre($_POST['titre']);
+
+    //     if (isset($_FILES["imageurl"])) {
   
-            $uniqueFileName = uniqid();
-            $extension = end(explode(".", $_FILES["imageurl"]["name"]));
-            $tempname = $_FILES["imageurl"]["tmp_name"];    
-            $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
+    //         $uniqueFileName = uniqid();
+    //         $extension = end(explode(".", $_FILES["imageurl"]["name"]));
+    //         $tempname = $_FILES["imageurl"]["tmp_name"];    
+    //         $folder = __DIR__ . '/../public/albumImages/'.$uniqueFileName.'.'.$extension;
           
-            if (move_uploaded_file($tempname, $folder))  {
-                $image->setImageUrl($uniqueFileName.'.'.$extension);
-            }
-        }
+    //         if (move_uploaded_file($tempname, $folder))  {
+    //             $image->setImageUrl($uniqueFileName.'.'.$extension);
+    //         }
+    //     }
         
-        $image->setIdcompte($_POST['idcompte']);
+    //     $image->setIdcompte($_POST['idcompte']);
        
-        $imageDao->update($image);
+    //     $imageDao->update($image);
 
-        header('Location: '.pathUrl().'monImage/'.$imageId);
-    }
+    //     header('Location: '.pathUrl().'monImage/'.$imageId);
+    // }
 
-    public function delete()
-    {
-        $imageId = $_POST['idimage'];
+    // public function delete()
+    // {
+    //     $imageId = $_POST['idimage'];
 
-        $DBData = new DBData();
-        $db = $DBData->getConnection();
+    //     $DBData = new DBData();
+    //     $db = $DBData->getConnection();
 
-        $imageDao = new imageDao($db);
-        $imageDao->delete($imageId);
+    //     $imageDao = new imageDao($db);
+    //     $imageDao->delete($imageId);
 
-        header('Location: '.pathUrl().'mesImages');
-    }
- 
-    public function preCreate()
-    {
-        $this->show('imageEnCreation', [
-            'title' => 'Social Connect - Inscription'
-        ]); 
-    }
-*/
+    //     header('Location: '.pathUrl().'mesImages');
+    // }
 
 }

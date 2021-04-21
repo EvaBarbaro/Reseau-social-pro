@@ -12,17 +12,6 @@
 
 <div class="truc">
 
-<?php //session_start();?>
-<!-- <pre>
-        <b><p style="color:red;" >Variable SESSION</p></b>    <?php //var_dump($_SESSION); ?> 
-        <b><p style="color:red;">Variable viewvars</p> </b>    <?php //var_dump($viewVars); ?> 
-        <b><p style="color:red;"> Variable POST</p></b>   <?php //var_dump($_POST); ?> 
-        <b><p style="color:red;">Variable GET</p></b>   <?php //var_dump($_GET); ?> 
-        <b><p style="color:red;">Variable FILES</p> </b>    <?php // var_dump($_FILES); ?> 
-
-        <b><p style="color:red;">Variable image</p> </b>    <?php // var_dump($image); ?> 
-</pre>  -->
-
     <h2 class="mt-4">
         Toutes mes images
         <?php
@@ -83,7 +72,7 @@
                                             if ($image['idcompte'] === $_SESSION['idutilisateur']) {
                                         ?>
                                         <!-- Trigger the modal with a button modifier-->
-                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="<?= '#myModal'.$image['idimage'] 
+                                        <button id="buttonImage" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="<?= '#myModal'.$image['idimage'] 
                                         ?>">Suprimer</button>
 
                                         <!-- Modal -->
@@ -129,7 +118,7 @@
                         <!-- ------------------------------ limite entre les deux modales ------------------------------ -->
                                         
                                         <!-- Trigger the modal with a button modifier-->
-                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="<?= '#myModal2'.$image['idimage'] 
+                                        <button id="buttonImage" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="<?= '#myModal2'.$image['idimage'] 
                                         ?>">Modifier</button>
 
                                         <!-- Modal -->

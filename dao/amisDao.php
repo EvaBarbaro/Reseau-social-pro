@@ -5,7 +5,11 @@ include_once __DIR__.'/../models/amis.php';
 
 class amisDao  implements interfaceDao{
     private $conn;
-    public function __construct($db){   $this->conn = $db;  }
+
+    public function __construct($db){
+        $this->conn = $db;
+    }
+    
     // Obtention d'un couple d'amis spécifique (un seul tuple)
     public function get2($id1, $id2){
         $id1 = (string) $id1;
@@ -15,6 +19,7 @@ class amisDao  implements interfaceDao{
             $amis = $result->fetch(PDO::FETCH_ASSOC);
             return $amis;   
     }
+
     // Obtention de la liste d'amis de l'id passé en paramètre
     public function get($id1){
         $id1 = (string) $id1;
@@ -23,26 +28,53 @@ class amisDao  implements interfaceDao{
             $amiss = $result->fetch(PDO::FETCH_ASSOC);
             return $amiss;   
     }
+
     // Obtention de la liste de tout les tuples d'amis de la table amis
     public function getAll(){
-        $sql 	= "SELECT * FROM amis";
+        $sql 	= "SELECT * FROM amis as a, utilisateur as u WHERE a.idcompte =".$_SESSION['idutilisateur']." AND u.idutilisateur = a.idcompte_ami";
         $result = $this->conn->query($sql); 
-        $amiss = $result->fetchAll();
-        return $amiss;
+        $amis = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        return $amis;
     }
+
+//     SELECT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
+// a.idcompte ="1696278514562148" AND 
+// u.idutilisateur = a.idcompte_ami AND  
+// b.idcompte = a.idcompte_ami and 
+//  b.idcompte_ami = "1696278514562148";
+
+/* LISTE DEMANDE AMIS 
+SELECT DISTINCT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
+a.idcompte ="1696278514562148" AND 
+u.idutilisateur = a.idcompte_ami AND NOT( 
+b.idcompte = a.idcompte_ami and 
+b.idcompte_ami = "1696278514562148")
+*/
     
-    public function create($id1,$id2){
+    public function createInvite($idutilisateur,$idami){
         $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
         VALUES(:idcompte, :idcompte_ami )");
 
-        $sql->bindValue(':idcompte', $id1, PDO::PARAM_INT);
-        $sql->bindValue(':idcompte_ami', $id2, PDO::PARAM_INT);
+        $sql->bindValue(':idcompte', $idutilisateur, PDO::PARAM_INT);
+        $sql->bindValue(':idcompte_ami', $idami, PDO::PARAM_INT);
         $sql->execute();
     }
+
+    public function createConfirm($idutilisateur,$idami){
+        $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
+        VALUES(:idcompte, :idcompte_ami )");
+
+        $sql->bindValue(':idcompte', $idutilisateur, PDO::PARAM_INT);
+        $sql->bindValue(':idcompte_ami', $idami, PDO::PARAM_INT);
+        $sql->execute();
+    }
+
     // Efface la liste des amis de $id
     public function delete($id){     
         $this->conn->exec("DELETE FROM amis WHERE idcompte = $id");    
     }
+    
     // Efface l'ami $id2 de la liste d'ami de $id1
     public function delete2($id1, $id2){     
         $this->conn->exec("DELETE FROM amis WHERE idcompte = $id1 && idcompte_ami = $id2");    

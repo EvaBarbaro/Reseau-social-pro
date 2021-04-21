@@ -26,7 +26,6 @@ class SocialNetworkController extends CoreController
 
         $DBData = new DBData();
         $this->db = $DBData->getConnection();
-        //à remplacer par la variable idutilisateur de la session courante
         $this->idUtilisateur = $_SESSION['idutilisateur'];
         $this->entrepriseId = $entrepriseId;
         
@@ -35,16 +34,19 @@ class SocialNetworkController extends CoreController
     // page d'acceuil du réseau social
     public function home($parameters)
     {
+        
         $this->init($parameters['id']);
 
         $entrepriseId = $parameters['id'];
 
         $DBData = new DBData();
         $db = $DBData->getConnection();
-        //à remplacer par la variable idutilisateur de la session courante
-        $idUtilisateur = 1696278514562148;
-
-        $publicationList = $this->getPublications($parameters);
+       
+        $filtre=array();
+        $filtre['visibilite']="reseau";
+        $filtre['order']="publications";
+        $filtre['id']=$parameters['id'];
+        $publicationList = $this->getPublications($filtre);
 
         $utilisateurDao = new utilisateurDao($this->db );
         $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
@@ -57,17 +59,41 @@ class SocialNetworkController extends CoreController
             'publicationList' => $publicationList,
             'idUtilisateur' => $this->idUtilisateur,
             'utilisateurList' => $utilisateurList,
-            'idUtilisateur' => $idUtilisateur,
-            'utilisateurList' => $utilisateurList,
             'compteList' => $compteList
         ]);
     }
 
+  public function filtre($parameters)
+  {
+      $this->init($parameters['id']);
+
+      $entrepriseId = $parameters['id'];
+
+      $DBData = new DBData();
+      $db = $DBData->getConnection();
+     
+   
+      $publicationList = $this->getPublications($parameters);
+
+      $utilisateurDao = new utilisateurDao($this->db );
+      $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
+
+      $compteDao = new compteDao($db);
+      $compteList = $compteDao->getAll($_SESSION['identreprise']);
+
+      $this->show('singleEntreprise', [
+          'title' => 'Social Connect - Home',
+          'publicationList' => $publicationList,
+          'idUtilisateur' => $this->idUtilisateur,
+          'utilisateurList' => $utilisateurList,
+          'compteList' => $compteList
+      ]);
+  }
     // get toutes les publication(amis et public)
     public function getPublications($parameters) {
         $this->init($parameters['id']);
         $publicationDao = new publicationDao($this->db,$this->idUtilisateur,$this->entrepriseId);
-        $publicationList = $publicationDao->getAll();
+        $publicationList = $publicationDao->getAllPublications($parameters);
         return $publicationList;
     }
     
@@ -109,25 +135,57 @@ class SocialNetworkController extends CoreController
     public function createPublication($parameters) {
         $this->init($parameters['id']);
         $publication = new publication();
-        $publication->setDescription($_POST['description']);
-        $publication->setStatut($_POST['statut']);
+       
     
-        if (isset($_FILES["pubImage"])) {
+        if (isset($_FILES["pubMedia"])) {
 
             $uniqueFileName = uniqid();
-            $extension = end(explode(".", $_FILES["pubImage"]["name"]));
-            $tempname = $_FILES["pubImage"]["tmp_name"];    
+            $extension = end(explode(".", $_FILES["pubMedia"]["name"]));
+            $tempname = $_FILES["pubMedia"]["tmp_name"];
+            $fileSize = $_FILES['pubMedia']['size'];
+
+            if($extension==="mp4"){
+                
+                 $folder = __DIR__ . '/../public/publicationVideos/'.$uniqueFileName.'.'.$extension;
+                 if (move_uploaded_file($tempname, $folder))  {
+                    $_SESSION['message']="";
+                    $publication->setVideourl($uniqueFileName.'.'.$extension);
+
+                 }
+            }  
+            else if($extension==="pdf"){
+                $folder = __DIR__ . '/../public/publicationFichiers/'.$uniqueFileName.'.'.$extension;
+                if (move_uploaded_file($tempname, $folder))  {
+                    $_SESSION['message']="";
+                    $publication->setFichierurl($uniqueFileName.'.'.$extension);
+                }
+            }
+            else if(($extension==="png") || ($extension==="jpeg") || ($extension==="jpg") || ($extension==="gif")){
             $folder = __DIR__ . '/../public/publicationImages/'.$uniqueFileName.'.'.$extension;
           
             if (move_uploaded_file($tempname, $folder))  {
+                $_SESSION['message']="";
                 $publication->setImageurl($uniqueFileName.'.'.$extension);
             }
+         }
         }
-        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
-        $res = $publicationDao->create($publication);
+
+        if (empty($_POST['statut'])) {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Fichier non supporté.</div>";
+            return 0 ;
+        } else if(empty($_POST['description']) && empty($_FILES["pubMedia"]["tmp_name"])) {
+            $_SESSION['message'] = "<div class='alert alert-danger'>Veuillez entrer une description ou insérez un média.</div>";
+            return 0 ;
+        } else {
+            $_SESSION['message']="";
+            $publication->setDescription($_POST['description']);
+            $publication->setStatut($_POST['statut']);
+            $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
+            $res = $publicationDao->create($publication);
+        }
+
         return $res;
     }
-
     // modifier une publication
     public function updatePublication($parameters) {
         $this->init($parameters['id']);
@@ -153,7 +211,7 @@ class SocialNetworkController extends CoreController
         return $res;
     }
 
-    // supprimer une publication
+    // supprimer une publication dans mon compte
     public function deletePublication($parameters) {
         $this->init($parameters['id']);
 
@@ -170,6 +228,20 @@ class SocialNetworkController extends CoreController
         return $publication;
     }
 
+    // supprimer une publication dans home
+    public function deletePublicationHome($parameters) {
+        $this->init($parameters['id']);
+
+        $idCompte = $_POST['idcompte'];
+
+        $publication = new publication();
+        $publication->setIdpublication($_POST['idpublication']);
+
+        $publicationDao = new publicationDao($this->db,$this->idUtilisateur,null);
+        $publication = $publicationDao->delete($publication->getIdpublication());
+
+        return $publication;
+    }
     // like/unlike une publication
     public function LikeUnlikePublication($parameters) {
         $this->init($parameters['id']);
@@ -224,7 +296,7 @@ class SocialNetworkController extends CoreController
         $this->init($parameters['id']);
         $commentaire = new commentaire();
         $commentaire->setIdcommentaire($_POST['idcommentaire']);
-        $commentaire->setDescription($_POST['description']);
+        $commentaire->setDescription($_POST['updateComInput']);
         $commentaireDao = new commentaireDao($this->db,$this->idUtilisateur);
         $res = $commentaireDao->update($commentaire);
         return $res;

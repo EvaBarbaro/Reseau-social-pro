@@ -15,6 +15,7 @@ include __DIR__ . '/controllers/ImageController.php';
 include __DIR__ . '/controllers/UserController.php';
 include __DIR__ . '/controllers/AccountController.php';
 include __DIR__ . '/controllers/SocialNetworkController.php';
+include __DIR__ . '/controllers/AmisController.php';
 include __DIR__ . '/controllers/ErrorController.php';
 
 $router = new AltoRouter();
@@ -40,12 +41,16 @@ $router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEn
 
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikePublication', 'SocialNetworkController#LikeUnlikePublication', 'reseauSingleLikeUnlikePublication');
 $router->map('POST', '/monReseau/[i:id]/createPublication', 'SocialNetworkController#createPublication', 'reseauSinglecreatePublication');
+$router->map('POST', '/monReseau/[i:id]/deletePublication', 'SocialNetworkController#deletePublicationHome', 'reseauSingledeletePublication');
 
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikeCommentaire', 'SocialNetworkController#LikeUnlikeCommentaire', 'reseauSingleLikeUnlikeCommentaire');
 $router->map('POST', '/monReseau/[i:id]/createCommentaire', 'SocialNetworkController#createCommentaire', 'reseauSinglecreateCommentaire');
+$router->map('POST', '/monReseau/[i:id]/updateCommentaire', 'SocialNetworkController#updateCommentaire', 'reseauSingleupdateCommentaire');
+$router->map('POST', '/monReseau/[i:id]/deleteCommentaire', 'SocialNetworkController#deleteCommentaire', 'reseauSingledeleteCommentaire');
 
 $router->map('GET', '/superAdmin', 'CompanyController#getAll', 'superAdmin');
 $router->map('GET', '/monReseau/[i:id]', 'SocialNetworkController#home', 'reseauSingle');
+$router->map('GET', '/monReseau/[i:id]/[a:visibilite]/[a:order]', 'SocialNetworkController#filtre', 'reseauSingleFiltre');
 $router->map('POST', '/mesPublications/update', 'SocialNetworkController#updatePublication', 'publicationUpdate');
 $router->map('POST', '/mesPublications/delete', 'SocialNetworkController#deletePublication', 'publicationDelete');
 $router->map('POST', '/monReseau/create', 'CompanyController#create', 'reseauCreate');
@@ -68,6 +73,9 @@ $router->map('GET', '/monReseau/[i:id]/admin/informations', 'AccountController#g
 $router->map('GET', '/monCompte/[i:id]/mesInformations', 'AccountController#get', 'accountSingle');
 $router->map('POST', '/mesInformations/update', 'AccountController#update', 'accountUpdate');
 
+$router->map('GET', '/monCompte/[i:id]/mesAmis', 'AmisController#getAll', 'accountamis' );
+$router->map('POST', '/mesAmis/delete', 'AmisController#delete', 'accountamisDelete' );
+
 $match = $router->match();
 
 if ($match !== false) {
@@ -76,6 +84,8 @@ if ($match !== false) {
     } else if ($match['target'] === "SocialNetworkController#getPublicationByUser" && empty($_SESSION)) {
         $match = false;
     } else if ($match['target'] === "SocialNetworkController#home" && empty($_SESSION) || $match['target'] === "SocialNetworkController#home" && $match['params']['id'] !== $_SESSION['identreprise']) {
+        $match = false;
+    } else if ($match['target'] === "SocialNetworkController#filtre" && empty($_SESSION) || $match['target'] === "SocialNetworkController#filtre" && $match['params']['id'] !== $_SESSION['identreprise']) {
         $match = false;
     } else if ($match['target'] === "UserController#get" && empty($_SESSION) || $match['target'] === "UserController#get" && $match['params']['id'] !== $_SESSION['idutilisateur']) {
         $match = false;

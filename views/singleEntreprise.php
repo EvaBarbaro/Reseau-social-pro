@@ -1,10 +1,6 @@
-<div id="networkHomePage">
-
-
 <?php
 require_once __DIR__ . '/networkNav.php';
 ?>
-
 
 <div class="row">
 <div class="col-lg-4">
@@ -14,7 +10,19 @@ require_once __DIR__ . '/asideMember.php';
 
 ?>
 </div>
+
 <div class="col-lg-2">
+<div id="Page" >
+<div id="loadPage" >
+<div id="cardErrorMessage" class="card mt-4" style="width: 45rem;"><?php
+
+if (!empty($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    $_SESSION['message']="";
+}
+
+?></div>
+
   <!-- formulaire d'ajout publication -->
   
   <div class="card  rounded-0 mt-3" style="width: 45rem;">
@@ -38,16 +46,16 @@ require_once __DIR__ . '/asideMember.php';
 </div>
 
   <div class="card-body">
-  <form id="formPub" name="AddPub" action="" enctype="multipart/form-data">
+  <form id="formPub" name="AddPub"  enctype="multipart/form-data">
   <div class="form-group">
  
     <textarea name="description" class="form-control" id="validationTextarea" placeholder="Publier"></textarea>
   </div>
   <div class="form-group">
-    <label for="pubImage">Ajouter une image</label>
+    <label for="pubMedia">Ajouter un media (image/video/fichier) </label>
     <input type="hidden" name="statut" value="public" id="statut" class="text-input"/>
 
-    <input type="file" class="form-control-file" name="pubImage" id="pubImage">
+    <input type="file" class="form-control-file" name="pubMedia" id="pubMedia">
   </div>
   <div class="form-group">
   <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -63,9 +71,32 @@ require_once __DIR__ . '/asideMember.php';
 
   </div>
 </div>
-  <!-- formulaire d'ajout publication -->
-  <img name="reset"  id="reset" style="width:4em;cursor: pointer;margin-left:20em;" src="<?php echo pathUrl().'public/img/reset.png';?>" class="card-img-top mt-3" alt="Image introuvable">
-
+  <!-- Bouton pour recharger les publications -->
+  <img name="reset"  id="reset" style="width:4em;cursor: pointer;margin-left:20em;" src="<?php echo pathUrl().'public/img/reset.png';?>" class="card-img-top mt-4" alt="Image introuvable">
+ <!-- Filtre visibilité -->
+ <div class="btn-group mt-4">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Visiblité
+  </button>
+  <div class="dropdown-menu">
+    <a id="allPubs" style="cursor: pointer;" class="dropdown-item">Toutes les publications</a>
+    <a id="publicPubs" style="cursor: pointer;" class="dropdown-item">Public</a>
+    <a id="amisPubs" style="cursor: pointer;" class="dropdown-item">Amis</a>
+  
+  </div>
+</div>
+  <!-- Trie selon dates ou likes -->
+<div class="btn-group mt-4">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Trier
+  </button>
+  <div class="dropdown-menu">
+    <a id="datePubs" style="cursor: pointer;" class="dropdown-item">Date de publication</a>
+    <a id="likePubs" style="cursor: pointer;" class="dropdown-item">Popularité</a> 
+  </div>
+</div>
+<div id="Pub">
+<div id="loadPub">
 <?php
 $i=0;
 
@@ -99,7 +130,27 @@ if(!empty($pub['comptePublication']['photo'])){
     $img ="amis.png";
   } ?>
   <div class="visibilité">
-  <img class="offset-11" src="<?php echo pathUrl().'public/img/'.$img;?>"> 
+  <img <?php
+  if($_SESSION['role']!=="modo" && $_SESSION['role']!=="admin" && $_SESSION['idutilisateur']!==$pub['comptePublication']['idcompte']) {
+    ?>
+    class="offset-11"
+    <?php
+    }
+    ?> src="<?php echo pathUrl().'public/img/'.$img;?>" > 
+  <?php if($_SESSION['role']==="modo" || $_SESSION['role'] ==="admin" || $_SESSION['idutilisateur'] ===$pub['comptePublication']['idcompte']){
+    
+    
+    ?>
+  <img name="deletePub" 
+       id="deletePub"
+       style="cursor:pointer;height: 1.5rem;width: 1.5rem;" 
+       src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
+       alt="Image introuvable"
+       data-toggle="modal" 
+       data-target="#deletePubModal<?=$pub['publicationInfos']['idpublication']?>"
+  >
+    
+    <?php } ?>
 </div>
 <!--
 <div class="dropdown offset-8">
@@ -119,6 +170,29 @@ if(!empty($pub['comptePublication']['photo'])){
 </div>
 -->
   </div>
+     <!-- Modal -->
+     <div class="modal fade" id="deletePubModal<?=$pub['publicationInfos']['idpublication']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deletePubModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePubModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Êtes vous sûrs de vouloir supprimer ?
+      </div>
+      <div class="modal-footer">
+      <form name="deletePubForm<?=$j;?>" id="deletePubForm" value="<?=$pub['publicationInfos']['idpublication']; ?>">
+        <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" id="deletePubModal" class="btn btn-primary">Confirmer</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <?php
 if(!empty($pub['publicationInfos']['imageurl'])){
@@ -126,37 +200,56 @@ if(!empty($pub['publicationInfos']['imageurl'])){
     <?php
 
 } 
-?>
-  <div class="card-body">
-    <p class="card-text"><?php
-    echo $pub['publicationInfos']['description'];
-?></p>
-  </div>
+else if(!empty($pub['publicationInfos']['videourl'])){
+  ?>
+
+ <video width="720" height="640" controls>
+  <source src=<?=pathUrl().'public/publicationVideos/'.$pub['publicationInfos']['videourl']?> type="video/mp4">
+
+  Your browser does not support the video tag.
+</video> 
+<?php  }
+else if(!empty($pub['publicationInfos']['fichierurl'])){
+  ?>
+
+    <object data="<?=pathUrl().'public/publicationFichiers/'.$pub['publicationInfos']['fichierurl']?>" type="application/pdf" width="720" height="640">
+       
+    </object>
+
+<?php  }?>
+<div class="card-body">
+  <p class="card-text"><?=$pub['publicationInfos']['description']?></p>
+</div>
   <div class="card-footer footerComm">
   <p>
 
   <div id="likeUnlikePub_form">
-<form name="likeUnlikePub<?=$i;?>" id="likeUnlikePub">
+
+<form name="likeUnlikePub<?=$i;?>" id="likeUnlikePub" >
   <?php if($pub['publication_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
-  <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
-
+  <input type="hidden" name="idpublication" id="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+  <span id="LikePub">
+  <span id="loadLikePub<?=$pub['publicationInfos']['idpublication']?>">
   <input type="image" id="<?=$img; ?>" name="likeUnlikePubButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
   
   <?php echo $pub['publicationInfos']['Nombre Like']; ?>
-
+  </span>
+  </span>
 
   <a class="btn offset-10 buttonCom" data-toggle="collapse" href="#addComment<?php echo $i;?>" role="button" aria-expanded="false" aria-controls="collapseExample">
  
   <img id="comment" src="<?php echo pathUrl().'public/img/comment.png';?>" class="card-img-top imgComm" alt="Image introuvable">
   
   </a>
-
+  <span id="ComPub<?=$pub['publicationInfos']['idpublication']?>">
+  <span id="loadComPub<?=$pub['publicationInfos']['idpublication']?>">
  <?=count($pub['commentaires'])?>
-
+</span>
+</span>
 </form>
 </div>
 
@@ -167,24 +260,28 @@ if(!empty($pub['publicationInfos']['imageurl'])){
 </p>
 <div class="collapse" id="addComment<?php echo $i;?>">
   <div class="card card-body">
-   <!-- Formulaire pour commenter-->
-   <form name="AddCom<?=$i;?>" action="">
-  <div class="form-group">
-  <input type="hidden" name="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
-    <textarea class="form-control" name="description" id="validationTextarea" placeholder="Commenter"></textarea>
-  </div>
-  <div class="form-group">
-  <button type="submit" class="btn btn-primary">Envoyer</button>
-</div>
-</form>
-<!-- Formulaire pour commenter-->
-  </div>
-</div>
+    <!-- Formulaire pour commenter-->
+        <form name="AddCom<?=$i;?>" >
+          <div class="form-group">
+            <input type="hidden" name="idpublication" id="idpublication" value="<?=$pub['publicationInfos']['idpublication']; ?>" class="text-input"/>
+            <textarea class="form-control" name="description" id="validationTextarea" placeholder="Commenter"></textarea>
+          </div>
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+        </form>
+    <!-- Formulaire pour commenter-->
   </div>
 </div>
+
+</div>
+</div>
+<span id="ComsPub<?=$pub['publicationInfos']['idpublication']?>">
+<span id="loadComsPub<?=$pub['publicationInfos']['idpublication']?>">
 <?php
-$tabCom = array_reverse($pub['commentaires'],true);
+$j=0;
 foreach($pub['commentaires'] as $com){
+$j++;
 ?>
 <div class="card rounded-0" style="width: 45rem;">
 <div class="card-header rounded-0" style="background-color:#7A92B1;">
@@ -196,31 +293,93 @@ if(!empty($com['commentaire_compte']['photo'])){
 }
 ?>
   <div class="pubHeader" ><img src="<?php echo $img;?>" class="card-img-top" alt="Image introuvable">
-
+  <div class="user">
 <?php
  echo $com['commentaire_compte']['nomutilisateur'];
 ?>
   <small id="dateCom" style="display:inline;" class="form-text font-weight-bold" ><?= $com['commentaireInfo']['date']?></small>
+  </div>
+  <?php if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){?>
+  <img name="updateCom" 
+       id="updateCom"
+       value="<?=$j?>"
+       style="cursor:pointer;height: 2.5rem;width: 2.5rem;" 
+       src="<?php echo pathUrl().'public/img/pencil.png';?>" 
+       alt="Image introuvable"
+  >
+  <?php } ?>
+  <?php if(($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']) || ($_SESSION['role']==="modo")){
+    $size;
+    if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){
+      $size="1.5rem";
+    }
+    else {
+      $size="2.6rem";
+    }
+    
+    
+    ?>
+  <img name="deleteCom" 
+       id="deleteCom"
+       style="cursor:pointer;height: <?=$size?>;width: <?=$size?>;" 
+       src="<?php echo pathUrl().'public/img/deleteCom.png';?>"  
+       alt="Image introuvable"
+       data-toggle="modal" 
+       data-target="#deleteComModal<?=$com['commentaireInfo']['idcommentaire']?>"
+  >
+    
+    <?php } ?>
+
+
+  
 
   </div>
   </div>
-  <div class="card-body" style="background-color:#B4C1D3;">
-    <p class="card-text"><?php
+  <!-- Modal -->
+<div class="modal fade" id="deleteComModal<?=$com['commentaireInfo']['idcommentaire']?>" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="deleteComModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteComModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Êtes vous sûrs de vouloir supprimer ?
+      </div>
+      <div class="modal-footer">
+      <form name="deleteComForm<?=$j;?>" id="deleteComForm" value="<?=$pub['publicationInfos']['idpublication']; ?>">
+        <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" id="deleteComModal" class="btn btn-primary">Confirmer</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="card-body" style="background-color:#B4C1D3;"  value="<?=$pub['publicationInfos']['idpublication']; ?>">
+  <p class="card-text" id="cardText" value=<?=$com['commentaireInfo']['idcommentaire']?>><?php
     echo $com['commentaireInfo']['description'];
 ?></p>
+    
   </div>
   <div class="card-footer rounded-0" style="background-color:#7A92B1;">
   <p>
   <div id="likeUnlikeCom_form">
-<form name="likeUnlikeCom<?=$i;?>" action="">
+<form name="likeUnlikeCom<?=$i;?>" >
   <?php if($com['commentaire_Liked_Par_Utilisateur']) {
     $img ="unlike.png";
   } else {
     $img ="like.png";
   } ?>
     <input type="hidden" name="idcommentaire" value="<?=$com['commentaireInfo']['idcommentaire']; ?>" class="text-input"/>
+    <span id="LikeCom">
+  <span id="loadLikeCom<?=$com['commentaireInfo']['idcommentaire']?>">
   <input type="image" id="<?=$img; ?>" name="likeUnlikeComButton" src="<?=pathUrl()."public/img/".$img;?>" class='card-img-top submitLike' alt='Image introuvable'>
   <?php echo $com['commentaireInfo']['Nombre Like']; ?>
+  </span>
+  </span>
 </div>
 </form>
 </p>
@@ -229,13 +388,18 @@ if(!empty($com['commentaire_compte']['photo'])){
 
 
 <?php
-}
+}?>
+</span>
+</span>
+<?php
+
 }?>
 </div>
 </div>
 </div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</div>
+</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src=<?php echo pathUrl().'utils/scripts/homeNetwork.js' ?>></script>

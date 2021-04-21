@@ -9,6 +9,13 @@ $uniqueID = hexdec(uniqid());
     </div>
 
         <div id="register">
+        <?php
+
+        if (!empty($_SESSION['message'])) {
+            echo $_SESSION['message'];
+        }
+
+        ?>
         <h1 class="mx-auto mt-4 mb-4" style="width:200px">Inscription</h1>
 
             <form action=<?= pathUrl()."monCompte/create" ?> method="POST" class="col">
@@ -31,8 +38,6 @@ $uniqueID = hexdec(uniqid());
                     <input type="email" class="form-control" name="mail" id="mail" placeholder="Votre email">
                     </div>
                 </div>
-                <input type="hidden" name="role" value="user">
-                <input type="hidden" name="statut" value=<?= false ?>>
                 <input type="hidden" name="identreprise" value="<?= $viewVars['entrepriseId'] ?>">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Confirmer</button>
                 <p class="mt-2 mx-auto" style="width:420px">Si vous avez déjà un compte <a href=<?= pathUrl()."monReseau/".$viewVars['entrepriseId']."/login" ?>>Connectez-vous</a> !</p>
