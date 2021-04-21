@@ -23,16 +23,20 @@ class demandeamisDao {
     // Obtention de la liste demandeamis de l'id passé en paramètre
     public function getAll($id1){
         $id1 = (string) $id1;
-        $sql = "SELECT * FROM demandeamis WHERE idcompte=".$id1 ;
+        $sql = "SELECT * FROM demandeamis WHERE idcompte_demandeur=$id1" ;
 			$result = $this->conn->query($sql);
             $amiss = $result->fetch(PDO::FETCH_ASSOC);
             return $amiss;   
     }
 
-    public function createDemandeAmis($id){
+    public function createDemandeAmis($id1,$id2){
+        $sql = $this->conn->prepare("INSERT INTO demandeAmis(idcompte_demandeur, idcompte_solliciter)VALUES($id1,$id2)"); 
+        $sql->execute();
     }
 
-    public function deleteDemandeAmis($id){
+    public function deleteDemandeAmis($id1,$id2){
+        $this->conn->exec("DELETE FROM demandeAmis WHERE idcompte_demandeur = $id1 and idcompte_solliciter = $id2");
+
     }
    
 
@@ -68,7 +72,7 @@ b.idcompte_ami = "1696278514562148")
         $sql->execute();
     }
 
-    // Efface la liste des amis de $id
+    /* Efface la liste des amis de $id
     public function delete($id){     
         $this->conn->exec("DELETE FROM amis WHERE idcompte = $id");    
     }
@@ -77,7 +81,7 @@ b.idcompte_ami = "1696278514562148")
     public function delete2($id1, $id2){     
         $this->conn->exec("DELETE FROM amis WHERE idcompte = $id1 && idcompte_ami = $id2");    
     }
-
+    */
 
     
 
