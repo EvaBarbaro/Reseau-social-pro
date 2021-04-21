@@ -1,7 +1,7 @@
 <?php 
 include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
-
+include_once __DIR__.'/amisDao.php';
 
 class demandeamisDao {
     private $conn;
@@ -57,7 +57,11 @@ class demandeamisDao {
 
     }
 
-   
+    public function AccepterDemandeAmis($id1,$id2){
+        $this->conn->exec("DELETE FROM demandeAmis WHERE idcompte_demandeur = $id1 and idcompte_solliciter = $id2");
+        $amisDao = new amisDao($this->conn);
+        $amisDao->createConfirm($id1,$id2);
+    }
 
 //     SELECT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
 // a.idcompte ="1696278514562148" AND 

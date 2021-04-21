@@ -56,9 +56,14 @@
                 <tr>
                 <td><?= $invite['nom'] ?> <?= $invite['prenom'] ?></td>
                 <td>
-                   <button id="AccepterDemande" type="button" class="btn btn-success col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
+                <form action=<?= pathUrl()."mesAmis/confirmInvite" ?> method='POST' style="display:inline;">
+                
+                <input type='hidden' value=<?= $invite['idcompte_demandeur'] ?> name="iddemandeur">
+                <input type='hidden' value=<?= $_SESSION['idutilisateur'] ?> name="idsolliciter">
+                   <button id="AccepterDemande" type="submit" class="btn btn-success col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
                     Accepter
                     </button>
+                    </form>
                     <form action=<?= pathUrl()."mesAmis/deleteInvite" ?> method='POST' style="display:inline;">
                 
                 <input type='hidden' value=<?= $invite['idcompte_demandeur'] ?> name="iddemandeur">

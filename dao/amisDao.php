@@ -70,7 +70,7 @@ b.idcompte_ami = "1696278514562148")
 
     public function createConfirm($idutilisateur,$idami){
         $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
-        VALUES(:idcompte, :idcompte_ami )");
+        VALUES(:idcompte, :idcompte_ami ),(:idcompte_ami, :idcompte )");
 
         $sql->bindValue(':idcompte', $idutilisateur, PDO::PARAM_INT);
         $sql->bindValue(':idcompte_ami', $idami, PDO::PARAM_INT);
