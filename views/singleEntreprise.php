@@ -1,14 +1,19 @@
+
+
 <?php
 require_once __DIR__ . '/networkNav.php';
 ?>
 
+<div style="margin-top:7rem;">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-lg-4" >
+<div style="position:fixed;width:30rem;">
 <?php
 
 require_once __DIR__ . '/asideMember.php';
 
 ?>
+</div>
 </div>
 
 <div class="col-lg-2">
@@ -396,6 +401,7 @@ if(!empty($com['commentaire_compte']['photo'])){
 <?php
 
 }?>
+</div>
 </div>
 </div>
 </div>

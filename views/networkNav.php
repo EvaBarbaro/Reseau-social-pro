@@ -1,6 +1,6 @@
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-6">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light mb-6">
 
 
 

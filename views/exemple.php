@@ -1,5 +1,9 @@
 <?php 
+
     require_once __DIR__ . '/networkNav.php';
+?>
+<div style="margin-top:7rem;">
+<?php
     require_once __DIR__ . '/accountNav.php';
 ?>
 <div class="d-flex">
@@ -67,5 +71,6 @@
                 echo "<td><a href=".pathUrl()."imageEnCreation class='btn btn-block btn-primary'>Insérer</a></td>";
                 ?>
     </div>
+</div>
 </div>              
 

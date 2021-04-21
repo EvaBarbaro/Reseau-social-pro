@@ -1,8 +1,10 @@
 <?php 
 
     require_once __DIR__ . '/networkNav.php';
+?>
+<div style="margin-top:7rem;">
+<?php
     require_once __DIR__ . '/accountNav.php';
-
 ?>
 <div class="container">
 	<h2 class="mt-4">Tous les utilisateurs</h2>
@@ -77,4 +79,5 @@
         }
         ?>
     </table>
+</div>
 </div>

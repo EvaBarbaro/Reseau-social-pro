@@ -1,5 +1,9 @@
 <?php 
+
     require_once __DIR__ . '/networkNav.php';
+?>
+<div style="margin-top:7rem;">
+<?php
     require_once __DIR__ . '/accountNav.php';
 ?>
 <div class="d-flex">
@@ -183,4 +187,4 @@
 </div><!--  div container  -->
 
 </div><!--  div d-flex  -->             
-
+</div>

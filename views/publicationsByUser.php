@@ -1,8 +1,10 @@
+<?php 
+
+    require_once __DIR__ . '/networkNav.php';
+?>
+<div style="margin-top:7rem;">
 <?php
-
-require_once __DIR__ . '/networkNav.php';
-require_once __DIR__ . '/accountNav.php';
-
+    require_once __DIR__ . '/accountNav.php';
 ?>
 <div class="d-flex">
 
@@ -97,4 +99,5 @@ require_once __DIR__ . '/asideProfil.php';
             ?>
             </div>
         </div>
+    </div>
     </div>
