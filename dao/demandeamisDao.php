@@ -20,10 +20,19 @@ class demandeamisDao {
             return $demandeamis;   
     }
 
-    // Obtention de la liste demandeamis de l'id passé en paramètre
+    // Obtention de la liste des gens qui m'ont demandé en ami, id passé en paramètre est mon id
     public function getAll($id1){
         $id1 = (string) $id1;
-        $sql = "SELECT * FROM demandeamis WHERE idcompte_demandeur=$id1" ;
+        $sql = "SELECT idcompte_demandeur FROM demandeAmis WHERE idcompte_solliciter=$id1" ;
+			$result = $this->conn->query($sql);
+            $amiss = $result->fetch(PDO::FETCH_ASSOC);
+            return $amiss;   
+    }
+
+    // Obtention de la liste des gens que j'ai demandé en ami, id passé en paramètre est mon id
+    public function getAllDemandeur($id1){
+        $id1 = (string) $id1;
+        $sql = "SELECT idcompte_solliciter FROM demandeAmis WHERE idcompte_demandeur=$id1" ;
 			$result = $this->conn->query($sql);
             $amiss = $result->fetch(PDO::FETCH_ASSOC);
             return $amiss;   
@@ -53,7 +62,7 @@ u.idutilisateur = a.idcompte_ami AND NOT(
 b.idcompte = a.idcompte_ami and 
 b.idcompte_ami = "1696278514562148")
 */
-    
+    /*
     public function createInvite($idutilisateur,$idami){
         $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
         VALUES(:idcompte, :idcompte_ami )");
@@ -71,6 +80,7 @@ b.idcompte_ami = "1696278514562148")
         $sql->bindValue(':idcompte_ami', $idami, PDO::PARAM_INT);
         $sql->execute();
     }
+    */
 
     /* Efface la liste des amis de $id
     public function delete($id){     
