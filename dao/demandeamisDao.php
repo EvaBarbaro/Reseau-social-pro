@@ -1,46 +1,51 @@
 <?php 
 include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
-include_once __DIR__.'/../models/demandeamis.php';
+include_once __DIR__.'/../models/amis.php';
 
-class amisDao  implements interfaceDao{
+class demandeamisDao {
     private $conn;
 
     public function __construct($db){
         $this->conn = $db;
     }
     
-    // Obtention d'un couple d'amis spécifique (un seul tuple)
+    // Obtention d'un couple de demandeamis spécifique (un seul tuple)
     public function get2($id1, $id2){
         $id1 = (string) $id1;
         $id2 = (string) $id2;
-        $sql = "SELECT * FROM amis WHERE idcompte=".$id1." && idcompte_ami=".$id2;
+        $sql = "SELECT * FROM demandeamis WHERE idcompte_demandeur=".$id1." && idcompte_solliciter=".$id2;
 			$result = $this->conn->query($sql);
-            $amis = $result->fetch(PDO::FETCH_ASSOC);
-            return $amis;   
+            $demandeamis = $result->fetch(PDO::FETCH_ASSOC);
+            return $demandeamis;   
     }
 
-    // Obtention de la liste d'amis de l'id passé en paramètre
-    public function get($id1){
+    // Obtention de la liste demandeamis de l'id passé en paramètre
+    public function getAll($id1){
         $id1 = (string) $id1;
-        $sql = "SELECT * FROM amis WHERE idcompte=".$id1 ;
+        $sql = "SELECT * FROM demandeamis WHERE idcompte=".$id1 ;
 			$result = $this->conn->query($sql);
             $amiss = $result->fetch(PDO::FETCH_ASSOC);
             return $amiss;   
     }
 
-    // Obtention de la liste de tout les tuples d'amis de la table amis
-    public function getAll(){
-        $sql 	= "SELECT * FROM amis as a, utilisateur as u WHERE a.idcompte =".$_SESSION['idutilisateur']." AND u.idutilisateur = a.idcompte_ami";
-        $result = $this->conn->query($sql); 
-        $amis = $result->fetchAll(PDO::FETCH_ASSOC);
+   
 
-        return $amis;
-    }
+//     SELECT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
+// a.idcompte ="1696278514562148" AND 
+// u.idutilisateur = a.idcompte_ami AND  
+// b.idcompte = a.idcompte_ami and 
+//  b.idcompte_ami = "1696278514562148";
 
-
+/* LISTE DEMANDE AMIS 
+SELECT DISTINCT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
+a.idcompte ="1696278514562148" AND 
+u.idutilisateur = a.idcompte_ami AND NOT( 
+b.idcompte = a.idcompte_ami and 
+b.idcompte_ami = "1696278514562148")
+*/
     
-    public function createInvite($demandeamisModel){
+    public function createInvite($idutilisateur,$idami){
         $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
         VALUES(:idcompte, :idcompte_ami )");
 
