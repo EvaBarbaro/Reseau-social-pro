@@ -39,6 +39,7 @@ $router->map('POST', '/monImage/delete', 'ImageController#delete', 'monImageDele
 $router->map('POST', '/monImage/update', 'ImageController#update', 'monImageUpdate');
 $router->map('GET', '/imageEnCreation', 'ImageController#preCreate', 'monImageEnCreation');
 
+$router->map('POST', '/monReseau/[i:id]/InviteAmis', 'SocialNetworkController#InviteAmis', 'reseauSingleInviteAmis');
 $router->map('POST', '/monReseau/[i:id]/LikeUnlikePublication', 'SocialNetworkController#LikeUnlikePublication', 'reseauSingleLikeUnlikePublication');
 $router->map('POST', '/monReseau/[i:id]/createPublication', 'SocialNetworkController#createPublication', 'reseauSinglecreatePublication');
 $router->map('POST', '/monReseau/[i:id]/deletePublication', 'SocialNetworkController#deletePublicationHome', 'reseauSingledeletePublication');

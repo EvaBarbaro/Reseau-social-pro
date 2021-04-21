@@ -49,7 +49,11 @@ class demandeamisDao {
 
     public function createDemandeAmis($id1,$id2){
         $sql = $this->conn->prepare("INSERT INTO demandeAmis(idcompte_demandeur, idcompte_solliciter)VALUES($id1,$id2)"); 
-        $sql->execute();
+       if( $sql->execute()){
+           return true;
+       } else {
+           return false;
+       }
     }
 
     public function deleteDemandeAmis($id1,$id2){

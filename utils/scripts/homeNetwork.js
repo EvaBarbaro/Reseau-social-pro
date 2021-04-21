@@ -122,6 +122,18 @@ $(document).on('submit', "form", function (e) {
         updatedContent= "#loadPub";
 
       }
+      else if($(this).attr("name")==("addAmis")) {
+        
+        link="/InviteAmis";
+        e.preventDefault();
+       
+      
+        
+        partToUpdate= $("#Member");
+
+        updatedContent= "#loadMember";
+
+      }
      else if($(this).attr("name").includes("likeUnlikeCom")) {
         
         link="/LikeUnlikeCommentaire"; 

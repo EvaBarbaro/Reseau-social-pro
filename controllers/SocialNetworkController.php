@@ -15,6 +15,7 @@ include_once __DIR__.'/../dao/like_publicationDao.php';
 include_once __DIR__.'/../models/like_publication.php';
 include_once __DIR__.'/../dao/like_commentaireDao.php';
 include_once __DIR__.'/../models/like_commentaire.php';
+include_once __DIR__.'/../dao/demandeamisDao.php';
 
 class SocialNetworkController extends CoreController
 {
@@ -349,5 +350,20 @@ class SocialNetworkController extends CoreController
         $res = $publicationDao->create($publication);
         return $res;*/
     }
+    public function InviteAmis()
+    {
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
 
+        $demandeamisDao = new demandeamisDao($db);
+        $invite = $demandeamisDao->createDemandeAmis($_POST['iddemandeur'],$_POST['idsolliciter']);
+        if(!$invite) {
+            $_SESSION['messageMember']="Invitation déjà envoyée";
+        }
+        else {
+            $_SESSION['messageMember']="";
+        }
+        
+
+    }
 }
