@@ -29,6 +29,11 @@ class demandeamisDao {
             return $amiss;   
     }
 
+    public function createDemandeAmis($id){
+    }
+
+    public function deleteDemandeAmis($id){
+    }
    
 
 //     SELECT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
