@@ -7,7 +7,7 @@ require_once __DIR__ . '/networkNav.php';
 <div style="margin-top:7rem;">
 <div class="row">
 <div class="col-lg-4" >
-<div style="position:fixed;width:30rem;">
+<div style="position:fixed;width:30rem;" id="member">
 <?php
 
 require_once __DIR__ . '/asideMember.php';

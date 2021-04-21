@@ -174,7 +174,7 @@
                     </div>
                 <form action=<?= pathUrl()."mesAmis/delete" ?> method='POST'>
                     <div class="modal-footer">
-                        <input type='hidden' value=<?= $amis['idcompte'] ?> name='idcompte' />
+                        <input type='hidden' value=<?= $amis['idcompte_ami'] ?> name='idcompteAmis' />
                         <button type="submit" class="btn btn-primary">Confirmer</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>

@@ -83,8 +83,9 @@ b.idcompte_ami = "1696278514562148")
     }
     
     // Efface l'ami $id2 de la liste d'ami de $id1
-    public function delete2($id1, $id2){     
-        $this->conn->exec("DELETE FROM amis WHERE idcompte = $id1 && idcompte_ami = $id2");    
+    public function deleteAmis($id1, $id2){     
+  $this->conn->exec("DELETE FROM amis WHERE ((idcompte = $id1 && idcompte_ami = $id2) or (idcompte = $id2 && idcompte_ami = $id1))");
+ 
     }
 
 
