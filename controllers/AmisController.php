@@ -42,6 +42,18 @@ class AmisController extends CoreController
         header('Location: '.pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/mesAmis');
 
     }
+
+    public function deleteInvite()
+    {
+        $DBData = new DBData();
+        $db = $DBData->getConnection();
+
+        $demandeamisDao = new demandeamisDao($db);
+        $demandeamisDao->deleteDemandeAmis($_POST['iddemandeur'],$_POST['idsolliciter']);
+
+        header('Location: '.pathUrl().'monCompte/'.$_SESSION['idutilisateur'].'/mesAmis');
+
+    }
     // public function get($parameters)
     // {
     //     $imageId = $parameters['id'];

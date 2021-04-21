@@ -75,6 +75,7 @@ $router->map('POST', '/mesInformations/update', 'AccountController#update', 'acc
 
 $router->map('GET', '/monCompte/[i:id]/mesAmis', 'AmisController#getAll', 'accountamis' );
 $router->map('POST', '/mesAmis/delete', 'AmisController#delete', 'accountamisDelete' );
+$router->map('POST', '/mesAmis/deleteInvite', 'AmisController#deleteInvite', 'accountamisDeleteInvite' );
 
 $match = $router->match();
 

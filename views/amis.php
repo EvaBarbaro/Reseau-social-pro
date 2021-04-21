@@ -59,9 +59,14 @@
                    <button id="AccepterDemande" type="button" class="btn btn-success col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
                     Accepter
                     </button>
-                    <button id="RefuserDemande" type="button" class="btn btn-danger col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
+                    <form action=<?= pathUrl()."mesAmis/deleteInvite" ?> method='POST' style="display:inline;">
+                
+                <input type='hidden' value=<?= $invite['idcompte_demandeur'] ?> name="iddemandeur">
+                <input type='hidden' value=<?= $_SESSION['idutilisateur'] ?> name="idsolliciter">
+                    <button id="RefuserDemande" type="submit" class="btn btn-danger col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
                     Refuser
                     </button>
+                    </form>
                 </td>
                 </tr>
 
@@ -108,10 +113,14 @@
                 <tr>
                 <td><?= $request['nom'] ?> <?= $request['prenom'] ?></td>
                 <td>
+                <form action=<?= pathUrl()."mesAmis/deleteInvite" ?> method='POST'>
                 
-                    <button id="AnnulerDemande" type="button" class="btn btn-danger col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
+                <input type='hidden' value=<?= $request['idcompte_solliciter'] ?> name="idsolliciter">
+                <input type='hidden' value=<?= $_SESSION['idutilisateur'] ?> name="iddemandeur">
+                    <button id="AnnulerDemande" type="submit" class="btn btn-danger col-3" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
                    Annuler
                     </button>
+                </form>
                 </td>
                 </tr>
 
