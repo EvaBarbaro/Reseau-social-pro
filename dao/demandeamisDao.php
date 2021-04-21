@@ -28,6 +28,15 @@ class demandeamisDao {
             return $amiss;   
     }
 
+    public function getAlls($id1){
+        $id1 = (string) $id1;
+        $sql = "SELECT idcompte_solliciter FROM demandeAmis  WHERE idcompte_demandeur=$id1"  ;
+			$result = $this->conn->query($sql);
+            $amiss = $result->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $amiss;   
+    }
+
     // Obtention de la liste des gens que j'ai demandé en ami, id passé en paramètre est mon id
     public function getAllDemandes($id1){
         $id1 = (string) $id1;

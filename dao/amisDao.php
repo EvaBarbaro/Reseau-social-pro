@@ -22,12 +22,19 @@ class amisDao  implements interfaceDao{
 
     // Obtention de la liste d'amis de l'id passé en paramètre
     public function get($id1){
-        $id1 = (string) $id1;
-        $sql = "SELECT * FROM amis WHERE idcompte=".$id1 ;
+        $sql = "SELECT idcompte_ami FROM amis WHERE idcompte=$id1 ";
 			$result = $this->conn->query($sql);
-            $amiss = $result->fetch(PDO::FETCH_ASSOC);
+            $amiss = $result->fetchAll(PDO::FETCH_ASSOC);
             return $amiss;   
     }
+
+    // public function getAl($id){
+    //     $sql 	= "SELECT * FROM image WHERE idcompte =" .$id;
+    //     $result = $this->conn->query($sql); 
+    //     // (fetchAll-->) Transforme le bloc registrement de result en tableau de ligne
+    //     $images = $result->fetchAll();
+    //     return $images;
+    // }
 
     // Obtention de la liste de tout les tuples d'amis de la table amis
     public function getAll(){

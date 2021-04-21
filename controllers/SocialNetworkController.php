@@ -48,6 +48,14 @@ class SocialNetworkController extends CoreController
         $filtre['id']=$parameters['id'];
         $publicationList = $this->getPublications($filtre);
 
+        $idutil = $_SESSION['idutilisateur'];
+
+        $amisDao = new amisDao($db);
+        $amisLList = $amisDao->get($_SESSION['idutilisateur']);
+
+        $demandeamisDao = new demandeamisDao($db);
+        $demandeamisList = $demandeamisDao->getAlls($_SESSION['idutilisateur']);
+
         $utilisateurDao = new utilisateurDao($this->db );
         $utilisateurList = $utilisateurDao->getAll($this->entrepriseId);
 
@@ -56,6 +64,9 @@ class SocialNetworkController extends CoreController
 
         $this->show('singleEntreprise', [
             'title' => 'Social Connect - Home',
+            'idutil'=> $idutil,
+            'demandeamisList' => $demandeamisList,
+            'amisLList'=> $amisLList,
             'publicationList' => $publicationList,
             'idUtilisateur' => $this->idUtilisateur,
             'utilisateurList' => $utilisateurList,
