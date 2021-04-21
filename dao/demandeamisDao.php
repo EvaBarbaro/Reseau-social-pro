@@ -1,7 +1,7 @@
 <?php 
 include_once __DIR__.'/../interface/interfaceDao.php';
 include_once __DIR__.'/../utils/DBData.php';
-include_once __DIR__.'/../models/amis.php';
+
 
 class demandeamisDao {
     private $conn;
@@ -12,8 +12,6 @@ class demandeamisDao {
     
     // Obtention d'un couple de demandeamis spécifique (un seul tuple)
     public function get2($id1, $id2){
-        $id1 = (string) $id1;
-        $id2 = (string) $id2;
         $sql = "SELECT * FROM demandeamis WHERE idcompte_demandeur=".$id1." && idcompte_solliciter=".$id2;
 			$result = $this->conn->query($sql);
             $demandeamis = $result->fetch(PDO::FETCH_ASSOC);
@@ -31,7 +29,7 @@ class demandeamisDao {
     }
 
     // Obtention de la liste des gens que j'ai demandé en ami, id passé en paramètre est mon id
-    public function getAllDemandeur($id1){
+    public function getAllDemandes($id1){
         $id1 = (string) $id1;
         $sql = "SELECT da.idcompte_solliciter,c.nom,c.prenom FROM demandeAmis da,compte c WHERE da.idcompte_demandeur=$id1 and c.idcompte=da.idcompte_solliciter" ;
 			$result = $this->conn->query($sql);
