@@ -1,6 +1,7 @@
 <?php
 
 include_once __DIR__.'/../dao/amisDao.php';
+include_once __DIR__.'/../dao/demandeamisDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
 
@@ -17,10 +18,16 @@ class AmisController extends CoreController
         $compteDao = new compteDao($db);
         $compte = $compteDao->get($_SESSION['idutilisateur']);
 
+        $demandeamisDao = new demandeamisDao($db);
+        $InviteList = $demandeamisDao->getAll($_SESSION['idutilisateur']);
+        $RequestList = $demandeamisDao->getAllDemandeur($_SESSION['idutilisateur']);
+
         $this->show('amis', [
             'title' => 'Social Connect - Mes Amis',
+            'inviteList' => $InviteList,
             'amisList' => $amisList,
-            'compte' => $compte
+            'compte' => $compte,
+            'requestList'=> $RequestList,
         ]);
     }
 

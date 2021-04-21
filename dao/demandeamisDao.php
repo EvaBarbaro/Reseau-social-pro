@@ -23,18 +23,20 @@ class demandeamisDao {
     // Obtention de la liste des gens qui m'ont demandé en ami, id passé en paramètre est mon id
     public function getAll($id1){
         $id1 = (string) $id1;
-        $sql = "SELECT idcompte_demandeur FROM demandeAmis WHERE idcompte_solliciter=$id1" ;
+        $sql = "SELECT da.idcompte_demandeur,c.nom,c.prenom FROM demandeAmis da,compte c WHERE da.idcompte_solliciter=$id1 and c.idcompte=da.idcompte_demandeur" ;
 			$result = $this->conn->query($sql);
-            $amiss = $result->fetch(PDO::FETCH_ASSOC);
+            $amiss = $result->fetchAll(PDO::FETCH_ASSOC);
+          
             return $amiss;   
     }
 
     // Obtention de la liste des gens que j'ai demandé en ami, id passé en paramètre est mon id
     public function getAllDemandeur($id1){
         $id1 = (string) $id1;
-        $sql = "SELECT idcompte_solliciter FROM demandeAmis WHERE idcompte_demandeur=$id1" ;
+        $sql = "SELECT da.idcompte_solliciter,c.nom,c.prenom FROM demandeAmis da,compte c WHERE da.idcompte_demandeur=$id1 and c.idcompte=da.idcompte_solliciter" ;
 			$result = $this->conn->query($sql);
-            $amiss = $result->fetch(PDO::FETCH_ASSOC);
+            $amiss = $result->fetchAll(PDO::FETCH_ASSOC);
+          
             return $amiss;   
     }
 
