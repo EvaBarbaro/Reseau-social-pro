@@ -20,7 +20,7 @@ class AmisController extends CoreController
 
         $demandeamisDao = new demandeamisDao($db);
         $InviteList = $demandeamisDao->getAll($_SESSION['idutilisateur']);
-        $RequestList = $demandeamisDao->getAllDemandeur($_SESSION['idutilisateur']);
+        $RequestList = $demandeamisDao->getAllDemandes($_SESSION['idutilisateur']);
 
         $this->show('amis', [
             'title' => 'Social Connect - Mes Amis',
