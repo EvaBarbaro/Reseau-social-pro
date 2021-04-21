@@ -308,7 +308,7 @@ if(!empty($com['commentaire_compte']['photo'])){
        alt="Image introuvable"
   >
   <?php } ?>
-  <?php if(($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']) || ($_SESSION['role']==="modo")){
+  <?php if(($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']) || ($_SESSION['role']==="modo") || ($_SESSION['role']==="admin")){
     $size;
     if($viewVars['idUtilisateur']===$com['commentaire_compte']['idcompte']){
       $size="1.5rem";
