@@ -41,17 +41,13 @@ if (!empty($_SESSION['messageMember'])) {?>
       </svg> -->
       <?php
        $color="LightSteelBlue";
-
-       if ($viewVars["utilisateurList"][$index]["idutilisateur"]==$viewVars["idutil"]) {
-        $color="SteelBlue";
-      }  
        
         $lengthA = count($viewVars['amisLList']);
 
         for ($indexA=0; $indexA < $lengthA; $indexA++) { 
             $ami = $viewVars['amisLList'][$indexA]['idcompte_ami'];            
                  
-            if ($viewVars["utilisateurList"][$index]["idutilisateur"]==$ami) {
+            if ($compte['idcompte']===$ami) {
               $color="YellowGreen";
             }  
         }
@@ -61,7 +57,7 @@ if (!empty($_SESSION['messageMember'])) {?>
         for ($indexB=0; $indexB < $lengthB; $indexB++) { 
             $demandeami = $viewVars['demandeamisList'][$indexB]['idcompte_solliciter'];            
                  
-            if ($viewVars["utilisateurList"][$index]["idutilisateur"]==$demandeami) {
+            if ($compte['idcompte']===$demandeami) {
               $color="SandyBrown";
             }  
         }

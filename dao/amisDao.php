@@ -28,14 +28,6 @@ class amisDao  implements interfaceDao{
             return $amiss;   
     }
 
-    // public function getAl($id){
-    //     $sql 	= "SELECT * FROM image WHERE idcompte =" .$id;
-    //     $result = $this->conn->query($sql); 
-    //     // (fetchAll-->) Transforme le bloc registrement de result en tableau de ligne
-    //     $images = $result->fetchAll();
-    //     return $images;
-    // }
-
     // Obtention de la liste de tout les tuples d'amis de la table amis
     public function getAll(){
         $sql 	= "SELECT * FROM amis as a, utilisateur as u WHERE a.idcompte =".$_SESSION['idutilisateur']." AND u.idutilisateur = a.idcompte_ami";
@@ -44,20 +36,6 @@ class amisDao  implements interfaceDao{
 
         return $amis;
     }
-
-//     SELECT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
-// a.idcompte ="1696278514562148" AND 
-// u.idutilisateur = a.idcompte_ami AND  
-// b.idcompte = a.idcompte_ami and 
-//  b.idcompte_ami = "1696278514562148";
-
-/* LISTE DEMANDE AMIS 
-SELECT DISTINCT a.idcompte_ami FROM amis as a, amis as b, utilisateur as u WHERE 
-a.idcompte ="1696278514562148" AND 
-u.idutilisateur = a.idcompte_ami AND NOT( 
-b.idcompte = a.idcompte_ami and 
-b.idcompte_ami = "1696278514562148")
-*/
     
     public function createInvite($idutilisateur,$idami){
         $sql = $this->conn->prepare("INSERT INTO amis(idcompte, idcompte_ami) 
@@ -87,9 +65,5 @@ b.idcompte_ami = "1696278514562148")
   $this->conn->exec("DELETE FROM amis WHERE ((idcompte = $id1 && idcompte_ami = $id2) or (idcompte = $id2 && idcompte_ami = $id1))");
  
     }
-
-
-    
-
     
 }
