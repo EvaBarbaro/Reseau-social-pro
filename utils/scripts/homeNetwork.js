@@ -1,4 +1,4 @@
-$("#alert").hide();
+// $("#alert").hide();
 sessionStorage.clear();  
 var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
@@ -84,6 +84,7 @@ $(document).on('click', "svg", function () {
   if($(this).attr("id").includes("iconAmis")){
   $("#alert").html("Vous êtes déjà amis");
   $("#alert").show();
+  $("#alert2").hide();
   $("#Member").load(networkLink+"/"+visibilite+"/"+order+ " "+"#loadMember");
 }});
 /*$(document).on('keyup', "input[type=text]", function (e) { 

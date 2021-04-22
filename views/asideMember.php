@@ -1,9 +1,9 @@
-  <div class="alert alert-warning ml-2" role="alert" id="alert" style="width: 20rem; height:3rem;">
+  <div class="alert alert-warning ml-2" role="alert" id="alert" style="width: 20rem; height:3rem; display:none;">
   </div>
   <?php
 
 if (!empty($_SESSION['messageMember'])) {?>
-<div class="alert alert-warning ml-2" role="alert" style="width: 20rem; height:3rem;">
+<div class="alert alert-warning ml-2" role="alert" id="alert2" style="width: 20rem; height:3rem;">
 
 <?php
     echo $_SESSION['messageMember'];
