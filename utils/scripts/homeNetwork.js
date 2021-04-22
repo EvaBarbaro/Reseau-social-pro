@@ -82,7 +82,7 @@ else {
 
 $(document).on('click', "svg", function () {
   if($(this).attr("id").includes("iconAmis")){
-  $("#alert").html("vous êtes déjà amis");
+  $("#alert").html("Vous êtes déjà amis");
   $("#alert").show();
   $("#Member").load(networkLink+"/"+visibilite+"/"+order+ " "+"#loadMember");
 }});

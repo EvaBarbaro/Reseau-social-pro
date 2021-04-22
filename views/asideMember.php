@@ -40,8 +40,12 @@ if (!empty($_SESSION['messageMember'])) {?>
        
         $lengthA = count($viewVars['amisLList']);
 
+        $arrayAmis = array();
+
         for ($indexA=0; $indexA < $lengthA; $indexA++) { 
-            $ami = $viewVars['amisLList'][$indexA]['idcompte_ami'];            
+            $ami = $viewVars['amisLList'][$indexA]['idcompte_ami'];
+
+            array_push($arrayAmis, $ami);
                  
             if ($compte['idcompte']===$ami) {
               $color="YellowGreen";
@@ -56,10 +60,10 @@ if (!empty($_SESSION['messageMember'])) {?>
             if ($compte['idcompte']===$demandeami) {
               $color="SandyBrown";
             }  
-        }
+        }  
      
-  if($compte['idcompte']!==$_SESSION['idutilisateur'])  { 
-    if($compte['idcompte']!==$ami)  {     
+  if($compte['idcompte']!==$_SESSION['idutilisateur'])  {
+    if(!in_array($compte['idcompte'], $arrayAmis))  {
 ?>
 
 <form name="addAmis">
