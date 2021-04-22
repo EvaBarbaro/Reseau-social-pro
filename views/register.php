@@ -48,8 +48,9 @@ $uniqueUserID = hexdec(uniqid());
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="motdepasse" class="col-sm-4 col-form-label">Votre mot de passe</label>
+                    <label for="motdepasse" class="col-sm-4 col-form-label mt-4">Votre mot de passe</label>
                     <div class="col-sm-8">
+                    <label for="motdepasse"><small>Votre mot de passe doit contenir 8 caractères, un chiffre et un caractère spécial minimum</small></label>
                     <input type="password" class="form-control" name="motdepasse" id="motdepasse" placeholder="Votre mot de passe">
                     </div>
                 </div>
