@@ -1,4 +1,5 @@
 sessionStorage.clear();  
+$("#alert").hide();
 var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
 var idEntreprise = url.substring(url.lastIndexOf('monReseau')+10,url.lastIndexOf('monReseau')+26);
@@ -79,6 +80,12 @@ else {
   $(this).parents(".card-header").siblings(".card-body").find("form").replaceWith( "<p class='card-text' id='cardText' value='"+description+"'>"+description+"</p>" );
 }});  
 
+$(document).on('click', "svg", function () {
+  if($(this).attr("id").includes("iconAmis")){
+  $("#alert").html("vous êtes déjà amis");
+  $("#alert").show();
+  $("#Member").load(networkLink+"/"+visibilite+"/"+order+ " "+"#loadMember");
+}});
 /*$(document).on('keyup', "input[type=text]", function (e) { 
   var code = e.key; 
   if(code==="Enter"){
@@ -123,7 +130,7 @@ $(document).on('submit', "form", function (e) {
 
       }
       else if($(this).attr("name")==("addAmis")) {
-        
+        $("#alert").hide();
         link="/InviteAmis";
         e.preventDefault();
        

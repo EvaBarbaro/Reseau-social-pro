@@ -5,10 +5,13 @@
         <b><p style="color:red;">Variable getAll</p></b>   <?php //var_dump($_GET); ?> 
         <b><p style="color:red;">Variable FILES</p> </b>    <?php //var_dump($_FILES); ?> 
   </pre>   -->
+  <div class="alert alert-warning ml-2" role="alert" id="alert" style="width: 20rem; height:3rem;">
+  </div>
   <?php
 
 if (!empty($_SESSION['messageMember'])) {?>
-<div class="alert alert-warning" role="alert" style="width: 20rem; height:3rem;">
+<div class="alert alert-warning ml-2" role="alert" style="width: 20rem; height:3rem;">
+
 <?php
     echo $_SESSION['messageMember'];
     $_SESSION['messageMember']="";
@@ -62,7 +65,8 @@ if (!empty($_SESSION['messageMember'])) {?>
             }  
         }
      
-  if($compte['idcompte']!==$_SESSION['idutilisateur'])  {   
+  if($compte['idcompte']!==$_SESSION['idutilisateur'])  { 
+    if($compte['idcompte']!==$ami)  {     
 ?>
 
 <form name="addAmis">
@@ -75,7 +79,16 @@ if (!empty($_SESSION['messageMember'])) {?>
       </svg>
 </button>
       </form>
-      <?php } ?>
+      <?php } 
+      else {?>
+
+        <svg xmlns="http://www.w3.org/2000/svg" id="iconAmis<?=$compte['idcompte']?>" width="55" height="35" fill="<?= $color ?>" class="bi bi-person-plus-fill ml-2 mt-2" viewBox="0 0 16 16">
+        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+      </svg>
+
+        <?php
+      }  }?>
       </div>
     </div>
 <?php
