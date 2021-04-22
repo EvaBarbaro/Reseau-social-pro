@@ -66,8 +66,8 @@ if (!empty($_SESSION['messageMember'])) {?>
     if(!in_array($compte['idcompte'], $arrayAmis))  {
 ?>
 
-<form name="addAmis">
-<button type="submit" style="background:none;border:none;">
+<form name=<?= "addAmis".$compte['idcompte'] ?>>
+<button id="buttonAddFriend" type="submit" style="background:none;border:none;">
 <input type='hidden' value=<?= $compte['idcompte'] ?> name="idsolliciter">
 <input type='hidden' value=<?= $_SESSION['idutilisateur'] ?> name="iddemandeur">
       <svg xmlns="http://www.w3.org/2000/svg" width="55" height="35" fill="<?= $color ?>" class="bi bi-person-plus-fill ml-2 mt-2" viewBox="0 0 16 16">

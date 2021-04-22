@@ -5,6 +5,10 @@ body {
     overflow-x: hidden!important;
 }
 
+#buttonAddFriend:focus {
+    outline:0;
+}
+
 #logoImg {
     margin-left: 5em;
     object-fit: contain;

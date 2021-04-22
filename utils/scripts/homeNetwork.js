@@ -129,7 +129,7 @@ $(document).on('submit', "form", function (e) {
         updatedContent= "#loadPub";
 
       }
-      else if($(this).attr("name")==("addAmis")) {
+      else if($(this).attr("name").includes("addAmis")) {
         $("#alert").hide();
         link="/InviteAmis";
         e.preventDefault();
