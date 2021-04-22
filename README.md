@@ -6,11 +6,11 @@
 
 [Dictionnaire des données](Modelisation+SQL/Social-Connect_data_dict.md)
 
-[MCD](Modelisation+SQL/SocialConnect-MCD.PNG)
+[MCD](Modelisation+SQL/SocialConnect-MCD.JPG)
 
 [MLD](Modelisation+SQL/SocialConnect-MLD.html)
 
-[MPD](Modelisation+SQL/SocialConnect-MPD.PNG)
+[MPD](Modelisation+SQL/SocialConnect-MPD.JPG)
 
 ### Diagramme
 
