@@ -14,6 +14,7 @@ class AmisController extends CoreController
 
         $amisDao = new amisDao($db);
         $amisList = $amisDao->getAll();
+        $amis = $amisDao->get($_SESSION['idutilisateur']);
 
         $compteDao = new compteDao($db);
         $compte = $compteDao->get($_SESSION['idutilisateur']);
@@ -28,6 +29,7 @@ class AmisController extends CoreController
             'amisList' => $amisList,
             'compte' => $compte,
             'requestList'=> $RequestList,
+            'amis' => $amis
         ]);
     }
 

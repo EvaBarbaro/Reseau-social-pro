@@ -24,9 +24,27 @@ if (!empty($viewVars['compte']['idcompte'])) {
   <?php
     }
   ?>
+  <?php
+    if ($_SESSION['idutilisateur'] === $idcompte) {
+  ?>
   <li class="nav-item">
     <a class="nav-link album" href="<?= pathUrl().'monCompte/'.$idcompte.'/mesImages'?>">Mon Album</a>
   </li>
+  <?php
+    } else {
+  ?>
+  <?php
+    for ($index = 0; $index < count($viewVars['amis']); $index++) {
+      if ((isset($_SESSION['url']) && in_array($_SESSION['url'], $viewVars['amis'][$index]))) {
+  ?>
+  <li class="nav-item">
+    <a class="nav-link album" href="<?= pathUrl().'monCompte/'.$idcompte.'/mesImages'?>">Mon Album</a>
+  </li>
+  <?php
+        }
+      }
+    }
+  ?>
   <?php
     if ($_SESSION['idutilisateur'] === $idcompte) {
   ?>

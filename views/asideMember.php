@@ -1,11 +1,4 @@
-<!-- <pre>
-        <b><p style="color:red;" >Variable SESSION</p></b>    <?php //var_dump($_SESSION); ?> 
-        <b><p style="color:red;">Variable viewvars</p> </b>    <?php //var_dump($viewVars); ?> 
-        <b><p style="color:red;"> Variable POST</p></b>   <?php //var_dump($_POST); ?> 
-        <b><p style="color:red;">Variable getAll</p></b>   <?php //var_dump($_GET); ?> 
-        <b><p style="color:red;">Variable FILES</p> </b>    <?php //var_dump($_FILES); ?> 
-  </pre>   -->
-  <?php
+<?php
 
 if (!empty($_SESSION['messageMember'])) {?>
 <div class="alert alert-warning" role="alert" style="width: 20rem; height:3rem;">
