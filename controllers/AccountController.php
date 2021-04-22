@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../dao/compteDao.php';
+include_once __DIR__.'/../dao/amisDao.php';
 require_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
 
@@ -32,9 +33,15 @@ class AccountController extends CoreController
         $compteDao = new compteDao($db);
         $compte = $compteDao->get($compteId);
 
+        $amisDao = new amisDao($db);
+        $amisList = $amisDao->get($_SESSION['idutilisateur']);
+
+        $_SESSION['url'] = $parameters['id'];
+
         $this->show('singleCompte', [
             'title' => 'Social Connect - Mes informations',
-            'compte' => $compte
+            'compte' => $compte,
+            'amis' => $amisList
         ]);
     }
 

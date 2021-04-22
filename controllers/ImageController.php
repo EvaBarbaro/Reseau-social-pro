@@ -1,6 +1,11 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once __DIR__.'/../dao/imageDao.php';
+include_once __DIR__.'/../dao/amisDao.php';
 include_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
 
@@ -19,10 +24,14 @@ class ImageController extends CoreController
         $compteDao = new compteDao($db);
         $compte = $compteDao->get($imageId);
 
+        $amisDao = new amisDao($db);
+        $amisList = $amisDao->get($_SESSION['idutilisateur']);
+
         $this->show('image', [
-            'title' => 'Social Connect - Back Office',
+            'title' => 'Social Connect - Album',
             'imageList' => $imageList,
-            'compte' => $compte
+            'compte' => $compte,
+            'amis' => $amisList
         ]);
     }
 

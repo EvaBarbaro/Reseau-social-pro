@@ -148,6 +148,11 @@
   </div>
 
 <h2 class="mt-4">Tous les amis</h2>
+<table class="table table-striped">
+  <tr>
+    <th scope="col">Ami</th>
+    <th scope="col">Supprimer</th>
+  </tr>
     
     <?php
     $length = count($viewVars['amisList']);
@@ -155,13 +160,7 @@
     for ($index=0; $index < $length; $index++) { 
         $amis = $viewVars['amisList'][$index];
     ?>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-            <th scope="col">Ami</th>
-            <th scope="col">Supprimer</th>
-            </tr>
-        </thead>
+
         <tbody>
             <tr>
             <td><?= $amis['nomutilisateur'] ?></td>
@@ -169,13 +168,7 @@
                 <button id="deleteAccount" type="button" class="btn btn-danger mb-4" data-toggle="modal" data-target="<?= '#userDelModalAdmin'.$amis['idcompte'] ?>">
                 Supprimer
                 </button>
-            </td>
-            </tr>
-        </tbody>
-    </table>
-            <!-- Button trigger modal -->
-
-
+                <!-- Button trigger modal -->
                 <!-- Modal -->
                 <div class="modal fade" id="<?= 'userDelModalAdmin'.$amis['idcompte'] ?>" tabindex="-1" role="dialog" aria-labelledby="userDelModalAdminLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -193,12 +186,16 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </form>
-                    </div>
-                </div>
-                </div>
+                </td>
+            </tr>
+        </tbody>
                 
     <?php
     }
     ?>
+        </table>
+        </div>
+</div>
+</div>
 </div>
 </div>

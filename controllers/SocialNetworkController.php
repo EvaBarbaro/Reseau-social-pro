@@ -147,10 +147,16 @@ class SocialNetworkController extends CoreController
             $compteDao = new compteDao($db);
             $compte = $compteDao->get($idCompte);
 
+            $amisDao = new amisDao($db);
+            $amisList = $amisDao->get($_SESSION['idutilisateur']);
+
+            $_SESSION['url'] = $parameters['id'];
+
             $this->show('publicationsByUser', [
                 'title' => 'Social Connect - Mes publications',
                 'publicationByUser' => $publicationByUser,
-                'compte' => $compte
+                'compte' => $compte,
+                'amis' => $amisList
             ]);
         }
 

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../dao/utilisateurDao.php';
+include_once __DIR__.'/../dao/amisDao.php';
 require_once __DIR__.'/../dao/compteDao.php';
 require_once __DIR__.'/../utils/DBData.php';
 require_once __DIR__ . '/../pathUrl.php';
@@ -17,9 +18,13 @@ class UserController extends CoreController
         $utilisateurDao = new utilisateurDao($db);
         $utilisateurList = $utilisateurDao->getAll($entrepriseId);
 
+        $amisDao = new amisDao($db);
+        $amisList = $amisDao->get($_SESSION['idutilisateur']);
+
         $this->show('utilisateurs', [
             'title' => 'Social Connect - Réseau Back Office - Utilisateurs',
-            'utilisateurList' => $utilisateurList
+            'utilisateurList' => $utilisateurList,
+            'amis' => $amisList
         ]);
     }
 
@@ -36,10 +41,14 @@ class UserController extends CoreController
         $compteDao = new compteDao($db);
         $compte = $compteDao->get($utilisateurId);
 
+        $amisDao = new amisDao($db);
+        $amisList = $amisDao->get($_SESSION['idutilisateur']);
+
         $this->show('singleUtilisateur', [
             'title' => 'Social Connect - Mon Compte',
             'utilisateur' => $utilisateur,
-            'compte' => $compte
+            'compte' => $compte,
+            'amis' => $amisList
         ]);
     }
 
@@ -56,10 +65,14 @@ class UserController extends CoreController
         $compteDao = new compteDao($db);
         $compte = $compteDao->get($utilisateurId);
 
+        $amisDao = new amisDao($db);
+        $amisList = $amisDao->get($_SESSION['idutilisateur']);
+
         $this->show('singlePassword', [
             'title' => 'Social Connect - Mon Compte',
             'utilisateur' => $utilisateur,
-            'compte' => $compte
+            'compte' => $compte,
+            'amis' => $amisList
         ]);
     }
 
