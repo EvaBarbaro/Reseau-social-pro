@@ -53,7 +53,7 @@ class compteDao implements interfaceCompteDao {
     }
     
     public function getAll($identreprise) {
-        $sql = "SELECT u.identreprise, u.nomutilisateur, c.photo, c.idcompte FROM compte AS c JOIN utilisateur AS u ON u.idutilisateur = c.idcompte WHERE u.identreprise = $identreprise";
+        $sql = "SELECT u.identreprise, u.nomutilisateur, c.photo, c.idcompte FROM compte AS c JOIN utilisateur AS u ON u.idutilisateur = c.idcompte WHERE u.identreprise = $identreprise EXCEPT SELECT u.identreprise, u.nomutilisateur, c.photo, c.idcompte FROM compte AS c JOIN utilisateur AS u ON u.idutilisateur = c.idcompte WHERE idutilisateur =". $_SESSION['idutilisateur'];
 
         $pdoStatement = $this->conn->query($sql);
 
