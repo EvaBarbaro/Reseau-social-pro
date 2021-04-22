@@ -1,5 +1,5 @@
-sessionStorage.clear();  
 $("#alert").hide();
+sessionStorage.clear();  
 var url = window.location.href;
 var filename = url.substring(0,url.lastIndexOf('monReseau'));
 var idEntreprise = url.substring(url.lastIndexOf('monReseau')+10,url.lastIndexOf('monReseau')+26);
